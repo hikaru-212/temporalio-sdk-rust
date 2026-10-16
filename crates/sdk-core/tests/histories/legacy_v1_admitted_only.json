@@ -1,0 +1,23 @@
+{
+  "sha256": "abab810b3b07c5abdb3665432295484f15f02aeb89b69b5a1ac7ad01f66b1cec",
+  "size_bytes": 3868,
+  "event_count": 22,
+  "source": "Unmodified History events exported from the Temporal Server GetWorkflowExecutionHistory API",
+  "server_commit": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+  "server_test": "TestHistoryReplicationSignalsAndUpdatesTestSuite/TestAdmittedOnlyHistoryAfterCommandlessWorkflowTask",
+  "export_run_id": "temporal-server-history-export-durohq7k",
+  "workflow_run_id": "01a1453b-da92-7328-8e8b-aa85b0d0b469",
+  "export_validation": "proto.Unmarshal and proto.Equal against the original Server API History",
+  "relevant_events": {
+    "13": "ActivityTaskCompleted(item-1, dm-1)",
+    "14-16": "Successful commandless workflow task",
+    "17": "WorkflowTaskScheduled",
+    "18": "WorkflowExecutionUpdateAdmitted, origin Reapply",
+    "19": "WorkflowExecutionSignaled(snapshot-item-1)",
+    "20-21": "WorkflowTaskStarted / WorkflowTaskCompleted",
+    "22": "TimerStarted(id 3, timeout 3600s, workflow_task_completed_event_id 21)"
+  },
+  "compatibility_contract": "Flagless legacy V1 run: Signal observes None before item-1 resolution and StartTimer matches event 22. Historical admitted-only Update must not execute. Preserve the original bytes; do not add V2 flags.",
+  "limitations": "Server was driven by a scripted integration-test worker, not a naturally running Rust SDK workflow. The unfinished history ends at TimerStarted; the official replay envelope handles this without adding events.",
+  "server_test_status": "Local test-only addition on the listed Server commit; the test itself is not included in that commit."
+}
