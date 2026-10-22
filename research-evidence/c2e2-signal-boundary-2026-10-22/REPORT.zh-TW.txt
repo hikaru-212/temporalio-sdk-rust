@@ -1,0 +1,78 @@
+CCPO / EGTS — C2-E2 Signal Boundary Preservation
+
+結論 [Runtime-supported]
+Scanner PASS；H0 warm/cold PASS；Hs warm/cold PASS。Hs commandless 中間 WFT 的 Signal 工作被保留為獨立語言 activation，沒有被當作 stutter。這是此固定 P_sig、歷史與 deterministic LA substitute 的見證，不是一般必要性／充分性或 semantic equivalence 定理。
+
+來源與保存 [Source-confirmed]
+Pinned production SHA: 8f4a676f9e1a6276b5cc2f77e25c9183ce256fe9
+Checkpoint: 899ccfbfbf59d80797dc0274ff6c20c96e608f65
+本輪工作區: __C2E2_SOURCE_WORKSPACE__，獨立 local clone、detached HEAD。
+舊 checkpoint 仍 clean；47個既有manifest項目hash一致。既有C2-D test和evidence未更動。
+只新增c2e2_signal_boundary.rs、c2e2_guest.rs及managed_run.rs的cfg(test) module宣告。
+沒有production修改、Server E2E、GitHub寫入、commit或push。
+
+1. Harness feasibility [Source-confirmed / Runtime-supported]
+原C2-D adapter僅允許Initialize/Resolve且只poll MAIN，不能直接處理Signal。
+新增單一P_sig和同一expanded adapter用於H0/Hs兩個family、各自warm/cold。
+Guest activate結果與jobs一一配對；probe必須回StartedRoutine(kind Signal("probe"))。
+保存routine_id，先poll所有Signal routines，再pollMAIN；OR made_progress，無進度才完成activation。Signal完成後移除ID，不重複poll。完整保留commands collection並以respond呼叫WorkflowManager.push_commands_and_iterate，即使commands=[]亦完成activation。
+Hs warm stdout41-43與cold111-113：StartedRoutine(id1) → Signal(Ok(())) → completed；後續MAIN Blocked、commands=[]。各路一次。
+handler只記錄count/time/history_length/replay flag，不發command。沒有手工呼叫handler或吞StartedRoutine。
+此adapter限本無await probe、無interceptor程式；16pass budget與unsupported lifecycle的失敗屬harness INCONCLUSIVE。沒有wall-clock sleeps。
+來源對照：workflow_future.rs365/463/525/608/716；runtime/instance.rs543/965/1101/1134；新增guest檔保存完整實作。
+
+2. Histories / controls [Source-confirmed / Runtime-supported]
+T=1800000000；同一P_sig、inputs=[]、LA seq1/idla-1/typec2_la/attempt1/result local-result，最終workflow-result。
+H0：1WES；2Scheduled,3Started,4Completed；5Scheduled,6Started,7Completed；8Scheduled,9Started,10Completed；11LAMarker；12WorkflowCompleted。
+Hs：1WES；2Scheduled,3Started,4Completed；5Scheduled,6Signaled(probe),7Started,8Completed；9Scheduled,10Started,11Completed；12LAMarker；13WorkflowCompleted。
+WES=T-1；first Scheduled/Started=T；Completed4及下一Scheduled/Signal/Started=T+8；中間Completed及最後Scheduled/Started=T+16；最後Completed/marker/terminal=T+17。
+H0 Completed refs=(2,3),(5,6),(8,9)，marker11/terminal12 ref10。
+Hs Completed refs=(2,3),(5,7),(9,10)，marker12/terminal13 ref11。每個Started引用對應Scheduled。
+Signal6：name probe，input Some(empty Payloads)，identity c2-client，request_id 00000000-0000-4000-8000-000000000006；無external workflow reference，非ignorable、非command event。
+Completed4保有durable V2 flag；validate於前4個events觀察RunVersion，selected=Some(true)。無Update event或sequencing positions。
+LA marker完整解碼，complete_time=T+17、activation_index=Some(0)、backoff=None。Signal所在WFT之後，最後WFT重設activation index，沒有人工改marker group。
+兩個family分別比較自身warm/cold，從未以warm(H0)對cold(Hs)。Scanner H0是原E2-D exact bytes。Runtime每family保存actual warm metadata/marker後的獨立fixture，再讓cold decode同一份bytes。
+與scanner模板相比，runtime marker只有original_schedule_time回填真實request的worker-clock值；metadata flag順序／protobuf map順序可能不同，timestamps、LA/result/group、causal refs及其他事件不變。精確derived diffs已保存。原E2-D未覆寫。
+
+3. 預登記與執行結果 [Runtime-supported]
+predictions.before-run.json早於所有嘗試；各invocation保存同一predictions SHA。
+scanner-01 exit101：independent clone缺gitignored Cargo.lock，--locked於編譯前拒絕。INCONCLUSIVE，不是scanner falsification。
+從原C2-D execution workspace複製既存Cargo.lock；15份Cargo manifests逐byte相同；lock SHA cff32a5c18cb07cb4af26f544a8fb74997da7314a5f8f42244087abe65c50f07。未更改預測或scanner。
+scanner-02 exit0：1passed/536filtered。H0 after3: expected/actual index8,event9；Hs after3:index6,event7；Hs after7:index9,event10。finished=true、updates=[]。
+此scanner成功後才實作semantic comparison。
+semantic-h0-01 exit0：1passed/537filtered。
+semantic-hs-01 exit0：1passed/537filtered；只在H0通過後執行。
+兩個semantic runs的guest/source snapshots及SHA相同。所有原始stdout/stderr、命令、exitcode、test source/diff均保存。
+沒有correctness RED。最早失敗只有上述缺lockfile的環境失敗。
+
+4. Activation與語言時間線 [Runtime-supported]
+H0 warm：Init3(T,h3,count0) → empty heartbeat6(T+8,h6，不交Guest) → empty heartbeat9(T+16,h9，不交Guest) → Resolve1(T+17,h9,count0)。
+H0 cold：Init3(T,h3,count0) → 一次消費4..9 → Resolve1(T+17,h9,count0) → marker11/terminal12匹配。
+Hs warm：Init3(T,h3,count0) → Signal7(T+8,h7,count1，commands=[]) → empty heartbeat10(T+16,h10，不交Guest) → Resolve1(T+17,h10,count1)。
+Hs cold：Init3(T,h3,count0) → Signal7(T+8,h7,count1，commands=[]) → Resolve1(T+17,h10,count1) → marker12/terminal13匹配。
+Hs Signal routine兩路各一次；handler observations保持在指定projection中，不被消成stutter。
+Hs cold Signal完成後MAIN仍Blocked，未觀察after_la；到cursor10才產生Resolve/UpdateWFTime，尚未apply marker12。稍後marker12的machine狀態為ResolvedFromMarkerLookAheadWaitingMarkerEvent，支持真正lookahead。
+各family warm LA test callback一次；cold所有drain點無New，最後只有CancelAllInRun bookkeeping。
+語言initial/final commands在各family內完全相同；Signal commands空。Warm最後Server commands為RecordMarker+CompleteWorkflowExecution，cold正常匹配marker與terminal。
+Warm的正常完成是Core接受command；沒有Server durable commit acknowledgement。
+
+5. 第一個差異 / 相容範圍 [Runtime-supported / Model-inferred]
+Raw metadata在Init3即不同：warm replay=false/deploymentSome(test_bin_id)/last_sdk_version=""；cold replay=true/deploymentNone/last_sdk_version="pinned"。
+Hs Signal和LA resume仍mode/deployment不同，SDK version均pinned。真正workflow保存的is_replaying也不同；不能稱全部讀值或raw activation相等。
+兩路在指定jobs/grouping、time/history-length、signal count、LA result、commands及正常結果投影相容。
+空heartbeat wrapper activation.is_replaying=true，但warm machine.replaying=false；未送Guest，不能說warm workflow在replay。Cold terminal wrapper亦不送Guest。
+Metadata差異早於folding，不構成本實驗的fold defect。兩family具有相同initial metadata差異模式。
+
+6. 分類與C1意涵
+A Scanner boundary preservation：PASS [Runtime-supported]。
+B Real Guest Signal routine：PASS，StartedRoutine/poll/completion與空commands均實測 [Runtime-supported]。
+C Program-relative observable compatibility：H0/Hs各自PASS，完整mode/metadata不相等 [Runtime-supported]。
+D Effect-ledger safety：deterministic substitute的warm1/cold無New見證PASS；非外部系統exactly-once [Runtime-supported]。
+E Real Server reachability：Unknown，未做Server E2E。
+commandless不推出jobless；jobless也不是未經證明的observer-silent。[Model-inferred]
+本結果顯示non-silent步可以保留並顯式匹配，不證明C1對所有refinement必要，也不證五條件普遍充分。[Model-inferred]
+
+7. 限制與下一數學問題
+[Unknown] 精確Signal arrival介於Scheduled5與Started7的Server生成／dispatch；實際heartbeat與LA計時；task-scope/EOF authority、完整transport/deployment metadata、crash/retry/recovery與Server durable commit。
+[Source-confirmed] HistoryUpdate由helper注入；HANDOFF log不是實際paginator或Server admission證明。LA同步替身注入runtime17，並非真實等待17秒。
+[Model-inferred] 下一數學問題：能否以局部可檢查的規則，組合「silent區間可折疊」與「visible區間必須匹配」，並在多個可見邊界、pending LA及activation group下歸納保持clock、causal state與effect ledger？本輪不啟動該實驗。

@@ -1,0 +1,234 @@
+use crate::worker::workflow::chunking::{RunVersion, boundary, command_event};
+use prost::Message;
+use std::{fs, io::Write, path::Path};
+use temporalio_common::protos::{
+    coresdk::common::extract_local_activity_marker_details,
+    temporal::api::{
+        common::v1::Payloads,
+        enums::v1::EventType,
+        history::v1::{
+            History, HistoryEvent, WorkflowExecutionSignaledEventAttributes,
+            history_event::Attributes,
+        },
+    },
+};
+
+const T: i64 = 1_800_000_000;
+
+fn save(path: &Path, bytes: &[u8]) {
+    let mut file = fs::OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(path)
+        .unwrap();
+    file.write_all(bytes).unwrap();
+    file.sync_all().unwrap();
+}
+
+fn fixture_pair() -> (History, History) {
+    let h0_bytes = fs::read(std::env::var("C2E2_INPUT").unwrap()).unwrap();
+    let h0 = History::decode(h0_bytes.as_slice()).unwrap();
+    validate_fixture(&h0, false);
+    let mut hs = h0.clone();
+    for event in hs.events.iter_mut().skip(5) {
+        event.event_id += 1;
+        match event.attributes.as_mut().unwrap() {
+            Attributes::WorkflowTaskStartedEventAttributes(attrs) => {
+                if attrs.scheduled_event_id >= 6 {
+                    attrs.scheduled_event_id += 1;
+                }
+            }
+            Attributes::WorkflowTaskCompletedEventAttributes(attrs) => {
+                if attrs.scheduled_event_id >= 6 {
+                    attrs.scheduled_event_id += 1;
+                }
+                if attrs.started_event_id >= 6 {
+                    attrs.started_event_id += 1;
+                }
+            }
+            Attributes::MarkerRecordedEventAttributes(attrs) => {
+                attrs.workflow_task_completed_event_id += 1;
+            }
+            Attributes::WorkflowExecutionCompletedEventAttributes(attrs) => {
+                attrs.workflow_task_completed_event_id += 1;
+            }
+            Attributes::WorkflowTaskScheduledEventAttributes(_) => {}
+            other => panic!("unexpected event in frozen C2-D tail: {other:?}"),
+        }
+    }
+    hs.events.insert(
+        5,
+        HistoryEvent {
+            event_id: 6,
+            event_time: h0.events[4].event_time,
+            event_type: EventType::WorkflowExecutionSignaled as i32,
+            attributes: Some(Attributes::WorkflowExecutionSignaledEventAttributes(
+                WorkflowExecutionSignaledEventAttributes {
+                    signal_name: "probe".to_owned(),
+                    input: Some(Payloads { payloads: vec![] }),
+                    identity: "c2-client".to_owned(),
+                    request_id: "00000000-0000-4000-8000-000000000006".to_owned(),
+                    ..Default::default()
+                },
+            )),
+            ..Default::default()
+        },
+    );
+    assert_eq!(h0.events[..5], hs.events[..5]);
+    for (old, new) in h0.events.iter().skip(5).zip(hs.events.iter().skip(6)) {
+        assert_eq!(old.event_time, new.event_time);
+        assert_eq!(old.event_type, new.event_type);
+    }
+    validate_fixture(&hs, true);
+    (h0, hs)
+}
+
+fn validate_fixture(history: &History, has_signal: bool) {
+    let shift = i64::from(has_signal);
+    let middle_started = 6 + shift;
+    let final_scheduled = 8 + shift;
+    let final_started = 9 + shift;
+    let final_completed = 10 + shift;
+    let marker_id = 11 + shift;
+    let terminal_id = 12 + shift;
+    assert_eq!(history.events.len(), terminal_id as usize);
+    let expected = if has_signal {
+        vec![
+            EventType::WorkflowExecutionStarted,
+            EventType::WorkflowTaskScheduled,
+            EventType::WorkflowTaskStarted,
+            EventType::WorkflowTaskCompleted,
+            EventType::WorkflowTaskScheduled,
+            EventType::WorkflowExecutionSignaled,
+            EventType::WorkflowTaskStarted,
+            EventType::WorkflowTaskCompleted,
+            EventType::WorkflowTaskScheduled,
+            EventType::WorkflowTaskStarted,
+            EventType::WorkflowTaskCompleted,
+            EventType::MarkerRecorded,
+            EventType::WorkflowExecutionCompleted,
+        ]
+    } else {
+        vec![
+            EventType::WorkflowExecutionStarted,
+            EventType::WorkflowTaskScheduled,
+            EventType::WorkflowTaskStarted,
+            EventType::WorkflowTaskCompleted,
+            EventType::WorkflowTaskScheduled,
+            EventType::WorkflowTaskStarted,
+            EventType::WorkflowTaskCompleted,
+            EventType::WorkflowTaskScheduled,
+            EventType::WorkflowTaskStarted,
+            EventType::WorkflowTaskCompleted,
+            EventType::MarkerRecorded,
+            EventType::WorkflowExecutionCompleted,
+        ]
+    };
+    let event_at = |id: i64| &history.events[id as usize - 1];
+    for (index, (event, expected_type)) in history.events.iter().zip(expected).enumerate() {
+        assert_eq!(event.event_id, index as i64 + 1);
+        assert_eq!(event.event_type(), expected_type);
+        assert_eq!(command_event(event), event.event_id >= marker_id);
+        let timestamp = event.event_time.as_ref().unwrap();
+        assert_eq!(timestamp.nanos, 0);
+        let expected_time = if event.event_id == 1 {
+            T - 1
+        } else if event.event_id <= 3 {
+            T
+        } else if event.event_id <= middle_started {
+            T + 8
+        } else if event.event_id <= final_started {
+            T + 16
+        } else {
+            T + 17
+        };
+        assert_eq!(timestamp.seconds, expected_time);
+        assert!(!event.worker_may_ignore);
+    }
+    for (scheduled, started, completed) in [
+        (2, 3, 4),
+        (5, middle_started, middle_started + 1),
+        (final_scheduled, final_started, final_completed),
+    ] {
+        let Some(Attributes::WorkflowTaskStartedEventAttributes(attrs)) =
+            &event_at(started).attributes
+        else {
+            panic!("expected WorkflowTaskStarted");
+        };
+        assert_eq!(attrs.scheduled_event_id, scheduled);
+        let Some(Attributes::WorkflowTaskCompletedEventAttributes(attrs)) =
+            &event_at(completed).attributes
+        else {
+            panic!("expected WorkflowTaskCompleted");
+        };
+        assert_eq!(attrs.scheduled_event_id, scheduled);
+        assert_eq!(attrs.started_event_id, started);
+    }
+    let Some(Attributes::MarkerRecordedEventAttributes(marker)) = &event_at(marker_id).attributes
+    else {
+        panic!("expected Local Activity marker");
+    };
+    assert_eq!(marker.marker_name, "core_local_activity");
+    assert_eq!(marker.workflow_task_completed_event_id, final_completed);
+    assert!(marker.failure.is_none());
+    let (marker_data, result) = extract_local_activity_marker_details(&mut marker.details.clone());
+    let marker_data = marker_data.expect("frozen marker must decode");
+    assert_eq!(marker_data.seq, 1);
+    assert_eq!(marker_data.attempt, 1);
+    assert_eq!(marker_data.activity_id, "la-1");
+    assert_eq!(marker_data.activity_type, "c2_la");
+    assert_eq!(marker_data.complete_time.unwrap().seconds, T + 17);
+    assert_eq!(marker_data.activation_index, Some(0));
+    assert!(marker_data.original_schedule_time.is_some());
+    assert!(marker_data.backoff.is_none());
+    assert_eq!(result.unwrap().data, b"local-result");
+    let Some(Attributes::WorkflowExecutionCompletedEventAttributes(terminal)) =
+        &event_at(terminal_id).attributes
+    else {
+        panic!("expected WorkflowExecutionCompleted");
+    };
+    assert_eq!(terminal.workflow_task_completed_event_id, final_completed);
+    assert_eq!(terminal.result.as_ref().unwrap().payloads.len(), 1);
+    assert_eq!(terminal.result.as_ref().unwrap().payloads[0].data, b"workflow-result");
+    let mut version = RunVersion::default();
+    version.observe(&history.events[..4]).unwrap();
+    assert_eq!(version.selected(), Some(true));
+    if has_signal {
+        let signal = event_at(6);
+        assert!(!command_event(signal));
+        let Some(Attributes::WorkflowExecutionSignaledEventAttributes(attrs)) = &signal.attributes
+        else {
+            panic!("expected probe Signal");
+        };
+        assert_eq!(attrs.signal_name, "probe");
+        assert!(attrs.input.as_ref().unwrap().payloads.is_empty());
+        assert!(attrs.external_workflow_execution.is_none());
+    }
+}
+
+#[test]
+fn scanner_preserves_signal_boundary() {
+    let out = std::path::PathBuf::from(std::env::var("C2E2_OUTPUT_DIR").unwrap());
+    let (h0, hs) = fixture_pair();
+    save(&out.join("H0.pb"), &fs::read(std::env::var("C2E2_INPUT").unwrap()).unwrap());
+    save(&out.join("Hs.pb"), &hs.encode_to_vec());
+    save(&out.join("H0.decoded.txt"), format!("{h0:#?}\n").as_bytes());
+    save(&out.join("Hs.decoded.txt"), format!("{hs:#?}\n").as_bytes());
+    let mut observations = Vec::new();
+    for (label, history, after, expected_index, expected_event) in [
+        ("H0", &h0, 3, 8, 9),
+        ("Hs", &hs, 3, 6, 7),
+        ("Hs", &hs, 7, 9, 10),
+    ] {
+        let actual = boundary(&history.events, after, true, &[]);
+        let event = actual.map(|index| history.events[index].event_id);
+        let observation = format!(
+            "{label}: after={after}, finished=true, updates=[]; expected_index={expected_index}, expected_event={expected_event}; actual_index={actual:?}, actual_event={event:?}"
+        );
+        println!("C2E2 SCANNER {observation}");
+        observations.push(observation);
+        assert_eq!(actual, Some(expected_index));
+        assert_eq!(event, Some(expected_event));
+    }
+    save(&out.join("scanner-results.txt"), observations.join("\n").as_bytes());
+}

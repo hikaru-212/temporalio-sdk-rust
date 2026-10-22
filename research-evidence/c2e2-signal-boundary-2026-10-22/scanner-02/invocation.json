@@ -1,0 +1,33 @@
+{
+  "stage": "scanner",
+  "cwd": "__C2E2_SOURCE_WORKSPACE__",
+  "command": [
+    "cargo",
+    "test",
+    "--locked",
+    "--offline",
+    "-p",
+    "temporalio-sdk-core",
+    "--lib",
+    "worker::workflow::managed_run::c2e2_signal_boundary::scanner_preserves_signal_boundary",
+    "--",
+    "--exact",
+    "--nocapture"
+  ],
+  "environment_overrides": {
+    "TEMPORAL_USE_WFT_CHUNKING_V2": "1",
+    "C2E2_INPUT": "__C2E2_SOURCE_WORKSPACE__/research-evidence/c2d-live-replay-2026-10-22/run-02/fixtures/E2-D.pb",
+    "C2E2_OUTPUT_DIR": "__C2E2_SOURCE_WORKSPACE__/research-evidence/c2e2-signal-boundary-2026-10-22/scanner-02/fixtures",
+    "C2E2_FAMILY": "scanner",
+    "CARGO_TARGET_DIR": "__BUILD_CACHE__",
+    "CARGO_BUILD_JOBS": "2",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "CARGO_TERM_COLOR": "never"
+  },
+  "started_utc": "2026-10-22T19:59:53.420333+00:00",
+  "source_sha": "8f4a676f9e1a6276b5cc2f77e25c9183ce256fe9",
+  "checkpoint_sha": "899ccfbfbf59d80797dc0274ff6c20c96e608f65",
+  "test_source_sha256": "3c29d73336553f9aff02a4793239cb00697252060dd336b541906de46fc3cc26",
+  "predictions_sha256": "991196712799f28a87720c23a8089f8882ef642c319d680ed816618da7b3a819"
+}

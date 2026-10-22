@@ -1,0 +1,22 @@
+{
+  "parent_sha": "899ccfbfbf59d80797dc0274ff6c20c96e608f65",
+  "production_base_sha": "8f4a676f9e1a6276b5cc2f77e25c9183ce256fe9",
+  "branch": "research/ccpo-egts-c2e2",
+  "intended_repository": "hikaru-212/temporalio-sdk-rust",
+  "verified_authenticated_login": "hikaru-212",
+  "verified_repository_owner": "hikaru-212",
+  "verified_repository_id": 1362003777,
+  "verified_push_permission": true,
+  "remote_c2d_head": "899ccfbfbf59d80797dc0274ff6c20c96e608f65",
+  "remote_c2e2_branch_absent_before_preparation": true,
+  "original_c2e2_manifest_count": 83,
+  "original_c2d_manifest_count": 47,
+  "original_workspaces_and_raw_evidence": "preserved unchanged",
+  "test_execution_in_checkpoint_preparation": "none; archived scanner/H0/Hs results retained",
+  "publication": "separate clone and mapped public copies; no production change; no PR",
+  "test_source_sha256": {
+    "crates/sdk-core/src/worker/workflow/managed_run.rs": "6287e323b969424df55cf327fd6e711139a9e75999c11cf071316e91f95c6b43",
+    "crates/sdk-core/src/worker/workflow/c2e2_guest.rs": "6d112785ca2decd121db33d2543f912b58cdcc9fddceea8c1f6bc755af7747bd",
+    "crates/sdk-core/src/worker/workflow/c2e2_signal_boundary.rs": "b2b349af37998d1adc3a50d4b2acc0e4adb7c60f3f511a7a8d1fdd9691077a72"
+  }
+}

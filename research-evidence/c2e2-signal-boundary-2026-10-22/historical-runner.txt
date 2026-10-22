@@ -1,0 +1,69 @@
+import datetime
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+
+evidence = Path(__file__).resolve().parent
+root = evidence.parent.parent
+stage, run_name = sys.argv[1:3]
+assert stage in ('scanner', 'H0', 'Hs')
+run = evidence / run_name
+run.mkdir()
+out = run / 'fixtures'
+out.mkdir()
+test = 'scanner_preserves_signal_boundary' if stage == 'scanner' else 'warm_cold_signal_compatibility'
+command = ['cargo', 'test', '--locked', '--offline', '-p', 'temporalio-sdk-core', '--lib',
+           'worker::workflow::managed_run::c2e2_signal_boundary::' + test,
+           '--', '--exact', '--nocapture']
+overrides = {
+    'TEMPORAL_USE_WFT_CHUNKING_V2': '1',
+    'C2E2_INPUT': str(root / 'research-evidence/c2d-live-replay-2026-10-22/run-02/fixtures/E2-D.pb'),
+    'C2E2_OUTPUT_DIR': str(out),
+    'C2E2_FAMILY': stage,
+    'CARGO_TARGET_DIR': os.environ.get('C2E2_BUILD_DIR', '__BUILD_CACHE__'),
+    'CARGO_BUILD_JOBS': '2',
+    'CARGO_PROFILE_DEV_DEBUG': '0',
+    'CARGO_PROFILE_TEST_DEBUG': '0',
+    'CARGO_TERM_COLOR': 'never',
+}
+module = root / 'crates/sdk-core/src/worker/workflow/c2e2_signal_boundary.rs'
+shutil.copyfile(module, run / 'test-source.rs')
+diff = subprocess.check_output(['git', 'diff', '--', 'crates/sdk-core/src/worker/workflow/managed_run.rs'], cwd=root)
+source_hashes = {}
+for source in (module, module.with_name('c2e2_guest.rs')):
+    if not source.exists():
+        continue
+    shutil.copyfile(source, run / source.name)
+    source_hashes[str(source.relative_to(root))] = hashlib.sha256(source.read_bytes()).hexdigest()
+    new_diff = subprocess.run(['git', 'diff', '--no-index', '--', '/dev/null', str(source.relative_to(root))], cwd=root, capture_output=True)
+    assert new_diff.returncode in (0, 1)
+    diff += new_diff.stdout
+(run / 'test-only.diff').write_bytes(diff)
+invocation = {
+    'stage': stage, 'cwd': str(root), 'command': command,
+    'environment_overrides': overrides,
+    'started_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+    'source_sha': '8f4a676f9e1a6276b5cc2f77e25c9183ce256fe9',
+    'checkpoint_sha': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=root, text=True).strip(),
+    'test_source_sha256': hashlib.sha256(module.read_bytes()).hexdigest(),
+    'all_test_sources_sha256': source_hashes,
+    'predictions_sha256': hashlib.sha256((evidence / 'predictions.before-run.json').read_bytes()).hexdigest(),
+}
+(run / 'invocation.json').write_text(json.dumps(invocation, indent=2) + '\n')
+print('RUN ' + str(run), flush=True)
+print('COMMAND ' + ' '.join(command), flush=True)
+with (run / 'stdout.log').open('wb') as stdout, (run / 'stderr.log').open('wb') as stderr:
+    result = subprocess.run(command, cwd=root, env={**os.environ, **overrides}, stdout=stdout, stderr=stderr)
+(run / 'exit-code.txt').write_text(str(result.returncode) + '\n')
+(run / 'finished-utc.txt').write_text(datetime.datetime.now(datetime.timezone.utc).isoformat() + '\n')
+hashes = {str(p.relative_to(run)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(run.rglob('*')) if p.is_file()}
+(run / 'SHA256SUMS.json').write_text(json.dumps(hashes, indent=2) + '\n')
+print('EXIT ' + str(result.returncode), flush=True)
+for name in ('stdout.log', 'stderr.log'):
+    lines = (run / name).read_text(errors='replace').splitlines()
+    print(name + ' tail:\n' + '\n'.join(lines[-14:]), flush=True)
+sys.exit(result.returncode)

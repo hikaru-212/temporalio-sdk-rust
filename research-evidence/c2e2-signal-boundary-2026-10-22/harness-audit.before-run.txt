@@ -1,0 +1,6 @@
+Source-confirmed: bounded test-only extension feasible.
+Native workflow_future.rs:365 maps Signal StartedRoutine into active list; :463 polls signals first; :525 polls MAIN; :608 exits only at progress fixpoint; :716 drains host commands.
+Guest instance.rs:543 constructs Signal routine; :965 completes/preserves it; :1101 routes SignalWorkflow; :1134 removes completed routine.
+All arms must use the same adapter: exact job-result pairing, preserve StartedRoutine ID, poll real signal, require Signal(Ok), remove completed ID, poll MAIN, OR all progress, reject interceptor pending and bounded-loop exhaustion as harness failure.
+Signal handler calls state_mut to append count/time/history; no direct handler invocation and no generated command.
+Original C2-D MAIN-only adapter is insufficient. No production change needed.

@@ -1,0 +1,542 @@
+History {
+    events: [
+        HistoryEvent {
+            event_id: 1,
+            event_time: Some(
+                Timestamp {
+                    seconds: 1799999999,
+                    nanos: 0,
+                },
+            ),
+            event_type: WorkflowExecutionStarted,
+            version: 0,
+            task_id: 0,
+            worker_may_ignore: false,
+            user_metadata: None,
+            links: [],
+            principal: None,
+            event_group_markers: [],
+            attributes: Some(
+                WorkflowExecutionStartedEventAttributes(
+                    WorkflowExecutionStartedEventAttributes {
+                        workflow_type: Some(
+                            WorkflowType {
+                                name: "c2_wf",
+                            },
+                        ),
+                        parent_workflow_namespace: "",
+                        parent_workflow_namespace_id: "",
+                        parent_workflow_execution: None,
+                        parent_initiated_event_id: 0,
+                        task_queue: Some(
+                            TaskQueue {
+                                name: "c2_queue",
+                                kind: Normal,
+                                normal_name: "",
+                            },
+                        ),
+                        input: None,
+                        workflow_execution_timeout: Some(
+                            Duration {
+                                seconds: 600,
+                                nanos: 0,
+                            },
+                        ),
+                        workflow_run_timeout: Some(
+                            Duration {
+                                seconds: 600,
+                                nanos: 0,
+                            },
+                        ),
+                        workflow_task_timeout: Some(
+                            Duration {
+                                seconds: 10,
+                                nanos: 0,
+                            },
+                        ),
+                        continued_execution_run_id: "",
+                        initiator: Unspecified,
+                        continued_failure: None,
+                        last_completion_result: None,
+                        original_execution_run_id: "00000000-0000-4000-8000-000000000001",
+                        identity: "c2-client",
+                        first_execution_run_id: "00000000-0000-4000-8000-000000000001",
+                        retry_policy: None,
+                        attempt: 1,
+                        workflow_execution_expiration_time: Some(
+                            Timestamp {
+                                seconds: 1800000599,
+                                nanos: 0,
+                            },
+                        ),
+                        cron_schedule: "",
+                        first_workflow_task_backoff: None,
+                        memo: None,
+                        search_attributes: None,
+                        prev_auto_reset_points: None,
+                        header: None,
+                        parent_initiated_event_version: 0,
+                        workflow_id: "c2-workflow-id",
+                        source_version_stamp: None,
+                        completion_callbacks: [],
+                        root_workflow_execution: None,
+                        inherited_build_id: "",
+                        versioning_override: None,
+                        parent_pinned_worker_deployment_version: "",
+                        priority: None,
+                        inherited_pinned_version: None,
+                        inherited_auto_upgrade_info: None,
+                        eager_execution_accepted: false,
+                        declined_target_version_upgrade: None,
+                        time_skipping_config: None,
+                        time_skipping_state_propagation: None,
+                    },
+                ),
+            ),
+        },
+        HistoryEvent {
+            event_id: 2,
+            event_time: Some(
+                Timestamp {
+                    seconds: 1800000000,
+                    nanos: 0,
+                },
+            ),
+            event_type: WorkflowTaskScheduled,
+            version: 0,
+            task_id: 0,
+            worker_may_ignore: false,
+            user_metadata: None,
+            links: [],
+            principal: None,
+            event_group_markers: [],
+            attributes: Some(
+                WorkflowTaskScheduledEventAttributes(
+                    WorkflowTaskScheduledEventAttributes {
+                        task_queue: Some(
+                            TaskQueue {
+                                name: "c2_queue",
+                                kind: Normal,
+                                normal_name: "",
+                            },
+                        ),
+                        start_to_close_timeout: Some(
+                            Duration {
+                                seconds: 10,
+                                nanos: 0,
+                            },
+                        ),
+                        attempt: 1,
+                    },
+                ),
+            ),
+        },
+        HistoryEvent {
+            event_id: 3,
+            event_time: Some(
+                Timestamp {
+                    seconds: 1800000000,
+                    nanos: 0,
+                },
+            ),
+            event_type: WorkflowTaskStarted,
+            version: 0,
+            task_id: 0,
+            worker_may_ignore: false,
+            user_metadata: None,
+            links: [],
+            principal: None,
+            event_group_markers: [],
+            attributes: Some(
+                WorkflowTaskStartedEventAttributes(
+                    WorkflowTaskStartedEventAttributes {
+                        scheduled_event_id: 2,
+                        identity: "c2-worker",
+                        request_id: "00000000-0000-4000-8000-000000000003",
+                        suggest_continue_as_new: false,
+                        suggest_continue_as_new_reasons: [],
+                        target_worker_deployment_version_changed: false,
+                        history_size_bytes: 0,
+                        worker_version: None,
+                        build_id_redirect_counter: 0,
+                    },
+                ),
+            ),
+        },
+        HistoryEvent {
+            event_id: 4,
+            event_time: Some(
+                Timestamp {
+                    seconds: 1800000008,
+                    nanos: 0,
+                },
+            ),
+            event_type: WorkflowTaskCompleted,
+            version: 0,
+            task_id: 0,
+            worker_may_ignore: false,
+            user_metadata: None,
+            links: [],
+            principal: None,
+            event_group_markers: [],
+            attributes: Some(
+                WorkflowTaskCompletedEventAttributes(
+                    WorkflowTaskCompletedEventAttributes {
+                        scheduled_event_id: 2,
+                        started_event_id: 3,
+                        identity: "c2-worker",
+                        binary_checksum: "",
+                        worker_version: None,
+                        sdk_metadata: Some(
+                            WorkflowTaskCompletedMetadata {
+                                core_used_flags: [
+                                    3,
+                                    4,
+                                    2,
+                                    5,
+                                    1,
+                                ],
+                                lang_used_flags: [],
+                                sdk_name: "c2d-guest-adapter",
+                                sdk_version: "pinned",
+                            },
+                        ),
+                        metering_metadata: None,
+                        deployment: None,
+                        versioning_behavior: Unspecified,
+                        worker_deployment_version: "",
+                        worker_deployment_name: "",
+                        deployment_version: None,
+                    },
+                ),
+            ),
+        },
+        HistoryEvent {
+            event_id: 5,
+            event_time: Some(
+                Timestamp {
+                    seconds: 1800000008,
+                    nanos: 0,
+                },
+            ),
+            event_type: WorkflowTaskScheduled,
+            version: 0,
+            task_id: 0,
+            worker_may_ignore: false,
+            user_metadata: None,
+            links: [],
+            principal: None,
+            event_group_markers: [],
+            attributes: Some(
+                WorkflowTaskScheduledEventAttributes(
+                    WorkflowTaskScheduledEventAttributes {
+                        task_queue: Some(
+                            TaskQueue {
+                                name: "c2_queue",
+                                kind: Normal,
+                                normal_name: "",
+                            },
+                        ),
+                        start_to_close_timeout: Some(
+                            Duration {
+                                seconds: 10,
+                                nanos: 0,
+                            },
+                        ),
+                        attempt: 1,
+                    },
+                ),
+            ),
+        },
+        HistoryEvent {
+            event_id: 6,
+            event_time: Some(
+                Timestamp {
+                    seconds: 1800000008,
+                    nanos: 0,
+                },
+            ),
+            event_type: WorkflowExecutionSignaled,
+            version: 0,
+            task_id: 0,
+            worker_may_ignore: false,
+            user_metadata: None,
+            links: [],
+            principal: None,
+            event_group_markers: [],
+            attributes: Some(
+                WorkflowExecutionSignaledEventAttributes(
+                    WorkflowExecutionSignaledEventAttributes {
+                        signal_name: "probe",
+                        input: Some(
+                            Payloads {
+                                payloads: [],
+                            },
+                        ),
+                        identity: "c2-client",
+                        header: None,
+                        skip_generate_workflow_task: false,
+                        external_workflow_execution: None,
+                        request_id: "00000000-0000-4000-8000-000000000006",
+                    },
+                ),
+            ),
+        },
+        HistoryEvent {
+            event_id: 7,
+            event_time: Some(
+                Timestamp {
+                    seconds: 1800000008,
+                    nanos: 0,
+                },
+            ),
+            event_type: WorkflowTaskStarted,
+            version: 0,
+            task_id: 0,
+            worker_may_ignore: false,
+            user_metadata: None,
+            links: [],
+            principal: None,
+            event_group_markers: [],
+            attributes: Some(
+                WorkflowTaskStartedEventAttributes(
+                    WorkflowTaskStartedEventAttributes {
+                        scheduled_event_id: 5,
+                        identity: "c2-worker",
+                        request_id: "00000000-0000-4000-8000-000000000006",
+                        suggest_continue_as_new: false,
+                        suggest_continue_as_new_reasons: [],
+                        target_worker_deployment_version_changed: false,
+                        history_size_bytes: 0,
+                        worker_version: None,
+                        build_id_redirect_counter: 0,
+                    },
+                ),
+            ),
+        },
+        HistoryEvent {
+            event_id: 8,
+            event_time: Some(
+                Timestamp {
+                    seconds: 1800000016,
+                    nanos: 0,
+                },
+            ),
+            event_type: WorkflowTaskCompleted,
+            version: 0,
+            task_id: 0,
+            worker_may_ignore: false,
+            user_metadata: None,
+            links: [],
+            principal: None,
+            event_group_markers: [],
+            attributes: Some(
+                WorkflowTaskCompletedEventAttributes(
+                    WorkflowTaskCompletedEventAttributes {
+                        scheduled_event_id: 5,
+                        started_event_id: 7,
+                        identity: "c2-worker",
+                        binary_checksum: "",
+                        worker_version: None,
+                        sdk_metadata: Some(
+                            WorkflowTaskCompletedMetadata {
+                                core_used_flags: [],
+                                lang_used_flags: [],
+                                sdk_name: "",
+                                sdk_version: "",
+                            },
+                        ),
+                        metering_metadata: None,
+                        deployment: None,
+                        versioning_behavior: Unspecified,
+                        worker_deployment_version: "",
+                        worker_deployment_name: "",
+                        deployment_version: None,
+                    },
+                ),
+            ),
+        },
+        HistoryEvent {
+            event_id: 9,
+            event_time: Some(
+                Timestamp {
+                    seconds: 1800000016,
+                    nanos: 0,
+                },
+            ),
+            event_type: WorkflowTaskScheduled,
+            version: 0,
+            task_id: 0,
+            worker_may_ignore: false,
+            user_metadata: None,
+            links: [],
+            principal: None,
+            event_group_markers: [],
+            attributes: Some(
+                WorkflowTaskScheduledEventAttributes(
+                    WorkflowTaskScheduledEventAttributes {
+                        task_queue: Some(
+                            TaskQueue {
+                                name: "c2_queue",
+                                kind: Normal,
+                                normal_name: "",
+                            },
+                        ),
+                        start_to_close_timeout: Some(
+                            Duration {
+                                seconds: 10,
+                                nanos: 0,
+                            },
+                        ),
+                        attempt: 1,
+                    },
+                ),
+            ),
+        },
+        HistoryEvent {
+            event_id: 10,
+            event_time: Some(
+                Timestamp {
+                    seconds: 1800000016,
+                    nanos: 0,
+                },
+            ),
+            event_type: WorkflowTaskStarted,
+            version: 0,
+            task_id: 0,
+            worker_may_ignore: false,
+            user_metadata: None,
+            links: [],
+            principal: None,
+            event_group_markers: [],
+            attributes: Some(
+                WorkflowTaskStartedEventAttributes(
+                    WorkflowTaskStartedEventAttributes {
+                        scheduled_event_id: 9,
+                        identity: "c2-worker",
+                        request_id: "00000000-0000-4000-8000-000000000009",
+                        suggest_continue_as_new: false,
+                        suggest_continue_as_new_reasons: [],
+                        target_worker_deployment_version_changed: false,
+                        history_size_bytes: 0,
+                        worker_version: None,
+                        build_id_redirect_counter: 0,
+                    },
+                ),
+            ),
+        },
+        HistoryEvent {
+            event_id: 11,
+            event_time: Some(
+                Timestamp {
+                    seconds: 1800000017,
+                    nanos: 0,
+                },
+            ),
+            event_type: WorkflowTaskCompleted,
+            version: 0,
+            task_id: 0,
+            worker_may_ignore: false,
+            user_metadata: None,
+            links: [],
+            principal: None,
+            event_group_markers: [],
+            attributes: Some(
+                WorkflowTaskCompletedEventAttributes(
+                    WorkflowTaskCompletedEventAttributes {
+                        scheduled_event_id: 9,
+                        started_event_id: 10,
+                        identity: "c2-worker",
+                        binary_checksum: "",
+                        worker_version: None,
+                        sdk_metadata: Some(
+                            WorkflowTaskCompletedMetadata {
+                                core_used_flags: [],
+                                lang_used_flags: [],
+                                sdk_name: "",
+                                sdk_version: "",
+                            },
+                        ),
+                        metering_metadata: None,
+                        deployment: None,
+                        versioning_behavior: Unspecified,
+                        worker_deployment_version: "",
+                        worker_deployment_name: "",
+                        deployment_version: None,
+                    },
+                ),
+            ),
+        },
+        HistoryEvent {
+            event_id: 12,
+            event_time: Some(
+                Timestamp {
+                    seconds: 1800000017,
+                    nanos: 0,
+                },
+            ),
+            event_type: MarkerRecorded,
+            version: 0,
+            task_id: 0,
+            worker_may_ignore: false,
+            user_metadata: None,
+            links: [],
+            principal: None,
+            event_group_markers: [],
+            attributes: Some(
+                MarkerRecordedEventAttributes(
+                    MarkerRecordedEventAttributes {
+                        marker_name: "core_local_activity",
+                        details: {
+                            "data": Payloads {
+                                payloads: [
+                                    [eyJzZXEiOjEsImF0dGVtcHQiOjEsImFjdGl2aXR5X2k=..NzY0NjE4ODMwfSwiYWN0aXZhdGlvbl9pbmRleCI6MH0=],
+                                ],
+                            },
+                            "result": Payloads {
+                                payloads: [
+                                    [bG9jYWwtcmVzdWx0],
+                                ],
+                            },
+                        },
+                        workflow_task_completed_event_id: 11,
+                        header: None,
+                        failure: None,
+                    },
+                ),
+            ),
+        },
+        HistoryEvent {
+            event_id: 13,
+            event_time: Some(
+                Timestamp {
+                    seconds: 1800000017,
+                    nanos: 0,
+                },
+            ),
+            event_type: WorkflowExecutionCompleted,
+            version: 0,
+            task_id: 0,
+            worker_may_ignore: false,
+            user_metadata: None,
+            links: [],
+            principal: None,
+            event_group_markers: [],
+            attributes: Some(
+                WorkflowExecutionCompletedEventAttributes(
+                    WorkflowExecutionCompletedEventAttributes {
+                        result: Some(
+                            Payloads {
+                                payloads: [
+                                    [d29ya2Zsb3ctcmVzdWx0],
+                                ],
+                            },
+                        ),
+                        workflow_task_completed_event_id: 11,
+                        new_execution_run_id: "",
+                    },
+                ),
+            ),
+        },
+    ],
+}

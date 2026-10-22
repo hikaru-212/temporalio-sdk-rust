@@ -1,0 +1,36 @@
+{
+  "scanner": {
+    "scanner-01": "INCONCLUSIVE missing ignored Cargo.lock before compilation, exit101",
+    "scanner-02": "PASS exit0; H0 after3=event9, Hs after3=event7, Hs after7=event10"
+  },
+  "semantic": {
+    "H0": {
+      "classification": "PASS",
+      "exit_code": 0,
+      "raw_stdout": "__C2E2_SOURCE_WORKSPACE__/research-evidence/c2e2-signal-boundary-2026-10-22/semantic-h0-01/stdout.log",
+      "raw_stderr": "__C2E2_SOURCE_WORKSPACE__/research-evidence/c2e2-signal-boundary-2026-10-22/semantic-h0-01/stderr.log",
+      "test_result": "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 537 filtered out; finished in 0.03s",
+      "test_sources": {
+        "crates/sdk-core/src/worker/workflow/c2e2_signal_boundary.rs": "b2b349af37998d1adc3a50d4b2acc0e4adb7c60f3f511a7a8d1fdd9691077a72",
+        "crates/sdk-core/src/worker/workflow/c2e2_guest.rs": "6d112785ca2decd121db33d2543f912b58cdcc9fddceea8c1f6bc755af7747bd"
+      },
+      "runtime_fixture_sha256": "4e942cb8d05a425d9dec0ed9fbaf178ab8cd9c5abbedeeb6f493677229e097c2",
+      "signal_started_total": 0,
+      "signal_completed_total": 0
+    },
+    "Hs": {
+      "classification": "PASS",
+      "exit_code": 0,
+      "raw_stdout": "__C2E2_SOURCE_WORKSPACE__/research-evidence/c2e2-signal-boundary-2026-10-22/semantic-hs-01/stdout.log",
+      "raw_stderr": "__C2E2_SOURCE_WORKSPACE__/research-evidence/c2e2-signal-boundary-2026-10-22/semantic-hs-01/stderr.log",
+      "test_result": "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 537 filtered out; finished in 0.02s",
+      "test_sources": {
+        "crates/sdk-core/src/worker/workflow/c2e2_signal_boundary.rs": "b2b349af37998d1adc3a50d4b2acc0e4adb7c60f3f511a7a8d1fdd9691077a72",
+        "crates/sdk-core/src/worker/workflow/c2e2_guest.rs": "6d112785ca2decd121db33d2543f912b58cdcc9fddceea8c1f6bc755af7747bd"
+      },
+      "runtime_fixture_sha256": "6fcedb976e89bb42e59f95dc4141e08338c1daeb8ce77122e3231764fe2310d3",
+      "signal_started_total": 2,
+      "signal_completed_total": 2
+    }
+  }
+}

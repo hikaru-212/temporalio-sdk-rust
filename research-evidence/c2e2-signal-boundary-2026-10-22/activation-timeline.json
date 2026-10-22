@@ -1,0 +1,247 @@
+[
+  {
+    "family": "H0",
+    "label": "warm-init",
+    "machine_replaying": false,
+    "cursor": 3,
+    "last_processed": 3,
+    "stdout_line": 15,
+    "time_seconds": 1800000000,
+    "history_length": 3,
+    "activation_replaying": false,
+    "last_sdk_version": "",
+    "deployment": "Some(test_bin_id)",
+    "jobs": [
+      "InitializeWorkflow"
+    ],
+    "dispatched_to_guest": true
+  },
+  {
+    "family": "H0",
+    "label": "warm-middle",
+    "machine_replaying": false,
+    "cursor": 6,
+    "last_processed": 6,
+    "stdout_line": 37,
+    "time_seconds": 1800000008,
+    "history_length": 6,
+    "activation_replaying": true,
+    "last_sdk_version": "pinned",
+    "deployment": "Some(test_bin_id)",
+    "jobs": [],
+    "dispatched_to_guest": false
+  },
+  {
+    "family": "H0",
+    "label": "warm-last-heartbeat",
+    "machine_replaying": false,
+    "cursor": 9,
+    "last_processed": 9,
+    "stdout_line": 51,
+    "time_seconds": 1800000016,
+    "history_length": 9,
+    "activation_replaying": true,
+    "last_sdk_version": "pinned",
+    "deployment": "Some(test_bin_id)",
+    "jobs": [],
+    "dispatched_to_guest": false
+  },
+  {
+    "family": "H0",
+    "label": "warm-resume",
+    "machine_replaying": false,
+    "cursor": 9,
+    "last_processed": 9,
+    "stdout_line": 54,
+    "time_seconds": 1800000017,
+    "history_length": 9,
+    "activation_replaying": false,
+    "last_sdk_version": "pinned",
+    "deployment": "Some(test_bin_id)",
+    "jobs": [
+      "ResolveActivity(seq1)"
+    ],
+    "dispatched_to_guest": true
+  },
+  {
+    "family": "H0",
+    "label": "cold-init",
+    "machine_replaying": true,
+    "cursor": 3,
+    "last_processed": 3,
+    "stdout_line": 77,
+    "time_seconds": 1800000000,
+    "history_length": 3,
+    "activation_replaying": true,
+    "last_sdk_version": "pinned",
+    "deployment": null,
+    "jobs": [
+      "InitializeWorkflow"
+    ],
+    "dispatched_to_guest": true
+  },
+  {
+    "family": "H0",
+    "label": "cold-resume",
+    "machine_replaying": true,
+    "cursor": 9,
+    "last_processed": 9,
+    "stdout_line": 106,
+    "time_seconds": 1800000017,
+    "history_length": 9,
+    "activation_replaying": true,
+    "last_sdk_version": "pinned",
+    "deployment": null,
+    "jobs": [
+      "ResolveActivity(seq1)"
+    ],
+    "dispatched_to_guest": true
+  },
+  {
+    "family": "H0",
+    "label": "cold-terminal",
+    "machine_replaying": true,
+    "cursor": 9,
+    "last_processed": 12,
+    "stdout_line": 122,
+    "time_seconds": 1800000017,
+    "history_length": 12,
+    "activation_replaying": true,
+    "last_sdk_version": "pinned",
+    "deployment": null,
+    "jobs": [],
+    "dispatched_to_guest": false
+  },
+  {
+    "family": "Hs",
+    "label": "warm-init",
+    "machine_replaying": false,
+    "cursor": 3,
+    "last_processed": 3,
+    "stdout_line": 15,
+    "time_seconds": 1800000000,
+    "history_length": 3,
+    "activation_replaying": false,
+    "last_sdk_version": "",
+    "deployment": "Some(test_bin_id)",
+    "jobs": [
+      "InitializeWorkflow"
+    ],
+    "dispatched_to_guest": true
+  },
+  {
+    "family": "Hs",
+    "label": "warm-middle",
+    "machine_replaying": false,
+    "cursor": 7,
+    "last_processed": 7,
+    "stdout_line": 39,
+    "time_seconds": 1800000008,
+    "history_length": 7,
+    "activation_replaying": false,
+    "last_sdk_version": "pinned",
+    "deployment": "Some(test_bin_id)",
+    "jobs": [
+      "SignalWorkflow(probe)"
+    ],
+    "dispatched_to_guest": true
+  },
+  {
+    "family": "Hs",
+    "label": "warm-last-heartbeat",
+    "machine_replaying": false,
+    "cursor": 10,
+    "last_processed": 10,
+    "stdout_line": 63,
+    "time_seconds": 1800000016,
+    "history_length": 10,
+    "activation_replaying": true,
+    "last_sdk_version": "pinned",
+    "deployment": "Some(test_bin_id)",
+    "jobs": [],
+    "dispatched_to_guest": false
+  },
+  {
+    "family": "Hs",
+    "label": "warm-resume",
+    "machine_replaying": false,
+    "cursor": 10,
+    "last_processed": 10,
+    "stdout_line": 66,
+    "time_seconds": 1800000017,
+    "history_length": 10,
+    "activation_replaying": false,
+    "last_sdk_version": "pinned",
+    "deployment": "Some(test_bin_id)",
+    "jobs": [
+      "ResolveActivity(seq1)"
+    ],
+    "dispatched_to_guest": true
+  },
+  {
+    "family": "Hs",
+    "label": "cold-init",
+    "machine_replaying": true,
+    "cursor": 3,
+    "last_processed": 3,
+    "stdout_line": 89,
+    "time_seconds": 1800000000,
+    "history_length": 3,
+    "activation_replaying": true,
+    "last_sdk_version": "pinned",
+    "deployment": null,
+    "jobs": [
+      "InitializeWorkflow"
+    ],
+    "dispatched_to_guest": true
+  },
+  {
+    "family": "Hs",
+    "label": "cold-signal",
+    "machine_replaying": true,
+    "cursor": 7,
+    "last_processed": 7,
+    "stdout_line": 109,
+    "time_seconds": 1800000008,
+    "history_length": 7,
+    "activation_replaying": true,
+    "last_sdk_version": "pinned",
+    "deployment": null,
+    "jobs": [
+      "SignalWorkflow(probe)"
+    ],
+    "dispatched_to_guest": true
+  },
+  {
+    "family": "Hs",
+    "label": "cold-resume",
+    "machine_replaying": true,
+    "cursor": 10,
+    "last_processed": 10,
+    "stdout_line": 133,
+    "time_seconds": 1800000017,
+    "history_length": 10,
+    "activation_replaying": true,
+    "last_sdk_version": "pinned",
+    "deployment": null,
+    "jobs": [
+      "ResolveActivity(seq1)"
+    ],
+    "dispatched_to_guest": true
+  },
+  {
+    "family": "Hs",
+    "label": "cold-terminal",
+    "machine_replaying": true,
+    "cursor": 10,
+    "last_processed": 13,
+    "stdout_line": 149,
+    "time_seconds": 1800000017,
+    "history_length": 13,
+    "activation_replaying": true,
+    "last_sdk_version": "pinned",
+    "deployment": null,
+    "jobs": [],
+    "dispatched_to_guest": false
+  }
+]

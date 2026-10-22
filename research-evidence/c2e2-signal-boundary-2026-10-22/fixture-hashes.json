@@ -1,0 +1,6 @@
+{
+  "scanner-02/fixtures/H0.pb": "68de8fb53e38036a3cf155ce9d63169e0bad4d371ca4fbc2a95df4d060a7e1df",
+  "scanner-02/fixtures/Hs.pb": "ecf548f5d315c72103afd22ff6b90ff5330b915038f24fb13077e19bf5d227ac",
+  "semantic-h0-01/fixtures/H0-runtime.pb": "4e942cb8d05a425d9dec0ed9fbaf178ab8cd9c5abbedeeb6f493677229e097c2",
+  "semantic-hs-01/fixtures/Hs-runtime.pb": "6fcedb976e89bb42e59f95dc4141e08338c1daeb8ce77122e3231764fe2310d3"
+}

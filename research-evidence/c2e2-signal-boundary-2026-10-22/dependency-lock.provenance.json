@@ -1,0 +1,8 @@
+{
+  "source": "__C2D_EXECUTION_WORKSPACE__/Cargo.lock",
+  "source_workspace_head": "8f4a676f9e1a6276b5cc2f77e25c9183ce256fe9",
+  "source_sha256": "cff32a5c18cb07cb4af26f544a8fb74997da7314a5f8f42244087abe65c50f07",
+  "matching_Cargo_manifests": 15,
+  "first_attempt": "scanner-01 exit101 before compilation: ignored Cargo.lock absent in independent clone",
+  "change": "copy existing matching dependency lock into new isolated clone only; no dependency resolution/update"
+}

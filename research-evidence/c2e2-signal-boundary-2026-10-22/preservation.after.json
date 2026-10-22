@@ -1,0 +1,17 @@
+{
+  "checked_utc": "2026-10-22T20:06:25.488246+00:00",
+  "original_checkpoint_head": "899ccfbfbf59d80797dc0274ff6c20c96e608f65",
+  "original_checkpoint_status": "clean",
+  "original_manifest_files_verified": 47,
+  "same_program_and_adapter_source_in_H0_Hs": true,
+  "scanner_passed_source_preserved_as_prefix": true,
+  "predictions_unchanged_all_runs": true,
+  "all_run_manifests_verified": true,
+  "tracked_production_delta": "none; managed_run.rs only appended cfg(test) module declaration",
+  "new_test_only_files": [
+    "c2e2_signal_boundary.rs",
+    "c2e2_guest.rs"
+  ],
+  "local_head_unchanged": "899ccfbfbf59d80797dc0274ff6c20c96e608f65",
+  "commit_push_github_writes": false
+}

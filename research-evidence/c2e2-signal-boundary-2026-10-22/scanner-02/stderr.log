@@ -1,0 +1,10 @@
+   Compiling temporalio-protos v0.10.0 (__C2E2_SOURCE_WORKSPACE__/crates/protos)
+   Compiling temporalio-common v1.1.0 (__C2E2_SOURCE_WORKSPACE__/crates/common)
+   Compiling temporalio-macros v1.1.0 (__C2E2_SOURCE_WORKSPACE__/crates/macros)
+   Compiling temporalio-common-wasm v1.1.0 (__C2E2_SOURCE_WORKSPACE__/crates/common-wasm)
+   Compiling temporalio-workflow v1.1.0 (__C2E2_SOURCE_WORKSPACE__/crates/workflow)
+   Compiling temporalio-client v1.1.0 (__C2E2_SOURCE_WORKSPACE__/crates/client)
+   Compiling temporalio-sdk-core v0.10.0 (__C2E2_SOURCE_WORKSPACE__/crates/sdk-core)
+   Compiling temporalio-sdk v1.1.0 (__C2E2_SOURCE_WORKSPACE__/crates/sdk)
+    Finished `test` profile [unoptimized] target(s) in 52.12s
+     Running unittests src/lib.rs (__BUILD_CACHE__/debug/deps/temporalio_sdk_core-84eddf835206e70e)

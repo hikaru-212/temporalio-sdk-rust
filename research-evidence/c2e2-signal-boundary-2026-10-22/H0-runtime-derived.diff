@@ -1,0 +1,24 @@
+--- H0-scanner-template
++++ H0-runtime
+@@ -190,10 +190,10 @@
+                         sdk_metadata: Some(
+                             WorkflowTaskCompletedMetadata {
+                                 core_used_flags: [
++                                    5,
+                                     3,
++                                    2,
+                                     4,
+-                                    2,
+-                                    5,
+                                     1,
+                                 ],
+                                 lang_used_flags: [],
+@@ -456,7 +456,7 @@
+                         details: {
+                             "data": Payloads {
+                                 payloads: [
+-                                    [eyJzZXEiOjEsImF0dGVtcHQiOjEsImFjdGl2aXR5X2k=..NzY0NjE4ODMwfSwiYWN0aXZhdGlvbl9pbmRleCI6MH0=],
++                                    [eyJzZXEiOjEsImF0dGVtcHQiOjEsImFjdGl2aXR5X2k=..ODU0OTcxNzk2fSwiYWN0aXZhdGlvbl9pbmRleCI6MH0=],
+                                 ],
+                             },
+                             "result": Payloads {

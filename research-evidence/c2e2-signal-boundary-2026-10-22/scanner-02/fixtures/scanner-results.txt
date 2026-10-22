@@ -1,0 +1,3 @@
+H0: after=3, finished=true, updates=[]; expected_index=8, expected_event=9; actual_index=Some(8), actual_event=Some(9)
+Hs: after=3, finished=true, updates=[]; expected_index=6, expected_event=7; actual_index=Some(6), actual_event=Some(7)
+Hs: after=7, finished=true, updates=[]; expected_index=9, expected_event=10; actual_index=Some(9), actual_event=Some(10)

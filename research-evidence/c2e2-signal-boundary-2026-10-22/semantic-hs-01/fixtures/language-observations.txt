@@ -1,0 +1,64 @@
+warm=[
+    C2e2LanguageObservation {
+        stage: "before_la",
+        workflow_time: SystemTime {
+            tv_sec: 1800000000,
+            tv_nsec: 0,
+        },
+        history_length: 3,
+        is_replaying: false,
+        signal_receipt_count: 0,
+    },
+    C2e2LanguageObservation {
+        stage: "probe",
+        workflow_time: SystemTime {
+            tv_sec: 1800000008,
+            tv_nsec: 0,
+        },
+        history_length: 7,
+        is_replaying: false,
+        signal_receipt_count: 1,
+    },
+    C2e2LanguageObservation {
+        stage: "after_la",
+        workflow_time: SystemTime {
+            tv_sec: 1800000017,
+            tv_nsec: 0,
+        },
+        history_length: 10,
+        is_replaying: false,
+        signal_receipt_count: 1,
+    },
+]
+cold=[
+    C2e2LanguageObservation {
+        stage: "before_la",
+        workflow_time: SystemTime {
+            tv_sec: 1800000000,
+            tv_nsec: 0,
+        },
+        history_length: 3,
+        is_replaying: true,
+        signal_receipt_count: 0,
+    },
+    C2e2LanguageObservation {
+        stage: "probe",
+        workflow_time: SystemTime {
+            tv_sec: 1800000008,
+            tv_nsec: 0,
+        },
+        history_length: 7,
+        is_replaying: true,
+        signal_receipt_count: 1,
+    },
+    C2e2LanguageObservation {
+        stage: "after_la",
+        workflow_time: SystemTime {
+            tv_sec: 1800000017,
+            tv_nsec: 0,
+        },
+        history_length: 10,
+        is_replaying: true,
+        signal_receipt_count: 1,
+    },
+]

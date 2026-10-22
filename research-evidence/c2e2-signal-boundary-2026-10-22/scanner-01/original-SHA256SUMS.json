@@ -1,0 +1,9 @@
+{
+  "exit-code.txt": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c",
+  "finished-utc.txt": "a49830d5f71d1cac108d486718b4a137ea3e1029c3ef16e470d79bda2baf81c4",
+  "invocation.json": "2b336acb7011fd579a9ca5f44f381c93af570fcab9a972dd9a32b2d2adecd12f",
+  "stderr.log": "b578d796503dab621c8dedd7ed5a35f1710121bb4b89857d4fb1def60265b16a",
+  "stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "test-only.diff": "1cfee40856fa58e1f289b34730e079b54df528557ae54b5d102f88dfdb3691a7",
+  "test-source.rs": "3c29d73336553f9aff02a4793239cb00697252060dd336b541906de46fc3cc26"
+}

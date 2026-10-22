@@ -1,0 +1,110 @@
+initial=[
+    WorkflowCommand {
+        user_metadata: None,
+        event_group_markers: [],
+        variant: Some(
+            ScheduleLocalActivity(
+                ScheduleLocalActivity {
+                    seq: 1,
+                    activity_id: "la-1",
+                    activity_type: "c2_la",
+                    attempt: 1,
+                    original_schedule_time: None,
+                    headers: {},
+                    arguments: [],
+                    schedule_to_close_timeout: Some(
+                        Duration {
+                            seconds: 60,
+                            nanos: 0,
+                        },
+                    ),
+                    schedule_to_start_timeout: None,
+                    start_to_close_timeout: Some(
+                        Duration {
+                            seconds: 60,
+                            nanos: 0,
+                        },
+                    ),
+                    retry_policy: Some(
+                        RetryPolicy {
+                            initial_interval: Some(
+                                Duration {
+                                    seconds: 1,
+                                    nanos: 0,
+                                },
+                            ),
+                            backoff_coefficient: 2.0,
+                            maximum_interval: None,
+                            maximum_attempts: 0,
+                            non_retryable_error_types: [],
+                        },
+                    ),
+                    local_retry_threshold: None,
+                    cancellation_type: WaitCancellationCompleted,
+                    include_arguments_in_marker: false,
+                },
+            ),
+        ),
+    },
+]
+final=[
+    WorkflowCommand {
+        user_metadata: None,
+        event_group_markers: [],
+        variant: Some(
+            CompleteWorkflowExecution(
+                CompleteWorkflowExecution {
+                    result: Some(
+                        [d29ya2Zsb3ctcmVzdWx0],
+                    ),
+                },
+            ),
+        ),
+    },
+]
+server=[
+    Command {
+        command_type: RecordMarker,
+        user_metadata: None,
+        event_group_markers: [],
+        attributes: Some(
+            RecordMarkerCommandAttributes(
+                RecordMarkerCommandAttributes {
+                    marker_name: "core_local_activity",
+                    details: {
+                        "data": Payloads {
+                            payloads: [
+                                [eyJzZXEiOjEsImF0dGVtcHQiOjEsImFjdGl2aXR5X2k=..ODU0OTcxNzk2fSwiYWN0aXZhdGlvbl9pbmRleCI6MH0=],
+                            ],
+                        },
+                        "result": Payloads {
+                            payloads: [
+                                [bG9jYWwtcmVzdWx0],
+                            ],
+                        },
+                    },
+                    header: None,
+                    failure: None,
+                },
+            ),
+        ),
+    },
+    Command {
+        command_type: CompleteWorkflowExecution,
+        user_metadata: None,
+        event_group_markers: [],
+        attributes: Some(
+            CompleteWorkflowExecutionCommandAttributes(
+                CompleteWorkflowExecutionCommandAttributes {
+                    result: Some(
+                        Payloads {
+                            payloads: [
+                                [d29ya2Zsb3ctcmVzdWx0],
+                            ],
+                        },
+                    ),
+                },
+            ),
+        ),
+    },
+]

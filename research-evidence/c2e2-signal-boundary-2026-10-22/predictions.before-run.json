@@ -1,0 +1,111 @@
+{
+  "phase": "C2-E2",
+  "registered_utc": "2026-10-22T19:58:47.939083+00:00",
+  "source_sha": "8f4a676f9e1a6276b5cc2f77e25c9183ce256fe9",
+  "checkpoint_sha": "899ccfbfbf59d80797dc0274ff6c20c96e608f65",
+  "workspace": "__C2E2_SOURCE_WORKSPACE__",
+  "checkpoint_evidence_files_verified": 47,
+  "E2_D_sha256": "68de8fb53e38036a3cf155ce9d63169e0bad4d371ca4fbc2a95df4d060a7e1df",
+  "program": "One P_sig for H0 and Hs: original LA await body plus registered probe Signal handler recording count/time/history-length; no signal commands. Same expanded real Guest adapter in all arms.",
+  "scanner_predictions": [
+    {
+      "family": "H0",
+      "after": 3,
+      "finished": true,
+      "updates": [],
+      "index": 8,
+      "event": 9
+    },
+    {
+      "family": "Hs",
+      "after": 3,
+      "finished": true,
+      "updates": [],
+      "index": 6,
+      "event": 7
+    },
+    {
+      "family": "Hs",
+      "after": 7,
+      "finished": true,
+      "updates": [],
+      "index": 9,
+      "event": 10
+    }
+  ],
+  "Hs_events": [
+    "WES1",
+    "Scheduled2",
+    "Started3",
+    "Completed4",
+    "Scheduled5",
+    "Signal6(probe)",
+    "Started7",
+    "Completed8",
+    "Scheduled9",
+    "Started10",
+    "Completed11",
+    "LAMarker12",
+    "WorkflowCompleted13"
+  ],
+  "warm_cold_predictions": {
+    "H0": {
+      "signal_receipts_each": 0,
+      "language_jobs_each": [
+        "InitializeWorkflow",
+        "ResolveActivity(seq1)"
+      ],
+      "language_time_each": [
+        "T",
+        "T+17"
+      ],
+      "language_history_length_each": [
+        3,
+        9
+      ]
+    },
+    "Hs": {
+      "signal_receipts_each": 1,
+      "signal_routines_started_completed_each": [
+        1,
+        1
+      ],
+      "language_jobs_each": [
+        "InitializeWorkflow",
+        "SignalWorkflow(probe)",
+        "ResolveActivity(seq1)"
+      ],
+      "language_time_each": [
+        "T",
+        "T+8",
+        "T+17"
+      ],
+      "language_history_length_each": [
+        3,
+        7,
+        10
+      ]
+    },
+    "both": {
+      "warm_LA_substitute_calls": 1,
+      "cold_New_LA_requests": 0,
+      "LA_result": "local-result",
+      "LA_seq": 1,
+      "LA_id": "la-1",
+      "LA_type": "c2_la",
+      "workflow_result": "workflow-result",
+      "signal_activation_commands": [],
+      "normal_completion_required": true
+    }
+  },
+  "projection": "Retain ordered nonempty language jobs/grouping, actual language clock/history reads, signal count and handler receipt observation, LA identity/result, language commands and terminal outcome; compare each family within itself. Replay mode/deployment/SDK metadata are recorded raw and separately, not equalized.",
+  "fixture_policy": "Scanner H0 is exact archived E2-D; Hs derived only by legal Signal insertion and causal reference renumbering at T+8. Runtime each family starts from that validated shape; actual warm completion SDK metadata and actual warm marker are saved under new runtime fixture identities. Only original_schedule_time may vary in semantic marker metadata, echoing real LA request as in C2-D; preserve all event timestamps, identity/result, completion time and activation index. Cold consumes exactly the bytes saved for that family. Never overwrite archived E2-D.",
+  "classification": "Compiler/adapter/fixture construction failures are INCONCLUSIVE. Stop if scanner fixture or predictions fail. Do not change expected correctness to fatal. A real semantic RED requires valid fixture and Guest lifecycle.",
+  "limitations": [
+    "No full Worker/transport/paginator admission proof",
+    "LA deterministic substitute, runtime17 supplied, no sleeps",
+    "No Server generation, durable completion acknowledgement, crash/retry/recovery or general refinement proof",
+    "SDK/deployment differences exist before folding and remain separate observations",
+    "Signal must arrive after Scheduled5 and before Started7; Server reachability untested"
+  ]
+}

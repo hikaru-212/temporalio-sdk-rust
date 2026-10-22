@@ -1,0 +1,35 @@
+--- Hs-scanner-template
++++ Hs-runtime
+@@ -191,10 +191,10 @@
+                             WorkflowTaskCompletedMetadata {
+                                 core_used_flags: [
+                                     3,
++                                    2,
++                                    1,
+                                     4,
+-                                    2,
+                                     5,
+-                                    1,
+                                 ],
+                                 lang_used_flags: [],
+                                 sdk_name: "c2d-guest-adapter",
+@@ -488,14 +488,14 @@
+                     MarkerRecordedEventAttributes {
+                         marker_name: "core_local_activity",
+                         details: {
++                            "data": Payloads {
++                                payloads: [
++                                    [eyJzZXEiOjEsImF0dGVtcHQiOjEsImFjdGl2aXR5X2k=..MTQwNTM2Nzc0fSwiYWN0aXZhdGlvbl9pbmRleCI6MH0=],
++                                ],
++                            },
+                             "result": Payloads {
+                                 payloads: [
+                                     [bG9jYWwtcmVzdWx0],
+-                                ],
+-                            },
+-                            "data": Payloads {
+-                                payloads: [
+-                                    [eyJzZXEiOjEsImF0dGVtcHQiOjEsImFjdGl2aXR5X2k=..NzY0NjE4ODMwfSwiYWN0aXZhdGlvbl9pbmRleCI6MH0=],
+                                 ],
+                             },
+                         },

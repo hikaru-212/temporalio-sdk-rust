@@ -1,0 +1,9 @@
+
+running 1 test
+C2E2 SCANNER H0: after=3, finished=true, updates=[]; expected_index=8, expected_event=9; actual_index=Some(8), actual_event=Some(9)
+C2E2 SCANNER Hs: after=3, finished=true, updates=[]; expected_index=6, expected_event=7; actual_index=Some(6), actual_event=Some(7)
+C2E2 SCANNER Hs: after=7, finished=true, updates=[]; expected_index=9, expected_event=10; actual_index=Some(9), actual_event=Some(10)
+test worker::workflow::managed_run::c2e2_signal_boundary::scanner_preserves_signal_boundary ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 536 filtered out; finished in 0.02s
+

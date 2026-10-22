@@ -3204,3 +3204,7 @@ mod c2d_live_replay {
         println!("C2D RESULT conditional_semantic_convergence=PASS warm_external_calls=1 cold_external_calls=0 resolve_jobs_per_path=1");
     }
 }
+
+#[cfg(test)]
+#[path = "c2e2_signal_boundary.rs"]
+mod c2e2_signal_boundary;

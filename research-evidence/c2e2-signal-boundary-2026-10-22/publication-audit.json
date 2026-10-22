@@ -1,0 +1,15 @@
+{
+  "pattern_scan_findings": [],
+  "unnecessary_machine_path_findings": [],
+  "all_original_evidence_entries_mapped": 84,
+  "path_redacted_text_files": 14,
+  "protobuf_files_byte_identical": 19,
+  "immutable_input_bundled": true,
+  "test_sources_byte_identical_to_experiment": true,
+  "production_delta": "none; only cfg(test) declaration appended",
+  "included_build_cache_or_target": false,
+  "largest_original_evidence_bytes": 134080,
+  "scope": "common credential/token/private-key patterns and machine paths; not a general secrecy guarantee",
+  "portable_runner_validation": "Python AST parse, static dependency review and verify-only PASS; no compilation or test execution",
+  "raw_evidence_whitespace": "Preserved exact log trailing newlines and protobuf bytes; scoped .gitattributes marks protobuf as binary and disables whitespace lint for archived logs"
+}

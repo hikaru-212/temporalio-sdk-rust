@@ -1,0 +1,15 @@
+{
+  "exit-code.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+  "finished-utc.txt": "63cdd73222737a39d82a07a71592fc741733a9d20a1b53b261a324ba8dc273c1",
+  "fixtures/H0.decoded.txt": "98066ffc68566c6905b6b57eddbde1cb767f1060eca83793871cf68d4f90aaef",
+  "fixtures/H0.pb": "68de8fb53e38036a3cf155ce9d63169e0bad4d371ca4fbc2a95df4d060a7e1df",
+  "fixtures/Hs.decoded.txt": "a8a7d3fe330c28c1bb7861a4dd2af3eb0ee0dacc1cefa223b556f37b357713ca",
+  "fixtures/Hs.pb": "ecf548f5d315c72103afd22ff6b90ff5330b915038f24fb13077e19bf5d227ac",
+  "fixtures/scanner-results.txt": "6ed1b5192b927cf99d08a8d55fa29c77c598b21a55b9b485ff2183d20ed88f9f",
+  "invocation.json": "6bd15f140b6a8e3f95feca84783c5e8332210a4b141baf513b3b6edaa63ce9a7",
+  "original-SHA256SUMS.json": "a670515973bd47a15f7cfe1b126a9dc99a4d72d6421a73e950a488e965b9a9ac",
+  "stderr.log": "c8f4ee3b9b9f86271e7bf327329f5b9d114eb208ad15d335f725ee7cee146912",
+  "stdout.log": "2cc74b2563e89444b96a2df077a87e7c630fe747acdc962d11726aa5dce05631",
+  "test-only.diff": "1cfee40856fa58e1f289b34730e079b54df528557ae54b5d102f88dfdb3691a7",
+  "test-source.rs": "3c29d73336553f9aff02a4793239cb00697252060dd336b541906de46fc3cc26"
+}
