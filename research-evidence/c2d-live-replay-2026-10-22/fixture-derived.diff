@@ -1,0 +1,72 @@
+--- C2-B/E2
++++ C2-D/E2-D
+@@ -190,11 +190,15 @@
+                         sdk_metadata: Some(
+                             WorkflowTaskCompletedMetadata {
+                                 core_used_flags: [
++                                    3,
++                                    4,
++                                    2,
+                                     5,
++                                    1,
+                                 ],
+                                 lang_used_flags: [],
+-                                sdk_name: "",
+-                                sdk_version: "",
++                                sdk_name: "c2d-guest-adapter",
++                                sdk_version: "pinned",
+                             },
+                         ),
+                         metering_metadata: None,
+@@ -300,7 +304,14 @@
+                         identity: "c2-worker",
+                         binary_checksum: "",
+                         worker_version: None,
+-                        sdk_metadata: None,
++                        sdk_metadata: Some(
++                            WorkflowTaskCompletedMetadata {
++                                core_used_flags: [],
++                                lang_used_flags: [],
++                                sdk_name: "",
++                                sdk_version: "",
++                            },
++                        ),
+                         metering_metadata: None,
+                         deployment: None,
+                         versioning_behavior: Unspecified,
+@@ -404,7 +415,14 @@
+                         identity: "c2-worker",
+                         binary_checksum: "",
+                         worker_version: None,
+-                        sdk_metadata: None,
++                        sdk_metadata: Some(
++                            WorkflowTaskCompletedMetadata {
++                                core_used_flags: [],
++                                lang_used_flags: [],
++                                sdk_name: "",
++                                sdk_version: "",
++                            },
++                        ),
+                         metering_metadata: None,
+                         deployment: None,
+                         versioning_behavior: Unspecified,
+@@ -436,14 +454,14 @@
+                     MarkerRecordedEventAttributes {
+                         marker_name: "core_local_activity",
+                         details: {
++                            "data": Payloads {
++                                payloads: [
++                                    [eyJzZXEiOjEsImF0dGVtcHQiOjEsImFjdGl2aXR5X2k=..NzY0NjE4ODMwfSwiYWN0aXZhdGlvbl9pbmRleCI6MH0=],
++                                ],
++                            },
+                             "result": Payloads {
+                                 payloads: [
+                                     [bG9jYWwtcmVzdWx0],
+-                                ],
+-                            },
+-                            "data": Payloads {
+-                                payloads: [
+-                                    [eyJzZXEiOjEsImF0dGVtcHQiOjEsImFjdGl2aXR5X2k=..Im5hbm9zIjowfSwiYWN0aXZhdGlvbl9pbmRleCI6MH0=],
+                                 ],
+                             },
+                         },

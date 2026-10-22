@@ -1,0 +1,11 @@
+{
+  "head_unchanged": true,
+  "changed_tracked_files": [
+    "crates/sdk-core/src/worker/workflow/managed_run.rs"
+  ],
+  "tracked_files_checked": 609,
+  "original_managed_run_exact_prefix": true,
+  "c2b_artifacts_checked": 31,
+  "c2b_all_unchanged": true,
+  "prior_research_tests_unchanged": true
+}

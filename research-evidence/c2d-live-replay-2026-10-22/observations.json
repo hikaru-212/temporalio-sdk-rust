@@ -1,0 +1,99 @@
+{
+  "classification": "Conditional semantic convergence PASS for this WorkflowManager + native Guest + deterministic LA adapter witness",
+  "runtime_attempt": 2,
+  "exit_code": 0,
+  "test_result": "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 544 filtered out; finished in 0.01s",
+  "prior_attempt": {
+    "exit_code": 101,
+    "classification": "INCONCLUSIVE compiler/harness error, duplicate task_queue builder setter"
+  },
+  "history_sha256": "68de8fb53e38036a3cf155ce9d63169e0bad4d371ca4fbc2a95df4d060a7e1df",
+  "runtime_consumed_event_ids": {
+    "warm": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "cold": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ]
+  },
+  "observed_transition": "Cold last_processed3->9 in one get_next_activation; warm3->6->9; bothresumeT+17 history_length9",
+  "la_adapter_calls": {
+    "warm": 1,
+    "cold": 0
+  },
+  "language_dispatch_groups_each": [
+    [
+      "InitializeWorkflow"
+    ],
+    [
+      "ResolveActivity(seq=1,is_local=true)"
+    ]
+  ],
+  "language_clock_seconds_each": [
+    1800000000,
+    1800000017
+  ],
+  "language_history_length_each": [
+    3,
+    9
+  ],
+  "language_is_replaying": {
+    "warm": [
+      false,
+      false
+    ],
+    "cold": [
+      true,
+      true
+    ]
+  },
+  "marker": {
+    "seq": 1,
+    "attempt": 1,
+    "activity_id": "la-1",
+    "activity_type": "c2_la",
+    "complete_time": {
+      "seconds": 1800000017,
+      "nanos": 0
+    },
+    "backoff": null,
+    "original_schedule_time": {
+      "seconds": 1792696116,
+      "nanos": 764618830
+    },
+    "activation_index": 0
+  },
+  "completion": "Warm emits matching RecordMarker+CompleteWorkflowExecution; cold matches marker11 and terminal12 without fatal",
+  "metadata_differences": [
+    "is_replaying warmfalse/coldtrue",
+    "deployment warmSome(test_bin_id)/coldNone",
+    "initial last_sdk_version warmempty/coldpinned"
+  ],
+  "unproven": [
+    "Server/task/snapshot provenance and paginator admission",
+    "Full Worker dispatch and heartbeat scheduling",
+    "Actual external LA exactly-once under failure/retry",
+    "Real executor wall-clock duration",
+    "Queries and workflows observing other metadata",
+    "General cross-scope semantic refinement"
+  ]
+}

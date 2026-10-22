@@ -1,0 +1,16 @@
+{
+  "conclusion": "Feasible as a controlled WorkflowManager + actual Rust Guest runtime unit experiment; not a full Worker or Server experiment.",
+  "core_helpers": "managed_run.rs existing local_activity_replay_tests::replay_matches_live_activations; explicit new_work_from_server through dummy constructor avoids bypassing durable version selection.",
+  "language_adapter": "Actual GuestWorkflowInstance, BaseWorkflowContext, WorkflowContext::workflow_time/history_length/is_replaying; only minimal host terminal-result mapping mirrors sdk/workflow_future.rs562-572.",
+  "clock_domains": "History/activation virtual workflow T remains1800000000. Core-created original LA schedule time is worker SystemTime; injected executor echoes request exact value. Local resolution runtime17s drives workflow time T+17. No sleeps or wall-time ordering.",
+  "derived_fixture": "E2-D derives only actual completion SDK metadata and actual RecordMarker details; both executions share it. Original E2 remains read-only.",
+  "admission_scope": "Unit-level HistoryUpdate delivery preconditions assumed; get_events/remaining assertions guard slicing. Paginator and actual task authority excluded.",
+  "review_correction_before_execution": "Termination drains emit CancelAllInRun after CompleteWorkflow. Harness accepts exactly this and rejects additional New LA execution. This correction preceded run01.",
+  "source_references": {
+    "warm_lifecycle": "managed_run.rs1495-1539,1583-1613; existing regression2410-2478",
+    "version": "workflow_machines.rs351-373; internal_flags.rs132-183",
+    "LA_clock": "local_activity_state_machine.rs169-172,251-269; worker/activities/local_activities.rs752-757",
+    "termination": "workflow_machines.rs1655-1665; worker/workflow/local_acts.rs62-63",
+    "guest_clock": "workflow_context.rs1678-1691; runtime/instance.rs1064-1134"
+  }
+}

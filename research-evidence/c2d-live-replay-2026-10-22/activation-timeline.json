@@ -1,0 +1,94 @@
+[
+  {
+    "label": "warm-init",
+    "workflow_timestamp_seconds": 1800000000,
+    "history_length": 3,
+    "activation_is_replaying": false,
+    "machines_replaying": false,
+    "last_processed": 3,
+    "job_group": [
+      "InitializeWorkflow"
+    ],
+    "deployment": "test_bin_id",
+    "last_sdk_version": "",
+    "stdout_line": 15
+  },
+  {
+    "label": "warm-heartbeat6",
+    "workflow_timestamp_seconds": 1800000008,
+    "history_length": 6,
+    "activation_is_replaying": true,
+    "machines_replaying": false,
+    "last_processed": 6,
+    "job_group": [],
+    "deployment": "test_bin_id",
+    "last_sdk_version": "pinned",
+    "stdout_line": 34
+  },
+  {
+    "label": "warm-heartbeat9",
+    "workflow_timestamp_seconds": 1800000016,
+    "history_length": 9,
+    "activation_is_replaying": true,
+    "machines_replaying": false,
+    "last_processed": 9,
+    "job_group": [],
+    "deployment": "test_bin_id",
+    "last_sdk_version": "pinned",
+    "stdout_line": 48
+  },
+  {
+    "label": "warm-resume",
+    "workflow_timestamp_seconds": 1800000017,
+    "history_length": 9,
+    "activation_is_replaying": false,
+    "machines_replaying": false,
+    "last_processed": 9,
+    "job_group": [
+      "ResolveActivity(seq=1,is_local=true)"
+    ],
+    "deployment": "test_bin_id",
+    "last_sdk_version": "pinned",
+    "stdout_line": 51
+  },
+  {
+    "label": "cold-init",
+    "workflow_timestamp_seconds": 1800000000,
+    "history_length": 3,
+    "activation_is_replaying": true,
+    "machines_replaying": true,
+    "last_processed": 3,
+    "job_group": [
+      "InitializeWorkflow"
+    ],
+    "deployment": null,
+    "last_sdk_version": "pinned",
+    "stdout_line": 71
+  },
+  {
+    "label": "cold-resume",
+    "workflow_timestamp_seconds": 1800000017,
+    "history_length": 9,
+    "activation_is_replaying": true,
+    "machines_replaying": true,
+    "last_processed": 9,
+    "job_group": [
+      "ResolveActivity(seq=1,is_local=true)"
+    ],
+    "deployment": null,
+    "last_sdk_version": "pinned",
+    "stdout_line": 97
+  },
+  {
+    "label": "cold-terminal",
+    "workflow_timestamp_seconds": 1800000017,
+    "history_length": 12,
+    "activation_is_replaying": true,
+    "machines_replaying": true,
+    "last_processed": 12,
+    "job_group": [],
+    "deployment": null,
+    "last_sdk_version": "pinned",
+    "stdout_line": 111
+  }
+]

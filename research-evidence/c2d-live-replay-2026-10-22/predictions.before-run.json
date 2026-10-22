@@ -1,0 +1,29 @@
+{
+  "phase": "C2-D",
+  "registered_utc": "2026-10-22T19:03:31.366818+00:00",
+  "source_sha": "8f4a676f9e1a6276b5cc2f77e25c9183ce256fe9",
+  "workspace": "__C2D_SOURCE_WORKSPACE__",
+  "original_E2_sha256": "6634b01fac15a734c9fd92807f5bb1b3430201572da9b132b86b1987880a774c",
+  "original_E2": "__EVIDENCE_WORKSPACE__/research-evidence/c2b-scoped-boundary-2026-10-22/run-01/fixtures/E2.pb",
+  "comparison": "Warm and cold executions of one derived E2-D logical history; never E1 versus E2.",
+  "fixture_policy": "Keep all 12 original event IDs, event kinds, causal references, event timestamps, inputs and result payloads. Replace only completion SDK metadata with actual warm writer metadata, and marker details with actual warm RecordMarker command; marker original_schedule_time echoes the actual dispatched LA request. Preserve every original artifact. Save derived protobuf and precise decoded changes.",
+  "harness": "WorkflowManager + real Rust GuestWorkflowInstance and WorkflowContext; synchronous deterministic LA executor stand-in, runtime17s supplied at LocalActivityResolution boundary. No full Worker, real transport, scheduler, LA wall-clock timer or Server coverage.",
+  "predictions": [
+    "Warm dispatches LA seq1 idla-1 typec2_la once and resolves it exactly once.",
+    "Heartbeat continuations through Started6 and Started9 yield empty job groups and are not dispatched to language.",
+    "Cold durable V2 replay consumes 4..9 as one sequence and resolves via marker lookahead, with zero external LA dispatch/execution.",
+    "Both resume activations contain exactly ResolveActivity(seq1,is_local=true,result=local-result).",
+    "Both resume activation timestamp and workflow_time read by real workflow code equal T+17 (1800000017 seconds).",
+    "Both resume activation history_length and real workflow history_length read equal9.",
+    "is_replaying and other activation metadata recorded separately, not equalized.",
+    "Both programs emit compatible CompleteWorkflowExecution workflow-result, with marker emission/live and marker match/replay tracked separately.",
+    "Replay applies terminal event12 without fatal; normal correctness remains requirement."
+  ],
+  "classification": "Compiler/adapter/fixture failures are INCONCLUSIVE; do not turn fatal expectations into PASS.",
+  "admission_assumptions": [
+    "Incoming update scopes are valid and acknowledged heartbeat WFT completions; exact suffixes 1..3,4..6,7..9; full replay scope1..12.",
+    "Core-enabled V2 staging and sdk_metadata capability; durable C4 emitted by warm Core.",
+    "Fixed ordered scheduling: no LA resolution before Started9; timeout60s and WFT10s, modeled heartbeats at8s and16s; resolution17s.",
+    "Server reachability and real executor wall-clock behavior untested."
+  ]
+}

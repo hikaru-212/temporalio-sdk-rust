@@ -1,0 +1,34 @@
+{
+  "original_E2": {
+    "seq": 1,
+    "attempt": 1,
+    "activity_id": "la-1",
+    "activity_type": "c2_la",
+    "complete_time": {
+      "seconds": 1800000017,
+      "nanos": 0
+    },
+    "backoff": null,
+    "original_schedule_time": {
+      "seconds": 1800000000,
+      "nanos": 0
+    },
+    "activation_index": 0
+  },
+  "E2_D": {
+    "seq": 1,
+    "attempt": 1,
+    "activity_id": "la-1",
+    "activity_type": "c2_la",
+    "complete_time": {
+      "seconds": 1800000017,
+      "nanos": 0
+    },
+    "backoff": null,
+    "original_schedule_time": {
+      "seconds": 1792696116,
+      "nanos": 764618830
+    },
+    "activation_index": 0
+  }
+}

@@ -1,0 +1,75 @@
+C2-D — Live/Replay Semantic Convergence
+
+結論：受控 WorkflowManager＋真實 Rust Guest runtime 對照 PASS。
+這是同一份 E2-D、同一個 workflow 程式的有限語意投影見證；不是完整 Worker／Server 或任意 workflow 的語意等價證明。
+
+來源與 harness
+Source-confirmed：pinned SHA 8f4a676f9e1a6276b5cc2f77e25c9183ce256fe9。
+使用既有隔離 workspace __C2D_SOURCE_WORKSPACE__；原 __LEGACY_PHASE3_WORKSPACE__ 不存在，未重建或清理。
+僅在 crates/sdk-core/src/worker/workflow/managed_run.rs 尾端追加 cfg(test) c2d_live_replay 模組，保留原檔為完整 binary prefix。
+沿用既有 local_activity_replay_tests::replay_matches_live_activations 的 manager／heartbeat／LA resolution 模式。初始化用 dummy history 後 new_work_from_server，以實際走 durable RunVersion observe。
+語言側使用正式 GuestWorkflowInstance、BaseWorkflowContext 與 WorkflowContext；測試 host 僅收集 commands、依 SDK 既有規則將 guest terminal result 映射成 CompleteWorkflowExecution。不是手寫假的 workflow clock accessor。
+LA executor 是同步測試替身：收到唯一 New request 後執行結果 callback 一次，將結果保留至 WFT9，注入 runtime=17秒。未執行真實 LA worker 或以 wall-clock sleeps 排序。
+
+執行前登記
+predictions.before-run.json 在 run-01 前保存。預測：warm 一次 LA execution／resolution；WFT6／9 空 jobs 不送語言；cold marker lookahead resolution、零外部 LA dispatch；兩邊 resume 都 ResolveActivity(seq1,is_local=true,local-result)、timestamp與實際workflow_time=T+17、history_length9；後續正常 completion commands 相容。is_replaying 與其餘 metadata 個別記錄，不預測 raw activation 相等。
+T=1800000000秒。
+
+Fixture
+原 C2-B E2.pb 未變：SHA256 6634b01fac15a734c9fd92807f5bb1b3430201572da9b132b86b1987880a774c。
+E2-D.pb：SHA256 68de8fb53e38036a3cf155ce9d63169e0bad4d371ca4fbc2a95df4d060a7e1df。
+兩條執行比較的是這一份 E2-D；沒有比較 E1 與 E2。
+事件：1 WorkflowStarted；2/3 Scheduled/Started(T)；4 Completed(T+8)；5/6 Scheduled/Started(T+8)；7 commandless Completed(T+16)；8/9 Scheduled/Started(T+16)；10 Completed(T+17)；11 LA Marker(T+17)；12 WorkflowCompleted(T+17)。
+WFT completion references 維持 (scheduled,started)=(2,3),(5,6),(8,9)，marker11／terminal12 均指向 Completed10。其餘原始 events、時間、run/workflow identities、inputs及results保留。
+衍生部分只有實際 Core completion SDK metadata 與實際 RecordMarker details。C4 flags實際為[3,4,2,5,1]，V2選擇Some(true)；C7/C10為空metadata結構。SDK name/version為c2d-guest-adapter/pinned。
+LA seq1、id la-1、type c2_la、attempt1；語言command兩邊完全相同，schedule/start-to-close60秒、WaitCancellationCompleted、initial original_schedule_time=None、無arguments。
+Marker result binary/plain local-result；complete_time=1800000017、activation_index=0、backoff=null。original_schedule_time=1792696116.764618830，原樣取自實際 Core request，並由測試 executor 回填。
+這是 worker wall-clock retry baseline，與 virtual workflow time 是不同時鐘域；未偽造兩者相等。原 fixture該欄位為T，故使用獨立fixture身份。完整差異見fixture-derived.diff；marker-decoded.json保存未截短JSON。protobuf map順序不是canonical encoding，雜湊指實際保存bytes。
+
+Runtime-verified timeline
+路徑／步驟                 jobs                              timestamp       history_length  activation replay / machines replay
+warm init3                [InitializeWorkflow]              T               3               false / false
+warm續接4..6              []，不送語言                       T+8             6               true / false
+warm續接7..9              []，不送語言                       T+16            9               true / false
+warm LA resume            [ResolveActivity(seq1,is_local)]   T+17            9               false / false
+cold init3                [InitializeWorkflow]              T               3               true / true
+cold一次套用4..9後resume   [ResolveActivity(seq1,is_local)]   T+17            9               true / true
+cold匹配10..12            []，不送語言                       T+17            12              true / true
+
+空 activation wrapper 的 replay=true 來自 all_query 對空集合為真；不能據此說 warm machine正在replay。最後cold空wrapper亦未作為新的語言activation派送。
+真實 workflow 程式在 LA await 前後讀到：warm與cold皆 workflow_time=[T,T+17]、history_length=[3,9]。分別記錄is_replaying=[false,false]及[true,true]。
+Consumer既有 tracing逐事件證實warm套用1..9；cold套用1..12。Cold get_next_activation單次呼叫last_processed 3→9、cursor9，且resolution在尚未套用marker11時已產生；這支持marker lookahead而非外部執行。
+Warm callback一次，cold在初始、fold後均無New LA request；結束只產生預期CancelAllInRun bookkeeping。零dispatch不冒充完整外部系統exactly-once證明。
+Warm C4/C7 commands空；C10依序RecordMarker、CompleteWorkflowExecution(workflow-result)。Cold語言initial/final commands與warm相等，且真實machines成功匹配marker11及terminal12，無fatal或nondeterminism。
+Warm正常完成指Core接受terminal command並形成預期Server commands；沒有假造workflow結束後的WFT來回送terminal history，也沒有真的Server durable commit。
+
+第一次差異與收斂點
+Raw trace在init3已不同：warm deployment=Some(test_bin_id)、last_sdk_version空；cold deployment=None、last_sdk_version=pinned；replayflag亦不同。resume的deployment差異仍在。
+current_deployment_version()是真正語言可觀察欄位，不能普遍稱此差異為無觀察影響的stutter，也不能由這個有限測試證明它是合法非決定性。此次固定程式沒有讀該欄位，因此只在已指定jobs／clock／history-length／result／commands投影上作比較。差異早於fold，並非本次實驗觀察到的fold語意錯誤。
+確認收斂點：兩邊LA resume均為同一job/result、T+17、length9，真實語言程式讀值一致，之後產生相同CompleteWorkflow command；cold完成歷史比對。
+
+原始執行
+只執行同一個unit test，不重跑C2-B/C2-C：
+cargo test --locked --offline -p temporalio-sdk-core --lib worker::workflow::managed_run::c2d_live_replay::live_replay_semantic_convergence -- --exact --nocapture
+新process環境TEMPORAL_USE_WFT_CHUNKING_V2=1，其餘完整參數見各run/invocation.json。
+run-01 exit101：編譯E0277，test_worker_cfg已設定task_queue，重複builder setter。分類INCONCLUSIVE，未執行語意測試。原module、diff、stdout/stderr完整保存。
+修正僅將新測試配置改為build後設定公開task_queue欄位，未改預測。
+run-02 exit0：test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 544 filtered out; finished in 0.01s。
+raw stdout.log、stderr.log、combined.log、exit-code.txt均保存。第一次嘗試的compiler錯誤是第一個失敗；有效runtime比較未出現預測投影分歧。
+
+EGTS／CCPO義務
+1. Local action admissibility：只在明定HistoryUpdate scope／已回報heartbeat completion等前提下走通Core路徑。未測真正paginator、task token authority或CertifiedEOF provenance；不是獨立准入證明。
+2. Replay state reconstruction：Runtime-verified，正式machine＋Guest從同一fixture重建LA continuation並匹配終結。
+3. Observable compatibility：Runtime-verified，此固定程式的有限投影收斂。Model-inferred，可把沒有語言派送與外部作用的兩次heartbeat消費視為該投影下的stuttering；不能隱去語言已讀的clock，也不能泛化忽略deployment。
+4. LA side-effect uniqueness：Runtime-verified，測試executor warm一次callback、cold零New requests；故本見證沒有replay重執行。真實worker、重試、崩潰與外部副作用exactly-once仍Unknown。
+5. Subsequent command correctness：Runtime-verified，語言commands相同，warm marker符合derivedE2-D，cold marker／completion matching成功。這超過只比最終payload，但仍不是普遍I5定理。
+可用關係描述：同一程式P下保留非空job群組、每次workflow讀到的時間／history length、LA結果與後續語言commands；warm的一次LA效果及marker寫入，對應cold的既有marker讀取／匹配與零新增效果。mode旗標與其他metadata另存，未要求raw trace equality。
+EGTS v0.3的Cert^adm與EffectSound／跨scope refinement仍須分立。本見證支持一個conditional compatibility實例，不足以新增一般性定理；語意投影應明確標記程式P及其讀取欄位。
+
+Unknown／Server reachability
+未證Server會產生並交付這些精確heartbeat時間、scope、EOF或task metadata，也未測實際8秒heartbeat計時器。HistoryUpdate是明確注入，HANDOFF log不是paginator驗證。
+Derived history重建Core commands及SDK metadata，未完整模擬transport metadata。test capability只有sdk_metadata=true時，client可以不送WorkerVersionStamp；但真實request會使用test_bin_id作binary_checksum，而fixture保留空checksum，Server儲存語意本輪未查證。因此沒有完整producer-generated byte-exact history的聲明。
+未測讀deployment等metadata的其他workflow、Query、Signals、Updates、故障、重試或Server E2E；也未證無界future refinement。
+
+完整性
+609個tracked files比對後，只有本輪managed_run.rs追加test-only模組；其原始prefix完整。既有queries.rs、updates.rs、transition_coverage.rs未變。C2-B 31個既有artifact雜湊全部一致。沒有production變更、GitHub writes、修復實作、Phase3D或額外測試。止於C2-D。

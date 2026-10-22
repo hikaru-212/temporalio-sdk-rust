@@ -1,0 +1,4 @@
+   Compiling temporalio-sdk-core v0.10.0 (__C2D_SOURCE_WORKSPACE__/crates/sdk-core)
+   Compiling temporalio-sdk v1.1.0 (__C2D_SOURCE_WORKSPACE__/crates/sdk)
+    Finished `test` profile [unoptimized] target(s) in 20.91s
+     Running unittests src/lib.rs (__BUILD_CACHE__/debug/deps/temporalio_sdk_core-84eddf835206e70e)

@@ -1,0 +1,28 @@
+{
+  "base_sha": "8f4a676f9e1a6276b5cc2f77e25c9183ce256fe9",
+  "source_workspace": {
+    "head": "8f4a676f9e1a6276b5cc2f77e25c9183ce256fe9",
+    "branch": "investigate/pr-1629-latest-raw-tail",
+    "tracked_modifications": [
+      "crates/sdk-core/src/core_tests/queries.rs",
+      "crates/sdk-core/src/core_tests/updates.rs",
+      "crates/sdk-core/src/worker/workflow/machines/transition_coverage.rs",
+      "crates/sdk-core/src/worker/workflow/managed_run.rs"
+    ]
+  },
+  "evidence_workspace": {
+    "head": "3f9fcd253767d08733304cfaf20500c87a3015db",
+    "branch": "review/pr-1629"
+  },
+  "strategy": "New worktree/branch from pinned base; preserve existing branches, indexes and worktrees. Include only exact C2-D test and reviewed evidence; no earlier investigation diffs.",
+  "code_boundary": "Original managed_run.rs exactly equals pinned source; appended module is cfg(test) only.",
+  "branch": "research/ccpo-egts-c2d",
+  "fork_verification": {
+    "owner": "hikaru-212",
+    "authenticated_login": "hikaru-212",
+    "repository": "hikaru-212/temporalio-sdk-rust",
+    "push_permission": true,
+    "remote_branch_absent_before_preparation": true
+  },
+  "checkpoint_tests_executed": false
+}

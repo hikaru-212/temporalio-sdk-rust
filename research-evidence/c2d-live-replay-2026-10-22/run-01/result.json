@@ -1,0 +1,30 @@
+{
+  "command": [
+    "cargo",
+    "test",
+    "--locked",
+    "--offline",
+    "-p",
+    "temporalio-sdk-core",
+    "--lib",
+    "worker::workflow::managed_run::c2d_live_replay::live_replay_semantic_convergence",
+    "--",
+    "--exact",
+    "--nocapture"
+  ],
+  "cwd": "__C2D_SOURCE_WORKSPACE__",
+  "source_sha": "8f4a676f9e1a6276b5cc2f77e25c9183ce256fe9",
+  "started_utc": "2026-10-22T19:07:26.527032+00:00",
+  "environment_overrides": {
+    "C2D_OUTPUT_DIR": "__EVIDENCE_WORKSPACE__/research-evidence/c2d-live-replay-2026-10-22/run-01/fixtures",
+    "C2D_ORIGINAL_E2": "__EVIDENCE_WORKSPACE__/research-evidence/c2b-scoped-boundary-2026-10-22/run-01/fixtures/E2.pb",
+    "TEMPORAL_USE_WFT_CHUNKING_V2": "1",
+    "CARGO_TARGET_DIR": "__BUILD_CACHE__",
+    "CARGO_BUILD_JOBS": "2",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "CARGO_TERM_COLOR": "never"
+  },
+  "exit_code": 101,
+  "finished_utc": "2026-10-22T19:07:34.895744+00:00"
+}

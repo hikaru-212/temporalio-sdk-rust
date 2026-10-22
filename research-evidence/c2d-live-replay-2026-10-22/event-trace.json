@@ -1,0 +1,128 @@
+[
+  {
+    "path": "warm",
+    "event_id": 1,
+    "event_type": "WorkflowExecutionStarted",
+    "stdout_line": 5
+  },
+  {
+    "path": "warm",
+    "event_id": 2,
+    "event_type": "WorkflowTaskScheduled",
+    "stdout_line": 8
+  },
+  {
+    "path": "warm",
+    "event_id": 3,
+    "event_type": "WorkflowTaskStarted",
+    "stdout_line": 11
+  },
+  {
+    "path": "warm",
+    "event_id": 4,
+    "event_type": "WorkflowTaskCompleted",
+    "stdout_line": 23
+  },
+  {
+    "path": "warm",
+    "event_id": 5,
+    "event_type": "WorkflowTaskScheduled",
+    "stdout_line": 27
+  },
+  {
+    "path": "warm",
+    "event_id": 6,
+    "event_type": "WorkflowTaskStarted",
+    "stdout_line": 30
+  },
+  {
+    "path": "warm",
+    "event_id": 7,
+    "event_type": "WorkflowTaskCompleted",
+    "stdout_line": 37
+  },
+  {
+    "path": "warm",
+    "event_id": 8,
+    "event_type": "WorkflowTaskScheduled",
+    "stdout_line": 41
+  },
+  {
+    "path": "warm",
+    "event_id": 9,
+    "event_type": "WorkflowTaskStarted",
+    "stdout_line": 44
+  },
+  {
+    "path": "cold",
+    "event_id": 1,
+    "event_type": "WorkflowExecutionStarted",
+    "stdout_line": 61
+  },
+  {
+    "path": "cold",
+    "event_id": 2,
+    "event_type": "WorkflowTaskScheduled",
+    "stdout_line": 64
+  },
+  {
+    "path": "cold",
+    "event_id": 3,
+    "event_type": "WorkflowTaskStarted",
+    "stdout_line": 67
+  },
+  {
+    "path": "cold",
+    "event_id": 4,
+    "event_type": "WorkflowTaskCompleted",
+    "stdout_line": 75
+  },
+  {
+    "path": "cold",
+    "event_id": 5,
+    "event_type": "WorkflowTaskScheduled",
+    "stdout_line": 79
+  },
+  {
+    "path": "cold",
+    "event_id": 6,
+    "event_type": "WorkflowTaskStarted",
+    "stdout_line": 82
+  },
+  {
+    "path": "cold",
+    "event_id": 7,
+    "event_type": "WorkflowTaskCompleted",
+    "stdout_line": 85
+  },
+  {
+    "path": "cold",
+    "event_id": 8,
+    "event_type": "WorkflowTaskScheduled",
+    "stdout_line": 89
+  },
+  {
+    "path": "cold",
+    "event_id": 9,
+    "event_type": "WorkflowTaskStarted",
+    "stdout_line": 92
+  },
+  {
+    "path": "cold",
+    "event_id": 10,
+    "event_type": "WorkflowTaskCompleted",
+    "stdout_line": 103
+  },
+  {
+    "path": "cold",
+    "event_id": 11,
+    "event_type": "MarkerRecorded",
+    "stdout_line": 107
+  },
+  {
+    "path": "cold",
+    "event_id": 12,
+    "event_type": "WorkflowExecutionCompleted",
+    "stdout_line": 109
+  }
+]
