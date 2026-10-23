@@ -1,0 +1,24 @@
+{
+  "command": [
+    "go",
+    "test",
+    "-p",
+    "2",
+    "-tags",
+    "test_dep",
+    "-count=1",
+    "-timeout",
+    "3m",
+    "-run",
+    "^TestCCPOC4Control$",
+    "-v",
+    "./tests/ccpo_c4"
+  ],
+  "cwd": "<SERVER_CHECKOUT>",
+  "start_utc": "2026-10-23T13:36:14.446914+00:00",
+  "arm": "control",
+  "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+  "test_sha256": "a6fd789b274808c0a807555795ee3598de935694c64bec6af26202a795f02223",
+  "exit_code": 0,
+  "finish_utc": "2026-10-23T13:36:18.670610+00:00"
+}

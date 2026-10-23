@@ -1,0 +1,1 @@
+INCONCLUSIVE：test harness initial task enumeration 使用 tasks.MaximumKey，immediate 類別不接受非 epoch FireTime。尚未呼叫 WFT completion。修正僅將 immediate 類別上界設為 NewImmediateKey(MaximumKey.TaskID)，不更動實驗預測、SQL 或 Server。原始 log / test source / exit code 保留。

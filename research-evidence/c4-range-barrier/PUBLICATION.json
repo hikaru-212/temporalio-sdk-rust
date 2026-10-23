@@ -1,0 +1,1025 @@
+{
+  "created_utc": "2026-10-23T13:57:56.399032+00:00",
+  "parent_checkpoint": "632c157c02af7154e4b93541c51dc1d17141c003",
+  "server_source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+  "original_manifest_entries_verified": 88,
+  "original_manifest_sha256": "7a86d208a336d191a2b4b457a2ca81da516949233d9134b200844220892973c5",
+  "original_archive_basename": "temporal-ccpo-c4-evidence-2026-10-23.tar.gz",
+  "original_archive_sha256": "494c747abb56db1ae788b915021953f8372ec339754170b382bc4dff42a83aba",
+  "original_archive_files_verified": 90,
+  "policy": "Public copies replace machine path prefixes, temporary database filenames and already masked YAML password values only. Original workspace/archive remain unchanged locally. Keep synthetic test tokens, all protobuf bytes, identity fields, timestamps, event/task IDs, observations, exit codes and conclusions. Historical hashes refer to originals; this mapping identifies public bytes.",
+  "entries": [
+    {
+      "original_path": "PREDICTIONS.zh-TW.md",
+      "published_path": "PREDICTIONS.zh-TW.md",
+      "original_sha256": "2684d18184f7657c9baa3957da40b2673fe699d2ca25b722e24656bd8d115187",
+      "published_sha256": "2684d18184f7657c9baa3957da40b2673fe699d2ca25b722e24656bd8d115187",
+      "original_bytes": 3933,
+      "published_bytes": 3933,
+      "transformations": []
+    },
+    {
+      "original_path": "README.md",
+      "published_path": "README.experiment.md",
+      "original_sha256": "b492253725c46e6e6936ef7ebaf068a3f880344f05086e4c0df6d9968ac886c9",
+      "published_sha256": "b492253725c46e6e6936ef7ebaf068a3f880344f05086e4c0df6d9968ac886c9",
+      "original_bytes": 3240,
+      "published_bytes": 3240,
+      "transformations": []
+    },
+    {
+      "original_path": "REPORT.zh-TW.md",
+      "published_path": "REPORT.zh-TW.md",
+      "original_sha256": "f3d798162cf3da80abac9f1cfa19d91017785a1b53458785203e9c82d1645493",
+      "published_sha256": "7c55336eb9b4e938bae385ecb26efb7730d00ccad83b2c6efc66168d19a544db",
+      "original_bytes": 22870,
+      "published_bytes": 22841,
+      "transformations": [
+        {
+          "rule": "/tmp/temporal-ccpo-c4-range-barrier-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<SERVER_CHECKOUT>",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "original_path": "RESULTS.json",
+      "published_path": "RESULTS.json",
+      "original_sha256": "ef72cb71efc476834bbc6a9dd81f3ab162748c72c9af324996c2af1a575f7286",
+      "published_sha256": "e1368b7a0983caa34552ce57dab149efc0b9a1c0079de68de98a6818b40a5978",
+      "original_bytes": 3941,
+      "published_bytes": 3796,
+      "transformations": [
+        {
+          "rule": "/tmp/temporal-ccpo-c4-range-barrier-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<SERVER_CHECKOUT>",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "original_path": "SHA256SUMS",
+      "published_path": "ORIGINAL-SHA256SUMS",
+      "original_sha256": "7a86d208a336d191a2b4b457a2ca81da516949233d9134b200844220892973c5",
+      "published_sha256": "7a86d208a336d191a2b4b457a2ca81da516949233d9134b200844220892973c5",
+      "original_bytes": 9254,
+      "published_bytes": 9254,
+      "transformations": []
+    },
+    {
+      "original_path": "audit-observations.py",
+      "published_path": "audit-observations.py",
+      "original_sha256": "0f1e847b91cd38600508a61ce0eb9d03911be6a801ca8f2ac06e78f0cc1e8e57",
+      "published_sha256": "0f1e847b91cd38600508a61ce0eb9d03911be6a801ca8f2ac06e78f0cc1e8e57",
+      "original_bytes": 4062,
+      "published_bytes": 4062,
+      "transformations": []
+    },
+    {
+      "original_path": "independent-observation-audit.json",
+      "published_path": "independent-observation-audit.json",
+      "original_sha256": "927f1232075b2eafbf35017fb923916561c8ad6c199d2a7e1b114862b6515f6a",
+      "published_sha256": "927f1232075b2eafbf35017fb923916561c8ad6c199d2a7e1b114862b6515f6a",
+      "original_bytes": 1639,
+      "published_bytes": 1639,
+      "transformations": []
+    },
+    {
+      "original_path": "lint-check/command.json",
+      "published_path": "lint-check/command.json",
+      "original_sha256": "32a93a795fea3083750674fc868963c82742920f2ef13b28ba4aa80f1849e185",
+      "published_sha256": "32a93a795fea3083750674fc868963c82742920f2ef13b28ba4aa80f1849e185",
+      "original_bytes": 242,
+      "published_bytes": 242,
+      "transformations": []
+    },
+    {
+      "original_path": "lint-check/result.json",
+      "published_path": "lint-check/result.json",
+      "original_sha256": "b5980b244fa1d3da4c4c2a0260f0ee73bbbf484b17677cff8a7254d737b74b6a",
+      "published_sha256": "b5980b244fa1d3da4c4c2a0260f0ee73bbbf484b17677cff8a7254d737b74b6a",
+      "original_bytes": 312,
+      "published_bytes": 312,
+      "transformations": []
+    },
+    {
+      "original_path": "lint-check/stderr.log",
+      "published_path": "lint-check/stderr.log",
+      "original_sha256": "9cc7b57e969007c493bcce343307140370c3c6307e4696edf5684075d1f9697e",
+      "published_sha256": "9cc7b57e969007c493bcce343307140370c3c6307e4696edf5684075d1f9697e",
+      "original_bytes": 1971,
+      "published_bytes": 1971,
+      "transformations": []
+    },
+    {
+      "original_path": "lint-check/stdout.log",
+      "published_path": "lint-check/stdout.log",
+      "original_sha256": "159b67554defee7f417dd32a7412a8afefa024f6ec0ebf71cb40a74019fab3a0",
+      "published_sha256": "0a59b0bfb399eab39653503b0bcd4137e034cfb359029825be9520f092dcdcb8",
+      "original_bytes": 239,
+      "published_bytes": 181,
+      "transformations": [
+        {
+          "rule": "/tmp/temporal-ccpo-c4-range-barrier-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<SERVER_CHECKOUT>",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "original_path": "pre-execution-audit.json",
+      "published_path": "pre-execution-audit.json",
+      "original_sha256": "121ec0f31057a5a89823865932cbbd09f9970a7cfc660857e6cb58e39993beae",
+      "published_sha256": "121ec0f31057a5a89823865932cbbd09f9970a7cfc660857e6cb58e39993beae",
+      "original_bytes": 281,
+      "published_bytes": 281,
+      "transformations": []
+    },
+    {
+      "original_path": "preregistration.json",
+      "published_path": "preregistration.json",
+      "original_sha256": "4ab1aed8b29d9b9f4457705d746acee6e5bebbc3dd0110e887a628c9c3598a71",
+      "published_sha256": "4ab1aed8b29d9b9f4457705d746acee6e5bebbc3dd0110e887a628c9c3598a71",
+      "original_bytes": 231,
+      "published_bytes": 231,
+      "transformations": []
+    },
+    {
+      "original_path": "preservation-final.json",
+      "published_path": "preservation-final.json",
+      "original_sha256": "949f3db7f1bf6bad16dd927252a3a96ba7e2e2e2464c31638683848328e07e3f",
+      "published_sha256": "949f3db7f1bf6bad16dd927252a3a96ba7e2e2e2464c31638683848328e07e3f",
+      "original_bytes": 7858,
+      "published_bytes": 7858,
+      "transformations": []
+    },
+    {
+      "original_path": "provenance-start.json",
+      "published_path": "provenance-start.json",
+      "original_sha256": "6094a2ad045644237243fc0a338e64d8682fd7b200e8e59141450d00834f5ae7",
+      "published_sha256": "772ea8b1417b402b955333404993f358d9ba55a5faee7608ff728a7f1998d2e7",
+      "original_bytes": 8277,
+      "published_bytes": 8183,
+      "transformations": [
+        {
+          "rule": "/tmp/temporal-ccpo-c4-range-barrier-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<SERVER_CHECKOUT>",
+          "count": 1
+        },
+        {
+          "rule": "/tmp/temporal-ccpo-c3-commit-ambiguity-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<C3_SERVER_CHECKOUT>",
+          "count": 1
+        },
+        {
+          "rule": "/tmp/temporal-ccpo-egts-c3-checkpoint-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<C3_CHECKPOINT>",
+          "count": 1
+        },
+        {
+          "rule": "/home/[^/\\s]+/oss/temporal",
+          "replacement": "<ORIGINAL_SERVER_CHECKOUT>",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "original_path": "run-01-control/CLASSIFICATION.zh-TW.md",
+      "published_path": "run-01-control/CLASSIFICATION.zh-TW.md",
+      "original_sha256": "a43fdbc866bb83dda14230d1aa32e62244fd712343dad6a6a6bfac2b0a17e987",
+      "published_sha256": "a43fdbc866bb83dda14230d1aa32e62244fd712343dad6a6a6bfac2b0a17e987",
+      "original_bytes": 322,
+      "published_bytes": 322,
+      "transformations": []
+    },
+    {
+      "original_path": "run-01-control/command.json",
+      "published_path": "run-01-control/command.json",
+      "original_sha256": "79cabdb7b9f84b66c383caf18e916d0a4f6cc561f01d73b3d14768bfe99e2f3b",
+      "published_sha256": "1c52165da218db8668c3c3cab956238cc88531b3ee58836da8f0094d8a2af824",
+      "original_bytes": 481,
+      "published_bytes": 452,
+      "transformations": [
+        {
+          "rule": "/tmp/temporal-ccpo-c4-range-barrier-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<SERVER_CHECKOUT>",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "original_path": "run-01-control/initial-history.pb",
+      "published_path": "run-01-control/initial-history.pb",
+      "original_sha256": "260d365b1b5cc6ed8b05632b7665b12c4cf58e73ce7579fc2fd09dbac66081bc",
+      "published_sha256": "260d365b1b5cc6ed8b05632b7665b12c4cf58e73ce7579fc2fd09dbac66081bc",
+      "original_bytes": 323,
+      "published_bytes": 323,
+      "transformations": []
+    },
+    {
+      "original_path": "run-01-control/initial-mutable-state.pb",
+      "published_path": "run-01-control/initial-mutable-state.pb",
+      "original_sha256": "c2ad3e1139828a107fbf35dc6f95f1226d7bd086fa3c712f5fc99a5ba6c14a42",
+      "published_sha256": "c2ad3e1139828a107fbf35dc6f95f1226d7bd086fa3c712f5fc99a5ba6c14a42",
+      "original_bytes": 724,
+      "published_bytes": 724,
+      "transformations": []
+    },
+    {
+      "original_path": "run-01-control/observations.json",
+      "published_path": "run-01-control/observations.json",
+      "original_sha256": "1c7e6c1dbe402876dd7c6fc5079105f0ba4d9c187514e031edf25c26bae43ea3",
+      "published_sha256": "1c7e6c1dbe402876dd7c6fc5079105f0ba4d9c187514e031edf25c26bae43ea3",
+      "original_bytes": 3917,
+      "published_bytes": 3917,
+      "transformations": []
+    },
+    {
+      "original_path": "run-01-control/request.pb",
+      "published_path": "run-01-control/request.pb",
+      "original_sha256": "212ebdf8ea9bf7fffdadf1d34ba07d5fcd6fd273252fac28deadf5bd6c6fd848",
+      "published_sha256": "212ebdf8ea9bf7fffdadf1d34ba07d5fcd6fd273252fac28deadf5bd6c6fd848",
+      "original_bytes": 265,
+      "published_bytes": 265,
+      "transformations": []
+    },
+    {
+      "original_path": "run-01-control/result.json",
+      "published_path": "run-01-control/result.json",
+      "original_sha256": "39f19b16eab1cd4d0aee81600ccb1ca8c82c27c255887ddc1bb58d974002eb72",
+      "published_sha256": "5501d4f99d85f1a1ea3392b30ebc14cd01d42bc4bd0185bba58f53e7dd08165f",
+      "original_bytes": 551,
+      "published_bytes": 522,
+      "transformations": [
+        {
+          "rule": "/tmp/temporal-ccpo-c4-range-barrier-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<SERVER_CHECKOUT>",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "original_path": "run-01-control/stderr.log",
+      "published_path": "run-01-control/stderr.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "published_bytes": 0,
+      "transformations": []
+    },
+    {
+      "original_path": "run-01-control/stdout.log",
+      "published_path": "run-01-control/stdout.log",
+      "original_sha256": "5406ad65a04ef341c463087069f80fdfbaf71a1774a2dd60266c4860e9f5bf00",
+      "published_sha256": "9a051b662d854e41b6b0e7f31d4cd9feab4e265241d0165cd0d219724d90b17b",
+      "original_bytes": 52805,
+      "published_bytes": 48408,
+      "transformations": [
+        {
+          "rule": "/tmp/temporal-ccpo-c4-range-barrier-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<SERVER_CHECKOUT>",
+          "count": 150
+        },
+        {
+          "rule": "/tmp/test_[0-9a-f]+",
+          "replacement": "<EPHEMERAL_SQLITE_DB>",
+          "count": 5
+        },
+        {
+          "rule": "YAML password configuration value (already masked in original logs)",
+          "replacement": "<REDACTED_TEST_PASSWORD>",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "original_path": "run-01-control/task-token.pb",
+      "published_path": "run-01-control/task-token.pb",
+      "original_sha256": "a0ed5319c36179123635dfca65f21a06c95a49fd49d3b3779a01eeb28e99c9a0",
+      "published_sha256": "a0ed5319c36179123635dfca65f21a06c95a49fd49d3b3779a01eeb28e99c9a0",
+      "original_bytes": 123,
+      "published_bytes": 123,
+      "transformations": []
+    },
+    {
+      "original_path": "run-01-control/test-source.go.txt",
+      "published_path": "run-01-control/test-source.go.txt",
+      "original_sha256": "a257a4d7e2f3130081c361d1868d15e63ff01a62e5143bfc167e8ab324fc582a",
+      "published_sha256": "a257a4d7e2f3130081c361d1868d15e63ff01a62e5143bfc167e8ab324fc582a",
+      "original_bytes": 21734,
+      "published_bytes": 21734,
+      "transformations": []
+    },
+    {
+      "original_path": "run-02-control/CLASSIFICATION.zh-TW.md",
+      "published_path": "run-02-control/CLASSIFICATION.zh-TW.md",
+      "original_sha256": "e9c5813c39a3f3d76efa38be8a46115137d583a04477035450d36d3f18212259",
+      "published_sha256": "e9c5813c39a3f3d76efa38be8a46115137d583a04477035450d36d3f18212259",
+      "original_bytes": 262,
+      "published_bytes": 262,
+      "transformations": []
+    },
+    {
+      "original_path": "run-02-control/command.json",
+      "published_path": "run-02-control/command.json",
+      "original_sha256": "2aa0b0a7796fed18ab629f07510da0b3bb385509ad5035fdbfd2ab511f6b294c",
+      "published_sha256": "f96d7b442dfe036c53badabefba771dc70ae10b61e5776eb7e9c74185b91d8dd",
+      "original_bytes": 481,
+      "published_bytes": 452,
+      "transformations": [
+        {
+          "rule": "/tmp/temporal-ccpo-c4-range-barrier-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<SERVER_CHECKOUT>",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "original_path": "run-02-control/initial-history.pb",
+      "published_path": "run-02-control/initial-history.pb",
+      "original_sha256": "ed9ca0d1eebb4c469ac5f7d1c767e5c8e534543a206bdf451d01ddc1c9db5b27",
+      "published_sha256": "ed9ca0d1eebb4c469ac5f7d1c767e5c8e534543a206bdf451d01ddc1c9db5b27",
+      "original_bytes": 323,
+      "published_bytes": 323,
+      "transformations": []
+    },
+    {
+      "original_path": "run-02-control/initial-mutable-state.pb",
+      "published_path": "run-02-control/initial-mutable-state.pb",
+      "original_sha256": "3fe80ddaf0c5df0af895ed58a3da5346a7df221421f5cb3dff0188bf94b6943a",
+      "published_sha256": "3fe80ddaf0c5df0af895ed58a3da5346a7df221421f5cb3dff0188bf94b6943a",
+      "original_bytes": 724,
+      "published_bytes": 724,
+      "transformations": []
+    },
+    {
+      "original_path": "run-02-control/observations.json",
+      "published_path": "run-02-control/observations.json",
+      "original_sha256": "77f201520caff1a46b6a2bb31daa5586a6f6dd717317333ff4eb09fdf1073f53",
+      "published_sha256": "77f201520caff1a46b6a2bb31daa5586a6f6dd717317333ff4eb09fdf1073f53",
+      "original_bytes": 3921,
+      "published_bytes": 3921,
+      "transformations": []
+    },
+    {
+      "original_path": "run-02-control/request.pb",
+      "published_path": "run-02-control/request.pb",
+      "original_sha256": "680ef7465c6cd7b3f2e2d8513d40f16764c6755d626115036110b4e0612bcc02",
+      "published_sha256": "680ef7465c6cd7b3f2e2d8513d40f16764c6755d626115036110b4e0612bcc02",
+      "original_bytes": 265,
+      "published_bytes": 265,
+      "transformations": []
+    },
+    {
+      "original_path": "run-02-control/result.json",
+      "published_path": "run-02-control/result.json",
+      "original_sha256": "0bdfc37b24e2cfb193a6c9ef2de044405941d1c656af5e5359e390d340cb277f",
+      "published_sha256": "f1b00383a2f4d8f8006a5d81d0b878d815302e3d82613f5a047e3196d3bded7f",
+      "original_bytes": 551,
+      "published_bytes": 522,
+      "transformations": [
+        {
+          "rule": "/tmp/temporal-ccpo-c4-range-barrier-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<SERVER_CHECKOUT>",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "original_path": "run-02-control/stderr.log",
+      "published_path": "run-02-control/stderr.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "published_bytes": 0,
+      "transformations": []
+    },
+    {
+      "original_path": "run-02-control/stdout.log",
+      "published_path": "run-02-control/stdout.log",
+      "original_sha256": "02f3d15f76ae8ccc14f57afd64adfc30eca4f947fa5e35f27b966dc2bc9be64d",
+      "published_sha256": "28fccdbc99298ec0b00eeb7e2eebc1e24b12b30106aae05324d01b8a8f16130f",
+      "original_bytes": 52805,
+      "published_bytes": 48408,
+      "transformations": [
+        {
+          "rule": "/tmp/temporal-ccpo-c4-range-barrier-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<SERVER_CHECKOUT>",
+          "count": 150
+        },
+        {
+          "rule": "/tmp/test_[0-9a-f]+",
+          "replacement": "<EPHEMERAL_SQLITE_DB>",
+          "count": 5
+        },
+        {
+          "rule": "YAML password configuration value (already masked in original logs)",
+          "replacement": "<REDACTED_TEST_PASSWORD>",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "original_path": "run-02-control/task-token.pb",
+      "published_path": "run-02-control/task-token.pb",
+      "original_sha256": "0b2c332d9d4e5f3a962688e947ce9fb6078dc285a76f120aec13a57cbed21a43",
+      "published_sha256": "0b2c332d9d4e5f3a962688e947ce9fb6078dc285a76f120aec13a57cbed21a43",
+      "original_bytes": 123,
+      "published_bytes": 123,
+      "transformations": []
+    },
+    {
+      "original_path": "run-02-control/test-source.go.txt",
+      "published_path": "run-02-control/test-source.go.txt",
+      "original_sha256": "6d8f839c343f630f73cdbb03c9d654a8734e81c50c0911a46fb936b58aefd460",
+      "published_sha256": "6d8f839c343f630f73cdbb03c9d654a8734e81c50c0911a46fb936b58aefd460",
+      "original_bytes": 21872,
+      "published_bytes": 21872,
+      "transformations": []
+    },
+    {
+      "original_path": "run-03-control/command.json",
+      "published_path": "run-03-control/command.json",
+      "original_sha256": "6ba46511d7ea0baffad6dc3940aaf3c9813427e73e684ef51bb4073c218d6462",
+      "published_sha256": "5872721e9f99ced472ee81673bc517f61acf94a4ecabf6516aa393f2b952f9c7",
+      "original_bytes": 481,
+      "published_bytes": 452,
+      "transformations": [
+        {
+          "rule": "/tmp/temporal-ccpo-c4-range-barrier-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<SERVER_CHECKOUT>",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "original_path": "run-03-control/committed-history.pb",
+      "published_path": "run-03-control/committed-history.pb",
+      "original_sha256": "3145a3eaee30b8169397e779bcbd4f1df22d260ab1b83845e8ddd5bd4b9b4ef6",
+      "published_sha256": "3145a3eaee30b8169397e779bcbd4f1df22d260ab1b83845e8ddd5bd4b9b4ef6",
+      "original_bytes": 526,
+      "published_bytes": 526,
+      "transformations": []
+    },
+    {
+      "original_path": "run-03-control/committed-mutable-state.pb",
+      "published_path": "run-03-control/committed-mutable-state.pb",
+      "original_sha256": "ee8ddb52fc1ebf24edbedd5bc0ca73bbe00a3861236b8133815491d31177471a",
+      "published_sha256": "ee8ddb52fc1ebf24edbedd5bc0ca73bbe00a3861236b8133815491d31177471a",
+      "original_bytes": 962,
+      "published_bytes": 962,
+      "transformations": []
+    },
+    {
+      "original_path": "run-03-control/initial-history.pb",
+      "published_path": "run-03-control/initial-history.pb",
+      "original_sha256": "72b010ac5586b9be968c7dc2e83dc49a0f6369beab3060677cd5d6f2bd65828c",
+      "published_sha256": "72b010ac5586b9be968c7dc2e83dc49a0f6369beab3060677cd5d6f2bd65828c",
+      "original_bytes": 323,
+      "published_bytes": 323,
+      "transformations": []
+    },
+    {
+      "original_path": "run-03-control/initial-mutable-state.pb",
+      "published_path": "run-03-control/initial-mutable-state.pb",
+      "original_sha256": "7fc10c36d832c7463e6187f7ac3cdc9a89d007a52b4bc9dd2f24415df933531f",
+      "published_sha256": "7fc10c36d832c7463e6187f7ac3cdc9a89d007a52b4bc9dd2f24415df933531f",
+      "original_bytes": 724,
+      "published_bytes": 724,
+      "transformations": []
+    },
+    {
+      "original_path": "run-03-control/observations.json",
+      "published_path": "run-03-control/observations.json",
+      "original_sha256": "ed105ec0a392c9020bbcef8e79a7be90d3430d5dc8de141d9c358a5229d47a03",
+      "published_sha256": "ed105ec0a392c9020bbcef8e79a7be90d3430d5dc8de141d9c358a5229d47a03",
+      "original_bytes": 31431,
+      "published_bytes": 31431,
+      "transformations": []
+    },
+    {
+      "original_path": "run-03-control/request.pb",
+      "published_path": "run-03-control/request.pb",
+      "original_sha256": "55d2ea2cc0fdea2aa13bd5d4eb13f9602d2c21ebe1cc045e97e4f2044a2831ff",
+      "published_sha256": "55d2ea2cc0fdea2aa13bd5d4eb13f9602d2c21ebe1cc045e97e4f2044a2831ff",
+      "original_bytes": 265,
+      "published_bytes": 265,
+      "transformations": []
+    },
+    {
+      "original_path": "run-03-control/result.json",
+      "published_path": "run-03-control/result.json",
+      "original_sha256": "45761b34dd6ba929d03256e737217eb733346004553c18839304c30373b67613",
+      "published_sha256": "f9a33d2be0bb38e311c730b6dce4bc6ad7bf6d272e03839210d7040d0a1fb55c",
+      "original_bytes": 551,
+      "published_bytes": 522,
+      "transformations": [
+        {
+          "rule": "/tmp/temporal-ccpo-c4-range-barrier-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<SERVER_CHECKOUT>",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "original_path": "run-03-control/stderr.log",
+      "published_path": "run-03-control/stderr.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "published_bytes": 0,
+      "transformations": []
+    },
+    {
+      "original_path": "run-03-control/stdout.log",
+      "published_path": "run-03-control/stdout.log",
+      "original_sha256": "018439df0304492224f84f60a61d880df2f73317941f280b9ca62cd9d76a562b",
+      "published_sha256": "b3a5b3836357bfd5101bf6d42374c4b8941a125d040f44011b288d0ee3656fa2",
+      "original_bytes": 81619,
+      "published_bytes": 76497,
+      "transformations": [
+        {
+          "rule": "/tmp/temporal-ccpo-c4-range-barrier-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<SERVER_CHECKOUT>",
+          "count": 175
+        },
+        {
+          "rule": "/tmp/test_[0-9a-f]+",
+          "replacement": "<EPHEMERAL_SQLITE_DB>",
+          "count": 5
+        },
+        {
+          "rule": "YAML password configuration value (already masked in original logs)",
+          "replacement": "<REDACTED_TEST_PASSWORD>",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "original_path": "run-03-control/task-token.pb",
+      "published_path": "run-03-control/task-token.pb",
+      "original_sha256": "b65a3ed6188cf95f14c3d7f0ad7cc86d0275fa2d077a6745f8b37ee4aa5e11c4",
+      "published_sha256": "b65a3ed6188cf95f14c3d7f0ad7cc86d0275fa2d077a6745f8b37ee4aa5e11c4",
+      "original_bytes": 123,
+      "published_bytes": 123,
+      "transformations": []
+    },
+    {
+      "original_path": "run-03-control/test-source.go.txt",
+      "published_path": "run-03-control/test-source.go.txt",
+      "original_sha256": "a6fd789b274808c0a807555795ee3598de935694c64bec6af26202a795f02223",
+      "published_sha256": "a6fd789b274808c0a807555795ee3598de935694c64bec6af26202a795f02223",
+      "original_bytes": 21959,
+      "published_bytes": 21959,
+      "transformations": []
+    },
+    {
+      "original_path": "run-04-committed-unknown/after-durable-range-barrier-history.pb",
+      "published_path": "run-04-committed-unknown/after-durable-range-barrier-history.pb",
+      "original_sha256": "ef1a4193690f17e06c4ad0cc49bc65f883a9d8d44e757d1f92f948bbf859d9c5",
+      "published_sha256": "ef1a4193690f17e06c4ad0cc49bc65f883a9d8d44e757d1f92f948bbf859d9c5",
+      "original_bytes": 520,
+      "published_bytes": 520,
+      "transformations": []
+    },
+    {
+      "original_path": "run-04-committed-unknown/after-durable-range-barrier-mutable-state.pb",
+      "published_path": "run-04-committed-unknown/after-durable-range-barrier-mutable-state.pb",
+      "original_sha256": "5b1dae378dc04d93af85fc5c1e4ea87f4264a8f93fa99500554ec7f3a7cf3261",
+      "published_sha256": "5b1dae378dc04d93af85fc5c1e4ea87f4264a8f93fa99500554ec7f3a7cf3261",
+      "original_bytes": 950,
+      "published_bytes": 950,
+      "transformations": []
+    },
+    {
+      "original_path": "run-04-committed-unknown/after-identical-retry-history.pb",
+      "published_path": "run-04-committed-unknown/after-identical-retry-history.pb",
+      "original_sha256": "ef1a4193690f17e06c4ad0cc49bc65f883a9d8d44e757d1f92f948bbf859d9c5",
+      "published_sha256": "ef1a4193690f17e06c4ad0cc49bc65f883a9d8d44e757d1f92f948bbf859d9c5",
+      "original_bytes": 520,
+      "published_bytes": 520,
+      "transformations": []
+    },
+    {
+      "original_path": "run-04-committed-unknown/after-identical-retry-mutable-state.pb",
+      "published_path": "run-04-committed-unknown/after-identical-retry-mutable-state.pb",
+      "original_sha256": "5b1dae378dc04d93af85fc5c1e4ea87f4264a8f93fa99500554ec7f3a7cf3261",
+      "published_sha256": "5b1dae378dc04d93af85fc5c1e4ea87f4264a8f93fa99500554ec7f3a7cf3261",
+      "original_bytes": 950,
+      "published_bytes": 950,
+      "transformations": []
+    },
+    {
+      "original_path": "run-04-committed-unknown/before-fault-history.pb",
+      "published_path": "run-04-committed-unknown/before-fault-history.pb",
+      "original_sha256": "8a4fe5b6180afa761deb43d1234ee6a8bf260479a7b5c0854c7927d945811d45",
+      "published_sha256": "8a4fe5b6180afa761deb43d1234ee6a8bf260479a7b5c0854c7927d945811d45",
+      "original_bytes": 317,
+      "published_bytes": 317,
+      "transformations": []
+    },
+    {
+      "original_path": "run-04-committed-unknown/before-fault-mutable-state.pb",
+      "published_path": "run-04-committed-unknown/before-fault-mutable-state.pb",
+      "original_sha256": "0b6f1ebb99d4745dc5be2b3007dff524e051e665d2d5fe66e36227132e02fd24",
+      "published_sha256": "0b6f1ebb99d4745dc5be2b3007dff524e051e665d2d5fe66e36227132e02fd24",
+      "original_bytes": 712,
+      "published_bytes": 712,
+      "transformations": []
+    },
+    {
+      "original_path": "run-04-committed-unknown/command.json",
+      "published_path": "run-04-committed-unknown/command.json",
+      "original_sha256": "50e42dcbd852217b42c8417b74d1a9d918bada55b1f0792fb981d5089e7341b0",
+      "published_sha256": "b806b8549c382cdce9824801c5694c15738f307fab8ddebdd316c622dd466d35",
+      "original_bytes": 484,
+      "published_bytes": 455,
+      "transformations": [
+        {
+          "rule": "/tmp/temporal-ccpo-c4-range-barrier-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<SERVER_CHECKOUT>",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "original_path": "run-04-committed-unknown/independent-read-during-reacquisition-not-server-certified-history.pb",
+      "published_path": "run-04-committed-unknown/independent-read-during-reacquisition-not-server-certified-history.pb",
+      "original_sha256": "ef1a4193690f17e06c4ad0cc49bc65f883a9d8d44e757d1f92f948bbf859d9c5",
+      "published_sha256": "ef1a4193690f17e06c4ad0cc49bc65f883a9d8d44e757d1f92f948bbf859d9c5",
+      "original_bytes": 520,
+      "published_bytes": 520,
+      "transformations": []
+    },
+    {
+      "original_path": "run-04-committed-unknown/independent-read-during-reacquisition-not-server-certified-mutable-state.pb",
+      "published_path": "run-04-committed-unknown/independent-read-during-reacquisition-not-server-certified-mutable-state.pb",
+      "original_sha256": "5b1dae378dc04d93af85fc5c1e4ea87f4264a8f93fa99500554ec7f3a7cf3261",
+      "published_sha256": "5b1dae378dc04d93af85fc5c1e4ea87f4264a8f93fa99500554ec7f3a7cf3261",
+      "original_bytes": 950,
+      "published_bytes": 950,
+      "transformations": []
+    },
+    {
+      "original_path": "run-04-committed-unknown/initial-history.pb",
+      "published_path": "run-04-committed-unknown/initial-history.pb",
+      "original_sha256": "8a4fe5b6180afa761deb43d1234ee6a8bf260479a7b5c0854c7927d945811d45",
+      "published_sha256": "8a4fe5b6180afa761deb43d1234ee6a8bf260479a7b5c0854c7927d945811d45",
+      "original_bytes": 317,
+      "published_bytes": 317,
+      "transformations": []
+    },
+    {
+      "original_path": "run-04-committed-unknown/initial-mutable-state.pb",
+      "published_path": "run-04-committed-unknown/initial-mutable-state.pb",
+      "original_sha256": "0b6f1ebb99d4745dc5be2b3007dff524e051e665d2d5fe66e36227132e02fd24",
+      "published_sha256": "0b6f1ebb99d4745dc5be2b3007dff524e051e665d2d5fe66e36227132e02fd24",
+      "original_bytes": 712,
+      "published_bytes": 712,
+      "transformations": []
+    },
+    {
+      "original_path": "run-04-committed-unknown/observations.json",
+      "published_path": "run-04-committed-unknown/observations.json",
+      "original_sha256": "8de67932c8499c952b706092205d90ecb4972be93935bae9f375232d817906b5",
+      "published_sha256": "e024b973fb097d84af6fe51bffea5033cb350f59e4d61984717df74e24cafe20",
+      "original_bytes": 98481,
+      "published_bytes": 96812,
+      "transformations": [
+        {
+          "rule": "/tmp/temporal-ccpo-c4-range-barrier-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<SERVER_CHECKOUT>",
+          "count": 51
+        },
+        {
+          "rule": "/home/[^/\\s]+/go/pkg/mod",
+          "replacement": "<GO_MODULE_CACHE>",
+          "count": 19
+        }
+      ]
+    },
+    {
+      "original_path": "run-04-committed-unknown/request.pb",
+      "published_path": "run-04-committed-unknown/request.pb",
+      "original_sha256": "3a207dbb23c030402d03803ddb90240372ab6d218bcb5050e07934392bce4c3c",
+      "published_sha256": "3a207dbb23c030402d03803ddb90240372ab6d218bcb5050e07934392bce4c3c",
+      "original_bytes": 253,
+      "published_bytes": 253,
+      "transformations": []
+    },
+    {
+      "original_path": "run-04-committed-unknown/result.json",
+      "published_path": "run-04-committed-unknown/result.json",
+      "original_sha256": "c1472ee440e8f98f4c9bd230a16fe5324ab5a084b23bb25fe558e9b39a679024",
+      "published_sha256": "5e8f770a0a608a28e56220385bade957cfaf877a64fb7b2dad81609bf4dc2090",
+      "original_bytes": 554,
+      "published_bytes": 525,
+      "transformations": [
+        {
+          "rule": "/tmp/temporal-ccpo-c4-range-barrier-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<SERVER_CHECKOUT>",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "original_path": "run-04-committed-unknown/stderr.log",
+      "published_path": "run-04-committed-unknown/stderr.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "published_bytes": 0,
+      "transformations": []
+    },
+    {
+      "original_path": "run-04-committed-unknown/stdout.log",
+      "published_path": "run-04-committed-unknown/stdout.log",
+      "original_sha256": "a2d28ac0794dc4d0e0c4f5ea36db37e6bb24fbf0b42acf63dbff9979b32c3454",
+      "published_sha256": "86fe7510910d5cd40ea6a5f4aa98eb1778dd668449339eac93d550bfa0449545",
+      "original_bytes": 140887,
+      "published_bytes": 132728,
+      "transformations": [
+        {
+          "rule": "/tmp/temporal-ccpo-c4-range-barrier-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<SERVER_CHECKOUT>",
+          "count": 268
+        },
+        {
+          "rule": "/home/[^/\\s]+/go/pkg/mod",
+          "replacement": "<GO_MODULE_CACHE>",
+          "count": 34
+        },
+        {
+          "rule": "/tmp/test_[0-9a-f]+",
+          "replacement": "<EPHEMERAL_SQLITE_DB>",
+          "count": 5
+        },
+        {
+          "rule": "YAML password configuration value (already masked in original logs)",
+          "replacement": "<REDACTED_TEST_PASSWORD>",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "original_path": "run-04-committed-unknown/task-token.pb",
+      "published_path": "run-04-committed-unknown/task-token.pb",
+      "original_sha256": "313e6d3107020d85404b9adac89739748e5c5796c2b560cbb900727ada8c4ee4",
+      "published_sha256": "313e6d3107020d85404b9adac89739748e5c5796c2b560cbb900727ada8c4ee4",
+      "original_bytes": 117,
+      "published_bytes": 117,
+      "transformations": []
+    },
+    {
+      "original_path": "run-04-committed-unknown/test-source.go.txt",
+      "published_path": "run-04-committed-unknown/test-source.go.txt",
+      "original_sha256": "a6fd789b274808c0a807555795ee3598de935694c64bec6af26202a795f02223",
+      "published_sha256": "a6fd789b274808c0a807555795ee3598de935694c64bec6af26202a795f02223",
+      "original_bytes": 21959,
+      "published_bytes": 21959,
+      "transformations": []
+    },
+    {
+      "original_path": "run-05-not-committed-unknown/after-durable-range-barrier-history.pb",
+      "published_path": "run-05-not-committed-unknown/after-durable-range-barrier-history.pb",
+      "original_sha256": "769df6b63b590c71ab5623f89588d48e0f5779dfd3164b81f3babbaebe00f2fe",
+      "published_sha256": "769df6b63b590c71ab5623f89588d48e0f5779dfd3164b81f3babbaebe00f2fe",
+      "original_bytes": 314,
+      "published_bytes": 314,
+      "transformations": []
+    },
+    {
+      "original_path": "run-05-not-committed-unknown/after-durable-range-barrier-mutable-state.pb",
+      "published_path": "run-05-not-committed-unknown/after-durable-range-barrier-mutable-state.pb",
+      "original_sha256": "ea4e47f2b488ff4f7f4477b08ee3835e0123b7576c1f4ece206fe485246005b5",
+      "published_sha256": "ea4e47f2b488ff4f7f4477b08ee3835e0123b7576c1f4ece206fe485246005b5",
+      "original_bytes": 704,
+      "published_bytes": 704,
+      "transformations": []
+    },
+    {
+      "original_path": "run-05-not-committed-unknown/after-identical-retry-history.pb",
+      "published_path": "run-05-not-committed-unknown/after-identical-retry-history.pb",
+      "original_sha256": "5ba7145b1947f19b9afac990921376ddfdb86da510615f3514d59c5e27c911c7",
+      "published_sha256": "5ba7145b1947f19b9afac990921376ddfdb86da510615f3514d59c5e27c911c7",
+      "original_bytes": 517,
+      "published_bytes": 517,
+      "transformations": []
+    },
+    {
+      "original_path": "run-05-not-committed-unknown/after-identical-retry-mutable-state.pb",
+      "published_path": "run-05-not-committed-unknown/after-identical-retry-mutable-state.pb",
+      "original_sha256": "d234dad8614b15bcdd3d0c32a4d38350cc5bc879808763bd04da35d12896116a",
+      "published_sha256": "d234dad8614b15bcdd3d0c32a4d38350cc5bc879808763bd04da35d12896116a",
+      "original_bytes": 942,
+      "published_bytes": 942,
+      "transformations": []
+    },
+    {
+      "original_path": "run-05-not-committed-unknown/before-fault-history.pb",
+      "published_path": "run-05-not-committed-unknown/before-fault-history.pb",
+      "original_sha256": "769df6b63b590c71ab5623f89588d48e0f5779dfd3164b81f3babbaebe00f2fe",
+      "published_sha256": "769df6b63b590c71ab5623f89588d48e0f5779dfd3164b81f3babbaebe00f2fe",
+      "original_bytes": 314,
+      "published_bytes": 314,
+      "transformations": []
+    },
+    {
+      "original_path": "run-05-not-committed-unknown/before-fault-mutable-state.pb",
+      "published_path": "run-05-not-committed-unknown/before-fault-mutable-state.pb",
+      "original_sha256": "ea4e47f2b488ff4f7f4477b08ee3835e0123b7576c1f4ece206fe485246005b5",
+      "published_sha256": "ea4e47f2b488ff4f7f4477b08ee3835e0123b7576c1f4ece206fe485246005b5",
+      "original_bytes": 704,
+      "published_bytes": 704,
+      "transformations": []
+    },
+    {
+      "original_path": "run-05-not-committed-unknown/command.json",
+      "published_path": "run-05-not-committed-unknown/command.json",
+      "original_sha256": "c8f6319f3ae7cb9b860f5d0b7f77fd7f62f22217cb855cff3d405ae73a2c0d77",
+      "published_sha256": "31108908573cf0fc2779416cddbe465714400970f4fbe3da9c2f65124c3a8ee8",
+      "original_bytes": 487,
+      "published_bytes": 458,
+      "transformations": [
+        {
+          "rule": "/tmp/temporal-ccpo-c4-range-barrier-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<SERVER_CHECKOUT>",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "original_path": "run-05-not-committed-unknown/independent-read-during-reacquisition-not-server-certified-history.pb",
+      "published_path": "run-05-not-committed-unknown/independent-read-during-reacquisition-not-server-certified-history.pb",
+      "original_sha256": "769df6b63b590c71ab5623f89588d48e0f5779dfd3164b81f3babbaebe00f2fe",
+      "published_sha256": "769df6b63b590c71ab5623f89588d48e0f5779dfd3164b81f3babbaebe00f2fe",
+      "original_bytes": 314,
+      "published_bytes": 314,
+      "transformations": []
+    },
+    {
+      "original_path": "run-05-not-committed-unknown/independent-read-during-reacquisition-not-server-certified-mutable-state.pb",
+      "published_path": "run-05-not-committed-unknown/independent-read-during-reacquisition-not-server-certified-mutable-state.pb",
+      "original_sha256": "ea4e47f2b488ff4f7f4477b08ee3835e0123b7576c1f4ece206fe485246005b5",
+      "published_sha256": "ea4e47f2b488ff4f7f4477b08ee3835e0123b7576c1f4ece206fe485246005b5",
+      "original_bytes": 704,
+      "published_bytes": 704,
+      "transformations": []
+    },
+    {
+      "original_path": "run-05-not-committed-unknown/initial-history.pb",
+      "published_path": "run-05-not-committed-unknown/initial-history.pb",
+      "original_sha256": "769df6b63b590c71ab5623f89588d48e0f5779dfd3164b81f3babbaebe00f2fe",
+      "published_sha256": "769df6b63b590c71ab5623f89588d48e0f5779dfd3164b81f3babbaebe00f2fe",
+      "original_bytes": 314,
+      "published_bytes": 314,
+      "transformations": []
+    },
+    {
+      "original_path": "run-05-not-committed-unknown/initial-mutable-state.pb",
+      "published_path": "run-05-not-committed-unknown/initial-mutable-state.pb",
+      "original_sha256": "ea4e47f2b488ff4f7f4477b08ee3835e0123b7576c1f4ece206fe485246005b5",
+      "published_sha256": "ea4e47f2b488ff4f7f4477b08ee3835e0123b7576c1f4ece206fe485246005b5",
+      "original_bytes": 704,
+      "published_bytes": 704,
+      "transformations": []
+    },
+    {
+      "original_path": "run-05-not-committed-unknown/observations.json",
+      "published_path": "run-05-not-committed-unknown/observations.json",
+      "original_sha256": "9963c3f8e5f61d8af2b81bab546460d260bf52ada347ec6d0ca63bcf9eb20bd3",
+      "published_sha256": "42c979d9f3bd1c4c07eb7699d3fa6556beb5c1f114ca67380c0f607d856a4105",
+      "original_bytes": 94380,
+      "published_bytes": 92145,
+      "transformations": [
+        {
+          "rule": "/tmp/temporal-ccpo-c4-range-barrier-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<SERVER_CHECKOUT>",
+          "count": 65
+        },
+        {
+          "rule": "/home/[^/\\s]+/go/pkg/mod",
+          "replacement": "<GO_MODULE_CACHE>",
+          "count": 35
+        }
+      ]
+    },
+    {
+      "original_path": "run-05-not-committed-unknown/request.pb",
+      "published_path": "run-05-not-committed-unknown/request.pb",
+      "original_sha256": "ec324cb5c14037e1e6107ad33b3f334a3831fc80e82bcd93569c7ee1139a969a",
+      "published_sha256": "ec324cb5c14037e1e6107ad33b3f334a3831fc80e82bcd93569c7ee1139a969a",
+      "original_bytes": 252,
+      "published_bytes": 252,
+      "transformations": []
+    },
+    {
+      "original_path": "run-05-not-committed-unknown/result.json",
+      "published_path": "run-05-not-committed-unknown/result.json",
+      "original_sha256": "9b89914e23d9412d1f34f30441c8a7f541b1b63d537e910c1f162ebb15120683",
+      "published_sha256": "9d16262b63a63dfedcda1da22f54142b13e27177b6313389e581400e58b06139",
+      "original_bytes": 557,
+      "published_bytes": 528,
+      "transformations": [
+        {
+          "rule": "/tmp/temporal-ccpo-c4-range-barrier-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<SERVER_CHECKOUT>",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "original_path": "run-05-not-committed-unknown/stderr.log",
+      "published_path": "run-05-not-committed-unknown/stderr.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "published_bytes": 0,
+      "transformations": []
+    },
+    {
+      "original_path": "run-05-not-committed-unknown/stdout.log",
+      "published_path": "run-05-not-committed-unknown/stdout.log",
+      "original_sha256": "273034beb4d90817cf32fd2e1f8a19aa18f72976dd91a46612b0ce55daf31b01",
+      "published_sha256": "d53462822207c8277472e8603256dc0f3ca7db5929e020277ee23e118a91e2ae",
+      "original_bytes": 145377,
+      "published_bytes": 136362,
+      "transformations": [
+        {
+          "rule": "/tmp/temporal-ccpo-c4-range-barrier-\\d{4}-\\d{2}-\\d{2}",
+          "replacement": "<SERVER_CHECKOUT>",
+          "count": 292
+        },
+        {
+          "rule": "/home/[^/\\s]+/go/pkg/mod",
+          "replacement": "<GO_MODULE_CACHE>",
+          "count": 50
+        },
+        {
+          "rule": "/tmp/test_[0-9a-f]+",
+          "replacement": "<EPHEMERAL_SQLITE_DB>",
+          "count": 5
+        },
+        {
+          "rule": "YAML password configuration value (already masked in original logs)",
+          "replacement": "<REDACTED_TEST_PASSWORD>",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "original_path": "run-05-not-committed-unknown/task-token.pb",
+      "published_path": "run-05-not-committed-unknown/task-token.pb",
+      "original_sha256": "362d2522b71fad10872be6170955df5401b0f434c30664fa00f10be64e9ad7b4",
+      "published_sha256": "362d2522b71fad10872be6170955df5401b0f434c30664fa00f10be64e9ad7b4",
+      "original_bytes": 116,
+      "published_bytes": 116,
+      "transformations": []
+    },
+    {
+      "original_path": "run-05-not-committed-unknown/test-source.go.txt",
+      "published_path": "run-05-not-committed-unknown/test-source.go.txt",
+      "original_sha256": "a6fd789b274808c0a807555795ee3598de935694c64bec6af26202a795f02223",
+      "published_sha256": "a6fd789b274808c0a807555795ee3598de935694c64bec6af26202a795f02223",
+      "original_bytes": 21959,
+      "published_bytes": 21959,
+      "transformations": []
+    },
+    {
+      "original_path": "run-focused.py",
+      "published_path": "run-focused.py",
+      "original_sha256": "1c28cd93b880b79995f64e7a732140518510d3374342762ce39fc45edc0c1c17",
+      "published_sha256": "1c28cd93b880b79995f64e7a732140518510d3374342762ce39fc45edc0c1c17",
+      "original_bytes": 1623,
+      "published_bytes": 1623,
+      "transformations": []
+    },
+    {
+      "original_path": "server-test/range_barrier_test.go.txt",
+      "published_path": "server-test/range_barrier_test.go.txt",
+      "original_sha256": "a6fd789b274808c0a807555795ee3598de935694c64bec6af26202a795f02223",
+      "published_sha256": "a6fd789b274808c0a807555795ee3598de935694c64bec6af26202a795f02223",
+      "original_bytes": 21959,
+      "published_bytes": 21959,
+      "transformations": []
+    },
+    {
+      "original_path": "source-provenance.json",
+      "published_path": "source-provenance.json",
+      "original_sha256": "de7032db112fdd22a9d61f9abcf69f9120c5995f92aba743a9956e10815c0a86",
+      "published_sha256": "de7032db112fdd22a9d61f9abcf69f9120c5995f92aba743a9956e10815c0a86",
+      "original_bytes": 4451,
+      "published_bytes": 4451,
+      "transformations": []
+    },
+    {
+      "original_path": "test-only.diff",
+      "published_path": "test-only.diff",
+      "original_sha256": "3b388bc18cfd13617d67e3d1b5f5c8139ee6710d706f23d5cc82a66616de853b",
+      "published_sha256": "3b388bc18cfd13617d67e3d1b5f5c8139ee6710d706f23d5cc82a66616de853b",
+      "original_bytes": 22646,
+      "published_bytes": 22646,
+      "transformations": []
+    }
+  ]
+}

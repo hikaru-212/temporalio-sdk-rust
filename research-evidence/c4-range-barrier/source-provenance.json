@@ -1,0 +1,113 @@
+{
+  "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+  "verified_unchanged_source_files": {
+    "service/history/shard/context_impl.go": {
+      "sha256": "8e388df51f871e1ece27429f8a3cd2aeed84e29af99aaa3f03fa1f1beb1d4deb",
+      "lines": 2480
+    },
+    "service/history/shard/task_request_tracker.go": {
+      "sha256": "e621b2f07a3a21f0cb32568acd277e5bb33bfd20b054f455f051626397bb63d9",
+      "lines": 148
+    },
+    "service/history/shard/task_key_manager.go": {
+      "sha256": "2828b8f2526ce6c07e922cf9e12419eb48469fff99b2d69cea551dfc98cc8033",
+      "lines": 119
+    },
+    "service/history/shard/task_key_generator.go": {
+      "sha256": "2f593c1d6bf3bd1331d07c2c0d5930aba9f28653c40848af9e21621ba0450903",
+      "lines": 185
+    },
+    "service/history/shard/controller_impl.go": {
+      "sha256": "d576ee98a5e40f1120a76270271adcb00876fccc97f13e6dd3f993888b20d4b5",
+      "lines": 590
+    },
+    "service/history/workflow/context.go": {
+      "sha256": "fe3e6bd502b4119bad3f1618b6c4da70660e77770dffe96cb2c8cafcf0e77f7e",
+      "lines": 1691
+    },
+    "service/history/api/respondworkflowtaskcompleted/api.go": {
+      "sha256": "afb6e333ac224581777825cf3a84d0bec31e5182fc85843992a0d8a631ae1d56",
+      "lines": 1186
+    },
+    "service/history/handler.go": {
+      "sha256": "f6489761eb4f8a8885c9bb09e4ac0e5a9ccfc607acf6711076c4d0701ddc0ade",
+      "lines": 2726
+    },
+    "common/persistence/execution_manager.go": {
+      "sha256": "21d84aff76c56fc73fcef4b73ef9a7f2170af813492d626897725aeb8d1e2f4b",
+      "lines": 1390
+    },
+    "common/persistence/error_type.go": {
+      "sha256": "493db65dbb72f51f9bbc4223a25a0d0414d72892171ea238219b0ec542d598e9",
+      "lines": 22
+    },
+    "common/persistence/client/factory.go": {
+      "sha256": "7e8f349f660afd878350c3d57962a43ffa1432db3bf6a4dcb18e659730f9de6e",
+      "lines": 301
+    },
+    "common/persistence/client/fx.go": {
+      "sha256": "4d58e413dc39b43cadb8bd0fb608e83e0ef66707c0af1a4793bfc14ccb16f83c",
+      "lines": 240
+    },
+    "common/persistence/sql/common.go": {
+      "sha256": "a58e8692318e2c6477162ca4b35e9282aa94e7de296651db6e5093c75dfd467d",
+      "lines": 137
+    },
+    "common/persistence/sql/execution.go": {
+      "sha256": "c1f33d94990e13157db8515e5d10ebbaa7be9bda5af20da44705f00c1b1ce828",
+      "lines": 762
+    },
+    "common/persistence/sql/execution_util.go": {
+      "sha256": "aa626520bc68ea1ff089c7df50a6ce280f804e0708a87b24f7c33cc23fcac4b8",
+      "lines": 1236
+    },
+    "common/persistence/sql/execution_tasks.go": {
+      "sha256": "eae5cd8d713978abef04d0878564c0a9f35e583178c825cf73d32fdd0144cffc",
+      "lines": 773
+    },
+    "common/persistence/sql/shard.go": {
+      "sha256": "eff0872bf6454888cd43659ac67052762c74ee2e301629b4cc15961c3a73d48e",
+      "lines": 175
+    },
+    "common/persistence/sql/sqlplugin/sqlite/shard.go": {
+      "sha256": "7ca259bb6872951db8ab96f51bdd1a1adfc42986687ce837f7334f300757699a",
+      "lines": 97
+    },
+    "common/persistence/sql/sqlplugin/sqlite/db.go": {
+      "sha256": "4a30b856210120083d765255ceaf03d3ba8950281a15a719a1b0856d33bf9f23",
+      "lines": 125
+    },
+    "common/persistence/sql/sqlplugin/sqlite/plugin.go": {
+      "sha256": "9a37013cbddb3b4220f33ece10b3a41c0e58d6b7d5391aa0a7d82be3c3ce3073",
+      "lines": 210
+    },
+    "common/persistence/persistence-tests/setup.go": {
+      "sha256": "168061b650d3e20f793335849152cdeb121d8aefe5674742484bce1099f6f0c2",
+      "lines": 151
+    },
+    "common/persistence/faultinjection/fault.go": {
+      "sha256": "a970d1616d1d1a967dfe80b8117bf70446c8121cc0a4c33a7642c4f4e31343fe",
+      "lines": 72
+    },
+    "temporal/server_option.go": {
+      "sha256": "ec860793d1e0e5dcb0bd4421b62ad74e0e172e3347735593110e6d0721979044",
+      "lines": 255
+    },
+    "tests/testcore/onebox.go": {
+      "sha256": "fcfcb3f455883b93866cdac24292293c08c398a8c059aa542d41cee6a8be34be",
+      "lines": 493
+    },
+    "tests/testcore/test_cluster.go": {
+      "sha256": "8465ca9dcecf724184ba3a11cc2b55ee30b0fb5d1f95b90208f53596b26432bb",
+      "lines": 518
+    }
+  },
+  "go_version": "go version go1.27.0 linux/arm64",
+  "go_platform": "linux\narm64\n1",
+  "sql_driver": "modernc.org/sqlite v1.51.0",
+  "external_reference": {
+    "url": "https://www.sqlite.org/isolation.html",
+    "checked_utc": "2026-10-23T13:42:13.267987+00:00",
+    "use": "Separate-connection isolation, WAL snapshot / stale snapshot upgrade semantics; not runtime evidence of Arm C."
+  }
+}

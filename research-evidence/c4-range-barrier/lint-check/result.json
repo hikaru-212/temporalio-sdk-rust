@@ -1,0 +1,15 @@
+{
+  "command": [
+    "make",
+    "lint-code-fast",
+    "GOLANGCI_LINT_BASE_REV=HEAD"
+  ],
+  "environment_overrides": {
+    "GOPROXY": "off",
+    "GOSUMDB": "off",
+    "GOMAXPROCS": "2"
+  },
+  "start_utc": "2026-10-23T13:38:13.462643+00:00",
+  "exit_code": 2,
+  "finish_utc": "2026-10-23T13:38:13.584404+00:00"
+}

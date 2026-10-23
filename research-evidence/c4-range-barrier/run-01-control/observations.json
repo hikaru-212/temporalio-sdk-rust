@@ -1,0 +1,120 @@
+[
+  {
+    "sequence": 1,
+    "stage": "baseline",
+    "utc": "2026-10-23T13:34:45.44938347Z",
+    "value": {
+      "database": "file SQLite",
+      "external_activity_executor": false,
+      "namespace": "ccpo-c4-control",
+      "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+      "sqlite_attributes": {
+        "busy_timeout": "30000",
+        "cache": "shared",
+        "journal_mode": "wal",
+        "synchronous": "normal"
+      },
+      "wft_timeout_seconds": 120,
+      "workflow_id": "ccpo-c4-control"
+    }
+  },
+  {
+    "sequence": 2,
+    "stage": "request",
+    "utc": "2026-10-23T13:34:45.459363477Z",
+    "value": {
+      "request": {
+        "task_token": "CiQ4YTk4OGI2MS0xNjZlLTQ1NjEtODM2NC1kNzAxYTMxZWM3Y2YSD2NjcG8tYzQtY29udHJvbBokMDFhMTY4ZjgtOWFjZC03ODRkLWFkNTktMDkzM2FiYTE3YWE3IAIoAUoICAEQioBAGAFQA2IMCPXE7dYGELimsNoB",
+        "commands": [
+          {
+            "command_type": "COMMAND_TYPE_SCHEDULE_ACTIVITY_TASK",
+            "schedule_activity_task_command_attributes": {
+              "activity_id": "ccpo-activity-1",
+              "activity_type": {
+                "name": "ccpo-activity"
+              },
+              "task_queue": {
+                "name": "ccpo-c4-queue",
+                "kind": "TASK_QUEUE_KIND_NORMAL"
+              },
+              "input": {
+                "payloads": [
+                  {
+                    "metadata": {
+                      "encoding": "anNvbi9wbGFpbg=="
+                    },
+                    "data": "ImNjcG8taW5wdXQi"
+                  }
+                ]
+              },
+              "schedule_to_close_timeout": "300s",
+              "start_to_close_timeout": "60s"
+            }
+          }
+        ],
+        "identity": "ccpo-client",
+        "namespace": "ccpo-c4-control"
+      },
+      "sha256": "212ebdf8ea9bf7fffdadf1d34ba07d5fcd6fd273252fac28deadf5bd6c6fd848",
+      "token": {
+        "namespace_id": "8a988b61-166e-4561-8364-d701a31ec7cf",
+        "workflow_id": "ccpo-c4-control",
+        "run_id": "01a168f8-9acd-784d-ad59-0933aba17aa7",
+        "scheduled_event_id": "2",
+        "attempt": 1,
+        "clock": {
+          "shard_id": 1,
+          "clock": "1048586",
+          "cluster_id": "1"
+        },
+        "started_event_id": "3",
+        "started_time": "2026-10-23T13:34:45.457970488Z"
+      },
+      "token_hex": "0a2438613938386236312d313636652d343536312d383336342d643730316133316563376366120f6363706f2d63342d636f6e74726f6c1a2430316131363866382d396163642d373834642d616435392d303933336162613137616137200228014a080801108a804018015003620c08f5c4edd60610b8a6b0da01"
+    }
+  },
+  {
+    "sequence": 3,
+    "stage": "protobuf-artifact",
+    "utc": "2026-10-23T13:34:45.45944906Z",
+    "value": {
+      "bytes": 265,
+      "file": "request.pb",
+      "sha256": "212ebdf8ea9bf7fffdadf1d34ba07d5fcd6fd273252fac28deadf5bd6c6fd848",
+      "type": "temporal.api.workflowservice.v1.RespondWorkflowTaskCompletedRequest"
+    }
+  },
+  {
+    "sequence": 4,
+    "stage": "protobuf-artifact",
+    "utc": "2026-10-23T13:34:45.45947531Z",
+    "value": {
+      "bytes": 123,
+      "file": "task-token.pb",
+      "sha256": "a0ed5319c36179123635dfca65f21a06c95a49fd49d3b3779a01eeb28e99c9a0",
+      "type": "temporal.server.api.token.v1.Task"
+    }
+  },
+  {
+    "sequence": 5,
+    "stage": "protobuf-artifact",
+    "utc": "2026-10-23T13:34:45.459861932Z",
+    "value": {
+      "bytes": 724,
+      "file": "initial-mutable-state.pb",
+      "sha256": "c2ad3e1139828a107fbf35dc6f95f1226d7bd086fa3c712f5fc99a5ba6c14a42",
+      "type": "temporal.server.api.persistence.v1.WorkflowMutableState"
+    }
+  },
+  {
+    "sequence": 6,
+    "stage": "protobuf-artifact",
+    "utc": "2026-10-23T13:34:45.45989939Z",
+    "value": {
+      "bytes": 323,
+      "file": "initial-history.pb",
+      "sha256": "260d365b1b5cc6ed8b05632b7665b12c4cf58e73ce7579fc2fd09dbac66081bc",
+      "type": "temporal.api.history.v1.History"
+    }
+  }
+]

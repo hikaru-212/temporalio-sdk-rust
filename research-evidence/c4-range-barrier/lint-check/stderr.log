@@ -1,0 +1,23 @@
+go: golang.org/toolchain@v0.0.1-go1.27.0.linux-arm64: verifying module: checksum database disabled by GOSUMDB=off
+failed to fetch version for go.temporal.io/api
+go: golang.org/toolchain@v0.0.1-go1.27.0.linux-arm64: verifying module: checksum database disabled by GOSUMDB=off
+failed to fetch version for go.temporal.io/api
+go: golang.org/toolchain@v0.0.1-go1.27.0.linux-arm64: verifying module: checksum database disabled by GOSUMDB=off
+failed to fetch version for go.temporal.io/api
+go: golang.org/toolchain@v0.0.1-go1.27.0.linux-arm64: verifying module: checksum database disabled by GOSUMDB=off
+failed to fetch version for go.temporal.io/api
+go: golang.org/toolchain@v0.0.1-go1.27.0.linux-arm64: verifying module: checksum database disabled by GOSUMDB=off
+go: golang.org/toolchain@v0.0.1-go1.27.0.linux-arm64: verifying module: checksum database disabled by GOSUMDB=off
+go: golang.org/toolchain@v0.0.1-go1.27.0.linux-arm64: verifying module: checksum database disabled by GOSUMDB=off
+failed to fetch version for go.temporal.io/api
+go: golang.org/toolchain@v0.0.1-go1.27.0.linux-arm64: verifying module: checksum database disabled by GOSUMDB=off
+failed to fetch version for go.temporal.io/api
+go: golang.org/toolchain@v0.0.1-go1.27.0.linux-arm64: verifying module: checksum database disabled by GOSUMDB=off
+failed to fetch version for go.temporal.io/api
+go: golang.org/toolchain@v0.0.1-go1.27.0.linux-arm64: verifying module: checksum database disabled by GOSUMDB=off
+failed to fetch version for go.temporal.io/api
+go: golang.org/toolchain@v0.0.1-go1.27.0.linux-arm64: verifying module: checksum database disabled by GOSUMDB=off
+go: golang.org/toolchain@v0.0.1-go1.27.0.linux-arm64: verifying module: checksum database disabled by GOSUMDB=off
+go: golang.org/toolchain@v0.0.1-go1.27.0.linux-arm64: verifying module: checksum database disabled by GOSUMDB=off
+make[1]: *** [Makefile:182: .bin/golangci-lint-v2.13.0] Error 1
+make: *** [Makefile:411: lint-code-fast] Error 2

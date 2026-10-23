@@ -1,0 +1,67 @@
+{
+  "run-03-control": {
+    "classification": "CONFIRMED SAFETY in controlled SQLite scope",
+    "added_task_ids": {
+      "archival": [],
+      "outbound": [],
+      "replication": [],
+      "timer": [
+        1048592
+      ],
+      "transfer": [
+        1048591
+      ],
+      "visibility": [
+        1048590
+      ]
+    },
+    "request_sha256": "55d2ea2cc0fdea2aa13bd5d4eb13f9602d2c21ebe1cc045e97e4f2044a2831ff",
+    "final_revision": 4,
+    "valid_acceptances": 1,
+    "task_categories_independently_enumerated": 6
+  },
+  "run-04-committed-unknown": {
+    "classification": "CONFIRMED SAFETY in controlled SQLite scope",
+    "added_task_ids": {
+      "archival": [],
+      "outbound": [],
+      "replication": [],
+      "timer": [
+        1048592
+      ],
+      "transfer": [
+        1048591
+      ],
+      "visibility": [
+        1048590
+      ]
+    },
+    "request_sha256": "3a207dbb23c030402d03803ddb90240372ab6d218bcb5050e07934392bce4c3c",
+    "final_revision": 4,
+    "valid_acceptances": 1,
+    "task_categories_independently_enumerated": 6,
+    "reload_count": 1
+  },
+  "run-05-not-committed-unknown": {
+    "classification": "CONFIRMED SAFETY in controlled SQLite scope",
+    "added_task_ids": {
+      "archival": [],
+      "outbound": [],
+      "replication": [],
+      "timer": [
+        2097157
+      ],
+      "transfer": [
+        2097156
+      ],
+      "visibility": [
+        2097155
+      ]
+    },
+    "request_sha256": "ec324cb5c14037e1e6107ad33b3f334a3831fc80e82bcd93569c7ee1139a969a",
+    "final_revision": 4,
+    "valid_acceptances": 1,
+    "task_categories_independently_enumerated": 6,
+    "reload_count": 1
+  }
+}

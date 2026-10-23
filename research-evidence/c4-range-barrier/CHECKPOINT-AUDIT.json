@@ -1,0 +1,46 @@
+{
+  "created_utc": "2026-10-23T14:00:48.615286+00:00",
+  "parent_checkpoint": "632c157c02af7154e4b93541c51dc1d17141c003",
+  "server_source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+  "branch": "research/ccpo-egts-c4-range-barrier",
+  "destination": "https://github.com/hikaru-212/temporalio-sdk-rust.git",
+  "repository_owner": "hikaru-212",
+  "authenticated_login": "hikaru-212",
+  "repository_id": 1362003777,
+  "verified_permissions": {
+    "push": true,
+    "admin": true
+  },
+  "remote_target_branch_initially_absent": true,
+  "remote_parent_branch_sha": "632c157c02af7154e4b93541c51dc1d17141c003",
+  "original_manifest_entries_verified": 88,
+  "archive_regular_files_matched": 90,
+  "original_protobuf_files": 38,
+  "source_files_transformed": 21,
+  "source_files_unchanged": 68,
+  "historical_run_exit_codes": [
+    1,
+    1,
+    0,
+    0,
+    0
+  ],
+  "lint_exit_code": 2,
+  "new_experiments_executed": false,
+  "new_compilation": false,
+  "production_changes": false,
+  "publication_synthetic_tokens_retained": true,
+  "prepush_only": true,
+  "staged_whitespace_check": {
+    "exit_code": 2,
+    "diagnostic_count": 141,
+    "files": [
+      "research-evidence/c4-range-barrier/run-01-control/stdout.log",
+      "research-evidence/c4-range-barrier/run-02-control/stdout.log",
+      "research-evidence/c4-range-barrier/run-03-control/stdout.log",
+      "research-evidence/c4-range-barrier/run-04-committed-unknown/stdout.log",
+      "research-evidence/c4-range-barrier/run-05-not-committed-unknown/stdout.log"
+    ],
+    "disposition": "Retain original evidence whitespace and binary protobuf bytes; do not reformat logs or patch. No new prose/script whitespace warnings."
+  }
+}

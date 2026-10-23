@@ -1,0 +1,476 @@
+package ccpo_c4_test
+
+import (
+	"context"
+	"crypto/sha256"
+	"encoding/hex"
+	"encoding/json"
+	"fmt"
+	"os"
+	"path/filepath"
+	"runtime/debug"
+	"sync"
+	"sync/atomic"
+	"testing"
+	"time"
+
+	"github.com/google/uuid"
+	"github.com/stretchr/testify/require"
+	commandpb "go.temporal.io/api/command/v1"
+	commonpb "go.temporal.io/api/common/v1"
+	enumspb "go.temporal.io/api/enums/v1"
+	historypb "go.temporal.io/api/history/v1"
+	"go.temporal.io/api/serviceerror"
+	taskqueuepb "go.temporal.io/api/taskqueue/v1"
+	"go.temporal.io/api/workflowservice/v1"
+	tokenspb "go.temporal.io/server/api/token/v1"
+	"go.temporal.io/server/chasm"
+	"go.temporal.io/server/common"
+	"go.temporal.io/server/common/headers"
+	"go.temporal.io/server/common/log/tag"
+	"go.temporal.io/server/common/namespace"
+	"go.temporal.io/server/common/payloads"
+	"go.temporal.io/server/common/persistence"
+	persistenceclient "go.temporal.io/server/common/persistence/client"
+	persistencetests "go.temporal.io/server/common/persistence/persistence-tests"
+	"go.temporal.io/server/common/persistence/versionhistory"
+	"go.temporal.io/server/common/primitives"
+	"go.temporal.io/server/common/tasktoken"
+	"go.temporal.io/server/common/testing/testhooks"
+	"go.temporal.io/server/common/testing/testlogger"
+	"go.temporal.io/server/service/history/tasks"
+	"go.temporal.io/server/temporal"
+	"go.temporal.io/server/tests/testcore"
+	"google.golang.org/protobuf/encoding/protojson"
+	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/durationpb"
+)
+
+const sourceSHA = "0d5e3848bed625907987f73d5eaae8dc77bc6590"
+
+type experiment struct {
+	t                           *testing.T
+	ctx                         context.Context
+	cluster                     *testcore.TestCluster
+	client                      workflowservice.WorkflowServiceClient
+	ns, nsID, workflowID, runID string
+	queue                       *taskqueuepb.TaskQueue
+	shardID                     int32
+	token                       *tokenspb.Task
+	request                     *workflowservice.RespondWorkflowTaskCompletedRequest
+	requestBytes                []byte
+	sequence                    atomic.Int64
+	arm                         string
+	oldRange                    atomic.Int64
+	phase                       atomic.Int32
+	loadCount                   atomic.Int32
+	renewOnce                   sync.Once
+	renewEntered                chan struct{}
+	renewRelease                chan struct{}
+	renewResult                 chan error
+	deleteRelease               chan struct{}
+	cleanupOnce                 sync.Once
+	renewReleaseOnce            sync.Once
+	armed                       atomic.Bool
+	faults                      atomic.Int32
+	release                     func()
+}
+
+func (e *experiment) record(stage string, value any) {
+	b, err := json.Marshal(map[string]any{"sequence": e.sequence.Add(1), "utc": time.Now().UTC().Format(time.RFC3339Nano), "stage": stage, "value": value})
+	if err != nil {
+		e.t.Errorf("evidence serialization: %v", err)
+		return
+	}
+	e.t.Logf("CCPO %s", b)
+}
+
+func jsonProto(t *testing.T, value proto.Message) json.RawMessage {
+	t.Helper()
+	b, err := protojson.MarshalOptions{UseProtoNames: true}.Marshal(value)
+	require.NoError(t, err)
+	return b
+}
+
+func newExperiment(t *testing.T, name string) *experiment {
+	t.Helper()
+	ctx, cancel := context.WithTimeout(headers.SetVersions(context.Background()), 90*time.Second)
+	t.Cleanup(cancel)
+	e := &experiment{t: t, ctx: ctx, ns: "ccpo-c4-" + name, workflowID: "ccpo-c4-" + name,
+		arm: name, renewEntered: make(chan struct{}), renewRelease: make(chan struct{}), renewResult: make(chan error, 1), deleteRelease: make(chan struct{}),
+		queue: &taskqueuepb.TaskQueue{Name: "ccpo-c4-queue", Kind: enumspb.TASK_QUEUE_KIND_NORMAL}}
+	logger := testlogger.NewTestLogger(t, testlogger.FailOnExpectedErrorOnly)
+	logger.Expect(testlogger.Error, ".*", tag.FailedAssertion)
+	db := persistencetests.GetSQLiteFileTestClusterOption()
+	t.Cleanup(func() { e.allowRenew(); e.allowDelete() })
+	baseFactory := temporal.PersistenceFactoryProvider()
+	cfg := &testcore.TestClusterConfig{
+		Persistence: *db, HistoryConfig: testcore.HistoryConfig{NumHistoryShards: 1},
+		WorkerConfig: testcore.WorkerConfig{DisableWorker: true},
+		AdditionalServerOptions: []temporal.ServerOption{temporal.WithPersistenceFactoryProvider(func(params persistenceclient.NewFactoryParams) persistenceclient.Factory {
+			f := baseFactory(params)
+			if params.ServiceName != primitives.HistoryService {
+				return f
+			}
+			return &observedFactory{Factory: f, e: e}
+		})},
+	}
+	cluster, err := testcore.NewTestClusterFactory().NewCluster(t, cfg, logger)
+	require.NoError(t, err)
+	e.cluster = cluster
+	t.Cleanup(func() { e.allowRenew(); e.allowDelete(); logger.Close(); require.NoError(t, cluster.TearDownCluster()) })
+	e.client = cluster.FrontendClient()
+	e.record("baseline", map[string]any{"source_sha": sourceSHA, "database": "file SQLite", "sqlite_attributes": db.ConnectAttributes, "namespace": e.ns, "workflow_id": e.workflowID, "wft_timeout_seconds": 120, "external_activity_executor": false})
+	_, err = e.client.RegisterNamespace(ctx, &workflowservice.RegisterNamespaceRequest{Namespace: e.ns, WorkflowExecutionRetentionPeriod: durationpb.New(24 * time.Hour)})
+	require.NoError(t, err)
+	var described *workflowservice.DescribeNamespaceResponse
+	require.Eventually(t, func() bool {
+		described, err = e.client.DescribeNamespace(ctx, &workflowservice.DescribeNamespaceRequest{Namespace: e.ns})
+		return err == nil
+	}, 10*time.Second, 20*time.Millisecond)
+	e.nsID = described.NamespaceInfo.Id
+	e.shardID = common.WorkflowIDToHistoryShard(e.nsID, e.workflowID, 1)
+	gate := make(chan struct{})
+	var once sync.Once
+	e.release = func() { once.Do(func() { close(gate) }) }
+	// Hold dispatch so the committed task row can be read before a queue ack removes it.
+	remove := cluster.InjectHook(t, testhooks.NewHook(testhooks.HistoryTransferTaskInterceptor, func(task tasks.Task, run func()) {
+		if a, ok := task.(*tasks.ActivityTask); ok && a.WorkflowID == e.workflowID {
+			<-gate
+		}
+		run()
+	}), namespace.ID(e.nsID))
+	t.Cleanup(func() { e.release(); remove() })
+	started, err := e.client.StartWorkflowExecution(ctx, &workflowservice.StartWorkflowExecutionRequest{Namespace: e.ns, WorkflowId: e.workflowID, RequestId: uuid.NewString(), WorkflowType: &commonpb.WorkflowType{Name: "ccpo-c4-workflow"}, TaskQueue: e.queue, WorkflowRunTimeout: durationpb.New(10 * time.Minute), WorkflowTaskTimeout: durationpb.New(120 * time.Second), Identity: "ccpo-client"})
+	require.NoError(t, err)
+	e.runID = started.RunId
+	poll, err := e.client.PollWorkflowTaskQueue(ctx, &workflowservice.PollWorkflowTaskQueueRequest{Namespace: e.ns, TaskQueue: e.queue, Identity: "ccpo-client"})
+	require.NoError(t, err)
+	require.NotEmpty(t, poll.TaskToken)
+	e.token, err = tasktoken.NewSerializer().Deserialize(poll.TaskToken)
+	require.NoError(t, err)
+	require.EqualValues(t, 2, e.token.ScheduledEventId)
+	require.EqualValues(t, 3, e.token.StartedEventId)
+	require.EqualValues(t, 1, e.token.Attempt)
+	require.Empty(t, poll.NextPageToken)
+	e.request = &workflowservice.RespondWorkflowTaskCompletedRequest{Namespace: e.ns, TaskToken: poll.TaskToken, Identity: "ccpo-client", Commands: []*commandpb.Command{{CommandType: enumspb.COMMAND_TYPE_SCHEDULE_ACTIVITY_TASK, Attributes: &commandpb.Command_ScheduleActivityTaskCommandAttributes{ScheduleActivityTaskCommandAttributes: &commandpb.ScheduleActivityTaskCommandAttributes{ActivityId: "ccpo-activity-1", ActivityType: &commonpb.ActivityType{Name: "ccpo-activity"}, TaskQueue: e.queue, Input: payloads.EncodeString("ccpo-input"), ScheduleToCloseTimeout: durationpb.New(5 * time.Minute), StartToCloseTimeout: durationpb.New(time.Minute), RequestEagerExecution: false}}}}}
+	e.requestBytes, err = proto.MarshalOptions{Deterministic: true}.Marshal(e.request)
+	require.NoError(t, err)
+	e.record("request", map[string]any{"token": jsonProto(t, e.token), "token_hex": hex.EncodeToString(poll.TaskToken), "request": jsonProto(t, e.request), "sha256": fmt.Sprintf("%x", sha256.Sum256(e.requestBytes))})
+	e.saveProto("request", e.request)
+	e.saveProto("task-token", e.token)
+	e.inspect("initial", false)
+	return e
+}
+
+func (e *experiment) complete(label string) error {
+	b, err := proto.MarshalOptions{Deterministic: true}.Marshal(e.request)
+	require.NoError(e.t, err)
+	require.Equal(e.t, e.requestBytes, b)
+	response, err := e.client.RespondWorkflowTaskCompleted(e.ctx, proto.Clone(e.request).(*workflowservice.RespondWorkflowTaskCompletedRequest))
+	e.record(label, map[string]any{"error_type": fmt.Sprintf("%T", err), "error": fmt.Sprint(err), "received_success": err == nil, "response": response})
+	return err
+}
+
+func (e *experiment) inspect(label string, accepted bool) *persistence.GetWorkflowExecutionResponse {
+	t := e.t
+	manager := e.cluster.ExecutionManager()
+	state, err := manager.GetWorkflowExecution(e.ctx, &persistence.GetWorkflowExecutionRequest{ShardID: e.shardID, NamespaceID: e.nsID, WorkflowID: e.workflowID, RunID: e.runID, ArchetypeID: chasm.WorkflowArchetypeID})
+	require.NoError(t, err)
+	shard, err := e.cluster.TestBase().ShardMgr.GetOrCreateShard(e.ctx, &persistence.GetOrCreateShardRequest{ShardID: e.shardID})
+	require.NoError(t, err)
+	branch, err := versionhistory.GetCurrentVersionHistory(state.State.ExecutionInfo.VersionHistories)
+	require.NoError(t, err)
+	history, err := manager.ReadHistoryBranch(e.ctx, &persistence.ReadHistoryBranchRequest{ShardID: e.shardID, BranchToken: branch.BranchToken, MinEventID: 1, MaxEventID: state.State.NextEventId, PageSize: 100})
+	require.NoError(t, err)
+	require.Empty(t, history.NextPageToken)
+	e.saveProto(label+"-mutable-state", state.State)
+	e.saveProto(label+"-history", &historypb.History{Events: history.HistoryEvents})
+	completed, scheduled := 0, 0
+	for _, event := range history.HistoryEvents {
+		switch event.EventType {
+		case enumspb.EVENT_TYPE_WORKFLOW_TASK_COMPLETED:
+			completed++
+			require.EqualValues(t, 2, event.GetWorkflowTaskCompletedEventAttributes().ScheduledEventId)
+			require.EqualValues(t, 3, event.GetWorkflowTaskCompletedEventAttributes().StartedEventId)
+		case enumspb.EVENT_TYPE_ACTIVITY_TASK_SCHEDULED:
+			scheduled++
+			require.Equal(t, "ccpo-activity-1", event.GetActivityTaskScheduledEventAttributes().ActivityId)
+			require.EqualValues(t, 4, event.GetActivityTaskScheduledEventAttributes().WorkflowTaskCompletedEventId)
+		}
+	}
+	storedTasks, ledger := e.enumerate()
+	if label == "initial" {
+		e.oldRange.Store(shard.ShardInfo.RangeId)
+	}
+	e.record(label, map[string]any{"db_revision": state.DBRecordVersion, "range_id": shard.ShardInfo.RangeId, "state": jsonProto(t, state.State), "effective_history": jsonProto(t, &historypb.History{Events: history.HistoryEvents}), "valid_completions": completed, "activity_schedules": scheduled, "direct_persisted_activity_tasks": storedTasks, "independent_category_ranges": ledger})
+	if accepted {
+		require.Equal(t, 1, completed)
+		require.Equal(t, 1, scheduled)
+		require.EqualValues(t, 6, state.State.NextEventId)
+		require.Zero(t, state.State.ExecutionInfo.WorkflowTaskScheduledEventId)
+		require.Zero(t, state.State.ExecutionInfo.WorkflowTaskStartedEventId)
+		require.Len(t, state.State.ActivityInfos, 1)
+		require.Equal(t, "ccpo-activity-1", state.State.ActivityInfos[5].ActivityId)
+		require.Len(t, storedTasks, 1)
+		require.EqualValues(t, 5, storedTasks[0].(*tasks.ActivityTask).ScheduledEventID)
+	} else {
+		require.Zero(t, completed)
+		require.Zero(t, scheduled)
+		require.EqualValues(t, 4, state.State.NextEventId)
+		require.EqualValues(t, 2, state.State.ExecutionInfo.WorkflowTaskScheduledEventId)
+		require.EqualValues(t, 3, state.State.ExecutionInfo.WorkflowTaskStartedEventId)
+		require.EqualValues(t, 1, state.State.ExecutionInfo.WorkflowTaskAttempt)
+		require.Empty(t, state.State.ActivityInfos)
+		require.Empty(t, storedTasks)
+	}
+	return state
+}
+
+func (e *experiment) recover() {
+	e.allowDelete()
+	e.release()
+	ctx, cancel := context.WithTimeout(e.ctx, 15*time.Second)
+	defer cancel()
+	poll, err := e.client.PollActivityTaskQueue(ctx, &workflowservice.PollActivityTaskQueueRequest{Namespace: e.ns, TaskQueue: e.queue, Identity: "ccpo-recovery-observer"})
+	e.record("recovery-poll", map[string]any{"error": fmt.Sprint(err), "response": poll, "external_effect_executed": false})
+	require.NoError(e.t, err)
+	require.NotEmpty(e.t, poll.TaskToken)
+	require.Equal(e.t, "ccpo-activity-1", poll.ActivityId)
+	require.Equal(e.t, e.runID, poll.WorkflowExecution.RunId)
+	require.True(e.t, proto.Equal(payloads.EncodeString("ccpo-input"), poll.Input))
+	decoded, err := tasktoken.NewSerializer().Deserialize(poll.TaskToken)
+	require.NoError(e.t, err)
+	require.EqualValues(e.t, 5, decoded.ScheduledEventId)
+	e.record("recovery-token", jsonProto(e.t, decoded))
+}
+
+type observedFactory struct {
+	persistenceclient.Factory
+	e *experiment
+}
+
+type observedExecution struct {
+	persistence.ExecutionManager
+	e *experiment
+}
+
+type observedShard struct {
+	persistence.ShardManager
+	e *experiment
+}
+
+func (f *observedFactory) NewExecutionManager() (persistence.ExecutionManager, error) {
+	m, err := f.Factory.NewExecutionManager()
+	if err != nil {
+		return nil, err
+	}
+	return &observedExecution{ExecutionManager: m, e: f.e}, nil
+}
+
+func (f *observedFactory) NewShardManager() (persistence.ShardManager, error) {
+	m, err := f.Factory.NewShardManager()
+	if err != nil {
+		return nil, err
+	}
+	return &observedShard{ShardManager: m, e: f.e}, nil
+}
+
+func (m *observedExecution) UpdateWorkflowExecution(ctx context.Context, r *persistence.UpdateWorkflowExecutionRequest) (*persistence.UpdateWorkflowExecutionResponse, error) {
+	e := m.e
+	if r.UpdateWorkflowMutation.ExecutionInfo.WorkflowId != e.workflowID || !e.armed.CompareAndSwap(true, false) {
+		return m.ExecutionManager.UpdateWorkflowExecution(ctx, r)
+	}
+	e.faults.Add(1)
+	e.record("injection-entry", map[string]any{"arm": e.arm, "write_range": r.RangeID, "proposed_revision": r.UpdateWorkflowMutation.DBRecordVersion, "proposed_next_event": r.UpdateWorkflowMutation.NextEventID, "proposed_tasks": r.UpdateWorkflowMutation.Tasks, "stack": string(debug.Stack())})
+	var response *persistence.UpdateWorkflowExecutionResponse
+	var err error
+	if e.arm == "a" {
+		response, err = m.ExecutionManager.UpdateWorkflowExecution(ctx, r)
+		e.record("delegate-result", map[string]any{"invoked": true, "error": fmt.Sprint(err), "error_type": fmt.Sprintf("%T", err)})
+		if err != nil {
+			return response, err
+		}
+	} else {
+		e.record("delegate-result", map[string]any{"invoked": false, "reason": "controlled before-delegate no-commit outcome"})
+	}
+	e.record("ambiguous-error-return", map[string]any{"type": "*persistence.TimeoutError", "message": "CCPO controlled unknown persistence outcome", "delegate_invoked": e.arm == "a"})
+	return nil, &persistence.TimeoutError{Msg: "CCPO controlled unknown persistence outcome"}
+}
+
+func (m *observedExecution) GetWorkflowExecution(ctx context.Context, r *persistence.GetWorkflowExecutionRequest) (*persistence.GetWorkflowExecutionResponse, error) {
+	result, err := m.ExecutionManager.GetWorkflowExecution(ctx, r)
+	if r.WorkflowID == m.e.workflowID && m.e.faults.Load() > 0 {
+		m.e.loadCount.Add(1)
+		m.e.record("history-manager-reload", map[string]any{"phase": m.e.phase.Load(), "error": fmt.Sprint(err), "response": result, "stack": string(debug.Stack())})
+	}
+	return result, err
+}
+
+func (m *observedShard) UpdateShard(ctx context.Context, r *persistence.UpdateShardRequest) error {
+	e := m.e
+	intercept := false
+	if e.faults.Load() > 0 && r.ShardInfo.RangeId > e.oldRange.Load() {
+		e.renewOnce.Do(func() { intercept = true })
+	}
+	if !intercept {
+		return m.ShardManager.UpdateShard(ctx, r)
+	}
+	e.phase.Store(1)
+	e.record("reacquisition-enter", map[string]any{"previous_range": r.PreviousRangeID, "requested_range": r.ShardInfo.RangeId, "stack": string(debug.Stack())})
+	close(e.renewEntered)
+	select {
+	case <-e.renewRelease:
+	case <-ctx.Done():
+		e.renewResult <- ctx.Err()
+		return ctx.Err()
+	}
+	err := m.ShardManager.UpdateShard(ctx, r)
+	if err == nil {
+		e.phase.Store(2)
+	}
+	e.record("reacquisition-delegate-result", map[string]any{"previous_range": r.PreviousRangeID, "requested_range": r.ShardInfo.RangeId, "error": fmt.Sprint(err)})
+	e.renewResult <- err
+	return err
+}
+
+func (e *experiment) allowRenew()  { e.renewReleaseOnce.Do(func() { close(e.renewRelease) }) }
+func (e *experiment) allowDelete() { e.cleanupOnce.Do(func() { close(e.deleteRelease) }) }
+
+// Deferring real cleanup keeps full task-range enumeration independent of recorder-selected IDs.
+func (m *observedExecution) CompleteHistoryTask(ctx context.Context, r *persistence.CompleteHistoryTaskRequest) error {
+	select {
+	case <-m.e.deleteRelease:
+		return m.ExecutionManager.CompleteHistoryTask(ctx, r)
+	case <-ctx.Done():
+		return ctx.Err()
+	}
+}
+
+func (m *observedExecution) RangeCompleteHistoryTasks(ctx context.Context, r *persistence.RangeCompleteHistoryTasksRequest) error {
+	select {
+	case <-m.e.deleteRelease:
+		return m.ExecutionManager.RangeCompleteHistoryTasks(ctx, r)
+	case <-ctx.Done():
+		return ctx.Err()
+	}
+}
+
+func (e *experiment) enumerate() ([]tasks.Task, map[string]any) {
+	categories := []tasks.Category{tasks.CategoryTransfer, tasks.CategoryTimer, tasks.CategoryVisibility, tasks.CategoryReplication, tasks.CategoryArchival, tasks.CategoryOutbound}
+	ledger := make(map[string]any)
+	var activities []tasks.Task
+	for _, category := range categories {
+		request := &persistence.GetHistoryTasksRequest{ShardID: e.shardID, TaskCategory: category, InclusiveMinTaskKey: tasks.MinimumKey, ExclusiveMaxTaskKey: tasks.MaximumKey, BatchSize: 2}
+		if category.Type() == tasks.CategoryTypeImmediate {
+			request.ExclusiveMaxTaskKey = tasks.NewImmediateKey(tasks.MaximumKey.TaskID)
+		}
+		var matching []tasks.Task
+		pages, rows := 0, 0
+		for {
+			page, err := e.cluster.ExecutionManager().GetHistoryTasks(e.ctx, request)
+			require.NoError(e.t, err)
+			pages++
+			rows += len(page.Tasks)
+			for _, task := range page.Tasks {
+				if task.GetNamespaceID() == e.nsID && task.GetWorkflowID() == e.workflowID && task.GetRunID() == e.runID {
+					matching = append(matching, task)
+					if _, ok := task.(*tasks.ActivityTask); ok {
+						activities = append(activities, task)
+					}
+				}
+			}
+			if len(page.NextPageToken) == 0 {
+				break
+			}
+			require.Less(e.t, pages, 100, "unexpected task range pagination")
+			request.NextPageToken = page.NextPageToken
+		}
+		ledger[category.Name()] = map[string]any{"inclusive_min": request.InclusiveMinTaskKey, "exclusive_max": request.ExclusiveMaxTaskKey, "pages": pages, "rows": rows, "matching_workflow_tasks": matching, "final_page_token_empty": true}
+	}
+	return activities, ledger
+}
+
+func (e *experiment) durableRange() int64 {
+	row, err := e.cluster.TestBase().ShardMgr.GetOrCreateShard(e.ctx, &persistence.GetOrCreateShardRequest{ShardID: e.shardID})
+	require.NoError(e.t, err)
+	return row.ShardInfo.RangeId
+}
+
+func TestCCPOC4Control(t *testing.T) {
+	e := newExperiment(t, "control")
+	require.NoError(t, e.complete("completion-1"))
+	e.inspect("committed", true)
+	require.Equal(t, e.oldRange.Load(), e.durableRange())
+	e.recover()
+}
+
+func TestCCPOC4CommittedUnknown(t *testing.T)    { testUnknown(t, "a") }
+func TestCCPOC4NotCommittedUnknown(t *testing.T) { testUnknown(t, "b") }
+
+func testUnknown(t *testing.T, arm string) {
+	e := newExperiment(t, arm)
+	before := e.inspect("before-fault", false)
+	e.armed.Store(true)
+	firstResult := make(chan error, 1)
+	go func() { firstResult <- e.complete("completion-1") }()
+	select {
+	case <-e.renewEntered:
+	case <-e.ctx.Done():
+		t.Fatal("INCONCLUSIVE: actual range reacquisition not reached")
+	}
+	require.Equal(t, e.oldRange.Load(), e.durableRange())
+	intermediate := e.inspect("independent-read-during-reacquisition-not-server-certified", arm == "a")
+	if arm == "b" {
+		require.Equal(t, before.DBRecordVersion, intermediate.DBRecordVersion)
+		require.True(t, proto.Equal(before.State, intermediate.State))
+	}
+	e.allowRenew()
+	select {
+	case err := <-e.renewResult:
+		require.NoError(t, err)
+	case <-e.ctx.Done():
+		t.Fatal("INCONCLUSIVE: range delegate completion absent")
+	}
+	newRange := e.durableRange()
+	require.Greater(t, newRange, e.oldRange.Load())
+	e.record("durable-range-barrier", map[string]any{"old_range": e.oldRange.Load(), "durable_new_range": newRange})
+	select {
+	case err := <-firstResult:
+		var deadline *serviceerror.DeadlineExceeded
+		require.ErrorAs(t, err, &deadline)
+	case <-e.ctx.Done():
+		t.Fatal("INCONCLUSIVE: first RPC did not return")
+	}
+	require.EqualValues(t, 1, e.faults.Load())
+	state := e.inspect("after-durable-range-barrier", arm == "a")
+	if arm == "a" {
+		var nf *serviceerror.NotFound
+		require.ErrorAs(t, e.complete("identical-retry"), &nf)
+		final := e.inspect("after-identical-retry", true)
+		require.Equal(t, state.DBRecordVersion, final.DBRecordVersion)
+		require.True(t, proto.Equal(state.State, final.State))
+	} else {
+		require.Equal(t, before.DBRecordVersion, state.DBRecordVersion)
+		require.True(t, proto.Equal(before.State, state.State))
+		require.NoError(t, e.complete("identical-retry"))
+		e.inspect("after-identical-retry", true)
+	}
+	require.Positive(t, e.loadCount.Load(), "retry must exercise actual History Mutable State reload")
+	e.recover()
+}
+
+func (e *experiment) saveProto(name string, value proto.Message) {
+	dir := os.Getenv("CCPO_EVIDENCE_OUTPUT")
+	if dir == "" {
+		return
+	}
+	data, err := proto.MarshalOptions{Deterministic: true}.Marshal(value)
+	require.NoError(e.t, err)
+	f, err := os.OpenFile(filepath.Join(dir, name+".pb"), os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0600)
+	require.NoError(e.t, err)
+	_, err = f.Write(data)
+	require.NoError(e.t, err)
+	require.NoError(e.t, f.Close())
+	e.record("protobuf-artifact", map[string]any{"file": name + ".pb", "type": string(value.ProtoReflect().Descriptor().FullName()), "sha256": fmt.Sprintf("%x", sha256.Sum256(data)), "bytes": len(data)})
+}

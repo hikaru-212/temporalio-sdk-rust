@@ -1,0 +1,356 @@
+=== RUN   TestCCPOC4Control
+    logger.go:146: 2026-10-23T13:34:45.419Z	info	created database	{"database": "<EPHEMERAL_SQLITE_DB>", "logging-call-at": "<SERVER_CHECKOUT>/common/persistence/sql/test_sql_persistence.go:125"}
+    logger.go:146: 2026-10-23T13:34:45.423Z	info	loaded schema	{"logging-call-at": "<SERVER_CHECKOUT>/common/persistence/sql/test_sql_persistence.go:190"}
+    logger.go:146: 2026-10-23T13:34:45.427Z	info	loaded schema	{"logging-call-at": "<SERVER_CHECKOUT>/common/persistence/sql/test_sql_persistence.go:190"}
+    logger.go:146: 2026-10-23T13:34:45.427Z	info	loaded schema version	{"version": "0.11", "logging-call-at": "<SERVER_CHECKOUT>/common/persistence/sql/test_sql_persistence.go:207"}
+    logger.go:146: 2026-10-23T13:34:45.428Z	info	Use rpc address 127.0.0.1:7134 for cluster active.	{"component": "metadata-initializer", "logging-call-at": "<SERVER_CHECKOUT>/temporal/cluster_metadata_loader.go:68"}
+    logger.go:146: 2026-10-23T13:34:45.428Z	info	PProf listen on 	{"host": "localhost", "port": 7000, "logging-call-at": "<SERVER_CHECKOUT>/common/pprof/pprof.go:58"}
+    logger.go:146: 2026-10-23T13:34:45.428Z	info	Use rpc address 127.0.0.1:7134 for cluster active.	{"component": "metadata-initializer", "logging-call-at": "<SERVER_CHECKOUT>/temporal/cluster_metadata_loader.go:68"}
+    logger.go:146: 2026-10-23T13:34:45.433Z	info	Quota changed	{"component": "persistence", "current-quota": null, "new-quota": 9000, "scope": "host", "service": "history", "logging-call-at": "<SERVER_CHECKOUT>/common/quotas/calculator/logged_calculator.go:100"}
+    logger.go:146: 2026-10-23T13:34:45.434Z	debug	RPC factory created. enableServerKeepalive: false, enableClientKeepalive: false	{"logging-call-at": "<SERVER_CHECKOUT>/common/resource/fx.go:470"}
+    logger.go:146: 2026-10-23T13:34:45.434Z	info	historyClient: ownership caching disabled	{"service": "history", "logging-call-at": "<SERVER_CHECKOUT>/client/history/client.go:70"}
+    logger.go:146: 2026-10-23T13:34:45.434Z	info	creating new visibility manager	{"visibility_plugin_name": "sqlite", "visibility_index_name": "<EPHEMERAL_SQLITE_DB>", "logging-call-at": "<SERVER_CHECKOUT>/common/persistence/visibility/factory.go:145"}
+    logger.go:146: 2026-10-23T13:34:45.435Z	info	Quota changed	{"component": "task-scheduler", "current-quota": null, "new-quota": 0, "scope": "host", "service": "history", "logging-call-at": "<SERVER_CHECKOUT>/common/quotas/calculator/logged_calculator.go:100"}
+    logger.go:146: 2026-10-23T13:34:45.435Z	info	Warning: CHASM component scheduler.scheduler declares state fields that won't be managed by CHASM:
+        	cacheConflictToken int64
+        	compiledSpec *scheduler.CompiledSpec	{"logging-call-at": "<SERVER_CHECKOUT>/chasm/registry.go:361"}
+    logger.go:146: 2026-10-23T13:34:45.436Z	info	Initialized lazy loaded OwnershipBasedQuotaScaler	{"service": "history", "logging-call-at": "<SERVER_CHECKOUT>/service/history/shard/fx.go:71"}
+    logger.go:146: 2026-10-23T13:34:45.436Z	info	Initialized service resolver for persistence rate limiting	{"service": "history", "logging-call-at": "<SERVER_CHECKOUT>/service/fx.go:76"}
+    logger.go:146: 2026-10-23T13:34:45.436Z	info	Created gRPC listener	{"service": "history", "address": "127.0.0.1:34277", "logging-call-at": "<SERVER_CHECKOUT>/common/rpc/rpc.go:209"}
+    logger.go:146: 2026-10-23T13:34:45.438Z	info	Quota changed	{"component": "persistence", "current-quota": null, "new-quota": 3000, "scope": "host", "service": "matching", "logging-call-at": "<SERVER_CHECKOUT>/common/quotas/calculator/logged_calculator.go:100"}
+    logger.go:146: 2026-10-23T13:34:45.438Z	info	Initialized service resolver for persistence rate limiting	{"service": "matching", "logging-call-at": "<SERVER_CHECKOUT>/service/fx.go:76"}
+    logger.go:146: 2026-10-23T13:34:45.438Z	debug	RPC factory created. enableServerKeepalive: false, enableClientKeepalive: false	{"logging-call-at": "<SERVER_CHECKOUT>/common/resource/fx.go:470"}
+    logger.go:146: 2026-10-23T13:34:45.438Z	info	Created gRPC listener	{"service": "matching", "address": "127.0.0.1:36735", "logging-call-at": "<SERVER_CHECKOUT>/common/rpc/rpc.go:209"}
+    logger.go:146: 2026-10-23T13:34:45.438Z	info	historyClient: ownership caching disabled	{"service": "matching", "logging-call-at": "<SERVER_CHECKOUT>/client/history/client.go:70"}
+    logger.go:146: 2026-10-23T13:34:45.438Z	info	creating new visibility manager	{"visibility_plugin_name": "sqlite", "visibility_index_name": "<EPHEMERAL_SQLITE_DB>", "logging-call-at": "<SERVER_CHECKOUT>/common/persistence/visibility/factory.go:145"}
+    logger.go:146: 2026-10-23T13:34:45.441Z	debug	RPC factory created. enableServerKeepalive: false, enableClientKeepalive: false	{"logging-call-at": "<SERVER_CHECKOUT>/common/resource/fx.go:470"}
+    logger.go:146: 2026-10-23T13:34:45.441Z	info	Quota changed	{"component": "persistence", "current-quota": null, "new-quota": 2000, "scope": "host", "service": "frontend", "logging-call-at": "<SERVER_CHECKOUT>/common/quotas/calculator/logged_calculator.go:100"}
+    logger.go:146: 2026-10-23T13:34:45.441Z	info	historyClient: ownership caching disabled	{"service": "frontend", "logging-call-at": "<SERVER_CHECKOUT>/client/history/client.go:70"}
+    logger.go:146: 2026-10-23T13:34:45.442Z	info	Warning: CHASM component scheduler.scheduler declares state fields that won't be managed by CHASM:
+        	cacheConflictToken int64
+        	compiledSpec *scheduler.CompiledSpec	{"logging-call-at": "<SERVER_CHECKOUT>/chasm/registry.go:361"}
+    logger.go:146: 2026-10-23T13:34:45.442Z	info	creating new visibility manager	{"visibility_plugin_name": "sqlite", "visibility_index_name": "<EPHEMERAL_SQLITE_DB>", "logging-call-at": "<SERVER_CHECKOUT>/common/persistence/visibility/factory.go:145"}
+    logger.go:146: 2026-10-23T13:34:45.442Z	info	Initialized service resolver for persistence rate limiting	{"service": "frontend", "logging-call-at": "<SERVER_CHECKOUT>/service/fx.go:76"}
+    logger.go:146: 2026-10-23T13:34:45.442Z	info	Quota changed	{"component": "rpc-handler", "current-quota": null, "new-quota": 3000, "scope": "host", "service": "frontend", "logging-call-at": "<SERVER_CHECKOUT>/common/quotas/calculator/logged_calculator.go:100"}
+    logger.go:146: 2026-10-23T13:34:45.443Z	info	Created gRPC listener	{"service": "frontend", "address": "127.0.0.1:42167", "logging-call-at": "<SERVER_CHECKOUT>/common/rpc/rpc.go:209"}
+    logger.go:146: 2026-10-23T13:34:45.445Z	info	Service is not requested, skipping initialization.	{"service": "internal-frontend", "logging-call-at": "<SERVER_CHECKOUT>/temporal/fx.go:581"}
+    logger.go:146: 2026-10-23T13:34:45.445Z	info	Service is not requested, skipping initialization.	{"service": "worker", "logging-call-at": "<SERVER_CHECKOUT>/temporal/fx.go:619"}
+    logger.go:146: 2026-10-23T13:34:45.446Z	info	PProf not started due to port not set	{"logging-call-at": "<SERVER_CHECKOUT>/common/pprof/pprof.go:44"}
+    logger.go:146: 2026-10-23T13:34:45.446Z	info	Starting server for services	{"value": {"frontend":{},"history":{},"matching":{}}, "logging-call-at": "<SERVER_CHECKOUT>/temporal/server_impl.go:89"}
+    logger.go:146: 2026-10-23T13:34:45.447Z	debug	archival:
+            history:
+                enableRead: false
+                provider: null
+                state: ""
+            visibility:
+                enableRead: false
+                provider: null
+                state: ""
+        clusterMetadata:
+            clusterInformation:
+                active:
+                    enabled: true
+                    httpAddress: 127.0.0.1:7144
+                    initialFailoverVersion: 1
+                    rpcAddress: 127.0.0.1:7134
+            currentClusterName: active
+            enableGlobalNamespace: false
+            failoverVersionIncrement: 10
+            masterClusterName: active
+            tags: {}
+        dcRedirectionPolicy:
+            policy: ""
+        dynamicConfigClient: null
+        global:
+            authorization:
+                audience: ""
+                authExtraHeaderName: ""
+                authHeaderName: ""
+                authorizer: ""
+                claimMapper: ""
+                jwtKeyProvider:
+                    keySourceURIs: []
+                    refreshInterval: 0s
+                permissionsClaimName: ""
+                permissionsRegex: ""
+                remoteClusterAuth:
+                    require: false
+            membership:
+                broadcastAddress: ""
+                maxJoinDuration: 1s
+            metrics: null
+            pprof:
+                host: ""
+                port: 0
+            tls:
+                expirationChecks:
+                    checkInterval: 0s
+                    errorWindow: 0s
+                    warningWindow: 0s
+                frontend:
+                    client:
+                        disableHostVerification: false
+                        forceTLS: false
+                        rootCaData: []
+                        rootCaFiles: []
+                        serverName: ""
+                    hostOverrides: {}
+                    server:
+                        certData: ""
+                        certFile: ""
+                        clientCaData: []
+                        clientCaFiles: []
+                        keyData: '******'
+                        keyFile: ""
+                        requireClientAuth: false
+                internode:
+                    client:
+                        disableHostVerification: false
+                        forceTLS: false
+                        rootCaData: []
+                        rootCaFiles: []
+                        serverName: ""
+                    hostOverrides: {}
+                    server:
+                        certData: ""
+                        certFile: ""
+                        clientCaData: []
+                        clientCaFiles: []
+                        keyData: '******'
+                        keyFile: ""
+                        requireClientAuth: false
+                refreshInterval: 0s
+                remoteClusters: {}
+                systemWorker:
+                    certData: ""
+                    certFile: ""
+                    client:
+                        disableHostVerification: false
+                        forceTLS: false
+                        rootCaData: []
+                        rootCaFiles: []
+                        serverName: ""
+                    keyData: '******'
+                    keyFile: ""
+        log:
+            development: false
+            format: ""
+            level: ""
+            outputFile: ""
+            stdout: false
+        namespaceDefaults:
+            archival:
+                history:
+                    URI: ""
+                    state: ""
+                visibility:
+                    URI: ""
+                    state: ""
+        otel: {}
+        persistence:
+            datastores:
+                test:
+                    cassandra: null
+                    customDatastore: null
+                    elasticsearch: null
+                    faultInjection: null
+                    sql:
+                        connectAddr: 127.0.0.1:0
+                        connectAttributes:
+                            busy_timeout: "30000"
+                            cache: shared
+                            journal_mode: wal
+                            synchronous: normal
+                        connectProtocol: tcp
+                        databaseName: <EPHEMERAL_SQLITE_DB>
+                        maxConnLifetime: 0s
+                        maxConns: 0
+                        maxIdleConns: 0
+                        password: '<REDACTED_TEST_PASSWORD>'
+                        passwordCommand: null
+                        pluginName: sqlite
+                        taskScanPartitions: 4
+                        tls: null
+                        user: ""
+            defaultStore: test
+            numHistoryShards: 1
+            secondaryVisibilityStore: ""
+            visibilityStore: test
+        publicClient:
+            forceTLSConfig: ""
+            hostPort: ""
+            httpHostPort: ""
+        services:
+            frontend:
+                rpc:
+                    bindOnIP: 127.0.0.1
+                    bindOnLocalHost: false
+                    clientConnectionConfig:
+                        keepAliveClientParameters: null
+                    grpcPort: 42167
+                    httpAdditionalForwardedHeaders:
+                        - this-header-forwarded
+                        - this-header-prefix-forwarded-*
+                    httpPort: 43101
+                    keepAliveServerConfig:
+                        keepAliveEnforcementPolicy: null
+                        keepAliveServerParameters: null
+                    membershipPort: 0
+            history:
+                rpc:
+                    bindOnIP: 127.0.0.1
+                    bindOnLocalHost: false
+                    clientConnectionConfig:
+                        keepAliveClientParameters: null
+                    grpcPort: 34277
+                    httpAdditionalForwardedHeaders: []
+                    httpPort: 0
+                    keepAliveServerConfig:
+                        keepAliveEnforcementPolicy: null
+                        keepAliveServerParameters: null
+                    membershipPort: 0
+            matching:
+                rpc:
+                    bindOnIP: 127.0.0.1
+                    bindOnLocalHost: false
+                    clientConnectionConfig:
+                        keepAliveClientParameters: null
+                    grpcPort: 36735
+                    httpAdditionalForwardedHeaders: []
+                    httpPort: 0
+                    keepAliveServerConfig:
+                        keepAliveEnforcementPolicy: null
+                        keepAliveServerParameters: null
+                    membershipPort: 0
+        visibility:
+            persistenceCustomSearchAttributes: {}
+        	{"logging-call-at": "<SERVER_CHECKOUT>/temporal/server_impl.go:90"}
+    logger.go:146: 2026-10-23T13:34:45.447Z	info	Watch not supported by persistence, namespace registry will use polling	{"service": "matching", "logging-call-at": "<SERVER_CHECKOUT>/common/namespace/nsregistry/registry.go:234"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	RuntimeMetricsReporter started	{"service": "matching", "logging-call-at": "<SERVER_CHECKOUT>/common/metrics/runtime.go:121"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	matching starting	{"service": "matching", "logging-call-at": "<SERVER_CHECKOUT>/service/matching/service.go:63"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	Update worker pool size	{"key": "worker-pool-size", "value": 64, "logging-call-at": "<SERVER_CHECKOUT>/common/tasks/sequential_scheduler.go:228"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	sequential scheduler started	{"logging-call-at": "<SERVER_CHECKOUT>/common/tasks/sequential_scheduler.go:81"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	interleaved weighted round robin task scheduler started	{"logging-call-at": "<SERVER_CHECKOUT>/common/tasks/interleaved_weighted_round_robin.go:116"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	Starting to serve on matching listener	{"service": "matching", "logging-call-at": "<SERVER_CHECKOUT>/service/matching/service.go:77"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	Update worker pool size	{"key": "worker-pool-size", "value": 64, "logging-call-at": "<SERVER_CHECKOUT>/common/tasks/sequential_scheduler.go:228"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	sequential scheduler started	{"logging-call-at": "<SERVER_CHECKOUT>/common/tasks/sequential_scheduler.go:81"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	interleaved weighted round robin task scheduler started	{"logging-call-at": "<SERVER_CHECKOUT>/common/tasks/interleaved_weighted_round_robin.go:116"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	Update worker pool size	{"key": "worker-pool-size", "service": "history", "value": 64, "logging-call-at": "<SERVER_CHECKOUT>/common/tasks/fifo_scheduler.go:138"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	fifo scheduler started	{"service": "history", "logging-call-at": "<SERVER_CHECKOUT>/common/tasks/fifo_scheduler.go:68"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	execution queue scheduler started	{"service": "history", "logging-call-at": "<SERVER_CHECKOUT>/common/tasks/execution_queue_scheduler.go:93"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	interleaved weighted round robin task scheduler started	{"service": "history", "logging-call-at": "<SERVER_CHECKOUT>/common/tasks/interleaved_weighted_round_robin.go:116"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	Update worker pool size	{"key": "worker-pool-size", "service": "history", "value": 64, "logging-call-at": "<SERVER_CHECKOUT>/common/tasks/fifo_scheduler.go:138"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	fifo scheduler started	{"service": "history", "logging-call-at": "<SERVER_CHECKOUT>/common/tasks/fifo_scheduler.go:68"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	execution queue scheduler started	{"service": "history", "logging-call-at": "<SERVER_CHECKOUT>/common/tasks/execution_queue_scheduler.go:93"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	interleaved weighted round robin task scheduler started	{"service": "history", "logging-call-at": "<SERVER_CHECKOUT>/common/tasks/interleaved_weighted_round_robin.go:116"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	Update worker pool size	{"key": "worker-pool-size", "service": "history", "value": 64, "logging-call-at": "<SERVER_CHECKOUT>/common/tasks/fifo_scheduler.go:138"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	fifo scheduler started	{"service": "history", "logging-call-at": "<SERVER_CHECKOUT>/common/tasks/fifo_scheduler.go:68"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	execution queue scheduler started	{"service": "history", "logging-call-at": "<SERVER_CHECKOUT>/common/tasks/execution_queue_scheduler.go:93"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	interleaved weighted round robin task scheduler started	{"service": "history", "logging-call-at": "<SERVER_CHECKOUT>/common/tasks/interleaved_weighted_round_robin.go:116"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	Update worker pool size	{"component": "memory-scheduled-queue-processor", "key": "worker-pool-size", "service": "history", "value": 64, "logging-call-at": "<SERVER_CHECKOUT>/common/tasks/fifo_scheduler.go:138"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	fifo scheduler started	{"component": "memory-scheduled-queue-processor", "service": "history", "logging-call-at": "<SERVER_CHECKOUT>/common/tasks/fifo_scheduler.go:68"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	Watch not supported by persistence, namespace registry will use polling	{"service": "history", "logging-call-at": "<SERVER_CHECKOUT>/common/namespace/nsregistry/registry.go:234"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	RuntimeMetricsReporter started	{"service": "history", "logging-call-at": "<SERVER_CHECKOUT>/common/metrics/runtime.go:121"}
+    logger.go:146: 2026-10-23T13:34:45.448Z	info	history starting	{"logging-call-at": "<SERVER_CHECKOUT>/service/history/service.go:69"}
+    logger.go:146: 2026-10-23T13:34:45.449Z	info	Replication task fetchers started.	{"logging-call-at": "<SERVER_CHECKOUT>/service/history/replication/task_fetcher.go:117"}
+    logger.go:146: 2026-10-23T13:34:45.449Z	info	StreamReceiverMonitor started.	{"logging-call-at": "<SERVER_CHECKOUT>/service/history/replication/stream_receiver_monitor.go:87"}
+    logger.go:146: 2026-10-23T13:34:45.449Z	info	none	{"address": "127.0.0.1:34277", "component": "shard-controller", "lifecycle": "Started", "logging-call-at": "<SERVER_CHECKOUT>/service/history/shard/controller_impl.go:112"}
+    logger.go:146: 2026-10-23T13:34:45.449Z	info	Watch not supported by persistence, namespace registry will use polling	{"service": "frontend", "logging-call-at": "<SERVER_CHECKOUT>/common/namespace/nsregistry/registry.go:234"}
+    logger.go:146: 2026-10-23T13:34:45.449Z	info	RuntimeMetricsReporter started	{"service": "frontend", "logging-call-at": "<SERVER_CHECKOUT>/common/metrics/runtime.go:121"}
+    logger.go:146: 2026-10-23T13:34:45.449Z	info	frontend starting	{"service": "frontend", "logging-call-at": "<SERVER_CHECKOUT>/service/frontend/service.go:521"}
+    range_barrier_test.go:85: CCPO {"sequence":1,"stage":"baseline","utc":"2026-10-23T13:34:45.44938347Z","value":{"database":"file SQLite","external_activity_executor":false,"namespace":"ccpo-c4-control","source_sha":"0d5e3848bed625907987f73d5eaae8dc77bc6590","sqlite_attributes":{"busy_timeout":"30000","cache":"shared","journal_mode":"wal","synchronous":"normal"},"wft_timeout_seconds":120,"workflow_id":"ccpo-c4-control"}}
+    logger.go:146: 2026-10-23T13:34:45.449Z	info	Starting to serve on history listener	{"logging-call-at": "<SERVER_CHECKOUT>/service/history/service.go:95"}
+    logger.go:146: 2026-10-23T13:34:45.449Z	info	ContextMetadataInterceptor: No metadata in context, not setting trailer	{"fullMethod": "/temporal.server.api.matchingservice.v1.MatchingService/ListNexusEndpoints", "logging-call-at": "<SERVER_CHECKOUT>/common/log/throttle_logger.go:44"}
+    logger.go:146: 2026-10-23T13:34:45.449Z	info	Frontend is now healthy	{"service": "frontend", "logging-call-at": "<SERVER_CHECKOUT>/service/frontend/workflow_handler.go:419"}
+    logger.go:146: 2026-10-23T13:34:45.449Z	info	Starting to serve on frontend listener	{"service": "frontend", "logging-call-at": "<SERVER_CHECKOUT>/service/frontend/service.go:539"}
+    logger.go:146: 2026-10-23T13:34:45.449Z	info	TrailerToContextMetadataInterceptor: No metadata in trailer	{"contextWrapped": false, "method": "/temporal.server.api.matchingservice.v1.MatchingService/ListNexusEndpoints", "service": "history", "logging-call-at": "<SERVER_CHECKOUT>/common/log/throttle_logger.go:44"}
+    logger.go:146: 2026-10-23T13:34:45.449Z	info	none	{"address": "127.0.0.1:34277", "component": "shard-controller", "number-changed": 0, "number-deleted": 0, "number-processed": 1, "shard-update": "RingMembershipChangedEvent", "logging-call-at": "<SERVER_CHECKOUT>/service/history/shard/ownership.go:92"}
+    logger.go:146: 2026-10-23T13:34:45.449Z	info	none	{"address": "127.0.0.1:34277", "component": "shard-context", "lifecycle": "Started", "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/shard/context_impl.go:1721"}
+    logger.go:146: 2026-10-23T13:34:45.449Z	info	none	{"address": "127.0.0.1:34277", "component": "shard-controller", "numShards": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/shard/controller_impl.go:265"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	Range updated for shardID	{"address": "127.0.0.1:34277", "previous-shard-range-id": 0, "shard-id": 1, "shard-range-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/shard/context_impl.go:1199"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	Task key range updated	{"address": "127.0.0.1:34277", "next-number": 2097152, "number": 1048576, "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/shard/task_key_generator.go:155"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	Acquired shard	{"address": "127.0.0.1:34277", "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/shard/context_impl.go:2084"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	none	{"address": "127.0.0.1:34277", "component": "shard-engine", "lifecycle": "Starting", "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/shard/context_impl.go:1562"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	none	{"address": "127.0.0.1:34277", "component": "history-engine", "lifecycle": "Starting", "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/history_engine.go:386"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	none	{"address": "127.0.0.1:34277", "component": "outbound-queue-processor", "lifecycle": "Starting", "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/queues/queue_immediate.go:96"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	Task rescheduler started.	{"address": "127.0.0.1:34277", "component": "outbound-queue-processor", "lifecycle": "Started", "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/queues/rescheduler.go:102"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	none	{"address": "127.0.0.1:34277", "component": "outbound-queue-processor", "lifecycle": "Started", "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/queues/queue_immediate.go:105"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	none	{"component": "memory-scheduled-queue-processor", "lifecycle": "Starting", "service": "history", "logging-call-at": "<SERVER_CHECKOUT>/service/history/queues/memory_scheduled_queue.go:79"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	none	{"component": "memory-scheduled-queue-processor", "lifecycle": "Started", "service": "history", "logging-call-at": "<SERVER_CHECKOUT>/service/history/queues/memory_scheduled_queue.go:84"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	none	{"address": "127.0.0.1:34277", "component": "transfer-queue-processor", "lifecycle": "Starting", "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/queues/queue_immediate.go:96"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	Task rescheduler started.	{"address": "127.0.0.1:34277", "component": "transfer-queue-processor", "lifecycle": "Started", "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/queues/rescheduler.go:102"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	none	{"address": "127.0.0.1:34277", "component": "transfer-queue-processor", "lifecycle": "Started", "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/queues/queue_immediate.go:105"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	none	{"address": "127.0.0.1:34277", "component": "visibility-queue-processor", "lifecycle": "Starting", "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/queues/queue_immediate.go:96"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	Task rescheduler started.	{"address": "127.0.0.1:34277", "component": "visibility-queue-processor", "lifecycle": "Started", "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/queues/rescheduler.go:102"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	none	{"address": "127.0.0.1:34277", "component": "visibility-queue-processor", "lifecycle": "Started", "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/queues/queue_immediate.go:105"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	none	{"address": "127.0.0.1:34277", "component": "timer-queue-processor", "lifecycle": "Starting", "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/queues/queue_scheduled.go:130"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	Task rescheduler started.	{"address": "127.0.0.1:34277", "component": "timer-queue-processor", "lifecycle": "Started", "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/queues/rescheduler.go:102"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	TrailerToContextMetadataInterceptor: No metadata in trailer	{"contextWrapped": false, "method": "/temporal.server.api.matchingservice.v1.MatchingService/ListNexusEndpoints", "service": "frontend", "logging-call-at": "<SERVER_CHECKOUT>/common/log/throttle_logger.go:44"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	none	{"address": "127.0.0.1:34277", "component": "timer-queue-processor", "lifecycle": "Started", "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/queues/queue_scheduled.go:139"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	none	{"address": "127.0.0.1:34277", "component": "history-engine", "lifecycle": "Started", "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/history_engine.go:395"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	none	{"address": "127.0.0.1:34277", "component": "shard-engine", "lifecycle": "Started", "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/shard/context_impl.go:1565"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	initial shards ready	{"address": "127.0.0.1:34277", "component": "shard-controller", "total": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/shard/controller_impl.go:511"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	queue reader started	{"address": "127.0.0.1:34277", "component": "timer-queue-processor", "lifecycle": "Started", "queue-reader-id": 0, "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/queues/reader.go:158"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	queue reader started	{"address": "127.0.0.1:34277", "component": "outbound-queue-processor", "lifecycle": "Started", "queue-reader-id": 0, "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/queues/reader.go:158"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	queue reader started	{"address": "127.0.0.1:34277", "component": "transfer-queue-processor", "lifecycle": "Started", "queue-reader-id": 0, "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/queues/reader.go:158"}
+    logger.go:146: 2026-10-23T13:34:45.450Z	info	queue reader started	{"address": "127.0.0.1:34277", "component": "visibility-queue-processor", "lifecycle": "Started", "queue-reader-id": 0, "shard-id": 1, "logging-call-at": "<SERVER_CHECKOUT>/service/history/queues/reader.go:158"}
+    logger.go:146: 2026-10-23T13:34:45.451Z	debug	Frontend method invoked.	{"wf-namespace": "ccpo-c4-control", "operation": "RegisterNamespace", "server-name": "", "cert-thumbprint": "", "logging-call-at": "<SERVER_CHECKOUT>/common/rpc/interceptor/namespace_logger.go:53"}
+    logger.go:146: 2026-10-23T13:34:45.451Z	info	Quota changed	{"component": "namespace-replication", "current-quota": null, "new-quota": 10, "scope": "namespace", "service": "frontend", "wf-namespace": "ccpo-c4-control", "logging-call-at": "<SERVER_CHECKOUT>/common/quotas/calculator/logged_calculator.go:100"}
+    logger.go:146: 2026-10-23T13:34:45.451Z	info	Quota changed	{"component": "persistence", "current-quota": null, "new-quota": 0, "scope": "namespace", "service": "frontend", "wf-namespace": "ccpo-c4-control", "logging-call-at": "<SERVER_CHECKOUT>/common/quotas/calculator/logged_calculator.go:100"}
+    logger.go:146: 2026-10-23T13:34:45.451Z	info	Register namespace succeeded	{"service": "frontend", "wf-namespace": "ccpo-c4-control", "wf-namespace-id": "8a988b61-166e-4561-8364-d701a31ec7cf", "logging-call-at": "<SERVER_CHECKOUT>/service/frontend/namespace_handler.go:275"}
+    logger.go:146: 2026-10-23T13:34:45.451Z	debug	Frontend method invoked.	{"wf-namespace": "ccpo-c4-control", "operation": "DescribeNamespace", "server-name": "", "cert-thumbprint": "", "logging-call-at": "<SERVER_CHECKOUT>/common/rpc/interceptor/namespace_logger.go:53"}
+    logger.go:146: 2026-10-23T13:34:45.451Z	info	Quota changed	{"component": "rpc-handler", "current-quota": null, "new-quota": 2400, "scope": "namespace", "service": "frontend", "wf-namespace": "ccpo-c4-control", "logging-call-at": "<SERVER_CHECKOUT>/common/quotas/calculator/logged_calculator.go:100"}
+    logger.go:146: 2026-10-23T13:34:45.452Z	debug	routing key extraction: adding routing key to context	{"wf-id": "ccpo-c4-control", "grpc-method": "/temporal.api.workflowservice.v1.WorkflowService/StartWorkflowExecution", "logging-call-at": "<SERVER_CHECKOUT>/common/rpc/interceptor/routing_key_interceptor.go:112"}
+    logger.go:146: 2026-10-23T13:34:45.452Z	debug	Frontend method invoked.	{"wf-namespace": "ccpo-c4-control", "operation": "StartWorkflowExecution", "server-name": "", "cert-thumbprint": "", "logging-call-at": "<SERVER_CHECKOUT>/common/rpc/interceptor/namespace_logger.go:53"}
+    logger.go:146: 2026-10-23T13:34:45.452Z	debug	Received StartWorkflowExecution.	{"service": "frontend", "wf-id": "ccpo-c4-control", "wf-type": "ccpo-c4-workflow", "logging-call-at": "<SERVER_CHECKOUT>/service/frontend/workflow_handler.go:561"}
+    logger.go:146: 2026-10-23T13:34:45.452Z	debug	Start workflow execution request namespace.	{"service": "frontend", "wf-namespace": "ccpo-c4-control", "logging-call-at": "<SERVER_CHECKOUT>/service/frontend/workflow_handler.go:565"}
+    logger.go:146: 2026-10-23T13:34:45.452Z	debug	Start workflow execution request namespaceID.	{"service": "frontend", "wf-namespace-id": "8a988b61-166e-4561-8364-d701a31ec7cf", "logging-call-at": "<SERVER_CHECKOUT>/service/frontend/workflow_handler.go:570"}
+    logger.go:146: 2026-10-23T13:34:45.454Z	debug	Workflow task updated	{"address": "127.0.0.1:34277", "attempt": 1, "shard-id": 1, "wf-id": "ccpo-c4-control", "wf-namespace": "ccpo-c4-control", "wf-run-id": "01a168f8-9acd-784d-ad59-0933aba17aa7", "wf-scheduled-event-id": 2, "wf-started-event-id": 0, "wf-started-timestamp": "0001-01-01T00:00:00.000Z", "workflow-task-request-id": "emptyUuid", "workflow-task-timeout": 120, "wt-type": "Normal", "logging-call-at": "<SERVER_CHECKOUT>/common/log/lazy_logger.go:30"}
+    logger.go:146: 2026-10-23T13:34:45.454Z	debug	time skipping skipped for: time skipping is not enabled	{"address": "127.0.0.1:34277", "shard-id": 1, "wf-id": "ccpo-c4-control", "wf-namespace": "ccpo-c4-control", "wf-run-id": "01a168f8-9acd-784d-ad59-0933aba17aa7", "logging-call-at": "<SERVER_CHECKOUT>/common/log/lazy_logger.go:30"}
+    logger.go:146: 2026-10-23T13:34:45.454Z	debug	Assigning new task key	{"address": "127.0.0.1:34277", "cursor-timestamp": "2026-10-23T13:34:46.450Z", "queue-task-id": 1048579, "queue-task-type": "WorkflowRunTimeout", "shard-id": 1, "timestamp": "2026-10-23T13:44:45.454Z", "wf-id": "ccpo-c4-control", "wf-namespace-id": "8a988b61-166e-4561-8364-d701a31ec7cf", "wf-run-id": "01a168f8-9acd-784d-ad59-0933aba17aa7", "logging-call-at": "<SERVER_CHECKOUT>/service/history/shard/task_key_generator.go:98"}
+    logger.go:146: 2026-10-23T13:34:45.454Z	debug	Assigning new task key	{"address": "127.0.0.1:34277", "cursor-timestamp": "2026-10-23T13:34:46.450Z", "queue-task-id": 1048580, "queue-task-type": "VisibilityStartExecution", "shard-id": 1, "timestamp": "2026-10-23T13:34:45.454Z", "wf-id": "ccpo-c4-control", "wf-namespace-id": "8a988b61-166e-4561-8364-d701a31ec7cf", "wf-run-id": "01a168f8-9acd-784d-ad59-0933aba17aa7", "logging-call-at": "<SERVER_CHECKOUT>/service/history/shard/task_key_generator.go:98"}
+    logger.go:146: 2026-10-23T13:34:45.454Z	debug	Assigning new task key	{"address": "127.0.0.1:34277", "cursor-timestamp": "2026-10-23T13:34:46.450Z", "queue-task-id": 1048581, "queue-task-type": "TransferWorkflowTask", "shard-id": 1, "timestamp": "2026-10-23T13:34:45.454Z", "wf-id": "ccpo-c4-control", "wf-namespace-id": "8a988b61-166e-4561-8364-d701a31ec7cf", "wf-run-id": "01a168f8-9acd-784d-ad59-0933aba17aa7", "logging-call-at": "<SERVER_CHECKOUT>/service/history/shard/task_key_generator.go:98"}
+    logger.go:146: 2026-10-23T13:34:45.454Z	info	Quota changed	{"component": "persistence", "current-quota": null, "new-quota": 0, "scope": "namespace", "service": "history", "wf-namespace": "ccpo-c4-control", "logging-call-at": "<SERVER_CHECKOUT>/common/quotas/calculator/logged_calculator.go:100"}
+    logger.go:146: 2026-10-23T13:34:45.454Z	info	ContextMetadataInterceptor: Setting trailer	{"trailer": {"contextmetadata-bin":["\n!\n\rworkflow-type\u0012\u0010ccpo-c4-workflow\n$\n\u0013workflow-task-queue\u0012\rccpo-c4-queue"],"contextmetadata-workflow-task-queue":["ccpo-c4-queue"],"contextmetadata-workflow-type":["ccpo-c4-workflow"],"workflow-task-queue":["ccpo-c4-queue"],"workflow-type":["ccpo-c4-workflow"]}, "fullMethod": "/temporal.server.api.historyservice.v1.HistoryService/StartWorkflowExecution", "logging-call-at": "<SERVER_CHECKOUT>/common/log/throttle_logger.go:44"}
+    logger.go:146: 2026-10-23T13:34:45.455Z	debug	Process task as active.	{"address": "127.0.0.1:34277", "component": "transfer-queue-processor", "shard-id": 1, "value": "WorkflowTask{WorkflowKey: 8a988b61-166e-4561-8364-d701a31ec7cf/ccpo-c4-control/01a168f8-9acd-784d-ad59-0933aba17aa7, VisibilityTimestamp: 2026-10-23 13:34:45.454316599 +0000 UTC, TaskID: 1048581, TaskQueue: ccpo-c4-queue, ScheduledEventID: 2, Version: 0}", "wf-namespace-id": "8a988b61-166e-4561-8364-d701a31ec7cf", "logging-call-at": "<SERVER_CHECKOUT>/service/history/queues/active_standby_executor.go:121"}
+    logger.go:146: 2026-10-23T13:34:45.455Z	debug	Frontend method invoked.	{"wf-namespace": "ccpo-c4-control", "operation": "PollWorkflowTaskQueue", "server-name": "", "cert-thumbprint": "", "logging-call-at": "<SERVER_CHECKOUT>/common/rpc/interceptor/namespace_logger.go:53"}
+    logger.go:146: 2026-10-23T13:34:45.455Z	info	Quota changed	{"component": "long-poll-handler", "current-quota": null, "new-quota": 1200, "scope": "namespace", "service": "frontend", "wf-namespace": "ccpo-c4-control", "logging-call-at": "<SERVER_CHECKOUT>/common/quotas/calculator/logged_calculator.go:100"}
+    logger.go:146: 2026-10-23T13:34:45.455Z	debug	Received PollWorkflowTaskQueue	{"service": "frontend", "logging-call-at": "<SERVER_CHECKOUT>/service/frontend/workflow_handler.go:1082"}
+    logger.go:146: 2026-10-23T13:34:45.455Z	debug	Poll workflow task queue.	{"service": "frontend", "wf-namespace": "ccpo-c4-control", "wf-namespace-id": "8a988b61-166e-4561-8364-d701a31ec7cf", "logging-call-at": "<SERVER_CHECKOUT>/service/frontend/workflow_handler.go:1119"}
+    logger.go:146: 2026-10-23T13:34:45.456Z	info	Quota changed	{"component": "persistence", "current-quota": null, "new-quota": 0, "scope": "namespace", "service": "matching", "wf-namespace": "ccpo-c4-control", "logging-call-at": "<SERVER_CHECKOUT>/common/quotas/calculator/logged_calculator.go:100"}
+    logger.go:146: 2026-10-23T13:34:45.456Z	info	loaded user data from db	{"component": "matching-engine", "timestamp": "1970-01-01T00:00:00.000Z", "user-data-version": 0, "wf-namespace": "ccpo-c4-control", "wf-task-queue-name": "ccpo-c4-queue", "wf-task-queue-type": "Workflow", "logging-call-at": "<SERVER_CHECKOUT>/service/matching/user_data_manager.go:871"}
+    logger.go:146: 2026-10-23T13:34:45.456Z	info	Started physicalTaskQueueManager	{"backlog": "priority", "cause": "Poll", "component": "matching-engine", "lifecycle": "Started", "wf-namespace": "ccpo-c4-control", "wf-task-queue-name": "ccpo-c4-queue", "wf-task-queue-type": "Workflow", "worker-version": "_unversioned_", "logging-call-at": "<SERVER_CHECKOUT>/service/matching/physical_task_queue_manager.go:312"}
+    logger.go:146: 2026-10-23T13:34:45.457Z	info	Starting draining	{"backlog": "fairness-drain", "component": "matching-engine", "wf-namespace": "ccpo-c4-control", "wf-task-queue-name": "ccpo-c4-queue", "wf-task-queue-type": "Workflow", "worker-version": "_unversioned_", "logging-call-at": "<SERVER_CHECKOUT>/service/matching/physical_task_queue_manager.go:430"}
+    logger.go:146: 2026-10-23T13:34:45.458Z	debug	Workflow task updated	{"address": "127.0.0.1:34277", "attempt": 1, "shard-id": 1, "wf-id": "ccpo-c4-control", "wf-namespace": "ccpo-c4-control", "wf-namespace-id": "8a988b61-166e-4561-8364-d701a31ec7cf", "wf-run-id": "01a168f8-9acd-784d-ad59-0933aba17aa7", "wf-scheduled-event-id": 2, "wf-started-event-id": 3, "wf-started-timestamp": "2026-10-23T13:34:45.457Z", "workflow-task-request-id": "5d28e739-9134-485f-9d2e-9a41073ec24b", "workflow-task-timeout": 120, "wt-type": "Normal", "logging-call-at": "<SERVER_CHECKOUT>/common/log/lazy_logger.go:30"}
+    logger.go:146: 2026-10-23T13:34:45.458Z	debug	time skipping skipped for: time skipping is not enabled	{"address": "127.0.0.1:34277", "shard-id": 1, "wf-id": "ccpo-c4-control", "wf-namespace": "ccpo-c4-control", "wf-namespace-id": "8a988b61-166e-4561-8364-d701a31ec7cf", "wf-run-id": "01a168f8-9acd-784d-ad59-0933aba17aa7", "logging-call-at": "<SERVER_CHECKOUT>/common/log/lazy_logger.go:30"}
+    logger.go:146: 2026-10-23T13:34:45.458Z	debug	Assigning new task key	{"address": "127.0.0.1:34277", "cursor-timestamp": "2026-10-23T13:34:46.455Z", "queue-task-id": 1048585, "queue-task-type": "WorkflowTaskTimeout", "shard-id": 1, "timestamp": "2026-10-23T13:36:45.458Z", "wf-id": "ccpo-c4-control", "wf-namespace-id": "8a988b61-166e-4561-8364-d701a31ec7cf", "wf-run-id": "01a168f8-9acd-784d-ad59-0933aba17aa7", "logging-call-at": "<SERVER_CHECKOUT>/service/history/shard/task_key_generator.go:98"}
+    logger.go:146: 2026-10-23T13:34:45.458Z	debug	returning empty user data (no data or no change)	{"component": "matching-engine", "wf-namespace": "ccpo-c4-control", "wf-task-queue-name": "ccpo-c4-queue", "wf-task-queue-type": "Workflow", "logging-call-at": "<SERVER_CHECKOUT>/service/matching/user_data_manager.go:644"}
+    logger.go:146: 2026-10-23T13:34:45.458Z	debug	returning empty user data (no data or no change)	{"component": "matching-engine", "wf-namespace": "ccpo-c4-control", "wf-task-queue-name": "ccpo-c4-queue", "wf-task-queue-type": "Workflow", "logging-call-at": "<SERVER_CHECKOUT>/service/matching/user_data_manager.go:644"}
+    logger.go:146: 2026-10-23T13:34:45.458Z	debug	returning empty user data (no data or no change)	{"component": "matching-engine", "wf-namespace": "ccpo-c4-control", "wf-task-queue-name": "ccpo-c4-queue", "wf-task-queue-type": "Workflow", "logging-call-at": "<SERVER_CHECKOUT>/service/matching/user_data_manager.go:644"}
+    logger.go:146: 2026-10-23T13:34:45.458Z	info	TrailerToContextMetadataInterceptor: No metadata in trailer	{"contextWrapped": false, "method": "/temporal.server.api.matchingservice.v1.MatchingService/GetTaskQueueUserData", "service": "matching", "logging-call-at": "<SERVER_CHECKOUT>/common/log/throttle_logger.go:44"}
+    logger.go:146: 2026-10-23T13:34:45.458Z	debug	fetched user data from parent, no change	{"component": "matching-engine", "wf-namespace": "ccpo-c4-control", "wf-task-queue-name": "/_sys/ccpo-c4-queue/3", "wf-task-queue-type": "Workflow", "logging-call-at": "<SERVER_CHECKOUT>/service/matching/user_data_manager.go:351"}
+    logger.go:146: 2026-10-23T13:34:45.458Z	info	Started physicalTaskQueueManager	{"backlog": "priority", "cause": "Force", "component": "matching-engine", "lifecycle": "Started", "wf-namespace": "ccpo-c4-control", "wf-task-queue-name": "/_sys/ccpo-c4-queue/3", "wf-task-queue-type": "Workflow", "worker-version": "_unversioned_", "logging-call-at": "<SERVER_CHECKOUT>/service/matching/physical_task_queue_manager.go:312"}
+    logger.go:146: 2026-10-23T13:34:45.458Z	debug	fetched user data from parent, no change	{"component": "matching-engine", "wf-namespace": "ccpo-c4-control", "wf-task-queue-name": "/_sys/ccpo-c4-queue/2", "wf-task-queue-type": "Workflow", "logging-call-at": "<SERVER_CHECKOUT>/service/matching/user_data_manager.go:351"}
+    logger.go:146: 2026-10-23T13:34:45.458Z	info	Started physicalTaskQueueManager	{"backlog": "priority", "cause": "Force", "component": "matching-engine", "lifecycle": "Started", "wf-namespace": "ccpo-c4-control", "wf-task-queue-name": "/_sys/ccpo-c4-queue/2", "wf-task-queue-type": "Workflow", "worker-version": "_unversioned_", "logging-call-at": "<SERVER_CHECKOUT>/service/matching/physical_task_queue_manager.go:312"}
+    logger.go:146: 2026-10-23T13:34:45.458Z	debug	fetched user data from parent, no change	{"component": "matching-engine", "wf-namespace": "ccpo-c4-control", "wf-task-queue-name": "/_sys/ccpo-c4-queue/1", "wf-task-queue-type": "Workflow", "logging-call-at": "<SERVER_CHECKOUT>/service/matching/user_data_manager.go:351"}
+    logger.go:146: 2026-10-23T13:34:45.458Z	info	Started physicalTaskQueueManager	{"backlog": "priority", "cause": "Force", "component": "matching-engine", "lifecycle": "Started", "wf-namespace": "ccpo-c4-control", "wf-task-queue-name": "/_sys/ccpo-c4-queue/1", "wf-task-queue-type": "Workflow", "worker-version": "_unversioned_", "logging-call-at": "<SERVER_CHECKOUT>/service/matching/physical_task_queue_manager.go:312"}
+    logger.go:146: 2026-10-23T13:34:45.458Z	info	Starting draining	{"backlog": "fairness-drain", "component": "matching-engine", "wf-namespace": "ccpo-c4-control", "wf-task-queue-name": "/_sys/ccpo-c4-queue/3", "wf-task-queue-type": "Workflow", "worker-version": "_unversioned_", "logging-call-at": "<SERVER_CHECKOUT>/service/matching/physical_task_queue_manager.go:430"}
+    logger.go:146: 2026-10-23T13:34:45.459Z	info	Starting draining	{"backlog": "fairness-drain", "component": "matching-engine", "wf-namespace": "ccpo-c4-control", "wf-task-queue-name": "/_sys/ccpo-c4-queue/1", "wf-task-queue-type": "Workflow", "worker-version": "_unversioned_", "logging-call-at": "<SERVER_CHECKOUT>/service/matching/physical_task_queue_manager.go:430"}
+    logger.go:146: 2026-10-23T13:34:45.459Z	info	Starting draining	{"backlog": "fairness-drain", "component": "matching-engine", "wf-namespace": "ccpo-c4-control", "wf-task-queue-name": "/_sys/ccpo-c4-queue/2", "wf-task-queue-type": "Workflow", "worker-version": "_unversioned_", "logging-call-at": "<SERVER_CHECKOUT>/service/matching/physical_task_queue_manager.go:430"}
+    range_barrier_test.go:85: CCPO {"sequence":2,"stage":"request","utc":"2026-10-23T13:34:45.459363477Z","value":{"request":{"task_token":"CiQ4YTk4OGI2MS0xNjZlLTQ1NjEtODM2NC1kNzAxYTMxZWM3Y2YSD2NjcG8tYzQtY29udHJvbBokMDFhMTY4ZjgtOWFjZC03ODRkLWFkNTktMDkzM2FiYTE3YWE3IAIoAUoICAEQioBAGAFQA2IMCPXE7dYGELimsNoB","commands":[{"command_type":"COMMAND_TYPE_SCHEDULE_ACTIVITY_TASK","schedule_activity_task_command_attributes":{"activity_id":"ccpo-activity-1","activity_type":{"name":"ccpo-activity"},"task_queue":{"name":"ccpo-c4-queue","kind":"TASK_QUEUE_KIND_NORMAL"},"input":{"payloads":[{"metadata":{"encoding":"anNvbi9wbGFpbg=="},"data":"ImNjcG8taW5wdXQi"}]},"schedule_to_close_timeout":"300s","start_to_close_timeout":"60s"}}],"identity":"ccpo-client","namespace":"ccpo-c4-control"},"sha256":"212ebdf8ea9bf7fffdadf1d34ba07d5fcd6fd273252fac28deadf5bd6c6fd848","token":{"namespace_id":"8a988b61-166e-4561-8364-d701a31ec7cf","workflow_id":"ccpo-c4-control","run_id":"01a168f8-9acd-784d-ad59-0933aba17aa7","scheduled_event_id":"2","attempt":1,"clock":{"shard_id":1,"clock":"1048586","cluster_id":"1"},"started_event_id":"3","started_time":"2026-10-23T13:34:45.457970488Z"},"token_hex":"0a2438613938386236312d313636652d343536312d383336342d643730316133316563376366120f6363706f2d63342d636f6e74726f6c1a2430316131363866382d396163642d373834642d616435392d303933336162613137616137200228014a080801108a804018015003620c08f5c4edd60610b8a6b0da01"}}
+    range_barrier_test.go:85: CCPO {"sequence":3,"stage":"protobuf-artifact","utc":"2026-10-23T13:34:45.45944906Z","value":{"bytes":265,"file":"request.pb","sha256":"212ebdf8ea9bf7fffdadf1d34ba07d5fcd6fd273252fac28deadf5bd6c6fd848","type":"temporal.api.workflowservice.v1.RespondWorkflowTaskCompletedRequest"}}
+    range_barrier_test.go:85: CCPO {"sequence":4,"stage":"protobuf-artifact","utc":"2026-10-23T13:34:45.45947531Z","value":{"bytes":123,"file":"task-token.pb","sha256":"a0ed5319c36179123635dfca65f21a06c95a49fd49d3b3779a01eeb28e99c9a0","type":"temporal.server.api.token.v1.Task"}}
+    range_barrier_test.go:85: CCPO {"sequence":5,"stage":"protobuf-artifact","utc":"2026-10-23T13:34:45.459861932Z","value":{"bytes":724,"file":"initial-mutable-state.pb","sha256":"c2ad3e1139828a107fbf35dc6f95f1226d7bd086fa3c712f5fc99a5ba6c14a42","type":"temporal.server.api.persistence.v1.WorkflowMutableState"}}
+    range_barrier_test.go:85: CCPO {"sequence":6,"stage":"protobuf-artifact","utc":"2026-10-23T13:34:45.45989939Z","value":{"bytes":323,"file":"initial-history.pb","sha256":"260d365b1b5cc6ed8b05632b7665b12c4cf58e73ce7579fc2fd09dbac66081bc","type":"temporal.api.history.v1.History"}}
+    range_barrier_test.go:369: 
+        	Error Trace:	<SERVER_CHECKOUT>/tests/ccpo_c4/range_barrier_test.go:369
+        	            				<SERVER_CHECKOUT>/tests/ccpo_c4/range_barrier_test.go:202
+        	            				<SERVER_CHECKOUT>/tests/ccpo_c4/range_barrier_test.go:162
+        	            				<SERVER_CHECKOUT>/tests/ccpo_c4/range_barrier_test.go:398
+        	Error:      	Received unexpected error:
+        	            	invalid task range, fireTime must be empty for immediate task category
+        	Test:       	TestCCPOC4Control
+--- FAIL: TestCCPOC4Control (0.05s)
+FAIL
+FAIL	go.temporal.io/server/tests/ccpo_c4	0.097s
+FAIL
