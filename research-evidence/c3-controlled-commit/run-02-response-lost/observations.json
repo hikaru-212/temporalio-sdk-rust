@@ -1,0 +1,883 @@
+{
+  "derived_from": "stdout.log",
+  "stdout_sha256": "eca208551f32843b0edf43a975f185f2cc09257bd7358c8648e844c081ced82d",
+  "records": [
+    {
+      "stage": "baseline",
+      "value": {
+        "database": "file SQLite",
+        "external_activity_executor": false,
+        "namespace": "ccpo-c3-response-lost",
+        "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+        "sqlite_attributes": {
+          "busy_timeout": "30000",
+          "cache": "shared",
+          "journal_mode": "wal",
+          "synchronous": "normal"
+        },
+        "wft_timeout_seconds": 120,
+        "workflow_id": "ccpo-c3-response-lost"
+      },
+      "stdout_line": 263
+    },
+    {
+      "stage": "request",
+      "value": {
+        "request": {
+          "task_token": "CiQ4YjRhN2E1ZC0zMTA0LTQzN2QtYTNkNy0wODQ2MmI2ZjNmYzgSFWNjcG8tYzMtcmVzcG9uc2UtbG9zdBokMDFhMTY4YWMtOWU3OS03ODg5LWJiNWUtYzNkY2U0YjBhZGVkIAIoAUoICAEQioBAGAFQA2IMCIGe7dYGELnNr7sC",
+          "commands": [
+            {
+              "command_type": "COMMAND_TYPE_SCHEDULE_ACTIVITY_TASK",
+              "schedule_activity_task_command_attributes": {
+                "activity_id": "ccpo-activity-1",
+                "activity_type": {
+                  "name": "ccpo-activity"
+                },
+                "task_queue": {
+                  "name": "ccpo-c3-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "input": {
+                  "payloads": [
+                    {
+                      "metadata": {
+                        "encoding": "anNvbi9wbGFpbg=="
+                      },
+                      "data": "ImNjcG8taW5wdXQi"
+                    }
+                  ]
+                },
+                "schedule_to_close_timeout": "300s",
+                "start_to_close_timeout": "60s"
+              }
+            }
+          ],
+          "identity": "ccpo-client",
+          "namespace": "ccpo-c3-response-lost"
+        },
+        "sha256": "91d283ecb805b37529856d74fe6862c8196be33a968301ddb6cf142a1f671018",
+        "token": {
+          "namespace_id": "8b4a7a5d-3104-437d-a3d7-08462b6f3fc8",
+          "workflow_id": "ccpo-c3-response-lost",
+          "run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+          "scheduled_event_id": "2",
+          "attempt": 1,
+          "clock": {
+            "shard_id": 1,
+            "clock": "1048586",
+            "cluster_id": "1"
+          },
+          "started_event_id": "3",
+          "started_time": "2026-10-23T12:11:45.661382841Z"
+        },
+        "token_hex": "0a2438623461376135642d333130342d343337642d613364372d30383436326236663366633812156363706f2d63332d726573706f6e73652d6c6f73741a2430316131363861632d396537392d373838392d626235652d633364636534623061646564200228014a080801108a804018015003620c08819eedd60610b9cdafbb02"
+      },
+      "stdout_line": 360
+    },
+    {
+      "stage": "initial",
+      "value": {
+        "activity_schedules": 0,
+        "db_revision": 3,
+        "direct_persisted_activity_tasks": null,
+        "effective_history": {
+          "events": [
+            {
+              "event_id": "1",
+              "event_time": "2026-10-23T12:11:45.657559730Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+              "task_id": "1048576",
+              "workflow_execution_started_event_attributes": {
+                "workflow_type": {
+                  "name": "ccpo-c3-workflow"
+                },
+                "task_queue": {
+                  "name": "ccpo-c3-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "workflow_run_timeout": "600s",
+                "workflow_task_timeout": "120s",
+                "original_execution_run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+                "identity": "ccpo-client",
+                "first_execution_run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+                "attempt": 1,
+                "first_workflow_task_backoff": "0s",
+                "workflow_id": "ccpo-c3-response-lost"
+              }
+            },
+            {
+              "event_id": "2",
+              "event_time": "2026-10-23T12:11:45.658158115Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+              "task_id": "1048577",
+              "workflow_task_scheduled_event_attributes": {
+                "task_queue": {
+                  "name": "ccpo-c3-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "start_to_close_timeout": "120s",
+                "attempt": 1
+              }
+            },
+            {
+              "event_id": "3",
+              "event_time": "2026-10-23T12:11:45.661382841Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+              "task_id": "1048583",
+              "workflow_task_started_event_attributes": {
+                "scheduled_event_id": "2",
+                "identity": "ccpo-client",
+                "request_id": "e25da3dd-5336-46e7-843f-e9b7a9ada0ef",
+                "history_size_bytes": "247"
+              }
+            }
+          ]
+        },
+        "range_id": 1,
+        "recorded_activity_tasks": null,
+        "state": {
+          "execution_info": {
+            "namespace_id": "8b4a7a5d-3104-437d-a3d7-08462b6f3fc8",
+            "workflow_id": "ccpo-c3-response-lost",
+            "task_queue": "ccpo-c3-queue",
+            "workflow_type_name": "ccpo-c3-workflow",
+            "workflow_run_timeout": "600s",
+            "default_workflow_task_timeout": "120s",
+            "last_running_clock": "1048583",
+            "last_first_event_id": "3",
+            "start_time": "2026-10-23T12:11:45.657559730Z",
+            "last_update_time": "2026-10-23T12:11:45.661527010Z",
+            "workflow_task_scheduled_event_id": "2",
+            "workflow_task_started_event_id": "3",
+            "workflow_task_timeout": "120s",
+            "workflow_task_attempt": 1,
+            "workflow_task_started_time": "2026-10-23T12:11:45.661382841Z",
+            "workflow_task_scheduled_time": "2026-10-23T12:11:45.658158115Z",
+            "workflow_task_original_scheduled_time": "2026-10-23T12:11:45.658157949Z",
+            "workflow_task_request_id": "e25da3dd-5336-46e7-843f-e9b7a9ada0ef",
+            "workflow_task_type": "WORKFLOW_TASK_TYPE_NORMAL",
+            "workflow_task_history_size_bytes": "247",
+            "attempt": 1,
+            "auto_reset_points": {},
+            "version_histories": {
+              "histories": [
+                {
+                  "branch_token": "CiQwMWExNjhhYy05ZTc5LTc4ODktYmI1ZS1jM2RjZTRiMGFkZWQSJDAxYTE2OGFjLTllNzktN2MxZi1hMTgxLWMyOGU4MGY1NDFiYw==",
+                  "items": [
+                    {
+                      "event_id": "3"
+                    }
+                  ]
+                }
+              ]
+            },
+            "first_execution_run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+            "execution_stats": {
+              "history_size": "329"
+            },
+            "workflow_run_expiration_time": "2026-10-23T12:21:45.657559730Z",
+            "last_first_event_txn_id": "1048584",
+            "state_transition_count": "2",
+            "execution_time": "2026-10-23T12:11:45.657559730Z",
+            "transition_history": [
+              {
+                "transition_count": "2"
+              }
+            ],
+            "root_workflow_id": "ccpo-c3-response-lost",
+            "root_run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+            "task_generation_shard_clock_timestamp": "1048576",
+            "workflow_task_last_update_versioned_transition": {
+              "transition_count": "2"
+            },
+            "sub_state_machine_tombstone_batches": [
+              {
+                "versioned_transition": {
+                  "transition_count": "1"
+                }
+              }
+            ],
+            "original_execution_run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded"
+          },
+          "execution_state": {
+            "create_request_id": "5817aa68-19f7-4dd0-84fd-7745908fe45f",
+            "run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+            "state": "WORKFLOW_EXECUTION_STATE_RUNNING",
+            "status": "WORKFLOW_EXECUTION_STATUS_RUNNING",
+            "last_update_versioned_transition": {
+              "transition_count": "1"
+            },
+            "start_time": "2026-10-23T12:11:45.657559730Z",
+            "request_ids": {
+              "5817aa68-19f7-4dd0-84fd-7745908fe45f": {
+                "event_type": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+                "event_id": "1"
+              }
+            },
+            "first_execution_run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded"
+          },
+          "next_event_id": "4"
+        },
+        "valid_completions": 0
+      },
+      "stdout_line": 361
+    },
+    {
+      "stage": "successful-handler-response-suppressed",
+      "value": {
+        "handler_error": null,
+        "method": "/temporal.api.workflowservice.v1.WorkflowService/RespondWorkflowTaskCompleted",
+        "response": {}
+      },
+      "stdout_line": 371
+    },
+    {
+      "stage": "completion-1",
+      "value": {
+        "error": "CCPO lost successful completion response",
+        "error_type": "*serviceerror.Unavailable",
+        "received_success": false,
+        "response": null
+      },
+      "stdout_line": 441
+    },
+    {
+      "stage": "after-lost-response",
+      "value": {
+        "activity_schedules": 1,
+        "db_revision": 4,
+        "direct_persisted_activity_tasks": [
+          {
+            "NamespaceID": "8b4a7a5d-3104-437d-a3d7-08462b6f3fc8",
+            "WorkflowID": "ccpo-c3-response-lost",
+            "RunID": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+            "VisibilityTimestamp": "2026-10-23T12:11:45.664071556Z",
+            "TaskID": 1048591,
+            "TaskQueue": "ccpo-c3-queue",
+            "ScheduledEventID": 5,
+            "Version": 0,
+            "Stamp": 0
+          }
+        ],
+        "effective_history": {
+          "events": [
+            {
+              "event_id": "1",
+              "event_time": "2026-10-23T12:11:45.657559730Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+              "task_id": "1048576",
+              "workflow_execution_started_event_attributes": {
+                "workflow_type": {
+                  "name": "ccpo-c3-workflow"
+                },
+                "task_queue": {
+                  "name": "ccpo-c3-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "workflow_run_timeout": "600s",
+                "workflow_task_timeout": "120s",
+                "original_execution_run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+                "identity": "ccpo-client",
+                "first_execution_run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+                "attempt": 1,
+                "first_workflow_task_backoff": "0s",
+                "workflow_id": "ccpo-c3-response-lost"
+              }
+            },
+            {
+              "event_id": "2",
+              "event_time": "2026-10-23T12:11:45.658158115Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+              "task_id": "1048577",
+              "workflow_task_scheduled_event_attributes": {
+                "task_queue": {
+                  "name": "ccpo-c3-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "start_to_close_timeout": "120s",
+                "attempt": 1
+              }
+            },
+            {
+              "event_id": "3",
+              "event_time": "2026-10-23T12:11:45.661382841Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+              "task_id": "1048583",
+              "workflow_task_started_event_attributes": {
+                "scheduled_event_id": "2",
+                "identity": "ccpo-client",
+                "request_id": "e25da3dd-5336-46e7-843f-e9b7a9ada0ef",
+                "history_size_bytes": "247"
+              }
+            },
+            {
+              "event_id": "4",
+              "event_time": "2026-10-23T12:11:45.663745926Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+              "task_id": "1048587",
+              "workflow_task_completed_event_attributes": {
+                "scheduled_event_id": "2",
+                "started_event_id": "3",
+                "identity": "ccpo-client"
+              }
+            },
+            {
+              "event_id": "5",
+              "event_time": "2026-10-23T12:11:45.663781718Z",
+              "event_type": "EVENT_TYPE_ACTIVITY_TASK_SCHEDULED",
+              "task_id": "1048588",
+              "activity_task_scheduled_event_attributes": {
+                "activity_id": "ccpo-activity-1",
+                "activity_type": {
+                  "name": "ccpo-activity"
+                },
+                "task_queue": {
+                  "name": "ccpo-c3-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "input": {
+                  "payloads": [
+                    {
+                      "metadata": {
+                        "encoding": "anNvbi9wbGFpbg=="
+                      },
+                      "data": "ImNjcG8taW5wdXQi"
+                    }
+                  ]
+                },
+                "schedule_to_close_timeout": "300s",
+                "schedule_to_start_timeout": "300s",
+                "start_to_close_timeout": "60s",
+                "heartbeat_timeout": "0s",
+                "workflow_task_completed_event_id": "4",
+                "retry_policy": {
+                  "initial_interval": "1s",
+                  "backoff_coefficient": 2,
+                  "maximum_interval": "100s"
+                }
+              }
+            }
+          ]
+        },
+        "range_id": 1,
+        "recorded_activity_tasks": [
+          {
+            "timestamp": "2026-10-23T12:11:45.664396896Z",
+            "taskType": "TransferActivityTask",
+            "shardId": 1,
+            "rangeId": 1,
+            "namespaceId": "8b4a7a5d-3104-437d-a3d7-08462b6f3fc8",
+            "workflowId": "ccpo-c3-response-lost",
+            "runId": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+            "task": {
+              "NamespaceID": "8b4a7a5d-3104-437d-a3d7-08462b6f3fc8",
+              "WorkflowID": "ccpo-c3-response-lost",
+              "RunID": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+              "VisibilityTimestamp": "2026-10-23T12:11:45.664071556Z",
+              "TaskID": 1048591,
+              "TaskQueue": "ccpo-c3-queue",
+              "ScheduledEventID": 5,
+              "Version": 0,
+              "Stamp": 0
+            }
+          }
+        ],
+        "state": {
+          "activity_infos": {
+            "5": {
+              "scheduled_event_batch_id": "4",
+              "scheduled_time": "2026-10-23T12:11:45.663781718Z",
+              "activity_id": "ccpo-activity-1",
+              "schedule_to_start_timeout": "300s",
+              "schedule_to_close_timeout": "300s",
+              "start_to_close_timeout": "60s",
+              "heartbeat_timeout": "0s",
+              "timer_task_status": 2,
+              "attempt": 1,
+              "task_queue": "ccpo-c3-queue",
+              "has_retry_policy": true,
+              "retry_initial_interval": "1s",
+              "retry_maximum_interval": "100s",
+              "retry_expiration_time": "2026-10-23T12:16:45.663781718Z",
+              "retry_backoff_coefficient": 2,
+              "scheduled_event_id": "5",
+              "activity_type": {
+                "name": "ccpo-activity"
+              },
+              "last_update_versioned_transition": {
+                "transition_count": "3"
+              },
+              "first_scheduled_time": "2026-10-23T12:11:45.663781718Z"
+            }
+          },
+          "execution_info": {
+            "namespace_id": "8b4a7a5d-3104-437d-a3d7-08462b6f3fc8",
+            "workflow_id": "ccpo-c3-response-lost",
+            "task_queue": "ccpo-c3-queue",
+            "workflow_type_name": "ccpo-c3-workflow",
+            "workflow_run_timeout": "600s",
+            "default_workflow_task_timeout": "120s",
+            "last_running_clock": "1048588",
+            "last_first_event_id": "4",
+            "last_completed_workflow_task_started_event_id": "3",
+            "start_time": "2026-10-23T12:11:45.657559730Z",
+            "last_update_time": "2026-10-23T12:11:45.664066890Z",
+            "workflow_task_timeout": "0s",
+            "workflow_task_attempt": 1,
+            "workflow_task_started_time": "1970-01-01T00:00:00Z",
+            "workflow_task_scheduled_time": "1970-01-01T00:00:00Z",
+            "workflow_task_original_scheduled_time": "2026-10-23T12:11:45.658157949Z",
+            "workflow_task_request_id": "emptyUuid",
+            "attempt": 1,
+            "activity_count": "1",
+            "auto_reset_points": {
+              "points": [
+                {
+                  "run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+                  "first_workflow_task_completed_id": "4",
+                  "create_time": "2026-10-23T12:11:45.663765634Z",
+                  "resettable": true
+                }
+              ]
+            },
+            "search_attributes": {
+              "BuildIds": {
+                "metadata": {
+                  "encoding": "anNvbi9wbGFpbg==",
+                  "type": "S2V5d29yZExpc3Q="
+                },
+                "data": "WyJ1bnZlcnNpb25lZCJd"
+              }
+            },
+            "version_histories": {
+              "histories": [
+                {
+                  "branch_token": "CiQwMWExNjhhYy05ZTc5LTc4ODktYmI1ZS1jM2RjZTRiMGFkZWQSJDAxYTE2OGFjLTllNzktN2MxZi1hMTgxLWMyOGU4MGY1NDFiYw==",
+                  "items": [
+                    {
+                      "event_id": "5"
+                    }
+                  ]
+                }
+              ]
+            },
+            "first_execution_run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+            "execution_stats": {
+              "history_size": "532"
+            },
+            "workflow_run_expiration_time": "2026-10-23T12:21:45.657559730Z",
+            "last_first_event_txn_id": "1048589",
+            "state_transition_count": "3",
+            "execution_time": "2026-10-23T12:11:45.657559730Z",
+            "transition_history": [
+              {
+                "transition_count": "3"
+              }
+            ],
+            "root_workflow_id": "ccpo-c3-response-lost",
+            "root_run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+            "task_generation_shard_clock_timestamp": "1048576",
+            "workflow_task_last_update_versioned_transition": {
+              "transition_count": "3"
+            },
+            "visibility_last_update_versioned_transition": {
+              "transition_count": "3"
+            },
+            "sub_state_machine_tombstone_batches": [
+              {
+                "versioned_transition": {
+                  "transition_count": "1"
+                }
+              }
+            ],
+            "original_execution_run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded"
+          },
+          "execution_state": {
+            "create_request_id": "5817aa68-19f7-4dd0-84fd-7745908fe45f",
+            "run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+            "state": "WORKFLOW_EXECUTION_STATE_RUNNING",
+            "status": "WORKFLOW_EXECUTION_STATUS_RUNNING",
+            "last_update_versioned_transition": {
+              "transition_count": "1"
+            },
+            "start_time": "2026-10-23T12:11:45.657559730Z",
+            "request_ids": {
+              "5817aa68-19f7-4dd0-84fd-7745908fe45f": {
+                "event_type": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+                "event_id": "1"
+              }
+            },
+            "first_execution_run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded"
+          },
+          "next_event_id": "6"
+        },
+        "valid_completions": 1
+      },
+      "stdout_line": 442
+    },
+    {
+      "stage": "completion-2",
+      "value": {
+        "error": "Workflow task not found.",
+        "error_type": "*serviceerror.NotFound",
+        "received_success": false,
+        "response": null
+      },
+      "stdout_line": 446
+    },
+    {
+      "stage": "after-identical-retry",
+      "value": {
+        "activity_schedules": 1,
+        "db_revision": 4,
+        "direct_persisted_activity_tasks": [
+          {
+            "NamespaceID": "8b4a7a5d-3104-437d-a3d7-08462b6f3fc8",
+            "WorkflowID": "ccpo-c3-response-lost",
+            "RunID": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+            "VisibilityTimestamp": "2026-10-23T12:11:45.664071556Z",
+            "TaskID": 1048591,
+            "TaskQueue": "ccpo-c3-queue",
+            "ScheduledEventID": 5,
+            "Version": 0,
+            "Stamp": 0
+          }
+        ],
+        "effective_history": {
+          "events": [
+            {
+              "event_id": "1",
+              "event_time": "2026-10-23T12:11:45.657559730Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+              "task_id": "1048576",
+              "workflow_execution_started_event_attributes": {
+                "workflow_type": {
+                  "name": "ccpo-c3-workflow"
+                },
+                "task_queue": {
+                  "name": "ccpo-c3-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "workflow_run_timeout": "600s",
+                "workflow_task_timeout": "120s",
+                "original_execution_run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+                "identity": "ccpo-client",
+                "first_execution_run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+                "attempt": 1,
+                "first_workflow_task_backoff": "0s",
+                "workflow_id": "ccpo-c3-response-lost"
+              }
+            },
+            {
+              "event_id": "2",
+              "event_time": "2026-10-23T12:11:45.658158115Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+              "task_id": "1048577",
+              "workflow_task_scheduled_event_attributes": {
+                "task_queue": {
+                  "name": "ccpo-c3-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "start_to_close_timeout": "120s",
+                "attempt": 1
+              }
+            },
+            {
+              "event_id": "3",
+              "event_time": "2026-10-23T12:11:45.661382841Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+              "task_id": "1048583",
+              "workflow_task_started_event_attributes": {
+                "scheduled_event_id": "2",
+                "identity": "ccpo-client",
+                "request_id": "e25da3dd-5336-46e7-843f-e9b7a9ada0ef",
+                "history_size_bytes": "247"
+              }
+            },
+            {
+              "event_id": "4",
+              "event_time": "2026-10-23T12:11:45.663745926Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+              "task_id": "1048587",
+              "workflow_task_completed_event_attributes": {
+                "scheduled_event_id": "2",
+                "started_event_id": "3",
+                "identity": "ccpo-client"
+              }
+            },
+            {
+              "event_id": "5",
+              "event_time": "2026-10-23T12:11:45.663781718Z",
+              "event_type": "EVENT_TYPE_ACTIVITY_TASK_SCHEDULED",
+              "task_id": "1048588",
+              "activity_task_scheduled_event_attributes": {
+                "activity_id": "ccpo-activity-1",
+                "activity_type": {
+                  "name": "ccpo-activity"
+                },
+                "task_queue": {
+                  "name": "ccpo-c3-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "input": {
+                  "payloads": [
+                    {
+                      "metadata": {
+                        "encoding": "anNvbi9wbGFpbg=="
+                      },
+                      "data": "ImNjcG8taW5wdXQi"
+                    }
+                  ]
+                },
+                "schedule_to_close_timeout": "300s",
+                "schedule_to_start_timeout": "300s",
+                "start_to_close_timeout": "60s",
+                "heartbeat_timeout": "0s",
+                "workflow_task_completed_event_id": "4",
+                "retry_policy": {
+                  "initial_interval": "1s",
+                  "backoff_coefficient": 2,
+                  "maximum_interval": "100s"
+                }
+              }
+            }
+          ]
+        },
+        "range_id": 1,
+        "recorded_activity_tasks": [
+          {
+            "timestamp": "2026-10-23T12:11:45.664396896Z",
+            "taskType": "TransferActivityTask",
+            "shardId": 1,
+            "rangeId": 1,
+            "namespaceId": "8b4a7a5d-3104-437d-a3d7-08462b6f3fc8",
+            "workflowId": "ccpo-c3-response-lost",
+            "runId": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+            "task": {
+              "NamespaceID": "8b4a7a5d-3104-437d-a3d7-08462b6f3fc8",
+              "WorkflowID": "ccpo-c3-response-lost",
+              "RunID": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+              "VisibilityTimestamp": "2026-10-23T12:11:45.664071556Z",
+              "TaskID": 1048591,
+              "TaskQueue": "ccpo-c3-queue",
+              "ScheduledEventID": 5,
+              "Version": 0,
+              "Stamp": 0
+            }
+          }
+        ],
+        "state": {
+          "activity_infos": {
+            "5": {
+              "scheduled_event_batch_id": "4",
+              "scheduled_time": "2026-10-23T12:11:45.663781718Z",
+              "activity_id": "ccpo-activity-1",
+              "schedule_to_start_timeout": "300s",
+              "schedule_to_close_timeout": "300s",
+              "start_to_close_timeout": "60s",
+              "heartbeat_timeout": "0s",
+              "timer_task_status": 2,
+              "attempt": 1,
+              "task_queue": "ccpo-c3-queue",
+              "has_retry_policy": true,
+              "retry_initial_interval": "1s",
+              "retry_maximum_interval": "100s",
+              "retry_expiration_time": "2026-10-23T12:16:45.663781718Z",
+              "retry_backoff_coefficient": 2,
+              "scheduled_event_id": "5",
+              "activity_type": {
+                "name": "ccpo-activity"
+              },
+              "last_update_versioned_transition": {
+                "transition_count": "3"
+              },
+              "first_scheduled_time": "2026-10-23T12:11:45.663781718Z"
+            }
+          },
+          "execution_info": {
+            "namespace_id": "8b4a7a5d-3104-437d-a3d7-08462b6f3fc8",
+            "workflow_id": "ccpo-c3-response-lost",
+            "task_queue": "ccpo-c3-queue",
+            "workflow_type_name": "ccpo-c3-workflow",
+            "workflow_run_timeout": "600s",
+            "default_workflow_task_timeout": "120s",
+            "last_running_clock": "1048588",
+            "last_first_event_id": "4",
+            "last_completed_workflow_task_started_event_id": "3",
+            "start_time": "2026-10-23T12:11:45.657559730Z",
+            "last_update_time": "2026-10-23T12:11:45.664066890Z",
+            "workflow_task_timeout": "0s",
+            "workflow_task_attempt": 1,
+            "workflow_task_started_time": "1970-01-01T00:00:00Z",
+            "workflow_task_scheduled_time": "1970-01-01T00:00:00Z",
+            "workflow_task_original_scheduled_time": "2026-10-23T12:11:45.658157949Z",
+            "workflow_task_request_id": "emptyUuid",
+            "attempt": 1,
+            "activity_count": "1",
+            "auto_reset_points": {
+              "points": [
+                {
+                  "run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+                  "first_workflow_task_completed_id": "4",
+                  "create_time": "2026-10-23T12:11:45.663765634Z",
+                  "resettable": true
+                }
+              ]
+            },
+            "search_attributes": {
+              "BuildIds": {
+                "metadata": {
+                  "encoding": "anNvbi9wbGFpbg==",
+                  "type": "S2V5d29yZExpc3Q="
+                },
+                "data": "WyJ1bnZlcnNpb25lZCJd"
+              }
+            },
+            "version_histories": {
+              "histories": [
+                {
+                  "branch_token": "CiQwMWExNjhhYy05ZTc5LTc4ODktYmI1ZS1jM2RjZTRiMGFkZWQSJDAxYTE2OGFjLTllNzktN2MxZi1hMTgxLWMyOGU4MGY1NDFiYw==",
+                  "items": [
+                    {
+                      "event_id": "5"
+                    }
+                  ]
+                }
+              ]
+            },
+            "first_execution_run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+            "execution_stats": {
+              "history_size": "532"
+            },
+            "workflow_run_expiration_time": "2026-10-23T12:21:45.657559730Z",
+            "last_first_event_txn_id": "1048589",
+            "state_transition_count": "3",
+            "execution_time": "2026-10-23T12:11:45.657559730Z",
+            "transition_history": [
+              {
+                "transition_count": "3"
+              }
+            ],
+            "root_workflow_id": "ccpo-c3-response-lost",
+            "root_run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+            "task_generation_shard_clock_timestamp": "1048576",
+            "workflow_task_last_update_versioned_transition": {
+              "transition_count": "3"
+            },
+            "visibility_last_update_versioned_transition": {
+              "transition_count": "3"
+            },
+            "sub_state_machine_tombstone_batches": [
+              {
+                "versioned_transition": {
+                  "transition_count": "1"
+                }
+              }
+            ],
+            "original_execution_run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded"
+          },
+          "execution_state": {
+            "create_request_id": "5817aa68-19f7-4dd0-84fd-7745908fe45f",
+            "run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+            "state": "WORKFLOW_EXECUTION_STATE_RUNNING",
+            "status": "WORKFLOW_EXECUTION_STATUS_RUNNING",
+            "last_update_versioned_transition": {
+              "transition_count": "1"
+            },
+            "start_time": "2026-10-23T12:11:45.657559730Z",
+            "request_ids": {
+              "5817aa68-19f7-4dd0-84fd-7745908fe45f": {
+                "event_type": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+                "event_id": "1"
+              }
+            },
+            "first_execution_run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded"
+          },
+          "next_event_id": "6"
+        },
+        "valid_completions": 1
+      },
+      "stdout_line": 447
+    },
+    {
+      "stage": "recovery-poll",
+      "value": {
+        "error": "<nil>",
+        "external_effect_executed": false,
+        "response": {
+          "task_token": "CiQ4YjRhN2E1ZC0zMTA0LTQzN2QtYTNkNy0wODQ2MmI2ZjNmYzgSFWNjcG8tYzMtcmVzcG9uc2UtbG9zdBokMDFhMTY4YWMtOWU3OS03ODg5LWJiNWUtYzNkY2U0YjBhZGVkIAUoATIPY2Nwby1hY3Rpdml0eS0xQg1jY3BvLWFjdGl2aXR5SggIARCRgEAYAQ==",
+          "workflow_namespace": "ccpo-c3-response-lost",
+          "workflow_type": {
+            "name": "ccpo-c3-workflow"
+          },
+          "workflow_execution": {
+            "workflow_id": "ccpo-c3-response-lost",
+            "run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded"
+          },
+          "activity_type": {
+            "name": "ccpo-activity"
+          },
+          "activity_id": "ccpo-activity-1",
+          "input": {
+            "payloads": [
+              {
+                "metadata": {
+                  "encoding": "anNvbi9wbGFpbg=="
+                },
+                "data": "ImNjcG8taW5wdXQi"
+              }
+            ]
+          },
+          "scheduled_time": {
+            "seconds": 1792757505,
+            "nanos": 663781718
+          },
+          "current_attempt_scheduled_time": {
+            "seconds": 1792757505,
+            "nanos": 663781718
+          },
+          "started_time": {
+            "seconds": 1792757505,
+            "nanos": 669388528
+          },
+          "attempt": 1,
+          "schedule_to_close_timeout": {
+            "seconds": 300
+          },
+          "start_to_close_timeout": {
+            "seconds": 60
+          },
+          "heartbeat_timeout": {},
+          "retry_policy": {
+            "initial_interval": {
+              "seconds": 1
+            },
+            "backoff_coefficient": 2,
+            "maximum_interval": {
+              "seconds": 100
+            }
+          }
+        }
+      },
+      "stdout_line": 468
+    },
+    {
+      "stage": "recovery-token",
+      "value": {
+        "namespace_id": "8b4a7a5d-3104-437d-a3d7-08462b6f3fc8",
+        "workflow_id": "ccpo-c3-response-lost",
+        "run_id": "01a168ac-9e79-7889-bb5e-c3dce4b0aded",
+        "scheduled_event_id": "5",
+        "attempt": 1,
+        "activity_id": "ccpo-activity-1",
+        "activity_type": "ccpo-activity",
+        "clock": {
+          "shard_id": 1,
+          "clock": "1048593",
+          "cluster_id": "1"
+        }
+      },
+      "stdout_line": 469
+    }
+  ]
+}

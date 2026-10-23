@@ -1,0 +1,916 @@
+[
+  {
+    "run": "run-01-control",
+    "arm": "control",
+    "exit_code": 0,
+    "test_sha256": "67a4041a30e989ff8565ef3c85a6e8120816fd15ccaa882ba3119f363f95ebe9",
+    "snapshots": [
+      {
+        "stage": "initial",
+        "db_revision": 3,
+        "range_id": 1,
+        "state_transitions": "2",
+        "next_event_id": "4",
+        "pending_wft_scheduled": "2",
+        "pending_wft_started": "3",
+        "completions": 0,
+        "activity_schedules": 0,
+        "activity_task_ids": [],
+        "all_written_tasks": {}
+      },
+      {
+        "stage": "committed",
+        "db_revision": 4,
+        "range_id": 1,
+        "state_transitions": "3",
+        "next_event_id": "6",
+        "pending_wft_scheduled": "0",
+        "pending_wft_started": "0",
+        "completions": 1,
+        "activity_schedules": 1,
+        "activity_task_ids": [
+          1048590
+        ],
+        "all_written_tasks": {}
+      }
+    ],
+    "calls": [
+      {
+        "stage": "completion-1",
+        "value": {
+          "error": "<nil>",
+          "error_type": "<nil>",
+          "received_success": true,
+          "response": {}
+        },
+        "stdout_line": 353
+      }
+    ],
+    "rejected_stores": 0,
+    "recovery": true
+  },
+  {
+    "run": "run-02-response-lost",
+    "arm": "a",
+    "exit_code": 0,
+    "test_sha256": "67a4041a30e989ff8565ef3c85a6e8120816fd15ccaa882ba3119f363f95ebe9",
+    "snapshots": [
+      {
+        "stage": "initial",
+        "db_revision": 3,
+        "range_id": 1,
+        "state_transitions": "2",
+        "next_event_id": "4",
+        "pending_wft_scheduled": "2",
+        "pending_wft_started": "3",
+        "completions": 0,
+        "activity_schedules": 0,
+        "activity_task_ids": [],
+        "all_written_tasks": {}
+      },
+      {
+        "stage": "after-lost-response",
+        "db_revision": 4,
+        "range_id": 1,
+        "state_transitions": "3",
+        "next_event_id": "6",
+        "pending_wft_scheduled": "0",
+        "pending_wft_started": "0",
+        "completions": 1,
+        "activity_schedules": 1,
+        "activity_task_ids": [
+          1048591
+        ],
+        "all_written_tasks": {}
+      },
+      {
+        "stage": "after-identical-retry",
+        "db_revision": 4,
+        "range_id": 1,
+        "state_transitions": "3",
+        "next_event_id": "6",
+        "pending_wft_scheduled": "0",
+        "pending_wft_started": "0",
+        "completions": 1,
+        "activity_schedules": 1,
+        "activity_task_ids": [
+          1048591
+        ],
+        "all_written_tasks": {}
+      }
+    ],
+    "calls": [
+      {
+        "stage": "completion-1",
+        "value": {
+          "error": "CCPO lost successful completion response",
+          "error_type": "*serviceerror.Unavailable",
+          "received_success": false,
+          "response": null
+        },
+        "stdout_line": 441
+      },
+      {
+        "stage": "completion-2",
+        "value": {
+          "error": "Workflow task not found.",
+          "error_type": "*serviceerror.NotFound",
+          "received_success": false,
+          "response": null
+        },
+        "stdout_line": 446
+      }
+    ],
+    "rejected_stores": 0,
+    "recovery": true
+  },
+  {
+    "run": "run-03-precommit",
+    "arm": "b",
+    "exit_code": 0,
+    "test_sha256": "67a4041a30e989ff8565ef3c85a6e8120816fd15ccaa882ba3119f363f95ebe9",
+    "snapshots": [
+      {
+        "stage": "initial",
+        "db_revision": 3,
+        "range_id": 1,
+        "state_transitions": "2",
+        "next_event_id": "4",
+        "pending_wft_scheduled": "2",
+        "pending_wft_started": "3",
+        "completions": 0,
+        "activity_schedules": 0,
+        "activity_task_ids": [],
+        "all_written_tasks": {}
+      },
+      {
+        "stage": "before-fault",
+        "db_revision": 3,
+        "range_id": 1,
+        "state_transitions": "2",
+        "next_event_id": "4",
+        "pending_wft_scheduled": "2",
+        "pending_wft_started": "3",
+        "completions": 0,
+        "activity_schedules": 0,
+        "activity_task_ids": [],
+        "all_written_tasks": {}
+      },
+      {
+        "stage": "after-precommit-rejection",
+        "db_revision": 3,
+        "range_id": 1,
+        "state_transitions": "2",
+        "next_event_id": "4",
+        "pending_wft_scheduled": "2",
+        "pending_wft_started": "3",
+        "completions": 0,
+        "activity_schedules": 0,
+        "activity_task_ids": [],
+        "all_written_tasks": {}
+      },
+      {
+        "stage": "after-identical-retry",
+        "db_revision": 4,
+        "range_id": 1,
+        "state_transitions": "3",
+        "next_event_id": "6",
+        "pending_wft_scheduled": "0",
+        "pending_wft_started": "0",
+        "completions": 1,
+        "activity_schedules": 1,
+        "activity_task_ids": [
+          1048602
+        ],
+        "all_written_tasks": {}
+      }
+    ],
+    "calls": [
+      {
+        "stage": "completion-1",
+        "value": {
+          "error": "CCPO deterministic pre-store rejection",
+          "error_type": "*serviceerror.ResourceExhausted",
+          "received_success": false,
+          "response": null
+        },
+        "stdout_line": 569
+      },
+      {
+        "stage": "completion-2",
+        "value": {
+          "error": "<nil>",
+          "error_type": "<nil>",
+          "received_success": true,
+          "response": {}
+        },
+        "stdout_line": 581
+      }
+    ],
+    "rejected_stores": 2,
+    "recovery": true
+  },
+  {
+    "run": "run-04-concurrent",
+    "arm": "concurrent",
+    "exit_code": 0,
+    "test_sha256": "67a4041a30e989ff8565ef3c85a6e8120816fd15ccaa882ba3119f363f95ebe9",
+    "snapshots": [
+      {
+        "stage": "initial",
+        "db_revision": 3,
+        "range_id": 1,
+        "state_transitions": "2",
+        "next_event_id": "4",
+        "pending_wft_scheduled": "2",
+        "pending_wft_started": "3",
+        "completions": 0,
+        "activity_schedules": 0,
+        "activity_task_ids": [],
+        "all_written_tasks": {}
+      },
+      {
+        "stage": "after-concurrent-attempts",
+        "db_revision": 4,
+        "range_id": 1,
+        "state_transitions": "3",
+        "next_event_id": "6",
+        "pending_wft_scheduled": "0",
+        "pending_wft_started": "0",
+        "completions": 1,
+        "activity_schedules": 1,
+        "activity_task_ids": [
+          1048591
+        ],
+        "all_written_tasks": {}
+      }
+    ],
+    "calls": [
+      {
+        "stage": "concurrent-0",
+        "value": {
+          "error": "<nil>",
+          "error_type": "<nil>",
+          "received_success": true,
+          "response": {}
+        },
+        "stdout_line": 356
+      },
+      {
+        "stage": "concurrent-1",
+        "value": {
+          "error": "Workflow task not found.",
+          "error_type": "*serviceerror.NotFound",
+          "received_success": false,
+          "response": null
+        },
+        "stdout_line": 357
+      }
+    ],
+    "rejected_stores": 0,
+    "recovery": true
+  },
+  {
+    "run": "run-05-control-ledger",
+    "arm": "control",
+    "exit_code": 0,
+    "test_sha256": "22b5bf7cd197edfaa78452452e1f239e8d7d4997aceefc9301b95b79ca213f25",
+    "snapshots": [
+      {
+        "stage": "initial",
+        "db_revision": 3,
+        "range_id": 1,
+        "state_transitions": "2",
+        "next_event_id": "4",
+        "pending_wft_scheduled": "2",
+        "pending_wft_started": "3",
+        "completions": 0,
+        "activity_schedules": 0,
+        "activity_task_ids": [],
+        "all_written_tasks": {
+          "timer": [
+            {
+              "type": "WorkflowRunTimeout",
+              "id": 1048579,
+              "range_id": 1
+            },
+            {
+              "type": "WorkflowTaskTimeout",
+              "id": 1048585,
+              "range_id": 1
+            }
+          ],
+          "transfer": [
+            {
+              "type": "TransferWorkflowTask",
+              "id": 1048581,
+              "range_id": 1
+            }
+          ],
+          "visibility": [
+            {
+              "type": "VisibilityStartExecution",
+              "id": 1048580,
+              "range_id": 1
+            }
+          ]
+        }
+      },
+      {
+        "stage": "committed",
+        "db_revision": 4,
+        "range_id": 1,
+        "state_transitions": "3",
+        "next_event_id": "6",
+        "pending_wft_scheduled": "0",
+        "pending_wft_started": "0",
+        "completions": 1,
+        "activity_schedules": 1,
+        "activity_task_ids": [
+          1048591
+        ],
+        "all_written_tasks": {
+          "timer": [
+            {
+              "type": "WorkflowRunTimeout",
+              "id": 1048579,
+              "range_id": 1
+            },
+            {
+              "type": "WorkflowTaskTimeout",
+              "id": 1048585,
+              "range_id": 1
+            },
+            {
+              "type": "ActivityTimeout",
+              "id": 1048592,
+              "range_id": 1
+            }
+          ],
+          "transfer": [
+            {
+              "type": "TransferWorkflowTask",
+              "id": 1048581,
+              "range_id": 1
+            },
+            {
+              "type": "TransferActivityTask",
+              "id": 1048591,
+              "range_id": 1
+            }
+          ],
+          "visibility": [
+            {
+              "type": "VisibilityStartExecution",
+              "id": 1048580,
+              "range_id": 1
+            },
+            {
+              "type": "VisibilityUpsertExecution",
+              "id": 1048590,
+              "range_id": 1
+            }
+          ]
+        }
+      }
+    ],
+    "calls": [
+      {
+        "stage": "completion-1",
+        "value": {
+          "error": "<nil>",
+          "error_type": "<nil>",
+          "received_success": true,
+          "response": {}
+        },
+        "stdout_line": 353
+      }
+    ],
+    "rejected_stores": 0,
+    "recovery": true
+  },
+  {
+    "run": "run-06-response-lost-ledger",
+    "arm": "a",
+    "exit_code": 0,
+    "test_sha256": "22b5bf7cd197edfaa78452452e1f239e8d7d4997aceefc9301b95b79ca213f25",
+    "snapshots": [
+      {
+        "stage": "initial",
+        "db_revision": 3,
+        "range_id": 1,
+        "state_transitions": "2",
+        "next_event_id": "4",
+        "pending_wft_scheduled": "2",
+        "pending_wft_started": "3",
+        "completions": 0,
+        "activity_schedules": 0,
+        "activity_task_ids": [],
+        "all_written_tasks": {
+          "timer": [
+            {
+              "type": "WorkflowRunTimeout",
+              "id": 1048580,
+              "range_id": 1
+            },
+            {
+              "type": "WorkflowTaskTimeout",
+              "id": 1048585,
+              "range_id": 1
+            }
+          ],
+          "transfer": [
+            {
+              "type": "TransferWorkflowTask",
+              "id": 1048579,
+              "range_id": 1
+            }
+          ],
+          "visibility": [
+            {
+              "type": "VisibilityStartExecution",
+              "id": 1048581,
+              "range_id": 1
+            }
+          ]
+        }
+      },
+      {
+        "stage": "after-lost-response",
+        "db_revision": 4,
+        "range_id": 1,
+        "state_transitions": "3",
+        "next_event_id": "6",
+        "pending_wft_scheduled": "0",
+        "pending_wft_started": "0",
+        "completions": 1,
+        "activity_schedules": 1,
+        "activity_task_ids": [
+          1048591
+        ],
+        "all_written_tasks": {
+          "timer": [
+            {
+              "type": "WorkflowRunTimeout",
+              "id": 1048580,
+              "range_id": 1
+            },
+            {
+              "type": "WorkflowTaskTimeout",
+              "id": 1048585,
+              "range_id": 1
+            },
+            {
+              "type": "ActivityTimeout",
+              "id": 1048592,
+              "range_id": 1
+            }
+          ],
+          "transfer": [
+            {
+              "type": "TransferWorkflowTask",
+              "id": 1048579,
+              "range_id": 1
+            },
+            {
+              "type": "TransferActivityTask",
+              "id": 1048591,
+              "range_id": 1
+            }
+          ],
+          "visibility": [
+            {
+              "type": "VisibilityStartExecution",
+              "id": 1048581,
+              "range_id": 1
+            },
+            {
+              "type": "VisibilityUpsertExecution",
+              "id": 1048590,
+              "range_id": 1
+            }
+          ]
+        }
+      },
+      {
+        "stage": "after-identical-retry",
+        "db_revision": 4,
+        "range_id": 1,
+        "state_transitions": "3",
+        "next_event_id": "6",
+        "pending_wft_scheduled": "0",
+        "pending_wft_started": "0",
+        "completions": 1,
+        "activity_schedules": 1,
+        "activity_task_ids": [
+          1048591
+        ],
+        "all_written_tasks": {
+          "timer": [
+            {
+              "type": "WorkflowRunTimeout",
+              "id": 1048580,
+              "range_id": 1
+            },
+            {
+              "type": "WorkflowTaskTimeout",
+              "id": 1048585,
+              "range_id": 1
+            },
+            {
+              "type": "ActivityTimeout",
+              "id": 1048592,
+              "range_id": 1
+            }
+          ],
+          "transfer": [
+            {
+              "type": "TransferWorkflowTask",
+              "id": 1048579,
+              "range_id": 1
+            },
+            {
+              "type": "TransferActivityTask",
+              "id": 1048591,
+              "range_id": 1
+            }
+          ],
+          "visibility": [
+            {
+              "type": "VisibilityStartExecution",
+              "id": 1048581,
+              "range_id": 1
+            },
+            {
+              "type": "VisibilityUpsertExecution",
+              "id": 1048590,
+              "range_id": 1
+            }
+          ]
+        }
+      }
+    ],
+    "calls": [
+      {
+        "stage": "completion-1",
+        "value": {
+          "error": "CCPO lost successful completion response",
+          "error_type": "*serviceerror.Unavailable",
+          "received_success": false,
+          "response": null
+        },
+        "stdout_line": 423
+      },
+      {
+        "stage": "completion-2",
+        "value": {
+          "error": "Workflow task not found.",
+          "error_type": "*serviceerror.NotFound",
+          "received_success": false,
+          "response": null
+        },
+        "stdout_line": 428
+      }
+    ],
+    "rejected_stores": 0,
+    "recovery": true
+  },
+  {
+    "run": "run-07-precommit-ledger",
+    "arm": "b",
+    "exit_code": 0,
+    "test_sha256": "22b5bf7cd197edfaa78452452e1f239e8d7d4997aceefc9301b95b79ca213f25",
+    "snapshots": [
+      {
+        "stage": "initial",
+        "db_revision": 3,
+        "range_id": 1,
+        "state_transitions": "2",
+        "next_event_id": "4",
+        "pending_wft_scheduled": "2",
+        "pending_wft_started": "3",
+        "completions": 0,
+        "activity_schedules": 0,
+        "activity_task_ids": [],
+        "all_written_tasks": {
+          "timer": [
+            {
+              "type": "WorkflowRunTimeout",
+              "id": 1048580,
+              "range_id": 1
+            },
+            {
+              "type": "WorkflowTaskTimeout",
+              "id": 1048585,
+              "range_id": 1
+            }
+          ],
+          "transfer": [
+            {
+              "type": "TransferWorkflowTask",
+              "id": 1048579,
+              "range_id": 1
+            }
+          ],
+          "visibility": [
+            {
+              "type": "VisibilityStartExecution",
+              "id": 1048581,
+              "range_id": 1
+            }
+          ]
+        }
+      },
+      {
+        "stage": "before-fault",
+        "db_revision": 3,
+        "range_id": 1,
+        "state_transitions": "2",
+        "next_event_id": "4",
+        "pending_wft_scheduled": "2",
+        "pending_wft_started": "3",
+        "completions": 0,
+        "activity_schedules": 0,
+        "activity_task_ids": [],
+        "all_written_tasks": {
+          "timer": [
+            {
+              "type": "WorkflowRunTimeout",
+              "id": 1048580,
+              "range_id": 1
+            },
+            {
+              "type": "WorkflowTaskTimeout",
+              "id": 1048585,
+              "range_id": 1
+            }
+          ],
+          "transfer": [
+            {
+              "type": "TransferWorkflowTask",
+              "id": 1048579,
+              "range_id": 1
+            }
+          ],
+          "visibility": [
+            {
+              "type": "VisibilityStartExecution",
+              "id": 1048581,
+              "range_id": 1
+            }
+          ]
+        }
+      },
+      {
+        "stage": "after-precommit-rejection",
+        "db_revision": 3,
+        "range_id": 1,
+        "state_transitions": "2",
+        "next_event_id": "4",
+        "pending_wft_scheduled": "2",
+        "pending_wft_started": "3",
+        "completions": 0,
+        "activity_schedules": 0,
+        "activity_task_ids": [],
+        "all_written_tasks": {
+          "timer": [
+            {
+              "type": "WorkflowRunTimeout",
+              "id": 1048580,
+              "range_id": 1
+            },
+            {
+              "type": "WorkflowTaskTimeout",
+              "id": 1048585,
+              "range_id": 1
+            }
+          ],
+          "transfer": [
+            {
+              "type": "TransferWorkflowTask",
+              "id": 1048579,
+              "range_id": 1
+            }
+          ],
+          "visibility": [
+            {
+              "type": "VisibilityStartExecution",
+              "id": 1048581,
+              "range_id": 1
+            }
+          ]
+        }
+      },
+      {
+        "stage": "after-identical-retry",
+        "db_revision": 4,
+        "range_id": 1,
+        "state_transitions": "3",
+        "next_event_id": "6",
+        "pending_wft_scheduled": "0",
+        "pending_wft_started": "0",
+        "completions": 1,
+        "activity_schedules": 1,
+        "activity_task_ids": [
+          1048602
+        ],
+        "all_written_tasks": {
+          "timer": [
+            {
+              "type": "WorkflowRunTimeout",
+              "id": 1048580,
+              "range_id": 1
+            },
+            {
+              "type": "WorkflowTaskTimeout",
+              "id": 1048585,
+              "range_id": 1
+            },
+            {
+              "type": "ActivityTimeout",
+              "id": 1048603,
+              "range_id": 1
+            }
+          ],
+          "transfer": [
+            {
+              "type": "TransferWorkflowTask",
+              "id": 1048579,
+              "range_id": 1
+            },
+            {
+              "type": "TransferActivityTask",
+              "id": 1048602,
+              "range_id": 1
+            }
+          ],
+          "visibility": [
+            {
+              "type": "VisibilityStartExecution",
+              "id": 1048581,
+              "range_id": 1
+            },
+            {
+              "type": "VisibilityUpsertExecution",
+              "id": 1048604,
+              "range_id": 1
+            }
+          ]
+        }
+      }
+    ],
+    "calls": [
+      {
+        "stage": "completion-1",
+        "value": {
+          "error": "CCPO deterministic pre-store rejection",
+          "error_type": "*serviceerror.ResourceExhausted",
+          "received_success": false,
+          "response": null
+        },
+        "stdout_line": 569
+      },
+      {
+        "stage": "completion-2",
+        "value": {
+          "error": "<nil>",
+          "error_type": "<nil>",
+          "received_success": true,
+          "response": {}
+        },
+        "stdout_line": 581
+      }
+    ],
+    "rejected_stores": 2,
+    "recovery": true
+  },
+  {
+    "run": "run-08-concurrent-ledger",
+    "arm": "concurrent",
+    "exit_code": 0,
+    "test_sha256": "22b5bf7cd197edfaa78452452e1f239e8d7d4997aceefc9301b95b79ca213f25",
+    "snapshots": [
+      {
+        "stage": "initial",
+        "db_revision": 3,
+        "range_id": 1,
+        "state_transitions": "2",
+        "next_event_id": "4",
+        "pending_wft_scheduled": "2",
+        "pending_wft_started": "3",
+        "completions": 0,
+        "activity_schedules": 0,
+        "activity_task_ids": [],
+        "all_written_tasks": {
+          "timer": [
+            {
+              "type": "WorkflowRunTimeout",
+              "id": 1048579,
+              "range_id": 1
+            },
+            {
+              "type": "WorkflowTaskTimeout",
+              "id": 1048585,
+              "range_id": 1
+            }
+          ],
+          "transfer": [
+            {
+              "type": "TransferWorkflowTask",
+              "id": 1048581,
+              "range_id": 1
+            }
+          ],
+          "visibility": [
+            {
+              "type": "VisibilityStartExecution",
+              "id": 1048580,
+              "range_id": 1
+            }
+          ]
+        }
+      },
+      {
+        "stage": "after-concurrent-attempts",
+        "db_revision": 4,
+        "range_id": 1,
+        "state_transitions": "3",
+        "next_event_id": "6",
+        "pending_wft_scheduled": "0",
+        "pending_wft_started": "0",
+        "completions": 1,
+        "activity_schedules": 1,
+        "activity_task_ids": [
+          1048591
+        ],
+        "all_written_tasks": {
+          "timer": [
+            {
+              "type": "WorkflowRunTimeout",
+              "id": 1048579,
+              "range_id": 1
+            },
+            {
+              "type": "WorkflowTaskTimeout",
+              "id": 1048585,
+              "range_id": 1
+            },
+            {
+              "type": "ActivityTimeout",
+              "id": 1048592,
+              "range_id": 1
+            }
+          ],
+          "transfer": [
+            {
+              "type": "TransferWorkflowTask",
+              "id": 1048581,
+              "range_id": 1
+            },
+            {
+              "type": "TransferActivityTask",
+              "id": 1048591,
+              "range_id": 1
+            }
+          ],
+          "visibility": [
+            {
+              "type": "VisibilityStartExecution",
+              "id": 1048580,
+              "range_id": 1
+            },
+            {
+              "type": "VisibilityUpsertExecution",
+              "id": 1048590,
+              "range_id": 1
+            }
+          ]
+        }
+      }
+    ],
+    "calls": [
+      {
+        "stage": "concurrent-1",
+        "value": {
+          "error": "<nil>",
+          "error_type": "<nil>",
+          "received_success": true,
+          "response": {}
+        },
+        "stdout_line": 356
+      },
+      {
+        "stage": "concurrent-0",
+        "value": {
+          "error": "Workflow task not found.",
+          "error_type": "*serviceerror.NotFound",
+          "received_success": false,
+          "response": null
+        },
+        "stdout_line": 357
+      }
+    ],
+    "rejected_stores": 0,
+    "recovery": true
+  }
+]

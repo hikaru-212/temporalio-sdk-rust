@@ -1,0 +1,22 @@
+{
+  "command": [
+    "go",
+    "test",
+    "-p",
+    "2",
+    "-tags",
+    "test_dep",
+    "-count=1",
+    "-timeout",
+    "3m",
+    "-run",
+    "^TestCCPOC3PrecommitFailure$",
+    "-v",
+    "./tests/ccpo_c3"
+  ],
+  "cwd": "<SERVER_CHECKOUT>",
+  "start_utc": "2026-10-23T12:16:02.676533+00:00",
+  "arm": "b",
+  "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+  "test_sha256": "22b5bf7cd197edfaa78452452e1f239e8d7d4997aceefc9301b95b79ca213f25"
+}

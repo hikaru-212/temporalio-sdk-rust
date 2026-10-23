@@ -1,0 +1,628 @@
+{
+  "created_utc": "2026-10-23T12:33:32.324027+00:00",
+  "parent_checkpoint": "70acd8a9eaad6a14a0b58ccf113c0cfda9e4cad1",
+  "server_source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+  "original_archive_basename": "temporal-ccpo-c3-evidence-2026-10-23.tar.gz",
+  "original_archive_sha256": "30939a09296226c6a065e9d88513ae033bd4311c4c6556b13aad70c1be284439",
+  "original_manifest_sha256": "e167ac5f2fcffc9873b951096c732a2221bc71ceaaa30308ad7d550969217f77",
+  "original_manifest_entries_verified": 58,
+  "archive_files_matched_to_workspace": 59,
+  "public_copy_policy": "Public copies only: replace machine paths, ephemeral database filenames and filesystem device label; omit unrelated worktree file inventory. Preserve all original files and archive locally. Do not change requests, observations, event/task IDs, exit codes, predictions, conclusions or test behavior. Historical stdout hashes still refer to ORIGINAL bytes; use this mapping for PUBLIC bytes. Password-labelled test-environment configuration values are additionally redacted in eight stdout copies; these are outside the predeclared workflow observation records.",
+  "entries": [
+    {
+      "original_path": "PREDICTIONS.md",
+      "published_path": "PREDICTIONS.md",
+      "original_sha256": "7e5bbcd0344551bcb0254a37d764ee4c35cf64c43c751977cbfe33e8cee3fcbf",
+      "published_sha256": "7e5bbcd0344551bcb0254a37d764ee4c35cf64c43c751977cbfe33e8cee3fcbf",
+      "original_bytes": 3615,
+      "published_bytes": 3615,
+      "transformations": []
+    },
+    {
+      "original_path": "README.md",
+      "published_path": "README.experiment.md",
+      "original_sha256": "e53732ff3ac33c6ede0e6e5c930d882f41d63905c2e2fc1a144183d7e2cffbaf",
+      "published_sha256": "5674b8db1998c5603bd1d7ba43362f76310331acdc8e6026e8b4aa27c1650b12",
+      "original_bytes": 2928,
+      "published_bytes": 2942,
+      "transformations": [
+        "replace local path/device prefix with <TEMP_ROOT>: 2"
+      ]
+    },
+    {
+      "original_path": "REPORT.zh-TW.md",
+      "published_path": "REPORT.zh-TW.md",
+      "original_sha256": "d34688400cfee51e6ad39d3232ac1e1296eb3c4acd15717df20f087a977d2b30",
+      "published_sha256": "d34688400cfee51e6ad39d3232ac1e1296eb3c4acd15717df20f087a977d2b30",
+      "original_bytes": 15468,
+      "published_bytes": 15468,
+      "transformations": []
+    },
+    {
+      "original_path": "RESULTS.json",
+      "published_path": "RESULTS.json",
+      "original_sha256": "cadb8a8284934063fd190735cf21689b439d308d5fc8baa6972ceb92de2b3f02",
+      "published_sha256": "cadb8a8284934063fd190735cf21689b439d308d5fc8baa6972ceb92de2b3f02",
+      "original_bytes": 23049,
+      "published_bytes": 23049,
+      "transformations": []
+    },
+    {
+      "original_path": "SHA256SUMS",
+      "published_path": "ORIGINAL-SHA256SUMS",
+      "original_sha256": "e167ac5f2fcffc9873b951096c732a2221bc71ceaaa30308ad7d550969217f77",
+      "published_sha256": "e167ac5f2fcffc9873b951096c732a2221bc71ceaaa30308ad7d550969217f77",
+      "original_bytes": 5565,
+      "published_bytes": 5565,
+      "transformations": []
+    },
+    {
+      "original_path": "evidence-extension.json",
+      "published_path": "evidence-extension.json",
+      "original_sha256": "27b2dfc676ecd4822789ff49a2998384bba6882506844c993b8933304a22b1de",
+      "published_sha256": "27b2dfc676ecd4822789ff49a2998384bba6882506844c993b8933304a22b1de",
+      "original_bytes": 456,
+      "published_bytes": 456,
+      "transformations": []
+    },
+    {
+      "original_path": "final-safety-audit.json",
+      "published_path": "final-safety-audit.json",
+      "original_sha256": "60e1a534d9e5d5030cdb02971a8e5b6a075138a3e4adfa4adf1eaf706256d081",
+      "published_sha256": "98b6af49653dc2d29b804365d076cdba65f543d4e8f062b9445dfbba47a68e58",
+      "original_bytes": 14169,
+      "published_bytes": 5144,
+      "transformations": [
+        "omit unrelated SDK review file inventory; preserve repository HEAD and tracked-diff result",
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 1",
+        "replace local path/device prefix with <C1_CHECKPOINT>: 1",
+        "replace local path/device prefix with <C2_CHECKPOINT>: 1",
+        "replace local path/device prefix with <SDK_REVIEW_CHECKOUT>: 1",
+        "replace local path/device prefix with <ORIGINAL_SERVER_CHECKOUT>: 1"
+      ]
+    },
+    {
+      "original_path": "harness-audit.json",
+      "published_path": "harness-audit.json",
+      "original_sha256": "21516b2271d8cacfbe424f3d3b4e750a89b948035959e17ecc4d2aae8c87adf9",
+      "published_sha256": "28d1feae3162482dc353f93bf4ea060f8e391ad206a0b77d15558a9cdc80d0d2",
+      "original_bytes": 595,
+      "published_bytes": 587,
+      "transformations": [
+        "replace local path/device prefix with <LOCAL_FILESYSTEM>: 1",
+        "replace local path/device prefix with <TEMP_ROOT>: 1"
+      ]
+    },
+    {
+      "original_path": "harness-v1.diff",
+      "published_path": "harness-v1.diff",
+      "original_sha256": "8a4f381f92ec31a02cf6df92b7dce9070a7de16b10d1ccb601b37ed93fb77c8b",
+      "published_sha256": "8a4f381f92ec31a02cf6df92b7dce9070a7de16b10d1ccb601b37ed93fb77c8b",
+      "original_bytes": 15708,
+      "published_bytes": 15708,
+      "transformations": []
+    },
+    {
+      "original_path": "harness-v1.test.go.txt",
+      "published_path": "harness-v1.test.go.txt",
+      "original_sha256": "67a4041a30e989ff8565ef3c85a6e8120816fd15ccaa882ba3119f363f95ebe9",
+      "published_sha256": "67a4041a30e989ff8565ef3c85a6e8120816fd15ccaa882ba3119f363f95ebe9",
+      "original_bytes": 15189,
+      "published_bytes": 15189,
+      "transformations": []
+    },
+    {
+      "original_path": "lint-check/command.json",
+      "published_path": "lint-check/command.json",
+      "original_sha256": "a513424b70b3722564b3f49a5b811c73c9f20fb9a5a96c761e0f08da6b054897",
+      "published_sha256": "a513424b70b3722564b3f49a5b811c73c9f20fb9a5a96c761e0f08da6b054897",
+      "original_bytes": 410,
+      "published_bytes": 410,
+      "transformations": []
+    },
+    {
+      "original_path": "lint-check/exit-code.txt",
+      "published_path": "lint-check/exit-code.txt",
+      "original_sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3",
+      "published_sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3",
+      "original_bytes": 2,
+      "published_bytes": 2,
+      "transformations": []
+    },
+    {
+      "original_path": "lint-check/stderr.log",
+      "published_path": "lint-check/stderr.log",
+      "original_sha256": "9cc7b57e969007c493bcce343307140370c3c6307e4696edf5684075d1f9697e",
+      "published_sha256": "9cc7b57e969007c493bcce343307140370c3c6307e4696edf5684075d1f9697e",
+      "original_bytes": 1971,
+      "published_bytes": 1971,
+      "transformations": []
+    },
+    {
+      "original_path": "lint-check/stdout.log",
+      "published_path": "lint-check/stdout.log",
+      "original_sha256": "b119b7463e487efa070026f1171bec63a3ac685568b33f18ac576161f2c2ac57",
+      "published_sha256": "0a59b0bfb399eab39653503b0bcd4137e034cfb359029825be9520f092dcdcb8",
+      "original_bytes": 245,
+      "published_bytes": 181,
+      "transformations": [
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 2"
+      ]
+    },
+    {
+      "original_path": "preregistration.json",
+      "published_path": "preregistration.json",
+      "original_sha256": "e486ed6df6cfd8954193598669cbfc0c1e5bd062aeb0ef0d4f2145c51acdb87b",
+      "published_sha256": "e486ed6df6cfd8954193598669cbfc0c1e5bd062aeb0ef0d4f2145c51acdb87b",
+      "original_bytes": 254,
+      "published_bytes": 254,
+      "transformations": []
+    },
+    {
+      "original_path": "run-01-control/command.json",
+      "published_path": "run-01-control/command.json",
+      "original_sha256": "1d1e893bd2a979aca2ece579e211066969aed90364a9dc287c27840c5b58d083",
+      "published_sha256": "d2140be0d88e3d26f6e23b36f301a99396d7ed6c3685eb52d4c0910d2411adde",
+      "original_bytes": 484,
+      "published_bytes": 452,
+      "transformations": [
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 1"
+      ]
+    },
+    {
+      "original_path": "run-01-control/observations.json",
+      "published_path": "run-01-control/observations.json",
+      "original_sha256": "f3d7f4bae33a45242d4fdfae596d55aa103788bbbcc68134cdc7647b589edfd7",
+      "published_sha256": "f3d7f4bae33a45242d4fdfae596d55aa103788bbbcc68134cdc7647b589edfd7",
+      "original_bytes": 21949,
+      "published_bytes": 21949,
+      "transformations": []
+    },
+    {
+      "original_path": "run-01-control/result.json",
+      "published_path": "run-01-control/result.json",
+      "original_sha256": "7efba3992760db4e3abaaa464f20b15243ad25bd77c77df9c68182529966097c",
+      "published_sha256": "bd38d9987ee8c25acb9ec7f29d8f91c7157baa8ca61e528c182b7b610671010a",
+      "original_bytes": 554,
+      "published_bytes": 522,
+      "transformations": [
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 1"
+      ]
+    },
+    {
+      "original_path": "run-01-control/stderr.log",
+      "published_path": "run-01-control/stderr.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "published_bytes": 0,
+      "transformations": []
+    },
+    {
+      "original_path": "run-01-control/stdout.log",
+      "published_path": "run-01-control/stdout.log",
+      "original_sha256": "fefc0b398ae258cc1fae012ebd394837844a7344a4b96e2997a76bafef6a068f",
+      "published_sha256": "70b8420deeba142821a8a705e4777423f9f43700543db8513fe1270feccdaf27",
+      "original_bytes": 75081,
+      "published_bytes": 69402,
+      "transformations": [
+        "replace ephemeral SQLite filenames: 5",
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 175",
+        "replace password-labelled test-environment configuration value: 1; original retained locally"
+      ]
+    },
+    {
+      "original_path": "run-02-response-lost/command.json",
+      "published_path": "run-02-response-lost/command.json",
+      "original_sha256": "be825480cb7db65930b6fcb631f9cb9b24a8979c57145b87db5e0e2705be51ce",
+      "published_sha256": "79c517844862d2bf76ce591b4e9b6192ed0fd76e5b20466f0bc9cce966b096a5",
+      "original_bytes": 483,
+      "published_bytes": 451,
+      "transformations": [
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 1"
+      ]
+    },
+    {
+      "original_path": "run-02-response-lost/observations.json",
+      "published_path": "run-02-response-lost/observations.json",
+      "original_sha256": "a10e1dcfc69918bf2542cd1a0c02801c257df27a7cdb210f3891a8f1e91782ea",
+      "published_sha256": "a10e1dcfc69918bf2542cd1a0c02801c257df27a7cdb210f3891a8f1e91782ea",
+      "original_bytes": 33326,
+      "published_bytes": 33326,
+      "transformations": []
+    },
+    {
+      "original_path": "run-02-response-lost/result.json",
+      "published_path": "run-02-response-lost/result.json",
+      "original_sha256": "4c143b978c49480a38cc00e903f8b03112f65f5e878f3d97130ef8d9dc9e9f5f",
+      "published_sha256": "d0a7b3edf8bd2b4719269a876e922ab8b5286097f38981fb084ac77135a64c45",
+      "original_bytes": 553,
+      "published_bytes": 521,
+      "transformations": [
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 1"
+      ]
+    },
+    {
+      "original_path": "run-02-response-lost/stderr.log",
+      "published_path": "run-02-response-lost/stderr.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "published_bytes": 0,
+      "transformations": []
+    },
+    {
+      "original_path": "run-02-response-lost/stdout.log",
+      "published_path": "run-02-response-lost/stdout.log",
+      "original_sha256": "eca208551f32843b0edf43a975f185f2cc09257bd7358c8648e844c081ced82d",
+      "published_sha256": "0fad3373256d60f520112a6cb836c72c49b0a95e2f15b6c25e80648546bb13c1",
+      "original_bytes": 92024,
+      "published_bytes": 85229,
+      "transformations": [
+        "replace ephemeral SQLite filenames: 5",
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 208",
+        "replace local path/device prefix with <LOCAL_HOME>: 15",
+        "replace password-labelled test-environment configuration value: 1; original retained locally"
+      ]
+    },
+    {
+      "original_path": "run-03-precommit/command.json",
+      "published_path": "run-03-precommit/command.json",
+      "original_sha256": "b665f8ec4981e8d78ed54be53400b121fccce88c91c979a91ddee6e40ca70fe3",
+      "published_sha256": "20b08edd669247fd078ab8f291ab08e708bf43fd4273167c7d83b4fdef0daaa4",
+      "original_bytes": 487,
+      "published_bytes": 455,
+      "transformations": [
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 1"
+      ]
+    },
+    {
+      "original_path": "run-03-precommit/observations.json",
+      "published_path": "run-03-precommit/observations.json",
+      "original_sha256": "50577b60c3c346c07cba0cbef0fd6ff3f311fbd6178d62e63d12a1089531b5da",
+      "published_sha256": "50577b60c3c346c07cba0cbef0fd6ff3f311fbd6178d62e63d12a1089531b5da",
+      "original_bytes": 37813,
+      "published_bytes": 37813,
+      "transformations": []
+    },
+    {
+      "original_path": "run-03-precommit/result.json",
+      "published_path": "run-03-precommit/result.json",
+      "original_sha256": "ff0124b42401c24fe16c958144e56d5f126a01a7719685b8fd93a8b1af8aa63f",
+      "published_sha256": "823574abe683b47fcf92dec7ecdf07869ef8ae8756898bff1df772e084b3680b",
+      "original_bytes": 557,
+      "published_bytes": 525,
+      "transformations": [
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 1"
+      ]
+    },
+    {
+      "original_path": "run-03-precommit/stderr.log",
+      "published_path": "run-03-precommit/stderr.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "published_bytes": 0,
+      "transformations": []
+    },
+    {
+      "original_path": "run-03-precommit/stdout.log",
+      "published_path": "run-03-precommit/stdout.log",
+      "original_sha256": "f78f3b82bccfd86111ec225e60c3f55f96e081353a608430bca2c5c610764048",
+      "published_sha256": "6a75dc47e505483f9239f5e5d9592ce817b10b124a94879e321a715696b5e36d",
+      "original_bytes": 115471,
+      "published_bytes": 106344,
+      "transformations": [
+        "replace ephemeral SQLite filenames: 5",
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 279",
+        "replace local path/device prefix with <LOCAL_HOME>: 30",
+        "replace password-labelled test-environment configuration value: 1; original retained locally"
+      ]
+    },
+    {
+      "original_path": "run-04-concurrent/command.json",
+      "published_path": "run-04-concurrent/command.json",
+      "original_sha256": "a2e9119f2bcfb373e4c5debc1da056c31543dcdfdc16d8e0c3e1ea08362e8c22",
+      "published_sha256": "2cb317e6ba001c484907f121ba2c6750e47158919e4f44b0a7f4a094adc16349",
+      "original_bytes": 490,
+      "published_bytes": 458,
+      "transformations": [
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 1"
+      ]
+    },
+    {
+      "original_path": "run-04-concurrent/observations.json",
+      "published_path": "run-04-concurrent/observations.json",
+      "original_sha256": "9f6e42a853ed5301e524a12a399f87ce32dcd6ed7e655cb5f68778f16963a544",
+      "published_sha256": "9f6e42a853ed5301e524a12a399f87ce32dcd6ed7e655cb5f68778f16963a544",
+      "original_bytes": 22374,
+      "published_bytes": 22374,
+      "transformations": []
+    },
+    {
+      "original_path": "run-04-concurrent/result.json",
+      "published_path": "run-04-concurrent/result.json",
+      "original_sha256": "fffedc8ee93cad0dcdfd1e79052312739c78613886d20751b239f37fd98c22aa",
+      "published_sha256": "be02b1b7e774780bf65659be3ffba6b3d35b08f6586224c6334513ec211b4575",
+      "original_bytes": 560,
+      "published_bytes": 528,
+      "transformations": [
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 1"
+      ]
+    },
+    {
+      "original_path": "run-04-concurrent/stderr.log",
+      "published_path": "run-04-concurrent/stderr.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "published_bytes": 0,
+      "transformations": []
+    },
+    {
+      "original_path": "run-04-concurrent/stdout.log",
+      "published_path": "run-04-concurrent/stdout.log",
+      "original_sha256": "c4be985ec2e3292e0a06024d0764d194f60552ed7373ff9d56f1ce6abfb253d1",
+      "published_sha256": "55e55fa899e1158b7901b48a0ae7c4ceb84893c7d1af9df5f0c36848ea066a8e",
+      "original_bytes": 76685,
+      "published_bytes": 70910,
+      "transformations": [
+        "replace ephemeral SQLite filenames: 5",
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 178",
+        "replace password-labelled test-environment configuration value: 1; original retained locally"
+      ]
+    },
+    {
+      "original_path": "run-05-control-ledger/command.json",
+      "published_path": "run-05-control-ledger/command.json",
+      "original_sha256": "5bf29491bcad244406ecc830eea67bc81c40db4ede291043ff2c5cce7a397829",
+      "published_sha256": "19e9ddc2ee7ff3f37671d30da3673678fa53b29dd3bff3d9a6d745c9e99cc901",
+      "original_bytes": 484,
+      "published_bytes": 452,
+      "transformations": [
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 1"
+      ]
+    },
+    {
+      "original_path": "run-05-control-ledger/observations.json",
+      "published_path": "run-05-control-ledger/observations.json",
+      "original_sha256": "e7c9112d7745541d99141e65d76ac1f773a01bad1c048041909faa19c6138518",
+      "published_sha256": "e7c9112d7745541d99141e65d76ac1f773a01bad1c048041909faa19c6138518",
+      "original_bytes": 31184,
+      "published_bytes": 31184,
+      "transformations": []
+    },
+    {
+      "original_path": "run-05-control-ledger/result.json",
+      "published_path": "run-05-control-ledger/result.json",
+      "original_sha256": "6d1b2577ee2a8538da9e737b49214c7d76ff66dd96c491671958e371d0d73b65",
+      "published_sha256": "23ddf1f90cbc25dc941bbf8009768782630485a64eeb6213d928e58801d2ad58",
+      "original_bytes": 554,
+      "published_bytes": 522,
+      "transformations": [
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 1"
+      ]
+    },
+    {
+      "original_path": "run-05-control-ledger/stderr.log",
+      "published_path": "run-05-control-ledger/stderr.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "published_bytes": 0,
+      "transformations": []
+    },
+    {
+      "original_path": "run-05-control-ledger/stdout.log",
+      "published_path": "run-05-control-ledger/stdout.log",
+      "original_sha256": "a0a910f08dcb40a197607504827e0c508a791f84519180c9f87a021d62d0f036",
+      "published_sha256": "db153ddbe4dd2d16a2ef3036f53dfab662ed094a1e0fe14cd7877b779a0dd33e",
+      "original_bytes": 80678,
+      "published_bytes": 74999,
+      "transformations": [
+        "replace ephemeral SQLite filenames: 5",
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 175",
+        "replace password-labelled test-environment configuration value: 1; original retained locally"
+      ]
+    },
+    {
+      "original_path": "run-06-response-lost-ledger/command.json",
+      "published_path": "run-06-response-lost-ledger/command.json",
+      "original_sha256": "8a3114171e26979dc5f038ec5117824f909c36c101d337f41f10eadb9a73879a",
+      "published_sha256": "c887915b1b2fe8961879b3cdc88e2b77779473501eb10712b92692950c28cac9",
+      "original_bytes": 483,
+      "published_bytes": 451,
+      "transformations": [
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 1"
+      ]
+    },
+    {
+      "original_path": "run-06-response-lost-ledger/observations.json",
+      "published_path": "run-06-response-lost-ledger/observations.json",
+      "original_sha256": "8b4e4309e9f597565ddf71153d184eab0ce316f427abc75a722d715fe68bcfbd",
+      "published_sha256": "8b4e4309e9f597565ddf71153d184eab0ce316f427abc75a722d715fe68bcfbd",
+      "original_bytes": 48427,
+      "published_bytes": 48427,
+      "transformations": []
+    },
+    {
+      "original_path": "run-06-response-lost-ledger/result.json",
+      "published_path": "run-06-response-lost-ledger/result.json",
+      "original_sha256": "5505cf91c853c83e05a9decb563db8da1c63937d29742725e5c50c940432d58d",
+      "published_sha256": "7c5df555663f4a94d09c27c3c497656465d9cdf5d3b9e53cec38d9ba395e1b5d",
+      "original_bytes": 553,
+      "published_bytes": 521,
+      "transformations": [
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 1"
+      ]
+    },
+    {
+      "original_path": "run-06-response-lost-ledger/stderr.log",
+      "published_path": "run-06-response-lost-ledger/stderr.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "published_bytes": 0,
+      "transformations": []
+    },
+    {
+      "original_path": "run-06-response-lost-ledger/stdout.log",
+      "published_path": "run-06-response-lost-ledger/stdout.log",
+      "original_sha256": "6c255b56b698555254640959eb2fa87c4e6027d84222d7388082318ec13fa901",
+      "published_sha256": "f40c118019d0c794cd7ffc9fab78d7338ceb218bad6e2d7efa633b4c5d154391",
+      "original_bytes": 99216,
+      "published_bytes": 92741,
+      "transformations": [
+        "replace ephemeral SQLite filenames: 5",
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 198",
+        "replace local path/device prefix with <LOCAL_HOME>: 15",
+        "replace password-labelled test-environment configuration value: 1; original retained locally"
+      ]
+    },
+    {
+      "original_path": "run-07-precommit-ledger/command.json",
+      "published_path": "run-07-precommit-ledger/command.json",
+      "original_sha256": "100f0448a4d5171ef0e4bdbbce02f85172a1b3e9d219218d67a129c1caf78b14",
+      "published_sha256": "d59a585cc337d954c55ef08f952f4b3ae422364daa0d6922a4473269cd027020",
+      "original_bytes": 487,
+      "published_bytes": 455,
+      "transformations": [
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 1"
+      ]
+    },
+    {
+      "original_path": "run-07-precommit-ledger/observations.json",
+      "published_path": "run-07-precommit-ledger/observations.json",
+      "original_sha256": "40339dcc6bc5b6703777f7df2fd74239ecaccc68e265b1e3b64b301da00bdff5",
+      "published_sha256": "40339dcc6bc5b6703777f7df2fd74239ecaccc68e265b1e3b64b301da00bdff5",
+      "original_bytes": 53788,
+      "published_bytes": 53788,
+      "transformations": []
+    },
+    {
+      "original_path": "run-07-precommit-ledger/result.json",
+      "published_path": "run-07-precommit-ledger/result.json",
+      "original_sha256": "d3cfdc329027daad0bf603cc6e39265513973c00c5945f7fd9c89042748f4f15",
+      "published_sha256": "02ae3f79cd5fc4981e4eef64c876a5d16f4551d548958a08f0e8ce856069aa75",
+      "original_bytes": 557,
+      "published_bytes": 525,
+      "transformations": [
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 1"
+      ]
+    },
+    {
+      "original_path": "run-07-precommit-ledger/stderr.log",
+      "published_path": "run-07-precommit-ledger/stderr.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "published_bytes": 0,
+      "transformations": []
+    },
+    {
+      "original_path": "run-07-precommit-ledger/stdout.log",
+      "published_path": "run-07-precommit-ledger/stdout.log",
+      "original_sha256": "16fa8bff94d88a2a2306837db9d6338ae5b1649d71e873aa58f785741fac6b58",
+      "published_sha256": "7bfa08886a07e8adfd5bb4362079bb8b9a992a68569eab6e6102101e22ea35b4",
+      "original_bytes": 125170,
+      "published_bytes": 116043,
+      "transformations": [
+        "replace ephemeral SQLite filenames: 5",
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 279",
+        "replace local path/device prefix with <LOCAL_HOME>: 30",
+        "replace password-labelled test-environment configuration value: 1; original retained locally"
+      ]
+    },
+    {
+      "original_path": "run-08-concurrent-ledger/command.json",
+      "published_path": "run-08-concurrent-ledger/command.json",
+      "original_sha256": "cae7847011c60edc32811f4670c6e2463f4a93eee0e234de4fb9869866456167",
+      "published_sha256": "d71677da291ebce4cfc303ab3590e663b7db8e5bc525e7873e59459152bcdbfc",
+      "original_bytes": 490,
+      "published_bytes": 458,
+      "transformations": [
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 1"
+      ]
+    },
+    {
+      "original_path": "run-08-concurrent-ledger/observations.json",
+      "published_path": "run-08-concurrent-ledger/observations.json",
+      "original_sha256": "d2778ea5fdc8bad52235c542d062ead20239c0c6cdc23d47fb2995912c03fab8",
+      "published_sha256": "d2778ea5fdc8bad52235c542d062ead20239c0c6cdc23d47fb2995912c03fab8",
+      "original_bytes": 31471,
+      "published_bytes": 31471,
+      "transformations": []
+    },
+    {
+      "original_path": "run-08-concurrent-ledger/result.json",
+      "published_path": "run-08-concurrent-ledger/result.json",
+      "original_sha256": "30facc75a21a22558b05060ab429637a299d9172d990f36e235dbdea787eafa7",
+      "published_sha256": "120225eca02c058d67b5cbeccac98a21f45625a907344584b38d9ac1d71aefd8",
+      "original_bytes": 560,
+      "published_bytes": 528,
+      "transformations": [
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 1"
+      ]
+    },
+    {
+      "original_path": "run-08-concurrent-ledger/stderr.log",
+      "published_path": "run-08-concurrent-ledger/stderr.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "published_bytes": 0,
+      "transformations": []
+    },
+    {
+      "original_path": "run-08-concurrent-ledger/stdout.log",
+      "published_path": "run-08-concurrent-ledger/stdout.log",
+      "original_sha256": "49cfc1add130776fbb488ca5cf6e610e52e5b68c9caf53c8f479a82c22508f37",
+      "published_sha256": "e0fe8b2f18e712d2f64490c67040c5b90f0b41b729d48f5acaff193fc4561bf2",
+      "original_bytes": 82219,
+      "published_bytes": 76444,
+      "transformations": [
+        "replace ephemeral SQLite filenames: 5",
+        "replace local path/device prefix with <SERVER_CHECKOUT>: 178",
+        "replace password-labelled test-environment configuration value: 1; original retained locally"
+      ]
+    },
+    {
+      "original_path": "run-focused.py",
+      "published_path": "run-focused.py",
+      "original_sha256": "abda95425cb4a52e80c7cbd698288ee4eeafdfe22c71f1425b369f6b1db2af72",
+      "published_sha256": "abda95425cb4a52e80c7cbd698288ee4eeafdfe22c71f1425b369f6b1db2af72",
+      "original_bytes": 1519,
+      "published_bytes": 1519,
+      "transformations": []
+    },
+    {
+      "original_path": "test-only.diff",
+      "published_path": "test-only.diff",
+      "original_sha256": "dd3e018a798cb490f361af089f375fdc4d804d91aa804e3ba2ab3fda7be78bf8",
+      "published_sha256": "dd3e018a798cb490f361af089f375fdc4d804d91aa804e3ba2ab3fda7be78bf8",
+      "original_bytes": 16127,
+      "published_bytes": 16127,
+      "transformations": []
+    },
+    {
+      "original_path": "verification.json",
+      "published_path": "verification.json",
+      "original_sha256": "342946322c518b1e249dac8ce422127d892a37f9c3f4c4f2c89d1a0d2d3cb411",
+      "published_sha256": "342946322c518b1e249dac8ce422127d892a37f9c3f4c4f2c89d1a0d2d3cb411",
+      "original_bytes": 977,
+      "published_bytes": 977,
+      "transformations": []
+    },
+    {
+      "original_path": "../../tests/ccpo_c3/commit_ambiguity_test.go",
+      "published_path": "server-test/commit_ambiguity_test.go",
+      "original_sha256": "22b5bf7cd197edfaa78452452e1f239e8d7d4997aceefc9301b95b79ca213f25",
+      "published_sha256": "22b5bf7cd197edfaa78452452e1f239e8d7d4997aceefc9301b95b79ca213f25",
+      "original_bytes": 15600,
+      "published_bytes": 15600,
+      "transformations": [
+        "relocate exact Server test source inside SDK-Rust research evidence; bytes unchanged"
+      ]
+    }
+  ]
+}

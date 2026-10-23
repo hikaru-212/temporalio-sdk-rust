@@ -1,0 +1,307 @@
+diff --git a/tests/ccpo_c3/commit_ambiguity_test.go b/tests/ccpo_c3/commit_ambiguity_test.go
+new file mode 100644
+index 000000000..98e31e03d
+--- /dev/null
++++ b/tests/ccpo_c3/commit_ambiguity_test.go
+@@ -0,0 +1,301 @@
++package ccpo_c3_test
++
++import (
++	"bytes"
++	"context"
++	"crypto/sha256"
++	"encoding/hex"
++	"encoding/json"
++	"fmt"
++	"sync"
++	"sync/atomic"
++	"testing"
++	"time"
++
++	"github.com/google/uuid"
++	"github.com/stretchr/testify/require"
++	commandpb "go.temporal.io/api/command/v1"
++	commonpb "go.temporal.io/api/common/v1"
++	enumspb "go.temporal.io/api/enums/v1"
++	historypb "go.temporal.io/api/history/v1"
++	"go.temporal.io/api/serviceerror"
++	taskqueuepb "go.temporal.io/api/taskqueue/v1"
++	"go.temporal.io/api/workflowservice/v1"
++	tokenspb "go.temporal.io/server/api/token/v1"
++	"go.temporal.io/server/chasm"
++	"go.temporal.io/server/common"
++	"go.temporal.io/server/common/config"
++	"go.temporal.io/server/common/headers"
++	"go.temporal.io/server/common/log/tag"
++	"go.temporal.io/server/common/namespace"
++	"go.temporal.io/server/common/payloads"
++	"go.temporal.io/server/common/persistence"
++	persistencetests "go.temporal.io/server/common/persistence/persistence-tests"
++	"go.temporal.io/server/common/persistence/versionhistory"
++	"go.temporal.io/server/common/rpc/grpcfaults"
++	"go.temporal.io/server/common/tasktoken"
++	"go.temporal.io/server/common/testing/testhooks"
++	"go.temporal.io/server/common/testing/testlogger"
++	"go.temporal.io/server/service/history/tasks"
++	"go.temporal.io/server/tests/testcore"
++	"google.golang.org/protobuf/encoding/protojson"
++	"google.golang.org/protobuf/proto"
++	"google.golang.org/protobuf/types/known/durationpb"
++)
++
++const sourceSHA = "0d5e3848bed625907987f73d5eaae8dc77bc6590"
++
++type experiment struct {
++	t                           *testing.T
++	ctx                         context.Context
++	cluster                     *testcore.TestCluster
++	client                      workflowservice.WorkflowServiceClient
++	ns, nsID, workflowID, runID string
++	queue                       *taskqueuepb.TaskQueue
++	shardID                     int32
++	token                       *tokenspb.Task
++	request                     *workflowservice.RespondWorkflowTaskCompletedRequest
++	requestBytes                []byte
++	armed                       atomic.Bool
++	faults                      atomic.Int32
++	release                     func()
++}
++
++func (e *experiment) record(stage string, value any) {
++	b, err := json.Marshal(map[string]any{"stage": stage, "value": value})
++	if err != nil {
++		e.t.Errorf("evidence serialization: %v", err)
++		return
++	}
++	e.t.Logf("CCPO %s", b)
++}
++
++func jsonProto(t *testing.T, value proto.Message) json.RawMessage {
++	t.Helper()
++	b, err := protojson.MarshalOptions{UseProtoNames: true}.Marshal(value)
++	require.NoError(t, err)
++	return b
++}
++
++func newExperiment(t *testing.T, name string) *experiment {
++	t.Helper()
++	ctx, cancel := context.WithTimeout(headers.SetVersions(context.Background()), 90*time.Second)
++	t.Cleanup(cancel)
++	e := &experiment{t: t, ctx: ctx, ns: "ccpo-c3-" + name, workflowID: "ccpo-c3-" + name,
++		queue: &taskqueuepb.TaskQueue{Name: "ccpo-c3-queue", Kind: enumspb.TASK_QUEUE_KIND_NORMAL}}
++	logger := testlogger.NewTestLogger(t, testlogger.FailOnExpectedErrorOnly)
++	logger.Expect(testlogger.Error, ".*", tag.FailedAssertion)
++	db := persistencetests.GetSQLiteFileTestClusterOption()
++	cfg := &testcore.TestClusterConfig{
++		Persistence: *db, HistoryConfig: testcore.HistoryConfig{NumHistoryShards: 1},
++		WorkerConfig: testcore.WorkerConfig{DisableWorker: true}, EnableHistoryTaskRecorder: true,
++		FaultInjection: &config.FaultInjection{Injector: func(target config.FaultInjectionTarget) error {
++			r, ok := target.Request.(*persistence.InternalUpdateWorkflowExecutionRequest)
++			if !ok || target.Method != "UpdateWorkflowExecution" || r.UpdateWorkflowMutation.WorkflowID != e.workflowID || !e.armed.Load() {
++				return nil
++			}
++			e.faults.Add(1)
++			e.record("before-store-rejection", map[string]any{"range_id": r.RangeID, "next_event_id_proposed": r.UpdateWorkflowMutation.NextEventID, "db_revision_proposed": r.UpdateWorkflowMutation.DBRecordVersion, "tasks_proposed": r.UpdateWorkflowMutation.Tasks})
++			return &serviceerror.ResourceExhausted{Cause: enumspb.RESOURCE_EXHAUSTED_CAUSE_SYSTEM_OVERLOADED, Scope: enumspb.RESOURCE_EXHAUSTED_SCOPE_SYSTEM, Message: "CCPO deterministic pre-store rejection"}
++		}},
++	}
++	cluster, err := testcore.NewTestClusterFactory().NewCluster(t, cfg, logger)
++	require.NoError(t, err)
++	e.cluster = cluster
++	t.Cleanup(func() { logger.Close(); require.NoError(t, cluster.TearDownCluster()) })
++	e.client = cluster.FrontendClient()
++	e.record("baseline", map[string]any{"source_sha": sourceSHA, "database": "file SQLite", "sqlite_attributes": db.ConnectAttributes, "namespace": e.ns, "workflow_id": e.workflowID, "wft_timeout_seconds": 120, "external_activity_executor": false})
++	_, err = e.client.RegisterNamespace(ctx, &workflowservice.RegisterNamespaceRequest{Namespace: e.ns, WorkflowExecutionRetentionPeriod: durationpb.New(24 * time.Hour)})
++	require.NoError(t, err)
++	var described *workflowservice.DescribeNamespaceResponse
++	require.Eventually(t, func() bool {
++		described, err = e.client.DescribeNamespace(ctx, &workflowservice.DescribeNamespaceRequest{Namespace: e.ns})
++		return err == nil
++	}, 10*time.Second, 20*time.Millisecond)
++	e.nsID = described.NamespaceInfo.Id
++	e.shardID = common.WorkflowIDToHistoryShard(e.nsID, e.workflowID, 1)
++	gate := make(chan struct{})
++	var once sync.Once
++	e.release = func() { once.Do(func() { close(gate) }) }
++	// Hold dispatch so the committed task row can be read before a queue ack removes it.
++	remove := cluster.InjectHook(t, testhooks.NewHook(testhooks.HistoryTransferTaskInterceptor, func(task tasks.Task, run func()) {
++		if a, ok := task.(*tasks.ActivityTask); ok && a.WorkflowID == e.workflowID {
++			<-gate
++		}
++		run()
++	}), namespace.ID(e.nsID))
++	t.Cleanup(func() { e.release(); remove() })
++	started, err := e.client.StartWorkflowExecution(ctx, &workflowservice.StartWorkflowExecutionRequest{Namespace: e.ns, WorkflowId: e.workflowID, RequestId: uuid.NewString(), WorkflowType: &commonpb.WorkflowType{Name: "ccpo-c3-workflow"}, TaskQueue: e.queue, WorkflowRunTimeout: durationpb.New(10 * time.Minute), WorkflowTaskTimeout: durationpb.New(120 * time.Second), Identity: "ccpo-client"})
++	require.NoError(t, err)
++	e.runID = started.RunId
++	poll, err := e.client.PollWorkflowTaskQueue(ctx, &workflowservice.PollWorkflowTaskQueueRequest{Namespace: e.ns, TaskQueue: e.queue, Identity: "ccpo-client"})
++	require.NoError(t, err)
++	require.NotEmpty(t, poll.TaskToken)
++	e.token, err = tasktoken.NewSerializer().Deserialize(poll.TaskToken)
++	require.NoError(t, err)
++	require.EqualValues(t, 2, e.token.ScheduledEventId)
++	require.EqualValues(t, 3, e.token.StartedEventId)
++	require.EqualValues(t, 1, e.token.Attempt)
++	require.Empty(t, poll.NextPageToken)
++	e.request = &workflowservice.RespondWorkflowTaskCompletedRequest{Namespace: e.ns, TaskToken: poll.TaskToken, Identity: "ccpo-client", Commands: []*commandpb.Command{{CommandType: enumspb.COMMAND_TYPE_SCHEDULE_ACTIVITY_TASK, Attributes: &commandpb.Command_ScheduleActivityTaskCommandAttributes{ScheduleActivityTaskCommandAttributes: &commandpb.ScheduleActivityTaskCommandAttributes{ActivityId: "ccpo-activity-1", ActivityType: &commonpb.ActivityType{Name: "ccpo-activity"}, TaskQueue: e.queue, Input: payloads.EncodeString("ccpo-input"), ScheduleToCloseTimeout: durationpb.New(5 * time.Minute), StartToCloseTimeout: durationpb.New(time.Minute), RequestEagerExecution: false}}}}}
++	e.requestBytes, err = proto.MarshalOptions{Deterministic: true}.Marshal(e.request)
++	require.NoError(t, err)
++	e.record("request", map[string]any{"token": jsonProto(t, e.token), "token_hex": hex.EncodeToString(poll.TaskToken), "request": jsonProto(t, e.request), "sha256": fmt.Sprintf("%x", sha256.Sum256(e.requestBytes))})
++	e.inspect("initial", false)
++	return e
++}
++
++func (e *experiment) complete(label string) error {
++	b, err := proto.MarshalOptions{Deterministic: true}.Marshal(e.request)
++	require.NoError(e.t, err)
++	require.Equal(e.t, e.requestBytes, b)
++	response, err := e.client.RespondWorkflowTaskCompleted(e.ctx, proto.Clone(e.request).(*workflowservice.RespondWorkflowTaskCompletedRequest))
++	e.record(label, map[string]any{"error_type": fmt.Sprintf("%T", err), "error": fmt.Sprint(err), "received_success": err == nil, "response": response})
++	return err
++}
++
++func (e *experiment) inspect(label string, accepted bool) *persistence.GetWorkflowExecutionResponse {
++	t := e.t
++	manager := e.cluster.ExecutionManager()
++	state, err := manager.GetWorkflowExecution(e.ctx, &persistence.GetWorkflowExecutionRequest{ShardID: e.shardID, NamespaceID: e.nsID, WorkflowID: e.workflowID, RunID: e.runID, ArchetypeID: chasm.WorkflowArchetypeID})
++	require.NoError(t, err)
++	shard, err := e.cluster.TestBase().ShardMgr.GetOrCreateShard(e.ctx, &persistence.GetOrCreateShardRequest{ShardID: e.shardID})
++	require.NoError(t, err)
++	branch, err := versionhistory.GetCurrentVersionHistory(state.State.ExecutionInfo.VersionHistories)
++	require.NoError(t, err)
++	history, err := manager.ReadHistoryBranch(e.ctx, &persistence.ReadHistoryBranchRequest{ShardID: e.shardID, BranchToken: branch.BranchToken, MinEventID: 1, MaxEventID: state.State.NextEventId, PageSize: 100})
++	require.NoError(t, err)
++	require.Empty(t, history.NextPageToken)
++	completed, scheduled := 0, 0
++	for _, event := range history.HistoryEvents {
++		switch event.EventType {
++		case enumspb.EVENT_TYPE_WORKFLOW_TASK_COMPLETED:
++			completed++
++			require.EqualValues(t, 2, event.GetWorkflowTaskCompletedEventAttributes().ScheduledEventId)
++			require.EqualValues(t, 3, event.GetWorkflowTaskCompletedEventAttributes().StartedEventId)
++		case enumspb.EVENT_TYPE_ACTIVITY_TASK_SCHEDULED:
++			scheduled++
++			require.Equal(t, "ccpo-activity-1", event.GetActivityTaskScheduledEventAttributes().ActivityId)
++			require.EqualValues(t, 4, event.GetActivityTaskScheduledEventAttributes().WorkflowTaskCompletedEventId)
++		}
++	}
++	recorded := e.cluster.GetHistoryTaskRecorder().MatchTasksForWorkflow(tasks.CategoryTransfer, e.nsID, e.workflowID, e.runID, func(r testcore.RecordedTask) bool { _, ok := r.Task.(*tasks.ActivityTask); return ok })
++	var storedTasks []tasks.Task
++	for _, r := range recorded {
++		read, readErr := manager.GetHistoryTasks(e.ctx, &persistence.GetHistoryTasksRequest{ShardID: e.shardID, TaskCategory: tasks.CategoryTransfer, InclusiveMinTaskKey: r.Task.GetKey(), ExclusiveMaxTaskKey: tasks.NewImmediateKey(r.Task.GetTaskID() + 1), BatchSize: 10})
++		require.NoError(t, readErr)
++		storedTasks = append(storedTasks, read.Tasks...)
++	}
++	e.record(label, map[string]any{"db_revision": state.DBRecordVersion, "range_id": shard.ShardInfo.RangeId, "state": jsonProto(t, state.State), "effective_history": jsonProto(t, &historypb.History{Events: history.HistoryEvents}), "valid_completions": completed, "activity_schedules": scheduled, "recorded_activity_tasks": recorded, "direct_persisted_activity_tasks": storedTasks})
++	if accepted {
++		require.Equal(t, 1, completed)
++		require.Equal(t, 1, scheduled)
++		require.EqualValues(t, 6, state.State.NextEventId)
++		require.Zero(t, state.State.ExecutionInfo.WorkflowTaskScheduledEventId)
++		require.Zero(t, state.State.ExecutionInfo.WorkflowTaskStartedEventId)
++		require.Len(t, state.State.ActivityInfos, 1)
++		require.Equal(t, "ccpo-activity-1", state.State.ActivityInfos[5].ActivityId)
++		require.Len(t, recorded, 1)
++		require.Len(t, storedTasks, 1)
++		require.EqualValues(t, 5, storedTasks[0].(*tasks.ActivityTask).ScheduledEventID)
++	} else {
++		require.Zero(t, completed)
++		require.Zero(t, scheduled)
++		require.EqualValues(t, 4, state.State.NextEventId)
++		require.EqualValues(t, 2, state.State.ExecutionInfo.WorkflowTaskScheduledEventId)
++		require.EqualValues(t, 3, state.State.ExecutionInfo.WorkflowTaskStartedEventId)
++		require.EqualValues(t, 1, state.State.ExecutionInfo.WorkflowTaskAttempt)
++		require.Empty(t, state.State.ActivityInfos)
++		require.Empty(t, recorded)
++	}
++	return state
++}
++
++func (e *experiment) recover() {
++	e.release()
++	ctx, cancel := context.WithTimeout(e.ctx, 15*time.Second)
++	defer cancel()
++	poll, err := e.client.PollActivityTaskQueue(ctx, &workflowservice.PollActivityTaskQueueRequest{Namespace: e.ns, TaskQueue: e.queue, Identity: "ccpo-recovery-observer"})
++	e.record("recovery-poll", map[string]any{"error": fmt.Sprint(err), "response": poll, "external_effect_executed": false})
++	require.NoError(e.t, err)
++	require.NotEmpty(e.t, poll.TaskToken)
++	require.Equal(e.t, "ccpo-activity-1", poll.ActivityId)
++	require.Equal(e.t, e.runID, poll.WorkflowExecution.RunId)
++	require.True(e.t, proto.Equal(payloads.EncodeString("ccpo-input"), poll.Input))
++	decoded, err := tasktoken.NewSerializer().Deserialize(poll.TaskToken)
++	require.NoError(e.t, err)
++	require.EqualValues(e.t, 5, decoded.ScheduledEventId)
++	e.record("recovery-token", jsonProto(e.t, decoded))
++}
++
++func TestCCPOC3Control(t *testing.T) {
++	e := newExperiment(t, "control")
++	require.NoError(t, e.complete("completion-1"))
++	e.inspect("committed", true)
++	e.recover()
++}
++
++func TestCCPOC3ResponseLost(t *testing.T) {
++	e := newExperiment(t, "response-lost")
++	var suppressed atomic.Int32
++	remove := e.cluster.Host().GetGRPCFaultGenerator().RegisterResponseCallback(grpcfaults.Scope{NamespaceName: namespace.Name(e.ns)}, func(_ context.Context, method string, req, resp any, handlerErr error) *grpcfaults.Outcome {
++		r, ok := req.(*workflowservice.RespondWorkflowTaskCompletedRequest)
++		if !ok || !bytes.Equal(r.TaskToken, e.request.TaskToken) || handlerErr != nil {
++			return nil
++		}
++		suppressed.Add(1)
++		e.record("successful-handler-response-suppressed", map[string]any{"method": method, "handler_error": nil, "response": resp})
++		return &grpcfaults.Outcome{Error: serviceerror.NewUnavailable("CCPO lost successful completion response")}
++	})
++	t.Cleanup(remove)
++	require.Error(t, e.complete("completion-1"))
++	require.EqualValues(t, 1, suppressed.Load())
++	first := e.inspect("after-lost-response", true)
++	remove()
++	var notFound *serviceerror.NotFound
++	require.ErrorAs(t, e.complete("completion-2"), &notFound)
++	second := e.inspect("after-identical-retry", true)
++	require.Equal(t, first.DBRecordVersion, second.DBRecordVersion)
++	require.True(t, proto.Equal(first.State, second.State))
++	e.recover()
++}
++
++func TestCCPOC3PrecommitFailure(t *testing.T) {
++	e := newExperiment(t, "precommit")
++	before := e.inspect("before-fault", false)
++	e.armed.Store(true)
++	err := e.complete("completion-1")
++	require.Error(t, err)
++	require.Positive(t, e.faults.Load())
++	after := e.inspect("after-precommit-rejection", false)
++	require.Equal(t, before.DBRecordVersion, after.DBRecordVersion)
++	require.True(t, proto.Equal(before.State, after.State))
++	e.armed.Store(false)
++	e.record("fault-disabled", map[string]any{"rejected_persistence_calls": e.faults.Load()})
++	require.NoError(t, e.complete("completion-2"))
++	e.inspect("after-identical-retry", true)
++	e.recover()
++}
++
++func TestCCPOC3Concurrent(t *testing.T) {
++	e := newExperiment(t, "concurrent")
++	start := make(chan struct{})
++	errors := make(chan error, 2)
++	for i := range 2 {
++		go func() { <-start; errors <- e.complete(fmt.Sprintf("concurrent-%d", i)) }()
++	}
++	close(start)
++	accepted := 0
++	for range 2 {
++		err := <-errors
++		if err == nil {
++			accepted++
++		} else {
++			var nf *serviceerror.NotFound
++			require.ErrorAs(t, err, &nf)
++		}
++	}
++	require.Equal(t, 1, accepted)
++	e.inspect("after-concurrent-attempts", true)
++	e.recover()
++}

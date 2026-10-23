@@ -1,0 +1,39 @@
+{
+  "recorded_utc": "2026-10-23T12:18:08.191233+00:00",
+  "repositories": {
+    "original_server": {
+      "path": "<ORIGINAL_SERVER_CHECKOUT>",
+      "head": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+      "status": "",
+      "tracked_diff_stat": ""
+    },
+    "c2_checkpoint": {
+      "path": "<C2_CHECKPOINT>",
+      "head": "70acd8a9eaad6a14a0b58ccf113c0cfda9e4cad1",
+      "status": "",
+      "tracked_diff_stat": ""
+    },
+    "c1_checkpoint": {
+      "path": "<C1_CHECKPOINT>",
+      "head": "029a790e4fa7663cf70c8fedc82b379d47f99dbb",
+      "status": "",
+      "tracked_diff_stat": ""
+    },
+    "original_sdk_review": {
+      "path": "<SDK_REVIEW_CHECKOUT>",
+      "head": "3f9fcd253767d08733304cfaf20500c87a3015db",
+      "status": "<OMITTED unrelated pre-existing file inventory: 120 entries>",
+      "tracked_diff_stat": ""
+    },
+    "c3_isolated": {
+      "path": "<SERVER_CHECKOUT>",
+      "head": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+      "status": "?? research-evidence/c3-controlled-commit/PREDICTIONS.md\n?? research-evidence/c3-controlled-commit/RESULTS.json\n?? research-evidence/c3-controlled-commit/evidence-extension.json\n?? research-evidence/c3-controlled-commit/harness-audit.json\n?? research-evidence/c3-controlled-commit/harness-v1.diff\n?? research-evidence/c3-controlled-commit/harness-v1.test.go.txt\n?? research-evidence/c3-controlled-commit/lint-check/command.json\n?? research-evidence/c3-controlled-commit/lint-check/exit-code.txt\n?? research-evidence/c3-controlled-commit/lint-check/stderr.log\n?? research-evidence/c3-controlled-commit/lint-check/stdout.log\n?? research-evidence/c3-controlled-commit/preregistration.json\n?? research-evidence/c3-controlled-commit/run-01-control/command.json\n?? research-evidence/c3-controlled-commit/run-01-control/observations.json\n?? research-evidence/c3-controlled-commit/run-01-control/result.json\n?? research-evidence/c3-controlled-commit/run-01-control/stderr.log\n?? research-evidence/c3-controlled-commit/run-01-control/stdout.log\n?? research-evidence/c3-controlled-commit/run-02-response-lost/command.json\n?? research-evidence/c3-controlled-commit/run-02-response-lost/observations.json\n?? research-evidence/c3-controlled-commit/run-02-response-lost/result.json\n?? research-evidence/c3-controlled-commit/run-02-response-lost/stderr.log\n?? research-evidence/c3-controlled-commit/run-02-response-lost/stdout.log\n?? research-evidence/c3-controlled-commit/run-03-precommit/command.json\n?? research-evidence/c3-controlled-commit/run-03-precommit/observations.json\n?? research-evidence/c3-controlled-commit/run-03-precommit/result.json\n?? research-evidence/c3-controlled-commit/run-03-precommit/stderr.log\n?? research-evidence/c3-controlled-commit/run-03-precommit/stdout.log\n?? research-evidence/c3-controlled-commit/run-04-concurrent/command.json\n?? research-evidence/c3-controlled-commit/run-04-concurrent/observations.json\n?? research-evidence/c3-controlled-commit/run-04-concurrent/result.json\n?? research-evidence/c3-controlled-commit/run-04-concurrent/stderr.log\n?? research-evidence/c3-controlled-commit/run-04-concurrent/stdout.log\n?? research-evidence/c3-controlled-commit/run-05-control-ledger/command.json\n?? research-evidence/c3-controlled-commit/run-05-control-ledger/observations.json\n?? research-evidence/c3-controlled-commit/run-05-control-ledger/result.json\n?? research-evidence/c3-controlled-commit/run-05-control-ledger/stderr.log\n?? research-evidence/c3-controlled-commit/run-05-control-ledger/stdout.log\n?? research-evidence/c3-controlled-commit/run-06-response-lost-ledger/command.json\n?? research-evidence/c3-controlled-commit/run-06-response-lost-ledger/observations.json\n?? research-evidence/c3-controlled-commit/run-06-response-lost-ledger/result.json\n?? research-evidence/c3-controlled-commit/run-06-response-lost-ledger/stderr.log\n?? research-evidence/c3-controlled-commit/run-06-response-lost-ledger/stdout.log\n?? research-evidence/c3-controlled-commit/run-07-precommit-ledger/command.json\n?? research-evidence/c3-controlled-commit/run-07-precommit-ledger/observations.json\n?? research-evidence/c3-controlled-commit/run-07-precommit-ledger/result.json\n?? research-evidence/c3-controlled-commit/run-07-precommit-ledger/stderr.log\n?? research-evidence/c3-controlled-commit/run-07-precommit-ledger/stdout.log\n?? research-evidence/c3-controlled-commit/run-08-concurrent-ledger/command.json\n?? research-evidence/c3-controlled-commit/run-08-concurrent-ledger/observations.json\n?? research-evidence/c3-controlled-commit/run-08-concurrent-ledger/result.json\n?? research-evidence/c3-controlled-commit/run-08-concurrent-ledger/stderr.log\n?? research-evidence/c3-controlled-commit/run-08-concurrent-ledger/stdout.log\n?? research-evidence/c3-controlled-commit/run-focused.py\n?? research-evidence/c3-controlled-commit/test-only.diff\n?? tests/ccpo_c3/commit_ambiguity_test.go\n",
+      "tracked_diff_stat": ""
+    }
+  },
+  "test_only_sha256": "22b5bf7cd197edfaa78452452e1f239e8d7d4997aceefc9301b95b79ca213f25",
+  "production_tracked_diff_empty": true,
+  "no_c3_commit": true,
+  "no_c3_push": true
+}

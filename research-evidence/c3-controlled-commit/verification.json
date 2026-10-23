@@ -1,0 +1,26 @@
+{
+  "verified_utc": "2026-10-23T12:23:34.295008+00:00",
+  "raw_run_count": 8,
+  "runtime_exit_codes": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "original_test_sha256": "67a4041a30e989ff8565ef3c85a6e8120816fd15ccaa882ba3119f363f95ebe9",
+  "final_test_sha256": "22b5bf7cd197edfaa78452452e1f239e8d7d4997aceefc9301b95b79ca213f25",
+  "pre_registration_hash_and_order_verified": true,
+  "every_extracted_observation_matches_original_stdout_line": true,
+  "focused_patch_applies_to_clean_pinned_server": true,
+  "original_server_tracked_and_untracked_status_clean": true,
+  "c2_manifest_verified": true,
+  "credential_pattern_scan_findings": [],
+  "scan_limits": "Pattern scan is not a general secret-detection proof. All workflow identities are controlled synthetic test data; raw logs remain local.",
+  "runtime_tests_compile_passed": true,
+  "lint_exit_code": 2,
+  "lint_status": "Tool preparation failed in cached-only/offline mode; no lint PASS claimed."
+}

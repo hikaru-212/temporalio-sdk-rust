@@ -1,0 +1,45 @@
+{
+  "audit_utc": "2026-10-23T12:38:01.636551+00:00",
+  "server_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+  "parent_checkpoint": "70acd8a9eaad6a14a0b58ccf113c0cfda9e4cad1",
+  "branch": "research/ccpo-egts-c3-commit-injection",
+  "authenticated_github_login": "hikaru-212",
+  "github_repository_owner": "hikaru-212",
+  "verified_push_permission": true,
+  "verified_remote_push_url": "https://github.com/hikaru-212/temporalio-sdk-rust.git",
+  "remote_target_branch_absent_at_initial_check": true,
+  "remote_parent_sha_verified": "70acd8a9eaad6a14a0b58ccf113c0cfda9e4cad1",
+  "original_archive_sha256": "30939a09296226c6a065e9d88513ae033bd4311c4c6556b13aad70c1be284439",
+  "original_manifest_entries_verified": 58,
+  "original_archive_files_equal_workspace": 59,
+  "historical_scenarios": [
+    "control",
+    "post-handler response suppression",
+    "pre-store rejection then retry",
+    "concurrent same-WFT requests"
+  ],
+  "historical_focused_runs": 8,
+  "new_tests_or_compilation": false,
+  "lint_preparation_exit_preserved": 2,
+  "direct_task_read_discovery": "recorder-discovered IDs; narrow [id,id+1) queries",
+  "independent_full_task_range_enumeration": "remaining obligation; not performed",
+  "publication": "sanitized copies with per-file original/public hashes; original workspace/archive unchanged",
+  "secret_pattern_findings": [],
+  "secret_scan_limit": "Pattern checks plus review; synthetic test tokens are retained as experimental evidence. This is not a general secret-detection proof.",
+  "staging_scope": "research-evidence/c3-controlled-commit only",
+  "production_changes": false,
+  "self_contained_source": "exact test source and patch included; pinned Server/dependencies must be obtained separately",
+  "password_label_review": {
+    "matched_log_files": 8,
+    "public_values": "<REDACTED_PASSWORD>",
+    "original_values": "preserved only in unchanged local originals/archive",
+    "workflow_observations_changed": false
+  },
+  "staged_diff_whitespace_review": {
+    "full_check_exit": 2,
+    "notice_count": 292,
+    "scope": "preserved stdout log space-before-tab indentation only",
+    "non_log_check_exit": 0,
+    "raw_formatting_preserved": true
+  }
+}

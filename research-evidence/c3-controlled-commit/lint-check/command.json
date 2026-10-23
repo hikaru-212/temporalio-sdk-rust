@@ -1,0 +1,14 @@
+{
+  "command": [
+    "make",
+    "lint-code-fast",
+    "GOLANGCI_LINT_BASE_REV=0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "GOLANGCI_LINT_FIX=false"
+  ],
+  "environment_overrides": {
+    "GOPROXY": "off",
+    "GOSUMDB": "off"
+  },
+  "reason": "Required repository lint target; cached dependencies only to avoid unrelated tool downloads/build expansion.",
+  "start_utc": "2026-10-23T12:14:44.220220+00:00"
+}

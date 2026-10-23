@@ -1,0 +1,9 @@
+{
+  "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+  "test_sha256": "67a4041a30e989ff8565ef3c85a6e8120816fd15ccaa882ba3119f363f95ebe9",
+  "go": "go version go1.27.0 linux/arm64",
+  "disk": "Filesystem                         Size  Used Avail Use% Mounted on\n<LOCAL_FILESYSTEM>  123G   97G   21G  83% <TEMP_ROOT>\n",
+  "timestamp": "2026-10-23T12:09:07.842047+00:00",
+  "test_path": "tests/ccpo_c3/commit_ambiguity_test.go",
+  "feasibility": "real file-backed SQLite + existing post-handler RPC fault + pre-store injection + transfer-task channel gate; no production edits"
+}
