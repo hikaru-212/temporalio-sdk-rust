@@ -1,0 +1,20 @@
+{
+  "parent_evidence_manifest_checks": {
+    "c2d-live-replay-2026-10-22": {
+      "manifest_sha256": "338949f70297355cfea3d885279453395eb51cfda0a7f838417675cff6529ad5",
+      "entries": 47,
+      "mismatches": []
+    },
+    "c2e2-signal-boundary-2026-10-22": {
+      "manifest_sha256": "30e400228a6d742896103d57f70b65fbbb283df52b9862200b8258abeb30a4a7",
+      "entries": 96,
+      "mismatches": []
+    }
+  },
+  "report_sections": 9,
+  "original_external_reference_count": 5,
+  "new_files_documentation_only": true,
+  "manual_publication_review": "Report and provenance reviewed; no credentials, private keys, environment dumps, machine-specific paths, build logs or generated runtime data included.",
+  "original_workspaces": "Reviewed existing branches, worktrees, remotes and uncommitted evidence before isolation; no changes made to them.",
+  "existing_tracked_tree_unchanged": true
+}
