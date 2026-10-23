@@ -1,0 +1,20 @@
+{
+  "parent_evidence_checks": {
+    "c2d-live-replay-2026-10-22": {
+      "verified_entries": 47,
+      "mismatches": 0
+    },
+    "c2e2-signal-boundary-2026-10-22": {
+      "verified_entries": 96,
+      "mismatches": 0
+    },
+    "c1-ambiguous-commit": {
+      "verified_entries": 4,
+      "mismatches": 0
+    }
+  },
+  "production_and_test_changes": false,
+  "public_documents_only": true,
+  "independent_clone": true,
+  "earlier_worktrees_unchanged": true
+}

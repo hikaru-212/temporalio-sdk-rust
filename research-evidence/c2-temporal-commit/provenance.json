@@ -1,0 +1,22 @@
+{
+  "phase": "CCPO C-2 checkpoint",
+  "source_kind": "conversation_transcript_extracted_from_existing_session_log",
+  "saved_report_is_reconstructed_document": true,
+  "original_message_timestamp_utc": "2026-10-23T11:02:30.729Z",
+  "original_message_record_line": 2975,
+  "original_line_count": 256,
+  "original_sha256": "345d9eb218f38dd4aa895b321f5aa61bb1852c14cfdb8a9ad0ab5a3429bf294d",
+  "public_sha256": "fea32ce4662be18509f2d3983f25d0b46cd27b719b82e1b0b721de1c3fcd77e6",
+  "transformation": "Only local Markdown link destinations replaced by verified pinned GitHub source permalinks; prose, labels, conclusions, line count and newline convention unchanged.",
+  "original_transcript_preserved_locally": true,
+  "server_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+  "sdk_sha": "8f4a676f9e1a6276b5cc2f77e25c9183ce256fe9",
+  "parent_checkpoint": "029a790e4fa7663cf70c8fedc82b379d47f99dbb",
+  "repository": "hikaru-212/temporalio-sdk-rust",
+  "push_url": "https://github.com/hikaru-212/temporalio-sdk-rust.git",
+  "branch": "research/ccpo-egts-c2-temporal-commit",
+  "runtime_verification": false,
+  "retrospective_conclusion_changes": false,
+  "git_writes_in_original_c2_investigation": false,
+  "publication_scan": "No credentials, private keys, environment dumps, build artifacts or machine-specific paths in public report."
+}

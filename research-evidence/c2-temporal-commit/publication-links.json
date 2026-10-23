@@ -1,0 +1,266 @@
+[
+  {
+    "original_link_sha256": "7109f4a8aaba0dad040f53d632cfc4282207ebe76b19037b47cb25ce8afe6c75",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "service/history/api/respondworkflowtaskcompleted/api.go",
+    "line": 676,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/service/history/api/respondworkflowtaskcompleted/api.go#L676"
+  },
+  {
+    "original_link_sha256": "1ba1bbf3429daa717edccbc6d46941ae8a2d0dd11d4bd04783f8c371eedb6a64",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "service/frontend/workflow_handler.go",
+    "line": 1220,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/service/frontend/workflow_handler.go#L1220"
+  },
+  {
+    "original_link_sha256": "a4edf6e2db622920d6623351f2914fad9609b328aa03e8c65debce14241a4218",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "client/history/client_gen.go",
+    "line": 1188,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/client/history/client_gen.go#L1188"
+  },
+  {
+    "original_link_sha256": "0dfd393c0e7fc583504dad85d907dbd82bdb62cfe27ac5b019fbc78fab682126",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "service/history/handler.go",
+    "line": 558,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/service/history/handler.go#L558"
+  },
+  {
+    "original_link_sha256": "45a568bbcdac779888969cd45787317284891abd05259c90ae7dbb3f6c544429",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "service/history/history_engine.go",
+    "line": 616,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/service/history/history_engine.go#L616"
+  },
+  {
+    "original_link_sha256": "a1318c026dc2640c23cd26cfc63311782ad2dc069673eed05c80aa2e9de39bcb",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "service/history/api/respondworkflowtaskcompleted/api.go",
+    "line": 112,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/service/history/api/respondworkflowtaskcompleted/api.go#L112"
+  },
+  {
+    "original_link_sha256": "ce5bf9f6542e8ac6658d9009262faaa793523419552203dd2edf19810b7310f6",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "service/history/workflow/context.go",
+    "line": 695,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/service/history/workflow/context.go#L695"
+  },
+  {
+    "original_link_sha256": "08aac31e4ef46a4e0af7b935f57f965c9e2260e0553ccd047e8ca31c836dcaac",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "service/history/workflow/transaction_impl.go",
+    "line": 167,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/service/history/workflow/transaction_impl.go#L167"
+  },
+  {
+    "original_link_sha256": "882e2716ac44aa50e8368baa81467c82ccc19cc8bee05661c460d74914e194e6",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "service/history/shard/context_impl.go",
+    "line": 597,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/service/history/shard/context_impl.go#L597"
+  },
+  {
+    "original_link_sha256": "76e005c4b2fb567144bc7bbdd5779df14c4a06051195a9bbb1d2b427fb1cf3af",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "common/persistence/execution_manager.go",
+    "line": 168,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/common/persistence/execution_manager.go#L168"
+  },
+  {
+    "original_link_sha256": "40ce5870d0270c6e4031e0cf3c7202450917c5dc9b344019d5847e19cbcde805",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "service/history/api/respondworkflowtaskcompleted/api.go",
+    "line": 795,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/service/history/api/respondworkflowtaskcompleted/api.go#L795"
+  },
+  {
+    "original_link_sha256": "65fcdd4e0ddd213d6e04e37f527e159b163b5b9fbdf70e9cdbcc804e5e2c6e67",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "common/persistence/sql/execution.go",
+    "line": 334,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/common/persistence/sql/execution.go#L334"
+  },
+  {
+    "original_link_sha256": "bdf51d8d368aa36b053488c7843799cb99c5f4d912bc54510970d50e153b9f5d",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "common/persistence/sql/common.go",
+    "line": 52,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/common/persistence/sql/common.go#L52"
+  },
+  {
+    "original_link_sha256": "3db3b278b7dcacdd567cb01ecb6f700d981061c77f18908887a878c0bb2681fc",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "common/persistence/cassandra/mutable_state_store.go",
+    "line": 689,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/common/persistence/cassandra/mutable_state_store.go#L689"
+  },
+  {
+    "original_link_sha256": "b020ef9025db9b2dc94a9d9d90db282428179f31ca4104fe93561a4eb129f4b8",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "common/config/persistence.go",
+    "line": 216,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/common/config/persistence.go#L216"
+  },
+  {
+    "original_link_sha256": "b33c53de749b14e2e3229360ab06ca3f1564f4b6457643ec89c092b0f7834e61",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "docs/architecture/history-service.md",
+    "line": 318,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/docs/architecture/history-service.md#L318"
+  },
+  {
+    "original_link_sha256": "3f81561f44eaae081ade24a9dc9ab1fd22cec816a67422eb9b1de8a742c85838",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "proto/internal/temporal/server/api/token/v1/message.proto",
+    "line": 39,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/proto/internal/temporal/server/api/token/v1/message.proto#L39"
+  },
+  {
+    "original_link_sha256": "87767aa7985b37db36d5e160d93000ac8f1da85bce826f8b46615ceb6c58e5fa",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "service/history/api/respondworkflowtaskcompleted/api.go",
+    "line": 203,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/service/history/api/respondworkflowtaskcompleted/api.go#L203"
+  },
+  {
+    "original_link_sha256": "5ba5a0abe1887023308c716d7e2c2e9f36300aba73ef4f017af1349e9ad17787",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "service/history/workflow/workflow_task_state_machine.go",
+    "line": 1107,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/service/history/workflow/workflow_task_state_machine.go#L1107"
+  },
+  {
+    "original_link_sha256": "d227f6aeedcbbd4fb2a42a54ae0f5529e5b10379cae9f218c919dd72fd46b42d",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "common/persistence/sql/execution_util.go",
+    "line": 629,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/common/persistence/sql/execution_util.go#L629"
+  },
+  {
+    "original_link_sha256": "79b8bb790a5d9bedb3003b36e225e1ab04626a730f99d42923041cc0ec05bee4",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "service/history/workflow/context.go",
+    "line": 888,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/service/history/workflow/context.go#L888"
+  },
+  {
+    "original_link_sha256": "73f753ded36fbeeab3d055ffdd9f58cbd0a1a0ae69c8f998561b000ec25a29f5",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "service/history/timer_queue_active_task_executor.go",
+    "line": 382,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/service/history/timer_queue_active_task_executor.go#L382"
+  },
+  {
+    "original_link_sha256": "ce969b67ac6ad8176e0b9fe216f4292132c594254458bb2f31c1bd5a2b53a526",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "service/history/shard/context_impl.go",
+    "line": 1501,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/service/history/shard/context_impl.go#L1501"
+  },
+  {
+    "original_link_sha256": "111a826142606d6ca1fd2fb568408e495f1512fab5c7afbc07a341fda1155111",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "service/history/shard/context_impl.go",
+    "line": 1164,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/service/history/shard/context_impl.go#L1164"
+  },
+  {
+    "original_link_sha256": "f06ee3fae8499b7a8906f35b43e2ff576607e30c6f2e6181a0e91d5fc179b7ab",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "service/history/shard/context_impl.go",
+    "line": 2414,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/service/history/shard/context_impl.go#L2414"
+  },
+  {
+    "original_link_sha256": "22ecd86c3003370b357c40fe7a95d79d08d3f5a44e6d7a84d627eda7f7c57f48",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "service/history/api/getworkflowexecutionhistory/api.go",
+    "line": 273,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/service/history/api/getworkflowexecutionhistory/api.go#L273"
+  },
+  {
+    "original_link_sha256": "69336551864d58f1657762e46679d88e9bd4db928bf1c6095c6467127d99c9cf",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "service/history/api/respondworkflowtaskcompleted/workflow_task_completed_handler.go",
+    "line": 555,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/service/history/api/respondworkflowtaskcompleted/workflow_task_completed_handler.go#L555"
+  },
+  {
+    "original_link_sha256": "f45918e92b7d17611c0be565c8f54f8a395bfd6f8dafa3f9bd944b8a65b797b5",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "service/history/workflow/task_generator.go",
+    "line": 552,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/service/history/workflow/task_generator.go#L552"
+  },
+  {
+    "original_link_sha256": "9f498efbeaa3b2d907f6fad8884fddc04c45d933fcf1056d5429abb214efa089",
+    "repository": "temporalio/temporal",
+    "source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "path": "docs/architecture/effect-package.md",
+    "line": 13,
+    "public_url": "https://github.com/temporalio/temporal/blob/0d5e3848bed625907987f73d5eaae8dc77bc6590/docs/architecture/effect-package.md#L13"
+  },
+  {
+    "original_link_sha256": "decc0af72ed854886accbe72bf111639deaa09238ccdbd14578bb36f5d2e6071",
+    "repository": "temporalio/sdk-rust",
+    "source_sha": "8f4a676f9e1a6276b5cc2f77e25c9183ce256fe9",
+    "path": "crates/sdk-core/src/worker/workflow/mod.rs",
+    "line": 616,
+    "public_url": "https://github.com/temporalio/sdk-rust/blob/8f4a676f9e1a6276b5cc2f77e25c9183ce256fe9/crates/sdk-core/src/worker/workflow/mod.rs#L616"
+  },
+  {
+    "original_link_sha256": "beda2ef0e09110d4d591dec00a98c19ba7d7d672468bcb73d90d855daf9dbf0a",
+    "repository": "temporalio/sdk-rust",
+    "source_sha": "8f4a676f9e1a6276b5cc2f77e25c9183ce256fe9",
+    "path": "crates/client/src/grpc.rs",
+    "line": 135,
+    "public_url": "https://github.com/temporalio/sdk-rust/blob/8f4a676f9e1a6276b5cc2f77e25c9183ce256fe9/crates/client/src/grpc.rs#L135"
+  },
+  {
+    "original_link_sha256": "58a3609d29c1a74bcd82ae8ac25bfac695937f4ce5926e661511c7df7acdb989",
+    "repository": "temporalio/sdk-rust",
+    "source_sha": "8f4a676f9e1a6276b5cc2f77e25c9183ce256fe9",
+    "path": "crates/client/src/retry.rs",
+    "line": 16,
+    "public_url": "https://github.com/temporalio/sdk-rust/blob/8f4a676f9e1a6276b5cc2f77e25c9183ce256fe9/crates/client/src/retry.rs#L16"
+  },
+  {
+    "original_link_sha256": "7f395f1b8c445be046657c9e27af53a3657d401c24e9dc06dec1a0b6cf2f85c1",
+    "repository": "temporalio/sdk-rust",
+    "source_sha": "8f4a676f9e1a6276b5cc2f77e25c9183ce256fe9",
+    "path": "crates/sdk-core/src/worker/workflow/mod.rs",
+    "line": 790,
+    "public_url": "https://github.com/temporalio/sdk-rust/blob/8f4a676f9e1a6276b5cc2f77e25c9183ce256fe9/crates/sdk-core/src/worker/workflow/mod.rs#L790"
+  }
+]
