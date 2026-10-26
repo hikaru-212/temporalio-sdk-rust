@@ -1,0 +1,35 @@
+{
+  "server_source_sha": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+  "sdk_research_parent_sha": "ea6507ed48614f71a7426740b61c51029f3c9541",
+  "personal_repository": "hikaru-212/temporalio-sdk-rust",
+  "proposed_branch": "research/ccpo-egts-c5b-fencing",
+  "experiments_executed_in_preparation": 0,
+  "test_source_sha256": {
+    "ordering_test.go": "b394c8efa431ed96ec4c7ba7c3dc04d3cd0dda5229f832e2e517076d400d8f2d",
+    "instrumentation_test.go": "6c231bf0df26c9e67ced84c675943658d4b9f7077d89b4ceb150357e1d99d978",
+    "ownership_test.go": "c4ae5f593c3b611c83509be898b23c147ac9c4d8d1151888127d5f9a3871c479"
+  },
+  "full_test_only_diff_sha256": "6de6767664a06f068ac3747eabebae537f411cd5f66a260ac22b6b2803dd689b",
+  "p2_only_diff_sha256": "d143234f8584fe02acb614e57feddccdc4e53a354bad7486d661e5a7abee3067",
+  "original_manifest_hashes": {
+    "main": "ea46208772bde7790713c69ea6e7e71e1e90111db2bdaf9b760443ea03eda16d",
+    "positive": "80fbab237f8d7727170a220de0f28e910bf36c5181aa56f091a403368d66611a",
+    "negative": "4ddc6ad9c00957381a32679e6bb11ec7ecd779e0da806771b42ed19674f0466c",
+    "p2": "7bdb76e50958a369ac079e0be1b372e6aac8a3e0b73b71a358e33282cfaf2964",
+    "recovered": "7ff1dfd726c3d37199ca5c893a410971254517c58714785383cf3b12de2ac38e",
+    "audit": "7e348dabe949d7e075966a0147e91e62fe0a13b5bd647d61537a330ef48ae07f"
+  },
+  "manifest_provenance": "original manifests verified locally; their hashes are commitments, not copies of private inventories",
+  "toolchain": "go1.27.0 linux/arm64",
+  "sqlite_driver": "modernc.org/sqlite v1.51.0",
+  "evidence_labels": [
+    "Source-confirmed",
+    "Runtime-supported",
+    "Model-inferred",
+    "Unknown"
+  ],
+  "publication_transform_version": "c5b-public-projection-v1",
+  "private_roots_disclosed": false,
+  "public_binary_protobufs": 0,
+  "complete_private_sessions": 0
+}

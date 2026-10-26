@@ -1,0 +1,35 @@
+{
+  "stage": "public candidate preparation; no commit/push",
+  "source_policy_entries_reviewed": 516,
+  "original_evidence_manifests_reverified": 6,
+  "public_protobufs": 0,
+  "task_token_raw_values_excluded": true,
+  "all_research_event_counts": {
+    "main": 119,
+    "positive": 94,
+    "negative": 100
+  },
+  "all_task_page_counts": {
+    "main": 47,
+    "positive": 35,
+    "negative": 40
+  },
+  "state_snapshot_counts": {
+    "main": 6,
+    "positive": 4,
+    "negative": 5
+  },
+  "original_artifacts_unchanged": true,
+  "tests_executed": 0,
+  "compilation": false,
+  "originals_not_publicly_available_for_bytewise_independent_comparison": "Reviewers can audit published semantics/source and hashes; validating each original-to-public transformation against raw tokens/bytes requires authorized access to private originals. Hash commitments do not prove truth of observations.",
+  "known_limits": [
+    "controlled manager/store early error, not native DB timeout",
+    "SQLite normal WFT only; no power-loss/crash/backend-general proof",
+    "successful cleanup path only; no race detector or timeout-path run",
+    "six-category scans are sequential, not one atomic multi-table snapshot",
+    "no external Activity execution or exactly-once claim",
+    "historical B1 partially recovered; no reconstructed raw logs or protobufs"
+  ],
+  "additional_manual_review": "Removed residual creator goroutine IDs in stack function strings; original raw evidence unchanged; no semantic event or identity changed."
+}

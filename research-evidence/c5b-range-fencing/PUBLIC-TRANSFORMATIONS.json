@@ -1,0 +1,1387 @@
+{
+  "format_version": 1,
+  "transformer": "tools/sanitization.py",
+  "transformer_version": "c5b-public-projection-v1",
+  "files": [
+    {
+      "public_path": "source/tests/ccpo_c5b2/ordering_test.go",
+      "public_sha256": "b394c8efa431ed96ec4c7ba7c3dc04d3cd0dda5229f832e2e517076d400d8f2d",
+      "bytes": 25471,
+      "origins": [
+        {
+          "bundle": "main",
+          "relative_path": "source/ordering_test.go",
+          "sha256": "b394c8efa431ed96ec4c7ba7c3dc04d3cd0dda5229f832e2e517076d400d8f2d",
+          "prior_disposition": "ALLOW_EXACT"
+        }
+      ],
+      "transformation": "byte-for-byte copy; only destination renamed",
+      "publication_review": "exact allowlist item; no machine paths or private values"
+    },
+    {
+      "public_path": "lineage/original-p2-defect/ordering_test.go.txt",
+      "public_sha256": "7fece5c2e0ddfa7f83796d3796b64ae0edf109f2f1bc3b53f3a10a62a2174b03",
+      "bytes": 25248,
+      "origins": [
+        {
+          "bundle": "p2",
+          "relative_path": "originals/ordering_test.go",
+          "sha256": "7fece5c2e0ddfa7f83796d3796b64ae0edf109f2f1bc3b53f3a10a62a2174b03",
+          "prior_disposition": "ALLOW_EXACT"
+        }
+      ],
+      "transformation": "byte-for-byte copy; only destination renamed",
+      "publication_review": "exact allowlist item; no machine paths or private values"
+    },
+    {
+      "public_path": "source/tests/ccpo_c5b2/instrumentation_test.go",
+      "public_sha256": "6c231bf0df26c9e67ced84c675943658d4b9f7077d89b4ceb150357e1d99d978",
+      "bytes": 18818,
+      "origins": [
+        {
+          "bundle": "main",
+          "relative_path": "source/instrumentation_test.go",
+          "sha256": "6c231bf0df26c9e67ced84c675943658d4b9f7077d89b4ceb150357e1d99d978",
+          "prior_disposition": "ALLOW_EXACT"
+        }
+      ],
+      "transformation": "byte-for-byte copy; only destination renamed",
+      "publication_review": "exact allowlist item; no machine paths or private values"
+    },
+    {
+      "public_path": "lineage/original-p2-defect/instrumentation_test.go.txt",
+      "public_sha256": "b79d424f58989592af50d9d6bfdc02f21e8f419e66acf880fcc8a9da7cc2bae7",
+      "bytes": 18214,
+      "origins": [
+        {
+          "bundle": "p2",
+          "relative_path": "originals/instrumentation_test.go",
+          "sha256": "b79d424f58989592af50d9d6bfdc02f21e8f419e66acf880fcc8a9da7cc2bae7",
+          "prior_disposition": "ALLOW_EXACT"
+        }
+      ],
+      "transformation": "byte-for-byte copy; only destination renamed",
+      "publication_review": "exact allowlist item; no machine paths or private values"
+    },
+    {
+      "public_path": "source/tests/ccpo_c5b2/ownership_test.go",
+      "public_sha256": "c4ae5f593c3b611c83509be898b23c147ac9c4d8d1151888127d5f9a3871c479",
+      "bytes": 7945,
+      "origins": [
+        {
+          "bundle": "main",
+          "relative_path": "source/ownership_test.go",
+          "sha256": "c4ae5f593c3b611c83509be898b23c147ac9c4d8d1151888127d5f9a3871c479",
+          "prior_disposition": "ALLOW_EXACT"
+        }
+      ],
+      "transformation": "byte-for-byte copy; only destination renamed",
+      "publication_review": "exact allowlist item; no machine paths or private values"
+    },
+    {
+      "public_path": "lineage/original-p2-defect/ownership_test.go.txt",
+      "public_sha256": "c4ae5f593c3b611c83509be898b23c147ac9c4d8d1151888127d5f9a3871c479",
+      "bytes": 7945,
+      "origins": [
+        {
+          "bundle": "p2",
+          "relative_path": "originals/ownership_test.go",
+          "sha256": "c4ae5f593c3b611c83509be898b23c147ac9c4d8d1151888127d5f9a3871c479",
+          "prior_disposition": "ALLOW_EXACT"
+        }
+      ],
+      "transformation": "byte-for-byte copy; only destination renamed",
+      "publication_review": "exact allowlist item; no machine paths or private values"
+    },
+    {
+      "public_path": "patches/test-only.diff",
+      "public_sha256": "6de6767664a06f068ac3747eabebae537f411cd5f66a260ac22b6b2803dd689b",
+      "bytes": 53626,
+      "origins": [
+        {
+          "bundle": "main",
+          "relative_path": "test-only.diff",
+          "sha256": "6de6767664a06f068ac3747eabebae537f411cd5f66a260ac22b6b2803dd689b",
+          "prior_disposition": "ALLOW_EXACT"
+        }
+      ],
+      "transformation": "byte-for-byte copy; only destination renamed",
+      "publication_review": "exact allowlist item; no machine paths or private values"
+    },
+    {
+      "public_path": "patches/p2-only.diff",
+      "public_sha256": "d143234f8584fe02acb614e57feddccdc4e53a354bad7486d661e5a7abee3067",
+      "bytes": 4961,
+      "origins": [
+        {
+          "bundle": "main",
+          "relative_path": "p2-only.diff",
+          "sha256": "d143234f8584fe02acb614e57feddccdc4e53a354bad7486d661e5a7abee3067",
+          "prior_disposition": "ALLOW_EXACT"
+        }
+      ],
+      "transformation": "byte-for-byte copy; only destination renamed",
+      "publication_review": "exact allowlist item; no machine paths or private values"
+    },
+    {
+      "public_path": "lineage/ORIGINAL-SHA256SUMS",
+      "public_sha256": "4db5e975245a330f5680a11eeb9d5bc166cbfc42b6ebda3df6f0063b054e3dcc",
+      "bytes": 287,
+      "origins": [
+        {
+          "bundle": "p2",
+          "relative_path": "ORIGINAL-SHA256SUMS",
+          "sha256": "4db5e975245a330f5680a11eeb9d5bc166cbfc42b6ebda3df6f0063b054e3dcc",
+          "prior_disposition": "ALLOW_EXACT"
+        }
+      ],
+      "transformation": "byte-for-byte copy; only destination renamed",
+      "publication_review": "exact allowlist item; no machine paths or private values"
+    },
+    {
+      "public_path": "lineage/PATCHED-SHA256SUMS",
+      "public_sha256": "dfd358162ab438537c2185d154d188a3e46cada438effd0eae5fc015e24d45f7",
+      "bytes": 281,
+      "origins": [
+        {
+          "bundle": "p2",
+          "relative_path": "PATCHED-SHA256SUMS",
+          "sha256": "dfd358162ab438537c2185d154d188a3e46cada438effd0eae5fc015e24d45f7",
+          "prior_disposition": "ALLOW_EXACT"
+        }
+      ],
+      "transformation": "byte-for-byte copy; only destination renamed",
+      "publication_review": "exact allowlist item; no machine paths or private values"
+    },
+    {
+      "public_path": "SOURCE-SHA256SUMS",
+      "public_sha256": "3b49596cad107af810d8940fd38f9b97f51421722bfa2d135828c80f66294fdf",
+      "bytes": 326,
+      "origins": [
+        {
+          "bundle": "main",
+          "relative_path": "SOURCE-SHA256SUMS",
+          "sha256": "2ab8805ed39eb0385ef1e840cf43799a34e27e73210018dc503b0688797575ef",
+          "prior_disposition": "ALLOW_EXACT"
+        }
+      ],
+      "transformation": "same hashes; relative filenames retargeted to public layout",
+      "publication_review": "no local paths"
+    },
+    {
+      "public_path": "historical/source-archive/common/persistence/sql/sqlplugin/sqlite/ccpo_c5b_feasibility_test.go.txt",
+      "public_sha256": "fc7a755e3f438ba292d9c75636afea96a64572b45f2818482aa13e69e3f71e5d",
+      "bytes": 4094,
+      "origins": [
+        {
+          "bundle": "recovered",
+          "relative_path": "recovered/source/common/persistence/sql/sqlplugin/sqlite/ccpo_c5b_feasibility_test.go",
+          "sha256": "fc7a755e3f438ba292d9c75636afea96a64572b45f2818482aa13e69e3f71e5d",
+          "prior_disposition": "ALLOW_EXACT_HISTORICAL"
+        }
+      ],
+      "transformation": "byte-for-byte copy; only destination renamed",
+      "publication_review": "exact allowlist item; no machine paths or private values"
+    },
+    {
+      "public_path": "historical/source-archive/tests/ccpo_c5b1/instrumentation_test.go.txt",
+      "public_sha256": "f58ffc2c7711b2e83d9b73ef75d664dfce91e8960b668f18feb06f6301103d84",
+      "bytes": 13587,
+      "origins": [
+        {
+          "bundle": "recovered",
+          "relative_path": "recovered/source/tests/ccpo_c5b1/instrumentation_test.go",
+          "sha256": "f58ffc2c7711b2e83d9b73ef75d664dfce91e8960b668f18feb06f6301103d84",
+          "prior_disposition": "ALLOW_EXACT_HISTORICAL"
+        }
+      ],
+      "transformation": "byte-for-byte copy; only destination renamed",
+      "publication_review": "exact allowlist item; no machine paths or private values"
+    },
+    {
+      "public_path": "historical/source-archive/tests/ccpo_c5b1/ordering_test.go.txt",
+      "public_sha256": "3a789890a34fb063aa20abc470124be917632ae89f249f1852d2624d249725af",
+      "bytes": 19752,
+      "origins": [
+        {
+          "bundle": "recovered",
+          "relative_path": "recovered/source/tests/ccpo_c5b1/ordering_test.go",
+          "sha256": "3a789890a34fb063aa20abc470124be917632ae89f249f1852d2624d249725af",
+          "prior_disposition": "ALLOW_EXACT_HISTORICAL"
+        }
+      ],
+      "transformation": "byte-for-byte copy; only destination renamed",
+      "publication_review": "exact allowlist item; no machine paths or private values"
+    },
+    {
+      "public_path": "historical/source-archive/tests/ccpo_c5b1/ownership_test.go.txt",
+      "public_sha256": "f8d4d200a109907f5220f8d8d76b1007f6d4bafb6209006e9c89bb2264fe8646",
+      "bytes": 7945,
+      "origins": [
+        {
+          "bundle": "recovered",
+          "relative_path": "recovered/source/tests/ccpo_c5b1/ownership_test.go",
+          "sha256": "f8d4d200a109907f5220f8d8d76b1007f6d4bafb6209006e9c89bb2264fe8646",
+          "prior_disposition": "ALLOW_EXACT_HISTORICAL"
+        }
+      ],
+      "transformation": "byte-for-byte copy; only destination renamed",
+      "publication_review": "exact allowlist item; no machine paths or private values"
+    },
+    {
+      "public_path": "historical/SOURCE-PROVENANCE.json",
+      "public_sha256": "5e69ee51b2008af0670b15305b1752ab77374156cb3cf9d4f9b86054dc32ea22",
+      "bytes": 1467,
+      "origins": [
+        {
+          "bundle": "audit",
+          "relative_path": "source-lineage.json",
+          "sha256": "cea20d834b0100d090d1a7c24fddb28b993b86a68a70c391fba38d75067971a5",
+          "prior_disposition": "LOCAL_AUDIT_INPUT_NOT_COPIED"
+        }
+      ],
+      "transformation": "select only exact Phase0/B1 source hashes; archive paths relative",
+      "publication_review": "exclude full session provenance and original local paths"
+    },
+    {
+      "public_path": "tools/sanitization.py",
+      "public_sha256": "17c28ecbd260a35c7c4c8caee6b40ca8352de57349336374959b3dee0861146e",
+      "bytes": 6338,
+      "origins": [],
+      "transformation": "new pure publication transformer; version c5b-public-projection-v1",
+      "publication_review": "no filesystem source paths, no runtime/service execution"
+    },
+    {
+      "public_path": "tools/verify_public.py",
+      "public_sha256": "a917d5bf8a3c5d90f1e019ecb3b7883e4bdfccf978be1a52a21e26b0307f394b",
+      "bytes": 6327,
+      "origins": [],
+      "transformation": "new offline public evidence verifier",
+      "publication_review": "hash and record inspection only; no experiments"
+    },
+    {
+      "public_path": "runs/main/events.public.json",
+      "public_sha256": "3f7db5ffe2d3b76370e25ac7e43b422f808a12d0c5d52c7171257455283f5d3d",
+      "bytes": 207806,
+      "origins": [
+        {
+          "bundle": "main",
+          "relative_path": "run-01/stdout.log",
+          "sha256": "cd31a7c4994156c157caec772825b1e82ce330b82c9613ed53d195e0b4f09f6e",
+          "prior_disposition": "DERIVED_ONLY"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/analysis/events.jsonl",
+          "sha256": "370520f92efe7a9b7fab17fbe38a0f4d5340b9a7381a357be531703e204012f4",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "projection-v1 all events; fields mapped/withheld as per transformation-actions.json",
+      "publication_review": "all event sequence numbers and critical safety scalars conserved"
+    },
+    {
+      "public_path": "runs/main/state-and-history.public.json",
+      "public_sha256": "6b6ff52ce12d496eb4ee84ec15e3e8c466c87e19d4074a51ed737c69742054e9",
+      "bytes": 73382,
+      "origins": [
+        {
+          "bundle": "main",
+          "relative_path": "run-01/analysis/durable-state-snapshots.json",
+          "sha256": "87d407426f1924a4551faf1a261897dfe59206477fb4c58a7c4aa4c892a09a64",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "same projected records selected by snapshot field; opaque branch tokens stable aliases",
+      "publication_review": "effective history, revision and causal references retained"
+    },
+    {
+      "public_path": "runs/main/six-category-tasks.public.json",
+      "public_sha256": "c041b3e78835b8070abd8903dd9fad794b90e0b3e600fa398909336c9cfd538e",
+      "bytes": 71417,
+      "origins": [
+        {
+          "bundle": "main",
+          "relative_path": "run-01/analysis/six-category-enumeration.json",
+          "sha256": "5177f46d10054b75230daae73a8dba5a07e22983f1b2635e479abb9070bd797e",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "all original page records and ledgers; pagination tokens replaced by stable equality-preserving aliases",
+      "publication_review": "all rows, IDs, query bounds and EOF retained"
+    },
+    {
+      "public_path": "runs/main/stdout.research-projection.log",
+      "public_sha256": "8487ba8116a0a37b62e7394e501925013dfa8cac491c7a1d5869875659081b19",
+      "bytes": 144555,
+      "origins": [
+        {
+          "bundle": "main",
+          "relative_path": "run-01/stdout.log",
+          "sha256": "cd31a7c4994156c157caec772825b1e82ce330b82c9613ed53d195e0b4f09f6e",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "filter all CCPO records + exact Go result lines; transform each CCPO payload; no raw server configuration",
+      "publication_review": "not advertised as complete raw stdout; omitted line count in result"
+    },
+    {
+      "public_path": "runs/main/stderr.log",
+      "public_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origins": [
+        {
+          "bundle": "main",
+          "relative_path": "run-01/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "prior_disposition": "ALLOW_EXACT"
+        }
+      ],
+      "transformation": "byte-for-byte copy; only destination renamed",
+      "publication_review": "exact allowlist item; no machine paths or private values"
+    },
+    {
+      "public_path": "runs/main/exit-code.txt",
+      "public_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2,
+      "origins": [
+        {
+          "bundle": "main",
+          "relative_path": "run-01/exit-code.txt",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "prior_disposition": "ALLOW_EXACT"
+        }
+      ],
+      "transformation": "byte-for-byte copy; only destination renamed",
+      "publication_review": "exact allowlist item; no machine paths or private values"
+    },
+    {
+      "public_path": "runs/main/predictions.public.zh-TW.md",
+      "public_sha256": "26dee7d4b1d72885305c1c96db5dbeeaa46df967f62b7fbdeb707a975bc4d754",
+      "bytes": 1608,
+      "origins": [
+        {
+          "bundle": "main",
+          "relative_path": "PREDICTIONS.zh-TW.md",
+          "sha256": "b0aa64adbbf9c5f3edb043c50621d3dc336490980e575b0e92f132ea3a5a934b",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "prepend provenance note; original prediction body byte-for-byte unchanged",
+      "publication_review": "reviewed text has no private paths or task tokens; DERIVED_ONLY cleared for this exact output"
+    },
+    {
+      "public_path": "runs/main/invocation.public.json",
+      "public_sha256": "451b1e317c426d9c5b7e46c9d5905938ccd3228def661c4ebcbdbd94d8fb01c0",
+      "bytes": 1451,
+      "origins": [
+        {
+          "bundle": "main",
+          "relative_path": "run-01/invocation.json",
+          "sha256": "8d6a769af7a5f267706c0b98f78629181262f2664f060691f8218764cec9fc0a",
+          "prior_disposition": "DERIVED_ONLY"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/invocation.txt",
+          "sha256": "efadbef7c39633f3a1c287f05c44cf9782404bd2c1c5713ccf865750a23893c0",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "executable and paths replaced; environment strict whitelist; exact argv flags retained",
+      "publication_review": "normalized reproduction form distinguished from original bytes"
+    },
+    {
+      "public_path": "runs/main/result.public.json",
+      "public_sha256": "fdd0f3acc5f0b2bc79211a4ccd156d4942c4262ce5d9f386c7f7b06089ed1d89",
+      "bytes": 1866,
+      "origins": [
+        {
+          "bundle": "main",
+          "relative_path": "run-01/result.json",
+          "sha256": "f6ecb2a716ea641fa2f3fd64e0d88170d09f295b1463f278a791bdca27b96b17",
+          "prior_disposition": "DERIVED_ONLY"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/exit-code.txt",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "prior_disposition": "ALLOW_EXACT"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/analysis/verification.json",
+          "sha256": "9ca35a8404684183827f637b5b4c3924cd4b0f21b57b449b00d7e10b1e261798",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "select original timing/exit; completed audit classification separately identified; omit disk and local environment",
+      "publication_review": "no historical results rewritten; no new execution claimed"
+    },
+    {
+      "public_path": "runs/main/original-binary-hashes.json",
+      "public_sha256": "c3358eda687be399ef8e8b87471facab22773b06c197a15ee3c4d1a9beef4a4f",
+      "bytes": 15927,
+      "origins": [
+        {
+          "bundle": "main",
+          "relative_path": "run-01/stdout.log",
+          "sha256": "cd31a7c4994156c157caec772825b1e82ce330b82c9613ed53d195e0b4f09f6e",
+          "prior_disposition": "DERIVED_ONLY"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/request.pb",
+          "sha256": "5e2f189f47adfaf5b2a170d3bbdc7d675bdba5c0a7e16cb747358b0371a6e309",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/task-token.pb",
+          "sha256": "efb6bb7085b011880c96d61046f123fd62c2cc07ecec3112c3b957465692cce1",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/initial-mutable-state.pb",
+          "sha256": "a8a9ac3b619050e2022f4e913f074e8d78b1fdad63443f544e60ed707c27d702",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/initial-history.pb",
+          "sha256": "4463994a910c359971a254d2cef2b34f3ba3804238e7d2e9590198814e404694",
+          "prior_disposition": "HOLD_BINARY_REVIEW"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/initial-shard.pb",
+          "sha256": "7a118afe766d081fe18945441dc401b8d25281c09470304fb042e1c635858b75",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/before-fault-mutable-state.pb",
+          "sha256": "a8a9ac3b619050e2022f4e913f074e8d78b1fdad63443f544e60ed707c27d702",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/before-fault-history.pb",
+          "sha256": "4463994a910c359971a254d2cef2b34f3ba3804238e7d2e9590198814e404694",
+          "prior_disposition": "HOLD_BINARY_REVIEW"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/before-fault-shard.pb",
+          "sha256": "7a118afe766d081fe18945441dc401b8d25281c09470304fb042e1c635858b75",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/guarded-describe.pb",
+          "sha256": "32c817cdb7c7a299407de5c204abd590b38fe7053c3603c49f40cf3528197335",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/before-old-release-mutable-state.pb",
+          "sha256": "a8a9ac3b619050e2022f4e913f074e8d78b1fdad63443f544e60ed707c27d702",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/before-old-release-history.pb",
+          "sha256": "4463994a910c359971a254d2cef2b34f3ba3804238e7d2e9590198814e404694",
+          "prior_disposition": "HOLD_BINARY_REVIEW"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/before-old-release-shard.pb",
+          "sha256": "8f4d93815ca7528f36109b1a288a1a38526705fed869cda83b9888657c898853",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/J-after-old-termination-mutable-state.pb",
+          "sha256": "a8a9ac3b619050e2022f4e913f074e8d78b1fdad63443f544e60ed707c27d702",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/J-after-old-termination-history.pb",
+          "sha256": "4463994a910c359971a254d2cef2b34f3ba3804238e7d2e9590198814e404694",
+          "prior_disposition": "HOLD_BINARY_REVIEW"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/J-after-old-termination-shard.pb",
+          "sha256": "8f4d93815ca7528f36109b1a288a1a38526705fed869cda83b9888657c898853",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/L-after-legitimate-retry-mutable-state.pb",
+          "sha256": "c4c8b82536cc1845670133d4eb50545be3a7813e859afc23309660348b74af19",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/L-after-legitimate-retry-history.pb",
+          "sha256": "0b570347b6899e97350abcc02e73003160025d039f56b73b45026ad7f37cf901",
+          "prior_disposition": "HOLD_BINARY_REVIEW"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/L-after-legitimate-retry-shard.pb",
+          "sha256": "8f4d93815ca7528f36109b1a288a1a38526705fed869cda83b9888657c898853",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/activity-poll.pb",
+          "sha256": "17f3b0c447f1850de3e21cd4b08c66912c1876f96a01bee24ca01a3dfac85794",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/activity-token.pb",
+          "sha256": "66f8b7a22118cfd9dc4c773274ee20c3026bc35246116bc2972a875e4f8cf626",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/after-Activity-poll-mutable-state.pb",
+          "sha256": "be6183e84fdc629570de3aaa3b1cfdb4fcbeb6e1f6df87a2f8c3ce136d181f5c",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/after-Activity-poll-history.pb",
+          "sha256": "0b570347b6899e97350abcc02e73003160025d039f56b73b45026ad7f37cf901",
+          "prior_disposition": "HOLD_BINARY_REVIEW"
+        },
+        {
+          "bundle": "main",
+          "relative_path": "run-01/protobuf/after-Activity-poll-shard.pb",
+          "sha256": "8f4d93815ca7528f36109b1a288a1a38526705fed869cda83b9888657c898853",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        }
+      ],
+      "transformation": "binary bytes excluded; retain original hashes/types and explicitly partial semantic projection locations",
+      "publication_review": "neither raw protobuf nor reconstructed protobuf included"
+    },
+    {
+      "public_path": "runs/main/transformation-actions.json",
+      "public_sha256": "81fa6f2e40badb7c56a4af003071e081fbac8d5ce4ff6c84ae74fef40d5d23dd",
+      "bytes": 70516,
+      "origins": [
+        {
+          "bundle": "main",
+          "relative_path": "run-01/stdout.log",
+          "sha256": "cd31a7c4994156c157caec772825b1e82ce330b82c9613ed53d195e0b4f09f6e",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "hash-only record of changed value locations and rules; no original secret values",
+      "publication_review": "stable aliases preserve per-arm equality; opaque data removed"
+    },
+    {
+      "public_path": "runs/positive/events.public.json",
+      "public_sha256": "71929fc5beb8ef7220f1a6265289c5b1e038e539246eca5767c764821df8b9be",
+      "bytes": 167634,
+      "origins": [
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/stdout.log",
+          "sha256": "1918306b3a629b1c23a6d865a01bada0216acb6f172b9c3d4dd40c9355baea92",
+          "prior_disposition": "DERIVED_ONLY"
+        },
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/analysis/events.jsonl",
+          "sha256": "b078781dccb0aa9173e5944dba4690d1847b2336479a9a6a58d7194c5ac122f2",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "projection-v1 all events; fields mapped/withheld as per transformation-actions.json",
+      "publication_review": "all event sequence numbers and critical safety scalars conserved"
+    },
+    {
+      "public_path": "runs/positive/state-and-history.public.json",
+      "public_sha256": "93852a44ca6fcda5a2ab554fb5f624377268ef7339ce9fda5a75751aefb79d41",
+      "bytes": 57892,
+      "origins": [
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/analysis/durable-state-snapshots.json",
+          "sha256": "f9c361b38a71dd262e122757e02d73b23df8c454d94e877596cba8a13d63572b",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "same projected records selected by snapshot field; opaque branch tokens stable aliases",
+      "publication_review": "effective history, revision and causal references retained"
+    },
+    {
+      "public_path": "runs/positive/six-category-tasks.public.json",
+      "public_sha256": "052822debc65cb12e86626c0494e47b0db2bd9fd78116071192471d8633700cf",
+      "bytes": 54638,
+      "origins": [
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/analysis/six-category-enumeration.json",
+          "sha256": "7735b55b89cabbff7d3cfb0a6684caf69ff0f99b427e9ba5031c9f99d4e07fd9",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "all original page records and ledgers; pagination tokens replaced by stable equality-preserving aliases",
+      "publication_review": "all rows, IDs, query bounds and EOF retained"
+    },
+    {
+      "public_path": "runs/positive/stdout.research-projection.log",
+      "public_sha256": "f607ada9451344f9788de0c961083b552cd574c9c7d90e3b6913f6b742513d0a",
+      "bytes": 116580,
+      "origins": [
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/stdout.log",
+          "sha256": "1918306b3a629b1c23a6d865a01bada0216acb6f172b9c3d4dd40c9355baea92",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "filter all CCPO records + exact Go result lines; transform each CCPO payload; no raw server configuration",
+      "publication_review": "not advertised as complete raw stdout; omitted line count in result"
+    },
+    {
+      "public_path": "runs/positive/stderr.log",
+      "public_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origins": [
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "prior_disposition": "ALLOW_EXACT"
+        }
+      ],
+      "transformation": "byte-for-byte copy; only destination renamed",
+      "publication_review": "exact allowlist item; no machine paths or private values"
+    },
+    {
+      "public_path": "runs/positive/exit-code.txt",
+      "public_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2,
+      "origins": [
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/exit-code.txt",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "prior_disposition": "ALLOW_EXACT"
+        }
+      ],
+      "transformation": "byte-for-byte copy; only destination renamed",
+      "publication_review": "exact allowlist item; no machine paths or private values"
+    },
+    {
+      "public_path": "runs/positive/predictions.public.zh-TW.md",
+      "public_sha256": "67ac4b70ee72b5f66228ecc60e6dfac9dc7d4b1c501ddba62a15c9a72b610d9e",
+      "bytes": 1513,
+      "origins": [
+        {
+          "bundle": "positive",
+          "relative_path": "PREDICTIONS.zh-TW.md",
+          "sha256": "ce81cdbf9005dc606ab5e1066e16f91f62d7a3a3e35a4b9017a97951d73fadd1",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "prepend provenance note; original prediction body byte-for-byte unchanged",
+      "publication_review": "reviewed text has no private paths or task tokens; DERIVED_ONLY cleared for this exact output"
+    },
+    {
+      "public_path": "runs/positive/invocation.public.json",
+      "public_sha256": "5cafff9dec20f6137ab4f395310c6502ebcb0df4a3c6f447e594b32250d9d238",
+      "bytes": 1455,
+      "origins": [
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/invocation.json",
+          "sha256": "f034f7877a8678026e42799692af35ef3ba9951c3d6e5cb32ee5b42314322773",
+          "prior_disposition": "DERIVED_ONLY"
+        },
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/invocation.txt",
+          "sha256": "72ec2b769131c0c0cac02d2a78acd6ca4c9a890d9109c12b40589648cca3961c",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "executable and paths replaced; environment strict whitelist; exact argv flags retained",
+      "publication_review": "normalized reproduction form distinguished from original bytes"
+    },
+    {
+      "public_path": "runs/positive/result.public.json",
+      "public_sha256": "97a8bed088c082a8ced750b574862e1ec98e6b759dd0ae78b7726ed5dfca4d06",
+      "bytes": 1648,
+      "origins": [
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/result.json",
+          "sha256": "c6645054d68731ce30bf262c0da4a2bc1efd7e825c7896d5069f25335f3357a6",
+          "prior_disposition": "DERIVED_ONLY"
+        },
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/exit-code.txt",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "prior_disposition": "ALLOW_EXACT"
+        },
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/analysis/verification.json",
+          "sha256": "5b89b8dc5a6958d090586078e9d33191b9d75b5e49b306da668ddb59b27957cf",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "select original timing/exit; completed audit classification separately identified; omit disk and local environment",
+      "publication_review": "no historical results rewritten; no new execution claimed"
+    },
+    {
+      "public_path": "runs/positive/original-binary-hashes.json",
+      "public_sha256": "a0ebfc1e741d3ea6ff702563a4d56c2731117d6c52ee1291f560e4ab5df1fb72",
+      "bytes": 11788,
+      "origins": [
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/stdout.log",
+          "sha256": "1918306b3a629b1c23a6d865a01bada0216acb6f172b9c3d4dd40c9355baea92",
+          "prior_disposition": "DERIVED_ONLY"
+        },
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/protobuf/request.pb",
+          "sha256": "b49a4bea7519fd13f7a024c9c6f4bc62644d2d7ad01705dda0244c8c9a913141",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/protobuf/task-token.pb",
+          "sha256": "dcde788e09a7b163753ba18a249804a52426bce12b97ed29f8322a6c2f771a02",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/protobuf/initial-mutable-state.pb",
+          "sha256": "c512f6cff4147464692346ebb32da87f164f1e017db1830f6a3fdd4d9a9fd5b9",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/protobuf/initial-history.pb",
+          "sha256": "dbca324e3f6d0b86f191b50f37cf09630c7469454e1fbcb29bca8424b7ef56cf",
+          "prior_disposition": "HOLD_BINARY_REVIEW"
+        },
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/protobuf/initial-shard.pb",
+          "sha256": "8577b115ecbd825b012f6018bafcddb5c05821dc85bb3a8317bbcc62ee9eee76",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/protobuf/guarded-describe.pb",
+          "sha256": "b456932de9fc23c32ebef0c58582da911d0ccd94dcdedc15a138ea3436fa7c30",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/protobuf/positive-after-renewal-mutable-state.pb",
+          "sha256": "8df3917edfc1f8d00b3e9d62a30271aa2509b585128d4b34f8f144adffedbff1",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/protobuf/positive-after-renewal-history.pb",
+          "sha256": "ac3271872310520a69095fba3e9c36af091d921dbcb0ae38c1c46eae682a31bb",
+          "prior_disposition": "HOLD_BINARY_REVIEW"
+        },
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/protobuf/positive-after-renewal-shard.pb",
+          "sha256": "90e99869a9481064a7419b4c04120d520312efdbb23f09cf5ad207d381e12616",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/protobuf/positive-after-rejected-retry-mutable-state.pb",
+          "sha256": "8df3917edfc1f8d00b3e9d62a30271aa2509b585128d4b34f8f144adffedbff1",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/protobuf/positive-after-rejected-retry-history.pb",
+          "sha256": "ac3271872310520a69095fba3e9c36af091d921dbcb0ae38c1c46eae682a31bb",
+          "prior_disposition": "HOLD_BINARY_REVIEW"
+        },
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/protobuf/positive-after-rejected-retry-shard.pb",
+          "sha256": "90e99869a9481064a7419b4c04120d520312efdbb23f09cf5ad207d381e12616",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/protobuf/activity-poll.pb",
+          "sha256": "54e6ac3bc08fd3c44f259df4d274cd8ef00d1ef27cb179a3c232be1bf0026a6f",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/protobuf/activity-token.pb",
+          "sha256": "d538066ad538c50d183cfae693843a329615d2f58aa6dd622a806da912724b75",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/protobuf/after-Activity-poll-mutable-state.pb",
+          "sha256": "d98bd1dd50c6a4ac0f9e7273b22d20528e545c0e9f2e4f0f9dbf4c8a082d8cb8",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/protobuf/after-Activity-poll-history.pb",
+          "sha256": "ac3271872310520a69095fba3e9c36af091d921dbcb0ae38c1c46eae682a31bb",
+          "prior_disposition": "HOLD_BINARY_REVIEW"
+        },
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/protobuf/after-Activity-poll-shard.pb",
+          "sha256": "90e99869a9481064a7419b4c04120d520312efdbb23f09cf5ad207d381e12616",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        }
+      ],
+      "transformation": "binary bytes excluded; retain original hashes/types and explicitly partial semantic projection locations",
+      "publication_review": "neither raw protobuf nor reconstructed protobuf included"
+    },
+    {
+      "public_path": "runs/positive/transformation-actions.json",
+      "public_sha256": "d602ff5342aa5a665cb60c30b8a3d0572cacb4170a44230b82ec51429b10d619",
+      "bytes": 59674,
+      "origins": [
+        {
+          "bundle": "positive",
+          "relative_path": "run-01/stdout.log",
+          "sha256": "1918306b3a629b1c23a6d865a01bada0216acb6f172b9c3d4dd40c9355baea92",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "hash-only record of changed value locations and rules; no original secret values",
+      "publication_review": "stable aliases preserve per-arm equality; opaque data removed"
+    },
+    {
+      "public_path": "runs/negative/events.public.json",
+      "public_sha256": "dec7fbce6cda78df2692bacc67a7e6fc1170c9ea2779f78a3706d599cb7666fe",
+      "bytes": 183134,
+      "origins": [
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/stdout.log",
+          "sha256": "ff064969b53407cf6654ec662220830f83573002dc944275231d400f0ce727ce",
+          "prior_disposition": "DERIVED_ONLY"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/analysis/events.jsonl",
+          "sha256": "578c53b22d77a13ca3aab5d1dcf379b51d47b2262286debe52926a9fa819f7d4",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "projection-v1 all events; fields mapped/withheld as per transformation-actions.json",
+      "publication_review": "all event sequence numbers and critical safety scalars conserved"
+    },
+    {
+      "public_path": "runs/negative/state-and-history.public.json",
+      "public_sha256": "d9420cc87a4775c0f740c2ae841d5e159f373f5c5af34573ff6e1ce554ebcc40",
+      "bytes": 63211,
+      "origins": [
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/analysis/durable-state-snapshots.json",
+          "sha256": "91249bf762ed875b3d3f9ad91192a3c111e2b8f74aac4d73dfcef2cdfd507ec1",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "same projected records selected by snapshot field; opaque branch tokens stable aliases",
+      "publication_review": "effective history, revision and causal references retained"
+    },
+    {
+      "public_path": "runs/negative/six-category-tasks.public.json",
+      "public_sha256": "8aba8cb90f369d98785fc0648e10d15a29c1a31e5982b6bf9d64c8d24f7147fe",
+      "bytes": 61314,
+      "origins": [
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/analysis/six-category-enumeration.json",
+          "sha256": "4377ed409bfd77dabda2dcfde3d7ed64736b9c7e27428e5ae545681e064d7cda",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "all original page records and ledgers; pagination tokens replaced by stable equality-preserving aliases",
+      "publication_review": "all rows, IDs, query bounds and EOF retained"
+    },
+    {
+      "public_path": "runs/negative/stdout.research-projection.log",
+      "public_sha256": "0309b3fe0797d64d685cb834b279d21d22cdf09509b30ced1d257c8436f64881",
+      "bytes": 127619,
+      "origins": [
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/stdout.log",
+          "sha256": "ff064969b53407cf6654ec662220830f83573002dc944275231d400f0ce727ce",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "filter all CCPO records + exact Go result lines; transform each CCPO payload; no raw server configuration",
+      "publication_review": "not advertised as complete raw stdout; omitted line count in result"
+    },
+    {
+      "public_path": "runs/negative/stderr.log",
+      "public_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "origins": [
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "prior_disposition": "ALLOW_EXACT"
+        }
+      ],
+      "transformation": "byte-for-byte copy; only destination renamed",
+      "publication_review": "exact allowlist item; no machine paths or private values"
+    },
+    {
+      "public_path": "runs/negative/exit-code.txt",
+      "public_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2,
+      "origins": [
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/exit-code.txt",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "prior_disposition": "ALLOW_EXACT"
+        }
+      ],
+      "transformation": "byte-for-byte copy; only destination renamed",
+      "publication_review": "exact allowlist item; no machine paths or private values"
+    },
+    {
+      "public_path": "runs/negative/predictions.public.zh-TW.md",
+      "public_sha256": "8846bef8d8cbaa577a94096492ecf04b0fd808e2119288bfaa97c98188f007bd",
+      "bytes": 1812,
+      "origins": [
+        {
+          "bundle": "negative",
+          "relative_path": "PREDICTIONS.zh-TW.md",
+          "sha256": "ed987c9385bd1c6746a32539f206bd77f38558ee4aa1f357de6b30612d896362",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "prepend provenance note; original prediction body byte-for-byte unchanged",
+      "publication_review": "reviewed text has no private paths or task tokens; DERIVED_ONLY cleared for this exact output"
+    },
+    {
+      "public_path": "runs/negative/invocation.public.json",
+      "public_sha256": "fa15e0c750883c341437bfd176595ae088fa3546c5a52f974ab725efba2530f1",
+      "bytes": 1455,
+      "origins": [
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/invocation.json",
+          "sha256": "5dc00312f9cf8f8995aa41385ef011f55a528799d3540b240ba751c1cf06bb0f",
+          "prior_disposition": "DERIVED_ONLY"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/invocation.txt",
+          "sha256": "283fc8f9da37965142165e8ebaa63b2796634d48bab140dfca151b4e53138ba2",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "executable and paths replaced; environment strict whitelist; exact argv flags retained",
+      "publication_review": "normalized reproduction form distinguished from original bytes"
+    },
+    {
+      "public_path": "runs/negative/result.public.json",
+      "public_sha256": "971676d84586c382b719b77222caf467e2cdc750422727766507e2c6e2658eb3",
+      "bytes": 1703,
+      "origins": [
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/result.json",
+          "sha256": "c2021b56b25fbcee1a31bc115a65467afe0c5680a4eae177a8b2fba55ecd127b",
+          "prior_disposition": "DERIVED_ONLY"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/exit-code.txt",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "prior_disposition": "ALLOW_EXACT"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/analysis/verification.json",
+          "sha256": "c6d9784dba108fb9659f45a02c3d318433262798f58ea149446b0f698e9288d2",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "select original timing/exit; completed audit classification separately identified; omit disk and local environment",
+      "publication_review": "no historical results rewritten; no new execution claimed"
+    },
+    {
+      "public_path": "runs/negative/original-binary-hashes.json",
+      "public_sha256": "24b897e0701d1c96729b578bf8f66d2eeea2b5499dfe88abde4744e55aac29fe",
+      "bytes": 13919,
+      "origins": [
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/stdout.log",
+          "sha256": "ff064969b53407cf6654ec662220830f83573002dc944275231d400f0ce727ce",
+          "prior_disposition": "DERIVED_ONLY"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/protobuf/request.pb",
+          "sha256": "fbe956c6a5d7658f0891fa82a160998fb32ee1bd982dc6a21b24d0b88e0e60dd",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/protobuf/task-token.pb",
+          "sha256": "b76e5de2aa0deba42670a5f40e7de25fb2ed533f3636dfb0b369a501377d380c",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/protobuf/initial-mutable-state.pb",
+          "sha256": "9189578f6e772d80301ed3015282471c2b379134dfba6f388f9b15ed70fca1ce",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/protobuf/initial-history.pb",
+          "sha256": "6cdcaf95f37d2ebbdb899bbbc2a3ac8c706fb3578d653c6220a81e1d1a60793a",
+          "prior_disposition": "HOLD_BINARY_REVIEW"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/protobuf/initial-shard.pb",
+          "sha256": "9649d664aef7888357cda738c3e4a22e410eae71c205da623a88dd729aa1f932",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/protobuf/guarded-describe.pb",
+          "sha256": "ecc7daee90321392a34d06c39bbfd81a4dd8f0eaf92b4fa773d349f24cd2e615",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/protobuf/negative-before-old-launch-mutable-state.pb",
+          "sha256": "9189578f6e772d80301ed3015282471c2b379134dfba6f388f9b15ed70fca1ce",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/protobuf/negative-before-old-launch-history.pb",
+          "sha256": "6cdcaf95f37d2ebbdb899bbbc2a3ac8c706fb3578d653c6220a81e1d1a60793a",
+          "prior_disposition": "HOLD_BINARY_REVIEW"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/protobuf/negative-before-old-launch-shard.pb",
+          "sha256": "d36a4b96277e75f481cd55a2b3d484b52d571b7312b91239e00a92c906409c86",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/protobuf/negative-after-stale-attempt-mutable-state.pb",
+          "sha256": "9189578f6e772d80301ed3015282471c2b379134dfba6f388f9b15ed70fca1ce",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/protobuf/negative-after-stale-attempt-history.pb",
+          "sha256": "6cdcaf95f37d2ebbdb899bbbc2a3ac8c706fb3578d653c6220a81e1d1a60793a",
+          "prior_disposition": "HOLD_BINARY_REVIEW"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/protobuf/negative-after-stale-attempt-shard.pb",
+          "sha256": "d36a4b96277e75f481cd55a2b3d484b52d571b7312b91239e00a92c906409c86",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/protobuf/negative-after-legitimate-retry-mutable-state.pb",
+          "sha256": "1df49c263da0a96fb45ed19238c2f2664d0246e77238bc61c1ec20e3b891485d",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/protobuf/negative-after-legitimate-retry-history.pb",
+          "sha256": "003eb023de6be730f50fbc1cf0b62224b7dc11d2542acd6c734d84b7cf8cfb77",
+          "prior_disposition": "HOLD_BINARY_REVIEW"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/protobuf/negative-after-legitimate-retry-shard.pb",
+          "sha256": "d36a4b96277e75f481cd55a2b3d484b52d571b7312b91239e00a92c906409c86",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/protobuf/activity-poll.pb",
+          "sha256": "6bc7d38b87f9cefd0ddee64c6f6726a24b9c828acb2ab4372f204b26f41c0ff1",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/protobuf/activity-token.pb",
+          "sha256": "45d6cb81d4fb9b96fb620fdede0867d922cfb38f56db91a624b4c90dd515754e",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/protobuf/after-Activity-poll-mutable-state.pb",
+          "sha256": "86b69727c1a0a42baa8a687ea522498d3b37fd342ef117b854e6a013f14b3fa6",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/protobuf/after-Activity-poll-history.pb",
+          "sha256": "003eb023de6be730f50fbc1cf0b62224b7dc11d2542acd6c734d84b7cf8cfb77",
+          "prior_disposition": "HOLD_BINARY_REVIEW"
+        },
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/protobuf/after-Activity-poll-shard.pb",
+          "sha256": "d36a4b96277e75f481cd55a2b3d484b52d571b7312b91239e00a92c906409c86",
+          "prior_disposition": "EXCLUDE_RAW_BINARY"
+        }
+      ],
+      "transformation": "binary bytes excluded; retain original hashes/types and explicitly partial semantic projection locations",
+      "publication_review": "neither raw protobuf nor reconstructed protobuf included"
+    },
+    {
+      "public_path": "runs/negative/transformation-actions.json",
+      "public_sha256": "013118c27dc995d48fc22988c375f224f0a4a4f27bf0f960f53aa6b91257f514",
+      "bytes": 63347,
+      "origins": [
+        {
+          "bundle": "negative",
+          "relative_path": "run-01/stdout.log",
+          "sha256": "ff064969b53407cf6654ec662220830f83573002dc944275231d400f0ce727ce",
+          "prior_disposition": "DERIVED_ONLY"
+        }
+      ],
+      "transformation": "hash-only record of changed value locations and rules; no original secret values",
+      "publication_review": "stable aliases preserve per-arm equality; opaque data removed"
+    },
+    {
+      "public_path": "historical/RECOVERY-LIMITATIONS.zh-TW.md",
+      "public_sha256": "44b2bd259b4659732ca562ca60392b640e5d127d37c046f5bfd681a53d071a9e",
+      "bytes": 1281,
+      "origins": [
+        {
+          "bundle": "audit",
+          "relative_path": "FINAL-AUDIT.zh-TW.md",
+          "sha256": "71ea9e300cf48029281145a66c0e75a6d71c07e39ff4cc0da1b75519b89f02be",
+          "prior_disposition": "LOCAL_AUDIT_INPUT_NOT_COPIED"
+        }
+      ],
+      "transformation": "new summary of historical recovery limits; no session record content exported",
+      "publication_review": "facts labeled historical; omitted originals remain private"
+    },
+    {
+      "public_path": "COMPARISON.zh-TW.md",
+      "public_sha256": "8330430994e8ca2322e1e73f238bb28731d21b037d9458673f98746f2afec22a",
+      "bytes": 2246,
+      "origins": [
+        {
+          "bundle": "audit",
+          "relative_path": "FINAL-AUDIT.zh-TW.md",
+          "sha256": "71ea9e300cf48029281145a66c0e75a6d71c07e39ff4cc0da1b75519b89f02be",
+          "prior_disposition": "LOCAL_AUDIT_INPUT_NOT_COPIED"
+        }
+      ],
+      "transformation": "extract original eight-row comparison table; append explicit scope",
+      "publication_review": "no original private paths in selected table"
+    },
+    {
+      "public_path": "PROVENANCE.json",
+      "public_sha256": "106d6c5aa460d06645966d39b0133e485469dd9601b90c12876c0e5e9ae31cbd",
+      "bytes": 1831,
+      "origins": [
+        {
+          "bundle": "audit",
+          "relative_path": "source-lineage.json",
+          "sha256": "cea20d834b0100d090d1a7c24fddb28b993b86a68a70c391fba38d75067971a5",
+          "prior_disposition": "LOCAL_AUDIT_INPUT_NOT_COPIED"
+        },
+        {
+          "bundle": "audit",
+          "relative_path": "manifest-verification.json",
+          "sha256": "59ef0f48e741d40ae5a658a9bd3f52d52dc44f98c41746abf96e52fb32be1e7f",
+          "prior_disposition": "LOCAL_AUDIT_INPUT_NOT_COPIED"
+        }
+      ],
+      "transformation": "select version/hash metadata; omit filesystem roots and private artifact inventories",
+      "publication_review": "relative bundle labels only"
+    },
+    {
+      "public_path": "README.zh-TW.md",
+      "public_sha256": "b909fba640e96328e9dd476ee19c14586508909edf3302389a2a8a97a90b5dc8",
+      "bytes": 2488,
+      "origins": [
+        {
+          "bundle": "audit",
+          "relative_path": "FINAL-AUDIT.zh-TW.md",
+          "sha256": "71ea9e300cf48029281145a66c0e75a6d71c07e39ff4cc0da1b75519b89f02be",
+          "prior_disposition": "LOCAL_AUDIT_INPUT_NOT_COPIED"
+        },
+        {
+          "bundle": "audit",
+          "relative_path": "PUBLICATION-ALLOWLIST.zh-TW.md",
+          "sha256": "78109fa8e29f64b674f4b77828d1c38a903790412057aeb90b9a04ed9feeddbf",
+          "prior_disposition": "LOCAL_AUDIT_INPUT_NOT_COPIED"
+        },
+        {
+          "bundle": "audit",
+          "relative_path": "CHECKPOINT-STRUCTURE.zh-TW.md",
+          "sha256": "b33ddd0c5067a437b1b42f4969714983f3ea2c07236d5be13e8a46eae29b265b",
+          "prior_disposition": "LOCAL_AUDIT_INPUT_NOT_COPIED"
+        }
+      ],
+      "transformation": "new authored publication explanation based on completed audit; historical observations unchanged",
+      "publication_review": "reviewed prose, no private filesystem paths"
+    },
+    {
+      "public_path": "FINAL-RESEARCH-REPORT.zh-TW.md",
+      "public_sha256": "4ee30f1d50393d1d8371fc537a3d97bbd882be5e551baf7e516b914af1245782",
+      "bytes": 7871,
+      "origins": [
+        {
+          "bundle": "audit",
+          "relative_path": "FINAL-AUDIT.zh-TW.md",
+          "sha256": "71ea9e300cf48029281145a66c0e75a6d71c07e39ff4cc0da1b75519b89f02be",
+          "prior_disposition": "LOCAL_AUDIT_INPUT_NOT_COPIED"
+        },
+        {
+          "bundle": "audit",
+          "relative_path": "PUBLICATION-ALLOWLIST.zh-TW.md",
+          "sha256": "78109fa8e29f64b674f4b77828d1c38a903790412057aeb90b9a04ed9feeddbf",
+          "prior_disposition": "LOCAL_AUDIT_INPUT_NOT_COPIED"
+        },
+        {
+          "bundle": "audit",
+          "relative_path": "CHECKPOINT-STRUCTURE.zh-TW.md",
+          "sha256": "b33ddd0c5067a437b1b42f4969714983f3ea2c07236d5be13e8a46eae29b265b",
+          "prior_disposition": "LOCAL_AUDIT_INPUT_NOT_COPIED"
+        }
+      ],
+      "transformation": "new authored publication explanation based on completed audit; historical observations unchanged",
+      "publication_review": "reviewed prose, no private filesystem paths"
+    },
+    {
+      "public_path": "METHODOLOGY.zh-TW.md",
+      "public_sha256": "4579eaf939f9c2d97caec7c0ba22906e95992efc29ae0e56f289e21cea9f89e2",
+      "bytes": 3217,
+      "origins": [
+        {
+          "bundle": "audit",
+          "relative_path": "FINAL-AUDIT.zh-TW.md",
+          "sha256": "71ea9e300cf48029281145a66c0e75a6d71c07e39ff4cc0da1b75519b89f02be",
+          "prior_disposition": "LOCAL_AUDIT_INPUT_NOT_COPIED"
+        },
+        {
+          "bundle": "audit",
+          "relative_path": "PUBLICATION-ALLOWLIST.zh-TW.md",
+          "sha256": "78109fa8e29f64b674f4b77828d1c38a903790412057aeb90b9a04ed9feeddbf",
+          "prior_disposition": "LOCAL_AUDIT_INPUT_NOT_COPIED"
+        },
+        {
+          "bundle": "audit",
+          "relative_path": "CHECKPOINT-STRUCTURE.zh-TW.md",
+          "sha256": "b33ddd0c5067a437b1b42f4969714983f3ea2c07236d5be13e8a46eae29b265b",
+          "prior_disposition": "LOCAL_AUDIT_INPUT_NOT_COPIED"
+        }
+      ],
+      "transformation": "new authored publication explanation based on completed audit; historical observations unchanged",
+      "publication_review": "reviewed prose, no private filesystem paths"
+    },
+    {
+      "public_path": "REPRODUCTION.zh-TW.md",
+      "public_sha256": "2072033bed6ed11dcf114698072afb4f767df7bcc4ff091eea30a433b35b0fd0",
+      "bytes": 3151,
+      "origins": [
+        {
+          "bundle": "audit",
+          "relative_path": "FINAL-AUDIT.zh-TW.md",
+          "sha256": "71ea9e300cf48029281145a66c0e75a6d71c07e39ff4cc0da1b75519b89f02be",
+          "prior_disposition": "LOCAL_AUDIT_INPUT_NOT_COPIED"
+        },
+        {
+          "bundle": "audit",
+          "relative_path": "PUBLICATION-ALLOWLIST.zh-TW.md",
+          "sha256": "78109fa8e29f64b674f4b77828d1c38a903790412057aeb90b9a04ed9feeddbf",
+          "prior_disposition": "LOCAL_AUDIT_INPUT_NOT_COPIED"
+        },
+        {
+          "bundle": "audit",
+          "relative_path": "CHECKPOINT-STRUCTURE.zh-TW.md",
+          "sha256": "b33ddd0c5067a437b1b42f4969714983f3ea2c07236d5be13e8a46eae29b265b",
+          "prior_disposition": "LOCAL_AUDIT_INPUT_NOT_COPIED"
+        }
+      ],
+      "transformation": "new authored publication explanation based on completed audit; historical observations unchanged",
+      "publication_review": "reviewed prose, no private filesystem paths"
+    },
+    {
+      "public_path": "SANITIZATION.zh-TW.md",
+      "public_sha256": "fb97ce3772e7a06bfff6c79783ce571a0efbc8fd0e82604a7043a028b6cee5eb",
+      "bytes": 4012,
+      "origins": [
+        {
+          "bundle": "audit",
+          "relative_path": "FINAL-AUDIT.zh-TW.md",
+          "sha256": "71ea9e300cf48029281145a66c0e75a6d71c07e39ff4cc0da1b75519b89f02be",
+          "prior_disposition": "LOCAL_AUDIT_INPUT_NOT_COPIED"
+        },
+        {
+          "bundle": "audit",
+          "relative_path": "PUBLICATION-ALLOWLIST.zh-TW.md",
+          "sha256": "78109fa8e29f64b674f4b77828d1c38a903790412057aeb90b9a04ed9feeddbf",
+          "prior_disposition": "LOCAL_AUDIT_INPUT_NOT_COPIED"
+        },
+        {
+          "bundle": "audit",
+          "relative_path": "CHECKPOINT-STRUCTURE.zh-TW.md",
+          "sha256": "b33ddd0c5067a437b1b42f4969714983f3ea2c07236d5be13e8a46eae29b265b",
+          "prior_disposition": "LOCAL_AUDIT_INPUT_NOT_COPIED"
+        }
+      ],
+      "transformation": "new authored publication explanation based on completed audit; historical observations unchanged",
+      "publication_review": "reviewed prose, no private filesystem paths"
+    },
+    {
+      "public_path": "PUBLICATION-REVIEW.json",
+      "public_sha256": "75b3fa7fa71a6d1943af5cf6fd848a1776ffa5b70f130fdea65afbb6d995ffd1",
+      "bytes": 1514,
+      "origins": [],
+      "transformation": "new candidate review summary; validation commands recorded privately",
+      "publication_review": "no original private values"
+    }
+  ],
+  "metadata_coverage": "This mapping hashes all payload files. Mapping and allowlist themselves are covered by SHA256SUMS; SHA256SUMS self-hash is recorded outside the bundle. No self-referential hash claims.",
+  "private_input_bytes_not_copied": true,
+  "lossy_transformations_not_reversible_from_public_bundle": true
+}

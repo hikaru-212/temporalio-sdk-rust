@@ -1,0 +1,113 @@
+--- a/tests/ccpo_c5b2/ordering_test.go
++++ b/tests/ccpo_c5b2/ordering_test.go
+@@ -68,6 +68,7 @@
+ 	requestBytes                []byte
+ 	sequence                    atomic.Int64
+ 	recordMu                    sync.Mutex
++	preserveResources           bool
+ 	oldRange                    atomic.Int64
+ 	armed                       atomic.Bool
+ 	faults                      atomic.Int32
+@@ -103,6 +104,9 @@
+ func (e *experiment) record(stage string, value any) {
+ 	e.recordMu.Lock()
+ 	defer e.recordMu.Unlock()
++	if e.preserveResources {
++		return
++	}
+ 	b, err := json.Marshal(map[string]any{"sequence": e.sequence.Add(1), "utc": time.Now().UTC().Format(time.RFC3339Nano), "stage": stage, "value": value})
+ 	if err != nil {
+ 		e.t.Errorf("evidence serialization: %v", err)
+@@ -139,7 +143,11 @@
+ 	cfgSQL := &config.SQL{PluginName: "sqlite", DatabaseName: db.DBName, ConnectAttributes: delegateAttributes, MaxConns: 4, MaxIdleConns: 4}
+ 	realDB, err := sqlstore.NewSQLDB(sqlplugin.DbKindMain, cfgSQL, resolver.NewNoopResolver(), logger, metrics.NoopMetricsHandler)
+ 	require.NoError(t, err)
+-	t.Cleanup(func() { require.NoError(t, realDB.Close()) })
++	t.Cleanup(func() {
++		if !e.preserveResources {
++			require.NoError(t, realDB.Close())
++		}
++	})
+ 	e.record("sql-config", cfgSQL)
+ 	observedLogger := &recoveryLogger{Logger: logger, e: e}
+ 	baseFactory := temporal.PersistenceFactoryProvider()
+@@ -157,7 +165,14 @@
+ 	cluster, err := testcore.NewTestClusterFactory().NewCluster(t, cfg, observedLogger)
+ 	require.NoError(t, err)
+ 	e.cluster = cluster
+-	t.Cleanup(func() { e.allowDelete(); require.NoError(t, cluster.TearDownCluster()); logger.Close() })
++	t.Cleanup(func() {
++		if e.preserveResources {
++			return
++		}
++		e.allowDelete()
++		require.NoError(t, cluster.TearDownCluster())
++		logger.Close()
++	})
+ 	e.client = cluster.FrontendClient()
+ 	e.record("baseline", map[string]any{"source_sha": sourceSHA, "database": "file SQLite", "sqlite_attributes": db.ConnectAttributes, "namespace": e.ns, "workflow_id": e.workflowID, "wft_timeout_seconds": 120, "external_activity_executor": false})
+ 	_, err = e.client.RegisterNamespace(ctx, &workflowservice.RegisterNamespaceRequest{Namespace: e.ns, WorkflowExecutionRetentionPeriod: durationpb.New(24 * time.Hour)})
+@@ -397,7 +412,7 @@
+ 	pre:=e.inspect("before-old-release",false);preTasks:=e.lastLedger
+ 	require.Equal(t,before.DBRecordVersion,pre.DBRecordVersion);require.True(t,proto.Equal(before.State,pre.State))
+ 	e.record("G-release-old-transaction",map[string]any{"tx":e.tx.id,"range":e.durableRange()})
+-	e.cleanupDelegate()
++	require.True(t, e.cleanupDelegate(), "INCONCLUSIVE: delegate termination not confirmed")
+ 	require.NoError(t,e.delegateContextErr,"INCONCLUSIVE: delegate canceled before physical outcome")
+ 	require.True(t,e.tx.closed.Load())
+ 	post:=e.inspect("J-after-old-termination",false);postTasks:=e.lastLedger
+--- a/tests/ccpo_c5b2/instrumentation_test.go
++++ b/tests/ccpo_c5b2/instrumentation_test.go
+@@ -355,10 +355,18 @@
+ func (e *experiment) releaseOld() {
+ 	e.gateOnce.Do(func() { e.released.Store(true); close(e.gate) })
+ }
+-func (e *experiment) cleanupDelegate() {
++// Abandoned delegates must not log through testing.T after the test has returned.
++func (e *experiment) retainDelegateResources() {
++	e.recordMu.Lock()
++	defer e.recordMu.Unlock()
++	e.preserveResources = true
++}
++
++// A true result means no delegate was started or done was received.
++func (e *experiment) cleanupDelegate() bool {
+ 	e.releaseOld()
+ 	if !e.started.Load() {
+-		return
++		return true
+ 	}
+ 	if e.arm=="negative" && !e.launched.Load() { e.delegateCancel(); e.launchOnce.Do(func(){close(e.launch)}) }
+ 	timer := time.NewTimer(10 * time.Second)
+@@ -371,15 +379,18 @@
+ 		select {
+ 		case <-e.done:
+ 		case <-timer.C:
+-			e.t.Error("INCONCLUSIVE: delegate did not terminate after bounded cancellation")
+-			return
++			e.retainDelegateResources()
++			e.t.Error("INCONCLUSIVE: delegate did not terminate after bounded cancellation; resources retained until process exit")
++			return false
+ 		}
+ 	}
+ 	e.delegateCancel()
+ 	if e.tx != nil && !e.tx.closed.Load() {
++		e.retainDelegateResources()
+ 		e.t.Error("INCONCLUSIVE: transaction closure not confirmed before cluster teardown")
+ 	}
+ 	e.record("cleanup-joined", map[string]any{"delegate_done": true, "cancel_called": true, "error": fmt.Sprint(e.delegateErr)})
++	return true
+ }
+ 
+ type connectionAudit struct {
+@@ -437,6 +448,10 @@
+  hookRegistry.Lock();delete(hookRegistry.entries,a.prefix);left:=len(hookRegistry.entries);hookRegistry.Unlock()
+  a.mu.Lock();defer a.mu.Unlock()
+  a.active=false
++ if a.e.preserveResources {
++  a.e.t.Logf("INCONCLUSIVE: connection hook unregistered; %d physical connections retained until process exit; registry entries=%d",len(a.connections),left)
++  return
++ }
+  for _,c:=range a.connections {
+   err:=c.Close()
+   a.e.record("physical-driver-close",map[string]any{"connection":fmt.Sprintf("%T:%p",c,c),"error":fmt.Sprint(err)})

@@ -1,0 +1,1968 @@
+{
+  "arm": "main",
+  "source": "events.public.json",
+  "snapshots": [
+    {
+      "sequence": 19,
+      "stage": "initial",
+      "utc": "2026-10-26T11:19:05.548703819Z",
+      "raw_stdout_line": 359,
+      "value": {
+        "activity_schedules": 0,
+        "db_revision": 3,
+        "direct_persisted_activity_tasks": null,
+        "effective_history": {
+          "events": [
+            {
+              "event_id": "1",
+              "event_time": "2026-10-26T11:19:05.539993708Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+              "task_id": "1048576",
+              "workflow_execution_started_event_attributes": {
+                "workflow_type": {
+                  "name": "ccpo-c5b1-workflow"
+                },
+                "task_queue": {
+                  "name": "ccpo-c5b1-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "workflow_run_timeout": "600s",
+                "workflow_task_timeout": "120s",
+                "original_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "identity": "ccpo-client",
+                "first_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "attempt": 1,
+                "first_workflow_task_backoff": "0s",
+                "workflow_id": "ccpo-c5b2-main"
+              }
+            },
+            {
+              "event_id": "2",
+              "event_time": "2026-10-26T11:19:05.540609359Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+              "task_id": "1048577",
+              "workflow_task_scheduled_event_attributes": {
+                "task_queue": {
+                  "name": "ccpo-c5b1-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "start_to_close_timeout": "120s",
+                "attempt": 1
+              }
+            },
+            {
+              "event_id": "3",
+              "event_time": "2026-10-26T11:19:05.545725571Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+              "task_id": "1048583",
+              "workflow_task_started_event_attributes": {
+                "scheduled_event_id": "2",
+                "identity": "ccpo-client",
+                "request_id": "1fd327bf-190c-45d7-b85d-b809cb630c68",
+                "history_size_bytes": "246"
+              }
+            }
+          ]
+        },
+        "independent_category_ranges": {
+          "archival": {
+            "exclusive_max": {
+              "FireTime": "2262-04-11T23:47:16.854775807Z",
+              "TaskID": 0
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": null,
+            "pages": 1,
+            "rows": 0
+          },
+          "outbound": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": null,
+            "pages": 1,
+            "rows": 0
+          },
+          "replication": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": null,
+            "pages": 1,
+            "rows": 0
+          },
+          "timer": {
+            "exclusive_max": {
+              "FireTime": "2262-04-11T23:47:16.854775807Z",
+              "TaskID": 0
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": [
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:21:05.546Z",
+                "TaskID": 1048585,
+                "EventID": 2,
+                "ScheduleAttempt": 1,
+                "TimeoutType": 1,
+                "Version": 0,
+                "Stamp": 0,
+                "InMemory": false
+              },
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:29:05.54Z",
+                "TaskID": 1048581,
+                "Version": 0
+              }
+            ],
+            "pages": 2,
+            "rows": 2
+          },
+          "transfer": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": [
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:19:05.540772532Z",
+                "TaskID": 1048580,
+                "TaskQueue": "ccpo-c5b1-queue",
+                "ScheduledEventID": 2,
+                "Version": 0,
+                "Stamp": 0
+              }
+            ],
+            "pages": 1,
+            "rows": 1
+          },
+          "visibility": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": [
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:19:05.540772532Z",
+                "TaskID": 1048579,
+                "Version": 0
+              }
+            ],
+            "pages": 1,
+            "rows": 1
+          }
+        },
+        "range_id": 1,
+        "state": {
+          "execution_info": {
+            "namespace_id": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+            "workflow_id": "ccpo-c5b2-main",
+            "task_queue": "ccpo-c5b1-queue",
+            "workflow_type_name": "ccpo-c5b1-workflow",
+            "workflow_run_timeout": "600s",
+            "default_workflow_task_timeout": "120s",
+            "last_running_clock": "1048583",
+            "last_first_event_id": "3",
+            "start_time": "2026-10-26T11:19:05.539993708Z",
+            "last_update_time": "2026-10-26T11:19:05.545850368Z",
+            "workflow_task_scheduled_event_id": "2",
+            "workflow_task_started_event_id": "3",
+            "workflow_task_timeout": "120s",
+            "workflow_task_attempt": 1,
+            "workflow_task_started_time": "2026-10-26T11:19:05.545725571Z",
+            "workflow_task_scheduled_time": "2026-10-26T11:19:05.540609359Z",
+            "workflow_task_original_scheduled_time": "2026-10-26T11:19:05.540609192Z",
+            "workflow_task_request_id": "1fd327bf-190c-45d7-b85d-b809cb630c68",
+            "workflow_task_type": "WORKFLOW_TASK_TYPE_NORMAL",
+            "workflow_task_history_size_bytes": "246",
+            "attempt": 1,
+            "auto_reset_points": {},
+            "version_histories": {
+              "histories": [
+                {
+                  "branch_token": "<main:branch:1>",
+                  "items": [
+                    {
+                      "event_id": "3"
+                    }
+                  ]
+                }
+              ]
+            },
+            "first_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+            "execution_stats": {
+              "history_size": "328"
+            },
+            "workflow_run_expiration_time": "2026-10-26T11:29:05.539993708Z",
+            "last_first_event_txn_id": "1048584",
+            "state_transition_count": "2",
+            "execution_time": "2026-10-26T11:19:05.539993708Z",
+            "transition_history": [
+              {
+                "transition_count": "2"
+              }
+            ],
+            "root_workflow_id": "ccpo-c5b2-main",
+            "root_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+            "task_generation_shard_clock_timestamp": "1048576",
+            "workflow_task_last_update_versioned_transition": {
+              "transition_count": "2"
+            },
+            "sub_state_machine_tombstone_batches": [
+              {
+                "versioned_transition": {
+                  "transition_count": "1"
+                }
+              }
+            ],
+            "original_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14"
+          },
+          "execution_state": {
+            "create_request_id": "be7dec14-6ac6-4402-81a5-04a42c32580d",
+            "run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+            "state": "WORKFLOW_EXECUTION_STATE_RUNNING",
+            "status": "WORKFLOW_EXECUTION_STATUS_RUNNING",
+            "last_update_versioned_transition": {
+              "transition_count": "1"
+            },
+            "start_time": "2026-10-26T11:19:05.539993708Z",
+            "request_ids": {
+              "be7dec14-6ac6-4402-81a5-04a42c32580d": {
+                "event_type": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+                "event_id": "1"
+              }
+            },
+            "first_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14"
+          },
+          "next_event_id": "4"
+        },
+        "valid_completions": 0
+      },
+      "original_record_value_sha256_canonical_json": "3c00dc1a47a36965bc1444bc014ea51dc759018e228884a31dcfa955d5cd1a01"
+    },
+    {
+      "sequence": 31,
+      "stage": "before-fault",
+      "utc": "2026-10-26T11:19:05.549709278Z",
+      "raw_stdout_line": 371,
+      "value": {
+        "activity_schedules": 0,
+        "db_revision": 3,
+        "direct_persisted_activity_tasks": null,
+        "effective_history": {
+          "events": [
+            {
+              "event_id": "1",
+              "event_time": "2026-10-26T11:19:05.539993708Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+              "task_id": "1048576",
+              "workflow_execution_started_event_attributes": {
+                "workflow_type": {
+                  "name": "ccpo-c5b1-workflow"
+                },
+                "task_queue": {
+                  "name": "ccpo-c5b1-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "workflow_run_timeout": "600s",
+                "workflow_task_timeout": "120s",
+                "original_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "identity": "ccpo-client",
+                "first_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "attempt": 1,
+                "first_workflow_task_backoff": "0s",
+                "workflow_id": "ccpo-c5b2-main"
+              }
+            },
+            {
+              "event_id": "2",
+              "event_time": "2026-10-26T11:19:05.540609359Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+              "task_id": "1048577",
+              "workflow_task_scheduled_event_attributes": {
+                "task_queue": {
+                  "name": "ccpo-c5b1-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "start_to_close_timeout": "120s",
+                "attempt": 1
+              }
+            },
+            {
+              "event_id": "3",
+              "event_time": "2026-10-26T11:19:05.545725571Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+              "task_id": "1048583",
+              "workflow_task_started_event_attributes": {
+                "scheduled_event_id": "2",
+                "identity": "ccpo-client",
+                "request_id": "1fd327bf-190c-45d7-b85d-b809cb630c68",
+                "history_size_bytes": "246"
+              }
+            }
+          ]
+        },
+        "independent_category_ranges": {
+          "archival": {
+            "exclusive_max": {
+              "FireTime": "2262-04-11T23:47:16.854775807Z",
+              "TaskID": 0
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": null,
+            "pages": 1,
+            "rows": 0
+          },
+          "outbound": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": null,
+            "pages": 1,
+            "rows": 0
+          },
+          "replication": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": null,
+            "pages": 1,
+            "rows": 0
+          },
+          "timer": {
+            "exclusive_max": {
+              "FireTime": "2262-04-11T23:47:16.854775807Z",
+              "TaskID": 0
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": [
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:21:05.546Z",
+                "TaskID": 1048585,
+                "EventID": 2,
+                "ScheduleAttempt": 1,
+                "TimeoutType": 1,
+                "Version": 0,
+                "Stamp": 0,
+                "InMemory": false
+              },
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:29:05.54Z",
+                "TaskID": 1048581,
+                "Version": 0
+              }
+            ],
+            "pages": 2,
+            "rows": 2
+          },
+          "transfer": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": [
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:19:05.540772532Z",
+                "TaskID": 1048580,
+                "TaskQueue": "ccpo-c5b1-queue",
+                "ScheduledEventID": 2,
+                "Version": 0,
+                "Stamp": 0
+              }
+            ],
+            "pages": 1,
+            "rows": 1
+          },
+          "visibility": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": [
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:19:05.540772532Z",
+                "TaskID": 1048579,
+                "Version": 0
+              }
+            ],
+            "pages": 1,
+            "rows": 1
+          }
+        },
+        "range_id": 1,
+        "state": {
+          "execution_info": {
+            "namespace_id": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+            "workflow_id": "ccpo-c5b2-main",
+            "task_queue": "ccpo-c5b1-queue",
+            "workflow_type_name": "ccpo-c5b1-workflow",
+            "workflow_run_timeout": "600s",
+            "default_workflow_task_timeout": "120s",
+            "last_running_clock": "1048583",
+            "last_first_event_id": "3",
+            "start_time": "2026-10-26T11:19:05.539993708Z",
+            "last_update_time": "2026-10-26T11:19:05.545850368Z",
+            "workflow_task_scheduled_event_id": "2",
+            "workflow_task_started_event_id": "3",
+            "workflow_task_timeout": "120s",
+            "workflow_task_attempt": 1,
+            "workflow_task_started_time": "2026-10-26T11:19:05.545725571Z",
+            "workflow_task_scheduled_time": "2026-10-26T11:19:05.540609359Z",
+            "workflow_task_original_scheduled_time": "2026-10-26T11:19:05.540609192Z",
+            "workflow_task_request_id": "1fd327bf-190c-45d7-b85d-b809cb630c68",
+            "workflow_task_type": "WORKFLOW_TASK_TYPE_NORMAL",
+            "workflow_task_history_size_bytes": "246",
+            "attempt": 1,
+            "auto_reset_points": {},
+            "version_histories": {
+              "histories": [
+                {
+                  "branch_token": "<main:branch:1>",
+                  "items": [
+                    {
+                      "event_id": "3"
+                    }
+                  ]
+                }
+              ]
+            },
+            "first_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+            "execution_stats": {
+              "history_size": "328"
+            },
+            "workflow_run_expiration_time": "2026-10-26T11:29:05.539993708Z",
+            "last_first_event_txn_id": "1048584",
+            "state_transition_count": "2",
+            "execution_time": "2026-10-26T11:19:05.539993708Z",
+            "transition_history": [
+              {
+                "transition_count": "2"
+              }
+            ],
+            "root_workflow_id": "ccpo-c5b2-main",
+            "root_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+            "task_generation_shard_clock_timestamp": "1048576",
+            "workflow_task_last_update_versioned_transition": {
+              "transition_count": "2"
+            },
+            "sub_state_machine_tombstone_batches": [
+              {
+                "versioned_transition": {
+                  "transition_count": "1"
+                }
+              }
+            ],
+            "original_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14"
+          },
+          "execution_state": {
+            "create_request_id": "be7dec14-6ac6-4402-81a5-04a42c32580d",
+            "run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+            "state": "WORKFLOW_EXECUTION_STATE_RUNNING",
+            "status": "WORKFLOW_EXECUTION_STATUS_RUNNING",
+            "last_update_versioned_transition": {
+              "transition_count": "1"
+            },
+            "start_time": "2026-10-26T11:19:05.539993708Z",
+            "request_ids": {
+              "be7dec14-6ac6-4402-81a5-04a42c32580d": {
+                "event_type": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+                "event_id": "1"
+              }
+            },
+            "first_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14"
+          },
+          "next_event_id": "4"
+        },
+        "valid_completions": 0
+      },
+      "original_record_value_sha256_canonical_json": "3c00dc1a47a36965bc1444bc014ea51dc759018e228884a31dcfa955d5cd1a01"
+    },
+    {
+      "sequence": 61,
+      "stage": "before-old-release",
+      "utc": "2026-10-26T11:19:05.557274466Z",
+      "raw_stdout_line": 506,
+      "value": {
+        "activity_schedules": 0,
+        "db_revision": 3,
+        "direct_persisted_activity_tasks": null,
+        "effective_history": {
+          "events": [
+            {
+              "event_id": "1",
+              "event_time": "2026-10-26T11:19:05.539993708Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+              "task_id": "1048576",
+              "workflow_execution_started_event_attributes": {
+                "workflow_type": {
+                  "name": "ccpo-c5b1-workflow"
+                },
+                "task_queue": {
+                  "name": "ccpo-c5b1-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "workflow_run_timeout": "600s",
+                "workflow_task_timeout": "120s",
+                "original_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "identity": "ccpo-client",
+                "first_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "attempt": 1,
+                "first_workflow_task_backoff": "0s",
+                "workflow_id": "ccpo-c5b2-main"
+              }
+            },
+            {
+              "event_id": "2",
+              "event_time": "2026-10-26T11:19:05.540609359Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+              "task_id": "1048577",
+              "workflow_task_scheduled_event_attributes": {
+                "task_queue": {
+                  "name": "ccpo-c5b1-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "start_to_close_timeout": "120s",
+                "attempt": 1
+              }
+            },
+            {
+              "event_id": "3",
+              "event_time": "2026-10-26T11:19:05.545725571Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+              "task_id": "1048583",
+              "workflow_task_started_event_attributes": {
+                "scheduled_event_id": "2",
+                "identity": "ccpo-client",
+                "request_id": "1fd327bf-190c-45d7-b85d-b809cb630c68",
+                "history_size_bytes": "246"
+              }
+            }
+          ]
+        },
+        "independent_category_ranges": {
+          "archival": {
+            "exclusive_max": {
+              "FireTime": "2262-04-11T23:47:16.854775807Z",
+              "TaskID": 0
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": null,
+            "pages": 1,
+            "rows": 0
+          },
+          "outbound": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": null,
+            "pages": 1,
+            "rows": 0
+          },
+          "replication": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": null,
+            "pages": 1,
+            "rows": 0
+          },
+          "timer": {
+            "exclusive_max": {
+              "FireTime": "2262-04-11T23:47:16.854775807Z",
+              "TaskID": 0
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": [
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:21:05.546Z",
+                "TaskID": 1048585,
+                "EventID": 2,
+                "ScheduleAttempt": 1,
+                "TimeoutType": 1,
+                "Version": 0,
+                "Stamp": 0,
+                "InMemory": false
+              },
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:29:05.54Z",
+                "TaskID": 1048581,
+                "Version": 0
+              }
+            ],
+            "pages": 2,
+            "rows": 2
+          },
+          "transfer": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": [
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:19:05.540772532Z",
+                "TaskID": 1048580,
+                "TaskQueue": "ccpo-c5b1-queue",
+                "ScheduledEventID": 2,
+                "Version": 0,
+                "Stamp": 0
+              }
+            ],
+            "pages": 1,
+            "rows": 1
+          },
+          "visibility": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": [
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:19:05.540772532Z",
+                "TaskID": 1048579,
+                "Version": 0
+              }
+            ],
+            "pages": 1,
+            "rows": 1
+          }
+        },
+        "range_id": 2,
+        "state": {
+          "execution_info": {
+            "namespace_id": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+            "workflow_id": "ccpo-c5b2-main",
+            "task_queue": "ccpo-c5b1-queue",
+            "workflow_type_name": "ccpo-c5b1-workflow",
+            "workflow_run_timeout": "600s",
+            "default_workflow_task_timeout": "120s",
+            "last_running_clock": "1048583",
+            "last_first_event_id": "3",
+            "start_time": "2026-10-26T11:19:05.539993708Z",
+            "last_update_time": "2026-10-26T11:19:05.545850368Z",
+            "workflow_task_scheduled_event_id": "2",
+            "workflow_task_started_event_id": "3",
+            "workflow_task_timeout": "120s",
+            "workflow_task_attempt": 1,
+            "workflow_task_started_time": "2026-10-26T11:19:05.545725571Z",
+            "workflow_task_scheduled_time": "2026-10-26T11:19:05.540609359Z",
+            "workflow_task_original_scheduled_time": "2026-10-26T11:19:05.540609192Z",
+            "workflow_task_request_id": "1fd327bf-190c-45d7-b85d-b809cb630c68",
+            "workflow_task_type": "WORKFLOW_TASK_TYPE_NORMAL",
+            "workflow_task_history_size_bytes": "246",
+            "attempt": 1,
+            "auto_reset_points": {},
+            "version_histories": {
+              "histories": [
+                {
+                  "branch_token": "<main:branch:1>",
+                  "items": [
+                    {
+                      "event_id": "3"
+                    }
+                  ]
+                }
+              ]
+            },
+            "first_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+            "execution_stats": {
+              "history_size": "328"
+            },
+            "workflow_run_expiration_time": "2026-10-26T11:29:05.539993708Z",
+            "last_first_event_txn_id": "1048584",
+            "state_transition_count": "2",
+            "execution_time": "2026-10-26T11:19:05.539993708Z",
+            "transition_history": [
+              {
+                "transition_count": "2"
+              }
+            ],
+            "root_workflow_id": "ccpo-c5b2-main",
+            "root_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+            "task_generation_shard_clock_timestamp": "1048576",
+            "workflow_task_last_update_versioned_transition": {
+              "transition_count": "2"
+            },
+            "sub_state_machine_tombstone_batches": [
+              {
+                "versioned_transition": {
+                  "transition_count": "1"
+                }
+              }
+            ],
+            "original_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14"
+          },
+          "execution_state": {
+            "create_request_id": "be7dec14-6ac6-4402-81a5-04a42c32580d",
+            "run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+            "state": "WORKFLOW_EXECUTION_STATE_RUNNING",
+            "status": "WORKFLOW_EXECUTION_STATUS_RUNNING",
+            "last_update_versioned_transition": {
+              "transition_count": "1"
+            },
+            "start_time": "2026-10-26T11:19:05.539993708Z",
+            "request_ids": {
+              "be7dec14-6ac6-4402-81a5-04a42c32580d": {
+                "event_type": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+                "event_id": "1"
+              }
+            },
+            "first_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14"
+          },
+          "next_event_id": "4"
+        },
+        "valid_completions": 0
+      },
+      "original_record_value_sha256_canonical_json": "cc94085452855d18750eed60eba70579face864ba96e77f5e3b00f50ee802b84"
+    },
+    {
+      "sequence": 80,
+      "stage": "J-after-old-termination",
+      "utc": "2026-10-26T11:19:05.558982746Z",
+      "raw_stdout_line": 525,
+      "value": {
+        "activity_schedules": 0,
+        "db_revision": 3,
+        "direct_persisted_activity_tasks": null,
+        "effective_history": {
+          "events": [
+            {
+              "event_id": "1",
+              "event_time": "2026-10-26T11:19:05.539993708Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+              "task_id": "1048576",
+              "workflow_execution_started_event_attributes": {
+                "workflow_type": {
+                  "name": "ccpo-c5b1-workflow"
+                },
+                "task_queue": {
+                  "name": "ccpo-c5b1-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "workflow_run_timeout": "600s",
+                "workflow_task_timeout": "120s",
+                "original_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "identity": "ccpo-client",
+                "first_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "attempt": 1,
+                "first_workflow_task_backoff": "0s",
+                "workflow_id": "ccpo-c5b2-main"
+              }
+            },
+            {
+              "event_id": "2",
+              "event_time": "2026-10-26T11:19:05.540609359Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+              "task_id": "1048577",
+              "workflow_task_scheduled_event_attributes": {
+                "task_queue": {
+                  "name": "ccpo-c5b1-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "start_to_close_timeout": "120s",
+                "attempt": 1
+              }
+            },
+            {
+              "event_id": "3",
+              "event_time": "2026-10-26T11:19:05.545725571Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+              "task_id": "1048583",
+              "workflow_task_started_event_attributes": {
+                "scheduled_event_id": "2",
+                "identity": "ccpo-client",
+                "request_id": "1fd327bf-190c-45d7-b85d-b809cb630c68",
+                "history_size_bytes": "246"
+              }
+            }
+          ]
+        },
+        "independent_category_ranges": {
+          "archival": {
+            "exclusive_max": {
+              "FireTime": "2262-04-11T23:47:16.854775807Z",
+              "TaskID": 0
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": null,
+            "pages": 1,
+            "rows": 0
+          },
+          "outbound": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": null,
+            "pages": 1,
+            "rows": 0
+          },
+          "replication": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": null,
+            "pages": 1,
+            "rows": 0
+          },
+          "timer": {
+            "exclusive_max": {
+              "FireTime": "2262-04-11T23:47:16.854775807Z",
+              "TaskID": 0
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": [
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:21:05.546Z",
+                "TaskID": 1048585,
+                "EventID": 2,
+                "ScheduleAttempt": 1,
+                "TimeoutType": 1,
+                "Version": 0,
+                "Stamp": 0,
+                "InMemory": false
+              },
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:29:05.54Z",
+                "TaskID": 1048581,
+                "Version": 0
+              }
+            ],
+            "pages": 2,
+            "rows": 2
+          },
+          "transfer": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": [
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:19:05.540772532Z",
+                "TaskID": 1048580,
+                "TaskQueue": "ccpo-c5b1-queue",
+                "ScheduledEventID": 2,
+                "Version": 0,
+                "Stamp": 0
+              }
+            ],
+            "pages": 1,
+            "rows": 1
+          },
+          "visibility": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": [
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:19:05.540772532Z",
+                "TaskID": 1048579,
+                "Version": 0
+              }
+            ],
+            "pages": 1,
+            "rows": 1
+          }
+        },
+        "range_id": 2,
+        "state": {
+          "execution_info": {
+            "namespace_id": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+            "workflow_id": "ccpo-c5b2-main",
+            "task_queue": "ccpo-c5b1-queue",
+            "workflow_type_name": "ccpo-c5b1-workflow",
+            "workflow_run_timeout": "600s",
+            "default_workflow_task_timeout": "120s",
+            "last_running_clock": "1048583",
+            "last_first_event_id": "3",
+            "start_time": "2026-10-26T11:19:05.539993708Z",
+            "last_update_time": "2026-10-26T11:19:05.545850368Z",
+            "workflow_task_scheduled_event_id": "2",
+            "workflow_task_started_event_id": "3",
+            "workflow_task_timeout": "120s",
+            "workflow_task_attempt": 1,
+            "workflow_task_started_time": "2026-10-26T11:19:05.545725571Z",
+            "workflow_task_scheduled_time": "2026-10-26T11:19:05.540609359Z",
+            "workflow_task_original_scheduled_time": "2026-10-26T11:19:05.540609192Z",
+            "workflow_task_request_id": "1fd327bf-190c-45d7-b85d-b809cb630c68",
+            "workflow_task_type": "WORKFLOW_TASK_TYPE_NORMAL",
+            "workflow_task_history_size_bytes": "246",
+            "attempt": 1,
+            "auto_reset_points": {},
+            "version_histories": {
+              "histories": [
+                {
+                  "branch_token": "<main:branch:1>",
+                  "items": [
+                    {
+                      "event_id": "3"
+                    }
+                  ]
+                }
+              ]
+            },
+            "first_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+            "execution_stats": {
+              "history_size": "328"
+            },
+            "workflow_run_expiration_time": "2026-10-26T11:29:05.539993708Z",
+            "last_first_event_txn_id": "1048584",
+            "state_transition_count": "2",
+            "execution_time": "2026-10-26T11:19:05.539993708Z",
+            "transition_history": [
+              {
+                "transition_count": "2"
+              }
+            ],
+            "root_workflow_id": "ccpo-c5b2-main",
+            "root_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+            "task_generation_shard_clock_timestamp": "1048576",
+            "workflow_task_last_update_versioned_transition": {
+              "transition_count": "2"
+            },
+            "sub_state_machine_tombstone_batches": [
+              {
+                "versioned_transition": {
+                  "transition_count": "1"
+                }
+              }
+            ],
+            "original_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14"
+          },
+          "execution_state": {
+            "create_request_id": "be7dec14-6ac6-4402-81a5-04a42c32580d",
+            "run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+            "state": "WORKFLOW_EXECUTION_STATE_RUNNING",
+            "status": "WORKFLOW_EXECUTION_STATUS_RUNNING",
+            "last_update_versioned_transition": {
+              "transition_count": "1"
+            },
+            "start_time": "2026-10-26T11:19:05.539993708Z",
+            "request_ids": {
+              "be7dec14-6ac6-4402-81a5-04a42c32580d": {
+                "event_type": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+                "event_id": "1"
+              }
+            },
+            "first_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14"
+          },
+          "next_event_id": "4"
+        },
+        "valid_completions": 0
+      },
+      "original_record_value_sha256_canonical_json": "cc94085452855d18750eed60eba70579face864ba96e77f5e3b00f50ee802b84"
+    },
+    {
+      "sequence": 96,
+      "stage": "L-after-legitimate-retry",
+      "utc": "2026-10-26T11:19:05.563674357Z",
+      "raw_stdout_line": 550,
+      "value": {
+        "activity_schedules": 1,
+        "db_revision": 4,
+        "direct_persisted_activity_tasks": [
+          {
+            "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+            "WorkflowID": "ccpo-c5b2-main",
+            "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+            "VisibilityTimestamp": "2026-10-26T11:19:05.560316384Z",
+            "TaskID": 2097156,
+            "TaskQueue": "ccpo-c5b1-queue",
+            "ScheduledEventID": 5,
+            "Version": 0,
+            "Stamp": 0
+          }
+        ],
+        "effective_history": {
+          "events": [
+            {
+              "event_id": "1",
+              "event_time": "2026-10-26T11:19:05.539993708Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+              "task_id": "1048576",
+              "workflow_execution_started_event_attributes": {
+                "workflow_type": {
+                  "name": "ccpo-c5b1-workflow"
+                },
+                "task_queue": {
+                  "name": "ccpo-c5b1-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "workflow_run_timeout": "600s",
+                "workflow_task_timeout": "120s",
+                "original_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "identity": "ccpo-client",
+                "first_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "attempt": 1,
+                "first_workflow_task_backoff": "0s",
+                "workflow_id": "ccpo-c5b2-main"
+              }
+            },
+            {
+              "event_id": "2",
+              "event_time": "2026-10-26T11:19:05.540609359Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+              "task_id": "1048577",
+              "workflow_task_scheduled_event_attributes": {
+                "task_queue": {
+                  "name": "ccpo-c5b1-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "start_to_close_timeout": "120s",
+                "attempt": 1
+              }
+            },
+            {
+              "event_id": "3",
+              "event_time": "2026-10-26T11:19:05.545725571Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+              "task_id": "1048583",
+              "workflow_task_started_event_attributes": {
+                "scheduled_event_id": "2",
+                "identity": "ccpo-client",
+                "request_id": "1fd327bf-190c-45d7-b85d-b809cb630c68",
+                "history_size_bytes": "246"
+              }
+            },
+            {
+              "event_id": "4",
+              "event_time": "2026-10-26T11:19:05.560197671Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+              "task_id": "2097152",
+              "workflow_task_completed_event_attributes": {
+                "scheduled_event_id": "2",
+                "started_event_id": "3",
+                "identity": "ccpo-client"
+              }
+            },
+            {
+              "event_id": "5",
+              "event_time": "2026-10-26T11:19:05.560219214Z",
+              "event_type": "EVENT_TYPE_ACTIVITY_TASK_SCHEDULED",
+              "task_id": "2097153",
+              "activity_task_scheduled_event_attributes": {
+                "activity_id": "ccpo-activity-1",
+                "activity_type": {
+                  "name": "ccpo-activity"
+                },
+                "task_queue": {
+                  "name": "ccpo-c5b1-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "input": {
+                  "payloads": [
+                    {
+                      "metadata": {
+                        "encoding": "anNvbi9wbGFpbg=="
+                      },
+                      "data": "ImNjcG8taW5wdXQi"
+                    }
+                  ]
+                },
+                "schedule_to_close_timeout": "300s",
+                "schedule_to_start_timeout": "300s",
+                "start_to_close_timeout": "60s",
+                "heartbeat_timeout": "0s",
+                "workflow_task_completed_event_id": "4",
+                "retry_policy": {
+                  "initial_interval": "1s",
+                  "backoff_coefficient": 2,
+                  "maximum_interval": "100s"
+                }
+              }
+            }
+          ]
+        },
+        "independent_category_ranges": {
+          "archival": {
+            "exclusive_max": {
+              "FireTime": "2262-04-11T23:47:16.854775807Z",
+              "TaskID": 0
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": null,
+            "pages": 1,
+            "rows": 0
+          },
+          "outbound": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": null,
+            "pages": 1,
+            "rows": 0
+          },
+          "replication": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": null,
+            "pages": 1,
+            "rows": 0
+          },
+          "timer": {
+            "exclusive_max": {
+              "FireTime": "2262-04-11T23:47:16.854775807Z",
+              "TaskID": 0
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": [
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:21:05.546Z",
+                "TaskID": 1048585,
+                "EventID": 2,
+                "ScheduleAttempt": 1,
+                "TimeoutType": 1,
+                "Version": 0,
+                "Stamp": 0,
+                "InMemory": false
+              },
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:24:05.561Z",
+                "TaskID": 2097157,
+                "TimeoutType": 2,
+                "EventID": 5,
+                "Attempt": 1,
+                "Stamp": 0
+              },
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:29:05.54Z",
+                "TaskID": 1048581,
+                "Version": 0
+              }
+            ],
+            "pages": 2,
+            "rows": 3
+          },
+          "transfer": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": [
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:19:05.540772532Z",
+                "TaskID": 1048580,
+                "TaskQueue": "ccpo-c5b1-queue",
+                "ScheduledEventID": 2,
+                "Version": 0,
+                "Stamp": 0
+              },
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:19:05.560316384Z",
+                "TaskID": 2097156,
+                "TaskQueue": "ccpo-c5b1-queue",
+                "ScheduledEventID": 5,
+                "Version": 0,
+                "Stamp": 0
+              }
+            ],
+            "pages": 2,
+            "rows": 2
+          },
+          "visibility": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": [
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:19:05.540772532Z",
+                "TaskID": 1048579,
+                "Version": 0
+              },
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:19:05.560316384Z",
+                "TaskID": 2097155
+              }
+            ],
+            "pages": 2,
+            "rows": 2
+          }
+        },
+        "range_id": 2,
+        "state": {
+          "activity_infos": {
+            "5": {
+              "scheduled_event_batch_id": "4",
+              "scheduled_time": "2026-10-26T11:19:05.560219214Z",
+              "activity_id": "ccpo-activity-1",
+              "schedule_to_start_timeout": "300s",
+              "schedule_to_close_timeout": "300s",
+              "start_to_close_timeout": "60s",
+              "heartbeat_timeout": "0s",
+              "timer_task_status": 2,
+              "attempt": 1,
+              "task_queue": "ccpo-c5b1-queue",
+              "has_retry_policy": true,
+              "retry_initial_interval": "1s",
+              "retry_maximum_interval": "100s",
+              "retry_expiration_time": "2026-10-26T11:24:05.560219214Z",
+              "retry_backoff_coefficient": 2,
+              "scheduled_event_id": "5",
+              "activity_type": {
+                "name": "ccpo-activity"
+              },
+              "last_update_versioned_transition": {
+                "transition_count": "3"
+              },
+              "first_scheduled_time": "2026-10-26T11:19:05.560219214Z"
+            }
+          },
+          "execution_info": {
+            "namespace_id": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+            "workflow_id": "ccpo-c5b2-main",
+            "task_queue": "ccpo-c5b1-queue",
+            "workflow_type_name": "ccpo-c5b1-workflow",
+            "workflow_run_timeout": "600s",
+            "default_workflow_task_timeout": "120s",
+            "last_running_clock": "2097153",
+            "last_first_event_id": "4",
+            "last_completed_workflow_task_started_event_id": "3",
+            "start_time": "2026-10-26T11:19:05.539993708Z",
+            "last_update_time": "2026-10-26T11:19:05.560311967Z",
+            "workflow_task_timeout": "0s",
+            "workflow_task_attempt": 1,
+            "workflow_task_started_time": "1970-01-01T00:00:00Z",
+            "workflow_task_scheduled_time": "1970-01-01T00:00:00Z",
+            "workflow_task_original_scheduled_time": "2026-10-26T11:19:05.540609192Z",
+            "workflow_task_request_id": "emptyUuid",
+            "attempt": 1,
+            "activity_count": "1",
+            "auto_reset_points": {
+              "points": [
+                {
+                  "run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                  "first_workflow_task_completed_id": "4",
+                  "create_time": "2026-10-26T11:19:05.560200588Z",
+                  "resettable": true
+                }
+              ]
+            },
+            "search_attributes": {
+              "BuildIds": {
+                "metadata": {
+                  "encoding": "anNvbi9wbGFpbg==",
+                  "type": "S2V5d29yZExpc3Q="
+                },
+                "data": "WyJ1bnZlcnNpb25lZCJd"
+              }
+            },
+            "version_histories": {
+              "histories": [
+                {
+                  "branch_token": "<main:branch:1>",
+                  "items": [
+                    {
+                      "event_id": "5"
+                    }
+                  ]
+                }
+              ]
+            },
+            "first_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+            "execution_stats": {
+              "history_size": "535"
+            },
+            "workflow_run_expiration_time": "2026-10-26T11:29:05.539993708Z",
+            "last_first_event_txn_id": "2097154",
+            "state_transition_count": "3",
+            "execution_time": "2026-10-26T11:19:05.539993708Z",
+            "transition_history": [
+              {
+                "transition_count": "3"
+              }
+            ],
+            "root_workflow_id": "ccpo-c5b2-main",
+            "root_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+            "task_generation_shard_clock_timestamp": "1048576",
+            "workflow_task_last_update_versioned_transition": {
+              "transition_count": "3"
+            },
+            "visibility_last_update_versioned_transition": {
+              "transition_count": "3"
+            },
+            "sub_state_machine_tombstone_batches": [
+              {
+                "versioned_transition": {
+                  "transition_count": "1"
+                }
+              }
+            ],
+            "original_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14"
+          },
+          "execution_state": {
+            "create_request_id": "be7dec14-6ac6-4402-81a5-04a42c32580d",
+            "run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+            "state": "WORKFLOW_EXECUTION_STATE_RUNNING",
+            "status": "WORKFLOW_EXECUTION_STATUS_RUNNING",
+            "last_update_versioned_transition": {
+              "transition_count": "1"
+            },
+            "start_time": "2026-10-26T11:19:05.539993708Z",
+            "request_ids": {
+              "be7dec14-6ac6-4402-81a5-04a42c32580d": {
+                "event_type": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+                "event_id": "1"
+              }
+            },
+            "first_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14"
+          },
+          "next_event_id": "6"
+        },
+        "valid_completions": 1
+      },
+      "original_record_value_sha256_canonical_json": "c980b88357ce0dfbbf0df40278537838b29588f270662c9da601739e7f977e43"
+    },
+    {
+      "sequence": 114,
+      "stage": "after-Activity-poll",
+      "utc": "2026-10-26T11:19:05.568235921Z",
+      "raw_stdout_line": 588,
+      "value": {
+        "activity_schedules": 1,
+        "db_revision": 5,
+        "direct_persisted_activity_tasks": [
+          {
+            "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+            "WorkflowID": "ccpo-c5b2-main",
+            "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+            "VisibilityTimestamp": "2026-10-26T11:19:05.560316384Z",
+            "TaskID": 2097156,
+            "TaskQueue": "ccpo-c5b1-queue",
+            "ScheduledEventID": 5,
+            "Version": 0,
+            "Stamp": 0
+          }
+        ],
+        "effective_history": {
+          "events": [
+            {
+              "event_id": "1",
+              "event_time": "2026-10-26T11:19:05.539993708Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+              "task_id": "1048576",
+              "workflow_execution_started_event_attributes": {
+                "workflow_type": {
+                  "name": "ccpo-c5b1-workflow"
+                },
+                "task_queue": {
+                  "name": "ccpo-c5b1-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "workflow_run_timeout": "600s",
+                "workflow_task_timeout": "120s",
+                "original_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "identity": "ccpo-client",
+                "first_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "attempt": 1,
+                "first_workflow_task_backoff": "0s",
+                "workflow_id": "ccpo-c5b2-main"
+              }
+            },
+            {
+              "event_id": "2",
+              "event_time": "2026-10-26T11:19:05.540609359Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_TASK_SCHEDULED",
+              "task_id": "1048577",
+              "workflow_task_scheduled_event_attributes": {
+                "task_queue": {
+                  "name": "ccpo-c5b1-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "start_to_close_timeout": "120s",
+                "attempt": 1
+              }
+            },
+            {
+              "event_id": "3",
+              "event_time": "2026-10-26T11:19:05.545725571Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_TASK_STARTED",
+              "task_id": "1048583",
+              "workflow_task_started_event_attributes": {
+                "scheduled_event_id": "2",
+                "identity": "ccpo-client",
+                "request_id": "1fd327bf-190c-45d7-b85d-b809cb630c68",
+                "history_size_bytes": "246"
+              }
+            },
+            {
+              "event_id": "4",
+              "event_time": "2026-10-26T11:19:05.560197671Z",
+              "event_type": "EVENT_TYPE_WORKFLOW_TASK_COMPLETED",
+              "task_id": "2097152",
+              "workflow_task_completed_event_attributes": {
+                "scheduled_event_id": "2",
+                "started_event_id": "3",
+                "identity": "ccpo-client"
+              }
+            },
+            {
+              "event_id": "5",
+              "event_time": "2026-10-26T11:19:05.560219214Z",
+              "event_type": "EVENT_TYPE_ACTIVITY_TASK_SCHEDULED",
+              "task_id": "2097153",
+              "activity_task_scheduled_event_attributes": {
+                "activity_id": "ccpo-activity-1",
+                "activity_type": {
+                  "name": "ccpo-activity"
+                },
+                "task_queue": {
+                  "name": "ccpo-c5b1-queue",
+                  "kind": "TASK_QUEUE_KIND_NORMAL"
+                },
+                "input": {
+                  "payloads": [
+                    {
+                      "metadata": {
+                        "encoding": "anNvbi9wbGFpbg=="
+                      },
+                      "data": "ImNjcG8taW5wdXQi"
+                    }
+                  ]
+                },
+                "schedule_to_close_timeout": "300s",
+                "schedule_to_start_timeout": "300s",
+                "start_to_close_timeout": "60s",
+                "heartbeat_timeout": "0s",
+                "workflow_task_completed_event_id": "4",
+                "retry_policy": {
+                  "initial_interval": "1s",
+                  "backoff_coefficient": 2,
+                  "maximum_interval": "100s"
+                }
+              }
+            }
+          ]
+        },
+        "independent_category_ranges": {
+          "archival": {
+            "exclusive_max": {
+              "FireTime": "2262-04-11T23:47:16.854775807Z",
+              "TaskID": 0
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": null,
+            "pages": 1,
+            "rows": 0
+          },
+          "outbound": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": null,
+            "pages": 1,
+            "rows": 0
+          },
+          "replication": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": null,
+            "pages": 1,
+            "rows": 0
+          },
+          "timer": {
+            "exclusive_max": {
+              "FireTime": "2262-04-11T23:47:16.854775807Z",
+              "TaskID": 0
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": [
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:20:05.566Z",
+                "TaskID": 2097160,
+                "TimeoutType": 1,
+                "EventID": 5,
+                "Attempt": 1,
+                "Stamp": 0
+              },
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:21:05.546Z",
+                "TaskID": 1048585,
+                "EventID": 2,
+                "ScheduleAttempt": 1,
+                "TimeoutType": 1,
+                "Version": 0,
+                "Stamp": 0,
+                "InMemory": false
+              },
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:24:05.561Z",
+                "TaskID": 2097157,
+                "TimeoutType": 2,
+                "EventID": 5,
+                "Attempt": 1,
+                "Stamp": 0
+              },
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:29:05.54Z",
+                "TaskID": 1048581,
+                "Version": 0
+              }
+            ],
+            "pages": 3,
+            "rows": 4
+          },
+          "transfer": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": [
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:19:05.540772532Z",
+                "TaskID": 1048580,
+                "TaskQueue": "ccpo-c5b1-queue",
+                "ScheduledEventID": 2,
+                "Version": 0,
+                "Stamp": 0
+              },
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:19:05.560316384Z",
+                "TaskID": 2097156,
+                "TaskQueue": "ccpo-c5b1-queue",
+                "ScheduledEventID": 5,
+                "Version": 0,
+                "Stamp": 0
+              }
+            ],
+            "pages": 2,
+            "rows": 2
+          },
+          "visibility": {
+            "exclusive_max": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 9223372036854775807
+            },
+            "final_page_token_empty": true,
+            "inclusive_min": {
+              "FireTime": "1970-01-01T00:00:00Z",
+              "TaskID": 0
+            },
+            "matching_workflow_tasks": [
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:19:05.540772532Z",
+                "TaskID": 1048579,
+                "Version": 0
+              },
+              {
+                "NamespaceID": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+                "WorkflowID": "ccpo-c5b2-main",
+                "RunID": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                "VisibilityTimestamp": "2026-10-26T11:19:05.560316384Z",
+                "TaskID": 2097155
+              }
+            ],
+            "pages": 2,
+            "rows": 2
+          }
+        },
+        "range_id": 2,
+        "state": {
+          "activity_infos": {
+            "5": {
+              "scheduled_event_batch_id": "4",
+              "scheduled_time": "2026-10-26T11:19:05.560219214Z",
+              "started_event_id": "-124",
+              "started_time": "2026-10-26T11:19:05.565818863Z",
+              "activity_id": "ccpo-activity-1",
+              "request_id": "0674f838-efda-4d4e-bbcf-33a4da573fa7",
+              "schedule_to_start_timeout": "300s",
+              "schedule_to_close_timeout": "300s",
+              "start_to_close_timeout": "60s",
+              "heartbeat_timeout": "0s",
+              "timer_task_status": 3,
+              "attempt": 1,
+              "task_queue": "ccpo-c5b1-queue",
+              "started_identity": "ccpo-recovery-observer",
+              "has_retry_policy": true,
+              "retry_initial_interval": "1s",
+              "retry_maximum_interval": "100s",
+              "retry_expiration_time": "2026-10-26T11:24:05.560219214Z",
+              "retry_backoff_coefficient": 2,
+              "scheduled_event_id": "5",
+              "activity_type": {
+                "name": "ccpo-activity"
+              },
+              "last_update_versioned_transition": {
+                "transition_count": "4"
+              },
+              "first_scheduled_time": "2026-10-26T11:19:05.560219214Z",
+              "started_clock": {
+                "shard_id": 1,
+                "clock": "2097158",
+                "cluster_id": "1"
+              }
+            }
+          },
+          "execution_info": {
+            "namespace_id": "bf6a0b58-15ea-4759-bb81-14b453bd07b4",
+            "workflow_id": "ccpo-c5b2-main",
+            "task_queue": "ccpo-c5b1-queue",
+            "workflow_type_name": "ccpo-c5b1-workflow",
+            "workflow_run_timeout": "600s",
+            "default_workflow_task_timeout": "120s",
+            "last_running_clock": "2097159",
+            "last_first_event_id": "4",
+            "last_completed_workflow_task_started_event_id": "3",
+            "start_time": "2026-10-26T11:19:05.539993708Z",
+            "last_update_time": "2026-10-26T11:19:05.565861406Z",
+            "workflow_task_timeout": "0s",
+            "workflow_task_attempt": 1,
+            "workflow_task_started_time": "1970-01-01T00:00:00Z",
+            "workflow_task_scheduled_time": "1970-01-01T00:00:00Z",
+            "workflow_task_original_scheduled_time": "2026-10-26T11:19:05.540609192Z",
+            "workflow_task_request_id": "emptyUuid",
+            "attempt": 1,
+            "activity_count": "1",
+            "auto_reset_points": {
+              "points": [
+                {
+                  "run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+                  "first_workflow_task_completed_id": "4",
+                  "create_time": "2026-10-26T11:19:05.560200588Z",
+                  "resettable": true
+                }
+              ]
+            },
+            "search_attributes": {
+              "BuildIds": {
+                "metadata": {
+                  "encoding": "anNvbi9wbGFpbg==",
+                  "type": "S2V5d29yZExpc3Q="
+                },
+                "data": "WyJ1bnZlcnNpb25lZCJd"
+              }
+            },
+            "version_histories": {
+              "histories": [
+                {
+                  "branch_token": "<main:branch:1>",
+                  "items": [
+                    {
+                      "event_id": "5"
+                    }
+                  ]
+                }
+              ]
+            },
+            "first_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+            "execution_stats": {
+              "history_size": "535"
+            },
+            "workflow_run_expiration_time": "2026-10-26T11:29:05.539993708Z",
+            "last_first_event_txn_id": "2097154",
+            "state_transition_count": "4",
+            "execution_time": "2026-10-26T11:19:05.539993708Z",
+            "transition_history": [
+              {
+                "transition_count": "4"
+              }
+            ],
+            "root_workflow_id": "ccpo-c5b2-main",
+            "root_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+            "task_generation_shard_clock_timestamp": "1048576",
+            "workflow_task_last_update_versioned_transition": {
+              "transition_count": "3"
+            },
+            "visibility_last_update_versioned_transition": {
+              "transition_count": "3"
+            },
+            "sub_state_machine_tombstone_batches": [
+              {
+                "versioned_transition": {
+                  "transition_count": "1"
+                }
+              }
+            ],
+            "original_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14"
+          },
+          "execution_state": {
+            "create_request_id": "be7dec14-6ac6-4402-81a5-04a42c32580d",
+            "run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14",
+            "state": "WORKFLOW_EXECUTION_STATE_RUNNING",
+            "status": "WORKFLOW_EXECUTION_STATUS_RUNNING",
+            "last_update_versioned_transition": {
+              "transition_count": "1"
+            },
+            "start_time": "2026-10-26T11:19:05.539993708Z",
+            "request_ids": {
+              "be7dec14-6ac6-4402-81a5-04a42c32580d": {
+                "event_type": "EVENT_TYPE_WORKFLOW_EXECUTION_STARTED",
+                "event_id": "1"
+              }
+            },
+            "first_execution_run_id": "01a177ef-7a43-7f27-acaf-95044e5ddf14"
+          },
+          "next_event_id": "6"
+        },
+        "valid_completions": 1
+      },
+      "original_record_value_sha256_canonical_json": "95b74f2373438f6256d003d8c1526fb0cbad207f50ebc3238801de9046963b7e"
+    }
+  ]
+}

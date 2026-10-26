@@ -1,0 +1,30 @@
+[
+  {
+    "archived_file": "historical/source-archive/common/persistence/sql/sqlplugin/sqlite/ccpo_c5b_feasibility_test.go.txt",
+    "original_source_relative_path": "common/persistence/sql/sqlplugin/sqlite/ccpo_c5b_feasibility_test.go",
+    "sha256": "fc7a755e3f438ba292d9c75636afea96a64572b45f2818482aa13e69e3f71e5d",
+    "line_count": 105,
+    "status": "EXACT RECOVERY of source; not a newly executed result"
+  },
+  {
+    "archived_file": "historical/source-archive/tests/ccpo_c5b1/instrumentation_test.go.txt",
+    "original_source_relative_path": "tests/ccpo_c5b1/instrumentation_test.go",
+    "sha256": "f58ffc2c7711b2e83d9b73ef75d664dfce91e8960b668f18feb06f6301103d84",
+    "line_count": 395,
+    "status": "EXACT RECOVERY of source; not a newly executed result"
+  },
+  {
+    "archived_file": "historical/source-archive/tests/ccpo_c5b1/ordering_test.go.txt",
+    "original_source_relative_path": "tests/ccpo_c5b1/ordering_test.go",
+    "sha256": "3a789890a34fb063aa20abc470124be917632ae89f249f1852d2624d249725af",
+    "line_count": 403,
+    "status": "EXACT RECOVERY of source; not a newly executed result"
+  },
+  {
+    "archived_file": "historical/source-archive/tests/ccpo_c5b1/ownership_test.go.txt",
+    "original_source_relative_path": "tests/ccpo_c5b1/ownership_test.go",
+    "sha256": "f8d4d200a109907f5220f8d8d76b1007f6d4bafb6209006e9c89bb2264fe8646",
+    "line_count": 243,
+    "status": "EXACT RECOVERY of source; not a newly executed result"
+  }
+]

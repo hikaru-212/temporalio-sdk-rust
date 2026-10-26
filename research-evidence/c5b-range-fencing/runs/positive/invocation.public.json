@@ -1,0 +1,49 @@
+{
+  "kind": "normalized original invocation; not original command bytes",
+  "cwd": "<PINNED_SERVER_CHECKOUT>",
+  "argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=30s",
+    "30m",
+    "<GO_1_27_0>",
+    "test",
+    "-p",
+    "2",
+    "-mod=readonly",
+    "-tags",
+    "test_dep",
+    "-count=1",
+    "-timeout",
+    "4m",
+    "-run",
+    "^TestCCPOC5B2Positive$",
+    "-v",
+    "./tests/ccpo_c5b2"
+  ],
+  "environment_whitelist": {
+    "GOTOOLCHAIN": "local",
+    "GOPROXY": "off",
+    "GOSUMDB": "off",
+    "GOMAXPROCS": "2",
+    "CGO_ENABLED": "0",
+    "GOFLAGS": "-mod=readonly",
+    "GOCACHE": "<ISOLATED_GOCACHE>",
+    "GOMODCACHE": "<EXISTING_MODULE_CACHE>",
+    "GOTMPDIR": "<BUILD_TEMP>",
+    "TMPDIR": "<ARM_OUTPUT>/runtime",
+    "CCPO_EVIDENCE_OUTPUT": "<ARM_OUTPUT>/protobuf",
+    "TEMPORAL_TEST_LOG_FILE": "<ARM_OUTPUT>/server.jsonl"
+  },
+  "omitted_environment": [
+    "PATH and all unlisted original variables"
+  ],
+  "original_invocation_sha256": "f034f7877a8678026e42799692af35ef3ba9951c3d6e5cb32ee5b42314322773",
+  "source_head": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+  "source_sha256": {
+    "ordering_test.go": "b394c8efa431ed96ec4c7ba7c3dc04d3cd0dda5229f832e2e517076d400d8f2d",
+    "instrumentation_test.go": "6c231bf0df26c9e67ced84c675943658d4b9f7077d89b4ceb150357e1d99d978",
+    "ownership_test.go": "c4ae5f593c3b611c83509be898b23c147ac9c4d8d1151888127d5f9a3871c479"
+  },
+  "go_version": "go1.27.0 linux/arm64"
+}

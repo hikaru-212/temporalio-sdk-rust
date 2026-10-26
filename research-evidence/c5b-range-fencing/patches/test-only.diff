@@ -1,0 +1,1180 @@
+--- /dev/null
++++ b/tests/ccpo_c5b2/ordering_test.go
+@@ -0,0 +1,466 @@
++package ccpo_c5b2_test
++
++import (
++	"context"
++	"crypto/sha256"
++	"encoding/hex"
++	"encoding/json"
++	"fmt"
++	"maps"
++	"os"
++	"path/filepath"
++	"runtime/debug"
++	"strings"
++	"sync"
++	"sync/atomic"
++	"testing"
++	"time"
++
++	"github.com/google/uuid"
++	"github.com/stretchr/testify/require"
++	commandpb "go.temporal.io/api/command/v1"
++	commonpb "go.temporal.io/api/common/v1"
++	enumspb "go.temporal.io/api/enums/v1"
++	historypb "go.temporal.io/api/history/v1"
++	"go.temporal.io/api/serviceerror"
++	taskqueuepb "go.temporal.io/api/taskqueue/v1"
++	"go.temporal.io/api/workflowservice/v1"
++	tokenspb "go.temporal.io/server/api/token/v1"
++	"go.temporal.io/server/chasm"
++	"go.temporal.io/server/common"
++	"go.temporal.io/server/common/config"
++	"go.temporal.io/server/common/headers"
++	"go.temporal.io/server/common/log/tag"
++	"go.temporal.io/server/common/metrics"
++	"go.temporal.io/server/common/namespace"
++	"go.temporal.io/server/common/payloads"
++	"go.temporal.io/server/common/persistence"
++	persistenceclient "go.temporal.io/server/common/persistence/client"
++	persistencetests "go.temporal.io/server/common/persistence/persistence-tests"
++	sqlstore "go.temporal.io/server/common/persistence/sql"
++	"go.temporal.io/server/common/persistence/sql/sqlplugin"
++	"go.temporal.io/server/common/persistence/versionhistory"
++	"go.temporal.io/server/common/primitives"
++	"go.temporal.io/server/common/resolver"
++	"go.temporal.io/server/common/tasktoken"
++	"go.temporal.io/server/common/testing/testhooks"
++	"go.temporal.io/server/common/testing/testlogger"
++	"go.temporal.io/server/service/history/tasks"
++	"go.temporal.io/server/temporal"
++	"go.temporal.io/server/tests/testcore"
++	"google.golang.org/protobuf/encoding/protojson"
++	"google.golang.org/protobuf/proto"
++	"google.golang.org/protobuf/types/known/durationpb"
++)
++
++const sourceSHA = "0d5e3848bed625907987f73d5eaae8dc77bc6590"
++
++type experiment struct {
++	t                           *testing.T
++	ctx                         context.Context
++	cluster                     *testcore.TestCluster
++	client                      workflowservice.WorkflowServiceClient
++	ns, nsID, workflowID, runID string
++	queue                       *taskqueuepb.TaskQueue
++	shardID                     int32
++	token                       *tokenspb.Task
++	request                     *workflowservice.RespondWorkflowTaskCompletedRequest
++	requestBytes                []byte
++	sequence                    atomic.Int64
++	recordMu                    sync.Mutex
++	preserveResources           bool
++	oldRange                    atomic.Int64
++	armed                       atomic.Bool
++	faults                      atomic.Int32
++	deleteRelease               chan struct{}
++	deleteOnce                  sync.Once
++	release                     func()
++	gate                        chan struct{}
++	gateEntered                 chan struct{}
++	gateOnce                    sync.Once
++	released                    atomic.Bool
++	done                        chan struct{}
++	started                     atomic.Bool
++	delegateCancel              context.CancelFunc
++	delegateErr                 error
++	tx                          *observedTx
++	probe                       chan chan probeResult
++	recovery                    chan struct{}
++	recoveryOnce                sync.Once
++	renewResult                 chan error
++	fresh                       chan readEvidence
++	captureFresh                atomic.Bool
++	managerError                chan struct{}
++	connections                 *connectionAudit
++	arm                         string
++	launch                      chan struct{}
++	launchOnce                  sync.Once
++	launched                    atomic.Bool
++	delegateContextErr          error
++	lastLedger                  map[string]any
++	dispatched                  bool
++}
++
++func (e *experiment) record(stage string, value any) {
++	e.recordMu.Lock()
++	defer e.recordMu.Unlock()
++	if e.preserveResources {
++		return
++	}
++	b, err := json.Marshal(map[string]any{"sequence": e.sequence.Add(1), "utc": time.Now().UTC().Format(time.RFC3339Nano), "stage": stage, "value": value})
++	if err != nil {
++		e.t.Errorf("evidence serialization: %v", err)
++		return
++	}
++	e.t.Logf("CCPO %s", b)
++}
++
++func jsonProto(t *testing.T, value proto.Message) json.RawMessage {
++	t.Helper()
++	b, err := protojson.MarshalOptions{UseProtoNames: true}.Marshal(value)
++	require.NoError(t, err)
++	return b
++}
++
++func newExperiment(t *testing.T, name string) *experiment {
++	t.Helper()
++	ctx, cancel := context.WithTimeout(headers.SetVersions(context.Background()), 120*time.Second)
++	t.Cleanup(cancel)
++	e := &experiment{t: t, ctx: ctx, arm: name, launch: make(chan struct{}), ns: "ccpo-c5b2-" + name, workflowID: "ccpo-c5b2-" + name,
++		deleteRelease: make(chan struct{}), gate: make(chan struct{}), gateEntered: make(chan struct{}), done: make(chan struct{}),
++		probe: make(chan chan probeResult), recovery: make(chan struct{}), renewResult: make(chan error, 1), fresh: make(chan readEvidence, 8), managerError: make(chan struct{}, 1),
++		queue: &taskqueuepb.TaskQueue{Name: "ccpo-c5b1-queue", Kind: enumspb.TASK_QUEUE_KIND_NORMAL}}
++	logger := testlogger.NewTestLogger(t, testlogger.FailOnExpectedErrorOnly)
++	logger.Expect(testlogger.Error, ".*", tag.FailedAssertion)
++	db := persistencetests.GetSQLiteFileTestClusterOption()
++	db.ConnectAttributes["cache"] = "private"
++	db.ConnectAttributes["read_uncommitted"] = "0"
++	e.connections = newConnectionAudit(e, db.DBName)
++	t.Cleanup(e.connections.close)
++	delegateAttributes := maps.Clone(db.ConnectAttributes)
++	// A distinct DSN preserves the normal service pool while the selected write retains its own connection.
++	delegateAttributes["busy_timeout"] = "1000"
++	cfgSQL := &config.SQL{PluginName: "sqlite", DatabaseName: db.DBName, ConnectAttributes: delegateAttributes, MaxConns: 4, MaxIdleConns: 4}
++	realDB, err := sqlstore.NewSQLDB(sqlplugin.DbKindMain, cfgSQL, resolver.NewNoopResolver(), logger, metrics.NoopMetricsHandler)
++	require.NoError(t, err)
++	t.Cleanup(func() {
++		if !e.preserveResources {
++			require.NoError(t, realDB.Close())
++		}
++	})
++	e.record("sql-config", cfgSQL)
++	observedLogger := &recoveryLogger{Logger: logger, e: e}
++	baseFactory := temporal.PersistenceFactoryProvider()
++	cfg := &testcore.TestClusterConfig{
++		Persistence: *db, HistoryConfig: testcore.HistoryConfig{NumHistoryShards: 1},
++		WorkerConfig: testcore.WorkerConfig{DisableWorker: true},
++		AdditionalServerOptions: []temporal.ServerOption{temporal.WithPersistenceFactoryProvider(func(params persistenceclient.NewFactoryParams) persistenceclient.Factory {
++			if params.ServiceName != primitives.HistoryService {
++				return baseFactory(params)
++			}
++			params.DataStoreFactory = &observedStoreFactory{DataStoreFactory: params.DataStoreFactory, e: e, db: &observedDB{DB: realDB, e: e}, logger: params.Logger, serializer: params.Serializer}
++			return &observedFactory{Factory: baseFactory(params), e: e}
++		})},
++	}
++	cluster, err := testcore.NewTestClusterFactory().NewCluster(t, cfg, observedLogger)
++	require.NoError(t, err)
++	e.cluster = cluster
++	t.Cleanup(func() {
++		if e.preserveResources {
++			return
++		}
++		e.allowDelete()
++		require.NoError(t, cluster.TearDownCluster())
++		logger.Close()
++	})
++	e.client = cluster.FrontendClient()
++	e.record("baseline", map[string]any{"source_sha": sourceSHA, "database": "file SQLite", "sqlite_attributes": db.ConnectAttributes, "namespace": e.ns, "workflow_id": e.workflowID, "wft_timeout_seconds": 120, "external_activity_executor": false})
++	_, err = e.client.RegisterNamespace(ctx, &workflowservice.RegisterNamespaceRequest{Namespace: e.ns, WorkflowExecutionRetentionPeriod: durationpb.New(24 * time.Hour)})
++	require.NoError(t, err)
++	var described *workflowservice.DescribeNamespaceResponse
++	require.Eventually(t, func() bool {
++		described, err = e.client.DescribeNamespace(ctx, &workflowservice.DescribeNamespaceRequest{Namespace: e.ns})
++		return err == nil
++	}, 10*time.Second, 20*time.Millisecond)
++	e.nsID = described.NamespaceInfo.Id
++	e.shardID = common.WorkflowIDToHistoryShard(e.nsID, e.workflowID, 1)
++	gate := make(chan struct{})
++	var once sync.Once
++	e.release = func() { once.Do(func() { close(gate) }) }
++	// Hold dispatch so the committed task row can be read before a queue ack removes it.
++	remove := cluster.InjectHook(t, testhooks.NewHook(testhooks.HistoryTransferTaskInterceptor, func(task tasks.Task, run func()) {
++		if a, ok := task.(*tasks.ActivityTask); ok && a.WorkflowID == e.workflowID {
++			<-gate
++		}
++		run()
++	}), namespace.ID(e.nsID))
++	t.Cleanup(func() { e.cleanupDelegate(); e.release(); remove() })
++	started, err := e.client.StartWorkflowExecution(ctx, &workflowservice.StartWorkflowExecutionRequest{Namespace: e.ns, WorkflowId: e.workflowID, RequestId: uuid.NewString(), WorkflowType: &commonpb.WorkflowType{Name: "ccpo-c5b1-workflow"}, TaskQueue: e.queue, WorkflowRunTimeout: durationpb.New(10 * time.Minute), WorkflowTaskTimeout: durationpb.New(120 * time.Second), Identity: "ccpo-client"})
++	require.NoError(t, err)
++	e.runID = started.RunId
++	poll, err := e.client.PollWorkflowTaskQueue(ctx, &workflowservice.PollWorkflowTaskQueueRequest{Namespace: e.ns, TaskQueue: e.queue, Identity: "ccpo-client"})
++	require.NoError(t, err)
++	require.NotEmpty(t, poll.TaskToken)
++	e.token, err = tasktoken.NewSerializer().Deserialize(poll.TaskToken)
++	require.NoError(t, err)
++	require.EqualValues(t, 2, e.token.ScheduledEventId)
++	require.EqualValues(t, 3, e.token.StartedEventId)
++	require.EqualValues(t, 1, e.token.Attempt)
++	require.Empty(t, poll.NextPageToken)
++	e.request = &workflowservice.RespondWorkflowTaskCompletedRequest{Namespace: e.ns, TaskToken: poll.TaskToken, Identity: "ccpo-client", Commands: []*commandpb.Command{{CommandType: enumspb.COMMAND_TYPE_SCHEDULE_ACTIVITY_TASK, Attributes: &commandpb.Command_ScheduleActivityTaskCommandAttributes{ScheduleActivityTaskCommandAttributes: &commandpb.ScheduleActivityTaskCommandAttributes{ActivityId: "ccpo-activity-1", ActivityType: &commonpb.ActivityType{Name: "ccpo-activity"}, TaskQueue: e.queue, Input: payloads.EncodeString("ccpo-input"), ScheduleToCloseTimeout: durationpb.New(5 * time.Minute), StartToCloseTimeout: durationpb.New(time.Minute), RequestEagerExecution: false}}}}}
++	e.requestBytes, err = proto.MarshalOptions{Deterministic: true}.Marshal(e.request)
++	require.NoError(t, err)
++	e.record("request", map[string]any{"token": jsonProto(t, e.token), "token_hex": hex.EncodeToString(poll.TaskToken), "request": jsonProto(t, e.request), "sha256": fmt.Sprintf("%x", sha256.Sum256(e.requestBytes))})
++	e.saveProto("request", e.request)
++	e.saveProto("task-token", e.token)
++	e.inspect("initial", false)
++	if info, ok := debug.ReadBuildInfo(); ok {
++		for _, dep := range info.Deps {
++			if dep.Path == "modernc.org/sqlite" { e.record("build-version", map[string]any{"go": info.GoVersion, "driver": dep.Path, "version": dep.Version, "sum": dep.Sum}) }
++		}
++	}
++	return e
++}
++
++func (e *experiment) complete(label string) error {
++	b, err := proto.MarshalOptions{Deterministic: true}.Marshal(e.request)
++	require.NoError(e.t, err)
++	require.Equal(e.t, e.requestBytes, b)
++	response, err := e.client.RespondWorkflowTaskCompleted(e.ctx, proto.Clone(e.request).(*workflowservice.RespondWorkflowTaskCompletedRequest))
++	e.record(label, map[string]any{"error_type": fmt.Sprintf("%T", err), "error": fmt.Sprint(err), "received_success": err == nil, "response": response})
++	return err
++}
++
++func (e *experiment) inspect(label string, accepted bool) *persistence.GetWorkflowExecutionResponse {
++	t := e.t
++	manager := e.cluster.ExecutionManager()
++	state, err := manager.GetWorkflowExecution(e.ctx, &persistence.GetWorkflowExecutionRequest{ShardID: e.shardID, NamespaceID: e.nsID, WorkflowID: e.workflowID, RunID: e.runID, ArchetypeID: chasm.WorkflowArchetypeID})
++	require.NoError(t, err)
++	shard, err := e.cluster.TestBase().ShardMgr.GetOrCreateShard(e.ctx, &persistence.GetOrCreateShardRequest{ShardID: e.shardID})
++	require.NoError(t, err)
++	branch, err := versionhistory.GetCurrentVersionHistory(state.State.ExecutionInfo.VersionHistories)
++	require.NoError(t, err)
++	history, err := manager.ReadHistoryBranch(e.ctx, &persistence.ReadHistoryBranchRequest{ShardID: e.shardID, BranchToken: branch.BranchToken, MinEventID: 1, MaxEventID: state.State.NextEventId, PageSize: 100})
++	require.NoError(t, err)
++	require.Empty(t, history.NextPageToken)
++	e.saveProto(label+"-mutable-state", state.State)
++	e.saveProto(label+"-history", &historypb.History{Events: history.HistoryEvents})
++	e.saveProto(label+"-shard", shard.ShardInfo)
++	completed, scheduled := 0, 0
++	for _, event := range history.HistoryEvents {
++		switch event.EventType {
++		case enumspb.EVENT_TYPE_WORKFLOW_TASK_COMPLETED:
++			completed++
++			require.EqualValues(t, 2, event.GetWorkflowTaskCompletedEventAttributes().ScheduledEventId)
++			require.EqualValues(t, 3, event.GetWorkflowTaskCompletedEventAttributes().StartedEventId)
++		case enumspb.EVENT_TYPE_ACTIVITY_TASK_SCHEDULED:
++			scheduled++
++			require.Equal(t, "ccpo-activity-1", event.GetActivityTaskScheduledEventAttributes().ActivityId)
++			require.EqualValues(t, 4, event.GetActivityTaskScheduledEventAttributes().WorkflowTaskCompletedEventId)
++		}
++	}
++	storedTasks, ledger := e.enumerate()
++	e.lastLedger = ledger
++	if label == "initial" {
++		e.oldRange.Store(shard.ShardInfo.RangeId)
++	}
++	e.record(label, map[string]any{"db_revision": state.DBRecordVersion, "range_id": shard.ShardInfo.RangeId, "state": jsonProto(t, state.State), "effective_history": jsonProto(t, &historypb.History{Events: history.HistoryEvents}), "valid_completions": completed, "activity_schedules": scheduled, "direct_persisted_activity_tasks": storedTasks, "independent_category_ranges": ledger})
++	if accepted {
++		require.Equal(t, 1, completed)
++		require.Equal(t, 1, scheduled)
++		if !e.dispatched { require.EqualValues(t, 4, state.DBRecordVersion); require.EqualValues(t, 6, state.State.NextEventId) } else { require.GreaterOrEqual(t, state.DBRecordVersion, int64(4)); require.GreaterOrEqual(t, state.State.NextEventId, int64(6)) }
++		require.Zero(t, state.State.ExecutionInfo.WorkflowTaskScheduledEventId)
++		require.Zero(t, state.State.ExecutionInfo.WorkflowTaskStartedEventId)
++		require.Len(t, state.State.ActivityInfos, 1)
++		require.Equal(t, "ccpo-activity-1", state.State.ActivityInfos[5].ActivityId)
++		if !e.dispatched { require.Len(t, storedTasks, 1) } else { require.LessOrEqual(t, len(storedTasks), 1) }
++		for _,task := range storedTasks { require.EqualValues(t, 5, task.(*tasks.ActivityTask).ScheduledEventID) }
++	} else {
++		require.EqualValues(t, 3, state.DBRecordVersion)
++		require.Zero(t, completed)
++		require.Zero(t, scheduled)
++		require.EqualValues(t, 4, state.State.NextEventId)
++		require.EqualValues(t, 2, state.State.ExecutionInfo.WorkflowTaskScheduledEventId)
++		require.EqualValues(t, 3, state.State.ExecutionInfo.WorkflowTaskStartedEventId)
++		require.EqualValues(t, 1, state.State.ExecutionInfo.WorkflowTaskAttempt)
++		require.Empty(t, state.State.ActivityInfos)
++		require.Empty(t, storedTasks)
++	}
++	return state
++}
++
++func (e *experiment) enumerate() ([]tasks.Task, map[string]any) {
++	categories := []tasks.Category{tasks.CategoryTransfer, tasks.CategoryTimer, tasks.CategoryVisibility, tasks.CategoryReplication, tasks.CategoryArchival, tasks.CategoryOutbound}
++	ledger := make(map[string]any)
++	var activities []tasks.Task
++	for _, category := range categories {
++		request := &persistence.GetHistoryTasksRequest{ShardID: e.shardID, TaskCategory: category, InclusiveMinTaskKey: tasks.MinimumKey, ExclusiveMaxTaskKey: tasks.MaximumKey, BatchSize: 2}
++		if category.Type() == tasks.CategoryTypeImmediate {
++			request.ExclusiveMaxTaskKey = tasks.NewImmediateKey(tasks.MaximumKey.TaskID)
++		} else {
++			request.ExclusiveMaxTaskKey = tasks.NewKey(tasks.MaximumKey.FireTime, 0)
++		}
++		var matching []tasks.Task
++		pages, rows := 0, 0
++		for {
++			page, err := e.cluster.ExecutionManager().GetHistoryTasks(e.ctx, request)
++			require.NoError(e.t, err)
++			pages++
++			rows += len(page.Tasks)
++			e.record("task-range-page",map[string]any{"category":category.Name(),"page":pages,"rows":len(page.Tasks),"request_token":request.NextPageToken,"next_token":page.NextPageToken,"tasks":page.Tasks,"inclusive_min":request.InclusiveMinTaskKey,"exclusive_max":request.ExclusiveMaxTaskKey})
++			for _, task := range page.Tasks {
++				if task.GetNamespaceID() == e.nsID && task.GetWorkflowID() == e.workflowID && task.GetRunID() == e.runID {
++					matching = append(matching, task)
++					if _, ok := task.(*tasks.ActivityTask); ok {
++						activities = append(activities, task)
++					}
++				}
++			}
++			if len(page.NextPageToken) == 0 {
++				break
++			}
++			require.Less(e.t, pages, 100, "unexpected task range pagination")
++			request.NextPageToken = page.NextPageToken
++		}
++		ledger[category.Name()] = map[string]any{"inclusive_min": request.InclusiveMinTaskKey, "exclusive_max": request.ExclusiveMaxTaskKey, "pages": pages, "rows": rows, "matching_workflow_tasks": matching, "final_page_token_empty": true}
++	}
++	return activities, ledger
++}
++
++func (e *experiment) durableRange() int64 {
++	row, err := e.cluster.TestBase().ShardMgr.GetOrCreateShard(e.ctx, &persistence.GetOrCreateShardRequest{ShardID: e.shardID})
++	require.NoError(e.t, err)
++	return row.ShardInfo.RangeId
++}
++
++func (e *experiment) saveProto(name string, value proto.Message) {
++	dir := os.Getenv("CCPO_EVIDENCE_OUTPUT")
++	if dir == "" {
++		return
++	}
++	data, err := proto.MarshalOptions{Deterministic: true}.Marshal(value)
++	require.NoError(e.t, err)
++	f, err := os.OpenFile(filepath.Join(dir, name+".pb"), os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0600)
++	require.NoError(e.t, err)
++	_, err = f.Write(data)
++	require.NoError(e.t, err)
++	require.NoError(e.t, f.Close())
++	e.record("protobuf-artifact", map[string]any{"file": name + ".pb", "type": string(value.ProtoReflect().Descriptor().FullName()), "sha256": fmt.Sprintf("%x", sha256.Sum256(data)), "bytes": len(data)})
++}
++
++func (e *experiment) awaitRecoveryAndFresh(accepted bool) {
++	t:=e.t
++	var timeout *serviceerror.DeadlineExceeded
++	require.ErrorAs(t,e.complete("first-completion-RPC"),&timeout)
++	select {case <-e.managerError:case <-e.ctx.Done():t.Fatal("INCONCLUSIVE: manager TimeoutError not observed")}
++	select {case <-e.recovery:case <-e.ctx.Done():t.Fatal("INCONCLUSIVE: real uncertain-write handling absent")}
++	select {case err:=<-e.renewResult:require.NoError(t,err);case <-e.ctx.Done():t.Fatal("INCONCLUSIVE: renewal absent")}
++	require.EqualValues(t,2,e.durableRange())
++	e.record("independent-durable-range-read",map[string]any{"range":2,"old_gate_released":e.released.Load(),"arm":e.arm})
++	e.captureFresh.Store(true)
++	describe,err:=e.client.DescribeWorkflowExecution(e.ctx,&workflowservice.DescribeWorkflowExecutionRequest{Namespace:e.ns,Execution:&commonpb.WorkflowExecution{WorkflowId:e.workflowID,RunId:e.runID}})
++	require.NoError(t,err)
++	e.saveProto("guarded-describe",describe)
++	var fresh readEvidence
++	select {case fresh=<-e.fresh:case <-e.ctx.Done():t.Fatal("INCONCLUSIVE: fresh guarded reload absent")}
++	e.captureFresh.Store(false)
++	require.NoError(t,fresh.Err)
++	require.Contains(t,fresh.Stack,"shard.(*ContextImpl).GetWorkflowExecution")
++	require.Contains(t,fresh.Stack,"workflow.(*ContextImpl).LoadMutableState")
++	require.True(t,strings.Contains(fresh.Stack,"describeworkflow"),fresh.Stack)
++	if accepted {
++		require.EqualValues(t,4,fresh.Revision);require.EqualValues(t,6,fresh.Next);require.Zero(t,fresh.Scheduled);require.Zero(t,fresh.Started)
++	} else {
++		require.EqualValues(t,3,fresh.Revision);require.EqualValues(t,4,fresh.Next);require.EqualValues(t,2,fresh.Scheduled);require.EqualValues(t,3,fresh.Started);require.False(t,fresh.Released)
++	}
++}
++
++func (e *experiment) probeOld() {
++	t:=e.t
++	require.False(t,e.released.Load());require.False(t,e.tx.closed.Load());require.Zero(t,e.tx.mutations.Load())
++	response:=make(chan probeResult,1)
++	select {case e.probe<-response:case <-e.ctx.Done():t.Fatal("INCONCLUSIVE: old probe not admitted")}
++	select {case p:=<-response:require.NoError(t,p.Err);require.EqualValues(t,1,p.Range);require.Equal(t,e.tx.id,p.TxID);case <-e.ctx.Done():t.Fatal("INCONCLUSIVE: old transaction probe failed")}
++	e.connections.mu.Lock();count:=len(e.connections.ids);e.connections.mu.Unlock()
++	require.GreaterOrEqual(t,count,2)
++	e.record("old-transaction-confirmed-across-barrier",map[string]any{"tx":e.tx.id,"connections":count,"snapshot_range":1,"released":false,"mutations":e.tx.mutations.Load()})
++}
++
++func (e *experiment) pollActivity() {
++	t:=e.t
++	e.dispatched=true
++	e.allowDelete();e.release()
++	ctx,cancel:=context.WithTimeout(e.ctx,15*time.Second);defer cancel()
++	poll,err:=e.client.PollActivityTaskQueue(ctx,&workflowservice.PollActivityTaskQueueRequest{Namespace:e.ns,TaskQueue:e.queue,Identity:"ccpo-recovery-observer"})
++	e.record("normal-Activity-poll",map[string]any{"error":fmt.Sprint(err),"response":poll,"external_effect_executed":false})
++	require.NoError(t,err);require.NotEmpty(t,poll.TaskToken)
++	require.Equal(t,"ccpo-activity-1",poll.ActivityId);require.Equal(t,e.runID,poll.WorkflowExecution.RunId)
++	require.True(t,proto.Equal(payloads.EncodeString("ccpo-input"),poll.Input))
++	token,err:=tasktoken.NewSerializer().Deserialize(poll.TaskToken);require.NoError(t,err)
++	require.EqualValues(t,5,token.ScheduledEventId)
++	e.saveProto("activity-poll",poll);e.saveProto("activity-token",token)
++	e.inspect("after-Activity-poll",true)
++}
++
++func TestCCPOC5B2Main(t *testing.T) {
++	e:=newExperiment(t,"main")
++	before:=e.inspect("before-fault",false)
++	require.EqualValues(t,1,e.durableRange())
++	e.armed.Store(true)
++	e.awaitRecoveryAndFresh(false)
++	e.probeOld()
++	pre:=e.inspect("before-old-release",false);preTasks:=e.lastLedger
++	require.Equal(t,before.DBRecordVersion,pre.DBRecordVersion);require.True(t,proto.Equal(before.State,pre.State))
++	e.record("G-release-old-transaction",map[string]any{"tx":e.tx.id,"range":e.durableRange()})
++	require.True(t, e.cleanupDelegate(), "INCONCLUSIVE: delegate termination not confirmed")
++	require.NoError(t,e.delegateContextErr,"INCONCLUSIVE: delegate canceled before physical outcome")
++	require.True(t,e.tx.closed.Load())
++	post:=e.inspect("J-after-old-termination",false);postTasks:=e.lastLedger
++	require.EqualValues(t,2,e.durableRange())
++	require.Equal(t,pre.DBRecordVersion,post.DBRecordVersion);require.True(t,proto.Equal(pre.State,post.State));require.Equal(t,preTasks,postTasks)
++	require.Error(t,e.delegateErr);require.EqualValues(t,517,e.tx.sqlCode.Load());require.Zero(t,e.tx.commits.Load());require.EqualValues(t,1,e.tx.rollbacks.Load());require.EqualValues(t,1,e.tx.mutations.Load())
++	e.record("post-barrier-state-preserved",map[string]any{"revision":post.DBRecordVersion,"same_MS":true,"same_six_category_tasks":true,"range":2,"sql_code":e.tx.sqlCode.Load()})
++	require.NoError(t,e.complete("K-legitimate-identical-retry"))
++	final:=e.inspect("L-after-legitimate-retry",true)
++	require.EqualValues(t,4,final.DBRecordVersion);require.EqualValues(t,2,e.durableRange())
++	e.pollActivity()
++	e.record("arm-safety-confirmed",map[string]any{"arm":"main","scope":"controlled SQLite normal WFT; controls still required","valid_acceptances":1,"external_effects":0})
++}
++
++func TestCCPOC5B2Positive(t *testing.T) {
++	e:=newExperiment(t,"positive")
++	require.EqualValues(t,1,e.durableRange());e.armed.Store(true)
++	e.awaitRecoveryAndFresh(true)
++	select {case <-e.done:default:t.Fatal("INCONCLUSIVE: positive delegate did not terminate")}
++	require.NoError(t,e.delegateErr);require.NoError(t,e.delegateContextErr)
++	require.EqualValues(t,1,e.tx.rangeRead.Load());require.EqualValues(t,1,e.tx.commits.Load());require.Zero(t,e.tx.rollbacks.Load());require.EqualValues(t,1,e.tx.mutations.Load())
++	state:=e.inspect("positive-after-renewal",true);ledger:=e.lastLedger
++	var nf *serviceerror.NotFound
++	require.ErrorAs(t,e.complete("positive-identical-retry"),&nf)
++	after:=e.inspect("positive-after-rejected-retry",true)
++	require.Equal(t,state.DBRecordVersion,after.DBRecordVersion);require.True(t,proto.Equal(state.State,after.State));require.Equal(t,ledger,e.lastLedger);require.EqualValues(t,2,e.durableRange())
++	e.pollActivity()
++	e.record("arm-safety-confirmed",map[string]any{"arm":"positive","valid_acceptances":1,"external_effects":0})
++}
++
++func TestCCPOC5B2Negative(t *testing.T) {
++	e:=newExperiment(t,"negative")
++	require.EqualValues(t,1,e.durableRange());e.armed.Store(true)
++	e.awaitRecoveryAndFresh(false)
++	pre:=e.inspect("negative-before-old-launch",false);ledger:=e.lastLedger
++	require.False(t,e.launched.Load())
++	e.record("negative-launch-after-authoritative-read",map[string]any{"range":e.durableRange(),"request_range":1,"revision":pre.DBRecordVersion})
++	e.launchOnce.Do(func(){e.launched.Store(true);close(e.launch)})
++	select {case <-e.done:case <-e.ctx.Done():t.Fatal("INCONCLUSIVE: negative delegate not terminated")}
++	require.NoError(t,e.delegateContextErr)
++	post:=e.inspect("negative-after-stale-attempt",false)
++	require.Equal(t,pre.DBRecordVersion,post.DBRecordVersion);require.True(t,proto.Equal(pre.State,post.State));require.Equal(t,ledger,e.lastLedger)
++	var lost *persistence.ShardOwnershipLostError
++	require.ErrorAs(t,e.delegateErr,&lost)
++	require.NotNil(t,e.tx);require.EqualValues(t,2,e.tx.rangeRead.Load());require.Zero(t,e.tx.gateVisits.Load());require.Zero(t,e.tx.mutations.Load());require.Zero(t,e.tx.commits.Load());require.EqualValues(t,1,e.tx.rollbacks.Load());require.True(t,e.tx.closed.Load())
++	require.EqualValues(t,2,e.durableRange())
++	require.NoError(t,e.complete("negative-legitimate-retry"))
++	e.inspect("negative-after-legitimate-retry",true)
++	e.pollActivity()
++	e.record("arm-safety-confirmed",map[string]any{"arm":"negative","valid_acceptances":1,"external_effects":0})
++}
+--- /dev/null
++++ b/tests/ccpo_c5b2/instrumentation_test.go
+@@ -0,0 +1,462 @@
++package ccpo_c5b2_test
++
++import (
++	"context"
++	"database/sql"
++	"database/sql/driver"
++	"errors"
++	"fmt"
++	"runtime/debug"
++	"strings"
++	"sync"
++	"sync/atomic"
++	"time"
++
++	enumspb "go.temporal.io/api/enums/v1"
++	"go.temporal.io/server/common/log"
++	"go.temporal.io/server/common/log/tag"
++	"go.temporal.io/server/common/persistence"
++	persistenceclient "go.temporal.io/server/common/persistence/client"
++	"go.temporal.io/server/common/persistence/serialization"
++	sqlstore "go.temporal.io/server/common/persistence/sql"
++	"go.temporal.io/server/common/persistence/sql/sqlplugin"
++	modernc "modernc.org/sqlite"
++)
++
++type delegateKey struct{}
++type probeResult struct {
++	Range int64
++	Err   error
++	TxID  string
++}
++type readEvidence struct {
++	Revision                 int64
++	Next, Scheduled, Started int64
++	Stack                    string
++	Err                      error
++	Released                 bool
++}
++
++type observedStoreFactory struct {
++	persistence.DataStoreFactory
++	e          *experiment
++	db         sqlplugin.DB
++	logger     log.Logger
++	serializer serialization.Serializer
++}
++
++func (f *observedStoreFactory) NewExecutionStore() (persistence.ExecutionStore, error) {
++	regular, err := f.DataStoreFactory.NewExecutionStore()
++	if err != nil {
++		return nil, err
++	}
++	s, err := sqlstore.NewSQLExecutionStore(f.db, f.logger, f.serializer)
++	if err != nil {
++		return nil, err
++	}
++	return &asyncStore{ExecutionStore: regular, delegate: s, serializer:f.serializer, e: f.e}, nil
++}
++
++type asyncStore struct {
++	persistence.ExecutionStore
++	delegate persistence.ExecutionStore
++	serializer serialization.Serializer
++	e        *experiment
++}
++
++func (s *asyncStore) UpdateWorkflowExecution(ctx context.Context, r *persistence.InternalUpdateWorkflowExecutionRequest) error {
++	e := s.e
++	if r == nil || r.UpdateWorkflowMutation.ExecutionInfo == nil { return fmt.Errorf("INCONCLUSIVE: nil internal request metadata") }
++	if r.UpdateWorkflowMutation.ExecutionInfo.WorkflowId != e.workflowID || !e.armed.CompareAndSwap(true, false) {
++		return s.ExecutionStore.UpdateWorkflowExecution(ctx, r)
++	}
++	if err := s.validateRequest(r); err != nil { return err }
++	owned, err := cloneRequest(r)
++	if err != nil {
++		return err
++	}
++	audit, err := verifyOwnership(r, owned)
++	if err != nil {
++		return err
++	}
++	e.record("ownership-audit", audit)
++	e.record("internal-request", normalizedValue(owned))
++	delegateContext, cancel := context.WithTimeout(context.WithValue(context.Background(), delegateKey{}, e), 90*time.Second)
++	e.delegateCancel = cancel
++	e.started.Store(true)
++	e.faults.Add(1)
++	go func() {
++		defer close(e.done)
++		defer func() {
++			cancel()
++			e.record("delegate-context-cancelled", map[string]any{"context_error": fmt.Sprint(delegateContext.Err())})
++		}()
++		if e.arm == "negative" {
++			select { case <-e.launch: case <-delegateContext.Done(): }
++		}
++		if delegateContext.Err() != nil { e.delegateErr = delegateContext.Err() } else {
++			e.record("delegate-invocation",map[string]any{"arm":e.arm,"range":owned.RangeID,"launched":e.launched.Load()})
++			e.delegateErr = s.delegate.UpdateWorkflowExecution(delegateContext, owned)
++		}
++		e.delegateContextErr = delegateContext.Err()
++		e.record("delegate-terminated", map[string]any{"error": fmt.Sprint(e.delegateErr), "type": fmt.Sprintf("%T", e.delegateErr), "context_before_cancel": fmt.Sprint(delegateContext.Err())})
++	}()
++	if e.arm == "negative" {
++		e.record("injected-store-timeout-before-delegate",map[string]any{"delegate_started":false,"preserved_request_range":owned.RangeID})
++		return &persistence.TimeoutError{Msg:"CCPO C5B2 controlled unknown outcome before old delegate launch"}
++	}
++	select {
++	case <-e.gateEntered:
++		if e.arm == "positive" {
++			e.releaseOld()
++			select { case <-e.done: case <-ctx.Done(): return ctx.Err() }
++			if e.delegateErr != nil { return fmt.Errorf("INCONCLUSIVE: positive old transaction did not commit: %w",e.delegateErr) }
++			e.record("positive-committed-before-error",map[string]any{"commits":e.tx.commits.Load(),"tx":e.tx.id})
++		}
++		e.record("injected-store-timeout", map[string]any{"delegate_still_open": !e.tx.closed.Load(), "layer": "ExecutionStore.UpdateWorkflowExecution", "native_database_timeout": false})
++		return &persistence.TimeoutError{Msg: "CCPO C5B2 controlled ambiguous persistence result"}
++	case <-e.done:
++		return fmt.Errorf("INCONCLUSIVE: delegate exited before gate: %w", e.delegateErr)
++	case <-ctx.Done():
++		return ctx.Err()
++	}
++}
++
++func (s *asyncStore) validateRequest(r *persistence.InternalUpdateWorkflowExecutionRequest) error {
++	m:=&r.UpdateWorkflowMutation
++	if r.NewWorkflowSnapshot != nil || len(r.NewWorkflowNewEvents)!=0 { return fmt.Errorf("INCONCLUSIVE: unsupported new workflow request") }
++	if r.RangeID!=1 || r.Mode!=persistence.UpdateWorkflowModeUpdateCurrent || m.ExecutionState==nil || m.NextEventID!=6 || m.DBRecordVersion!=4 || m.Condition!=4 || len(m.UpsertActivityInfos)!=1 || m.UpsertActivityInfos[5]==nil || len(r.UpdateWorkflowNewEvents)!=1 {
++		return fmt.Errorf("INCONCLUSIVE: request is outside registered normal WFT shape")
++	}
++	if len(m.DeleteActivityInfos)+len(m.UpsertTimerInfos)+len(m.DeleteTimerInfos)+len(m.UpsertChildExecutionInfos)+len(m.DeleteChildExecutionInfos)+len(m.UpsertRequestCancelInfos)+len(m.DeleteRequestCancelInfos)+len(m.UpsertSignalInfos)+len(m.DeleteSignalInfos)+len(m.UpsertChasmNodes)+len(m.DeleteChasmNodes)+len(m.UpsertSignalRequestedIDs)+len(m.DeleteSignalRequestedIDs)!=0 || m.NewBufferedEvents!=nil || m.ClearBufferedEvents {
++		return fmt.Errorf("INCONCLUSIVE: unrelated mutation fields")
++	}
++	batch:=r.UpdateWorkflowNewEvents[0]
++	if batch==nil || batch.IsNewBranch || batch.BranchInfo==nil || len(batch.BranchToken)==0 || batch.Node.NodeID!=4 { return fmt.Errorf("INCONCLUSIVE: unsupported history batch") }
++	events,err:=s.serializer.DeserializeEvents(batch.Node.Events)
++	if err!=nil { return fmt.Errorf("INCONCLUSIVE: history decode: %w",err) }
++	if len(events)!=2 || events[0].EventId!=4 || events[0].EventType!=enumspb.EVENT_TYPE_WORKFLOW_TASK_COMPLETED || events[1].EventId!=5 || events[1].EventType!=enumspb.EVENT_TYPE_ACTIVITY_TASK_SCHEDULED { return fmt.Errorf("INCONCLUSIVE: unexpected completion history") }
++	w,a:=events[0].GetWorkflowTaskCompletedEventAttributes(),events[1].GetActivityTaskScheduledEventAttributes()
++	if w==nil || a==nil || w.ScheduledEventId!=2 || w.StartedEventId!=3 || a.WorkflowTaskCompletedEventId!=4 || a.ActivityId!="ccpo-activity-1" { return fmt.Errorf("INCONCLUSIVE: invalid causal references") }
++	s.e.record("normal-request-shape-verified",map[string]any{"range":r.RangeID,"revision":m.DBRecordVersion,"condition":m.Condition,"next":m.NextEventID,"history_ids":[]int64{4,5},"new_snapshot":false,"new_workflow_events":0})
++	return nil
++}
++
++type observedDB struct {
++	sqlplugin.DB
++	e *experiment
++}
++
++func (db *observedDB) BeginTx(ctx context.Context) (sqlplugin.Tx, error) {
++	tx, err := db.DB.BeginTx(ctx)
++	if err != nil || ctx.Value(delegateKey{}) != db.e {
++		return tx, err
++	}
++	w := &observedTx{Tx: tx, e: db.e, id: fmt.Sprintf("%T:%p", tx, tx)}
++	db.e.tx = w
++	db.e.record("A-real-BeginTx", map[string]any{"tx": w.id, "error": fmt.Sprint(err)})
++	return w, nil
++}
++
++func (db *observedDB) InsertIntoHistoryNode(ctx context.Context, r *sqlplugin.HistoryNodeRow) (sql.Result, error) {
++	result, err := db.DB.InsertIntoHistoryNode(ctx, r)
++	if ctx.Value(delegateKey{}) == db.e {
++		db.e.record("history-append-before-MS-transaction", map[string]any{"row": r, "error": fmt.Sprint(err), "acceptance_receipt": false})
++	}
++	return result, err
++}
++
++type observedTx struct {
++	sqlplugin.Tx
++	e         *experiment
++	id        string
++	closed    atomic.Bool
++	mutations atomic.Int32
++	commits atomic.Int32
++	rollbacks atomic.Int32
++	rangeRead atomic.Int64
++	sqlCode atomic.Int32
++	gateVisits atomic.Int32
++}
++
++func (tx *observedTx) ReadLockShards(ctx context.Context, f sqlplugin.ShardsFilter) (int64, error) {
++	r, err := tx.Tx.ReadLockShards(ctx, f)
++	if err==nil { tx.rangeRead.Store(r) }
++	tx.e.record("B-real-shard-read", map[string]any{"tx": tx.id, "range": r, "error": fmt.Sprint(err)})
++	return r, err
++}
++
++func (tx *observedTx) LockCurrentExecutions(ctx context.Context, f sqlplugin.CurrentExecutionsFilter) (*sqlplugin.CurrentExecutionsRow, error) {
++	row, err := tx.Tx.LockCurrentExecutions(ctx, f)
++	if err != nil {
++		return row, err
++	}
++	e := tx.e
++	tx.gateVisits.Add(1)
++	e.record("C-pre-mutation-gate", map[string]any{"tx": tx.id, "real_current_row": row, "mutations": tx.mutations.Load(), "stack": string(debug.Stack())})
++	close(e.gateEntered)
++	for {
++		select {
++		case response := <-e.probe:
++			r, readErr := tx.Tx.ReadLockShards(ctx, sqlplugin.ShardsFilter{ShardID: e.shardID})
++			e.record("open-old-transaction-probe", map[string]any{"tx": tx.id, "range": r, "error": fmt.Sprint(readErr), "context_error": fmt.Sprint(ctx.Err()), "released": e.released.Load()})
++			response <- probeResult{Range: r, Err: readErr, TxID: tx.id}
++		case <-e.gate:
++			e.record("old-gate-release", map[string]any{"tx": tx.id, "context_error": fmt.Sprint(ctx.Err())})
++			return row, nil
++		case <-ctx.Done():
++			return nil, ctx.Err()
++		}
++	}
++}
++
++func (tx *observedTx) UpdateCurrentExecutions(ctx context.Context, row *sqlplugin.CurrentExecutionsRow) (sql.Result, error) {
++	tx.mutations.Add(1)
++	tx.e.record("first-SQL-mutation", map[string]any{"tx": tx.id, "method": "UpdateCurrentExecutions", "released": tx.e.released.Load(),"context_error":fmt.Sprint(ctx.Err())})
++	r, err := tx.Tx.UpdateCurrentExecutions(ctx, row)
++	var se *modernc.Error
++	code := 0
++	if errors.As(err, &se) {
++		code = se.Code()
++	}
++	tx.sqlCode.Store(int32(code))
++	tx.e.record("raw-SQL-result", map[string]any{"tx": tx.id, "error": fmt.Sprint(err), "type": fmt.Sprintf("%T", err), "sqlite_code": code})
++	return r, err
++}
++
++func (tx *observedTx) Commit() error {
++	err := tx.Tx.Commit()
++	if err==nil { tx.commits.Add(1) }
++	tx.closed.Store(err == nil || errors.Is(err, sql.ErrTxDone))
++	tx.e.record("real-tx-commit-return", map[string]any{"tx": tx.id, "error": fmt.Sprint(err)})
++	return err
++}
++
++func (tx *observedTx) Rollback() error {
++	err := tx.Tx.Rollback()
++	if err==nil { tx.rollbacks.Add(1) }
++	tx.closed.Store(err == nil || errors.Is(err, sql.ErrTxDone))
++	tx.e.record("real-tx-rollback-return", map[string]any{"tx": tx.id, "error": fmt.Sprint(err)})
++	return err
++}
++
++type recoveryLogger struct {
++	log.Logger
++	e *experiment
++}
++
++func (l *recoveryLogger) Info(msg string, tags ...tag.Tag) {
++	if l.e.faults.Load() > 0 && msg == "" {
++		stack := string(debug.Stack())
++		if strings.Contains(stack, "handleWriteErrorLocked") && strings.Contains(stack, ".transition") {
++			l.e.recoveryOnce.Do(func() {
++				l.e.record("F-real-uncertain-write-transition", map[string]any{"stack": stack, "state": "Acquiring; set before this log", "E_tracker_evidence": "source UpdateWorkflowExecution calls requestCompletionFn before handleWriteError; renewal later passes drain"})
++				close(l.e.recovery)
++			})
++		}
++	}
++	l.Logger.Info(msg, tags...)
++}
++
++type observedFactory struct {
++	persistenceclient.Factory
++	e *experiment
++}
++type observedExecution struct {
++	persistence.ExecutionManager
++	e *experiment
++}
++type observedShard struct {
++	persistence.ShardManager
++	e *experiment
++}
++
++func (f *observedFactory) NewExecutionManager() (persistence.ExecutionManager, error) {
++	m, err := f.Factory.NewExecutionManager()
++	if err != nil {
++		return nil, err
++	}
++	return &observedExecution{ExecutionManager: m, e: f.e}, nil
++}
++func (f *observedFactory) NewShardManager() (persistence.ShardManager, error) {
++	m, err := f.Factory.NewShardManager()
++	if err != nil {
++		return nil, err
++	}
++	return &observedShard{ShardManager: m, e: f.e}, nil
++}
++
++func (m *observedExecution) UpdateWorkflowExecution(ctx context.Context, r *persistence.UpdateWorkflowExecutionRequest) (*persistence.UpdateWorkflowExecutionResponse, error) {
++	result, err := m.ExecutionManager.UpdateWorkflowExecution(ctx, r)
++	if r.UpdateWorkflowMutation.ExecutionInfo.WorkflowId == m.e.workflowID && m.e.faults.Load() > 0 {
++		m.e.record("D-manager-result", map[string]any{"type": fmt.Sprintf("%T", err), "error": fmt.Sprint(err), "stack": string(debug.Stack())})
++		var timeout *persistence.TimeoutError
++		if errors.As(err, &timeout) {
++			select {
++			case m.e.managerError <- struct{}{}:
++			default:
++			}
++		}
++	}
++	return result, err
++}
++
++func (m *observedExecution) GetWorkflowExecution(ctx context.Context, r *persistence.GetWorkflowExecutionRequest) (*persistence.GetWorkflowExecutionResponse, error) {
++	result, err := m.ExecutionManager.GetWorkflowExecution(ctx, r)
++	if r.WorkflowID == m.e.workflowID && m.e.captureFresh.Load() {
++		v := readEvidence{Stack: string(debug.Stack()), Err: err, Released: m.e.released.Load()}
++		if result != nil {
++			v.Revision = result.DBRecordVersion
++			v.Next = result.State.NextEventId
++			v.Scheduled = result.State.ExecutionInfo.WorkflowTaskScheduledEventId
++			v.Started = result.State.ExecutionInfo.WorkflowTaskStartedEventId
++		}
++		m.e.record("I-guarded-fresh-MS-read", map[string]any{"revision": v.Revision, "next_event": v.Next, "scheduled": v.Scheduled, "started": v.Started, "released": v.Released, "error": fmt.Sprint(err), "stack": v.Stack, "H_evidence": "successful ContextImpl.GetWorkflowExecution passed errorByState"})
++		select {
++		case m.e.fresh <- v:
++		default:
++		}
++	}
++	return result, err
++}
++
++func (m *observedShard) UpdateShard(ctx context.Context, r *persistence.UpdateShardRequest) error {
++	if m.e.faults.Load() == 0 || r.PreviousRangeID != 1 || r.ShardInfo.RangeId != 2 {
++		return m.ShardManager.UpdateShard(ctx, r)
++	}
++	m.e.record("renewal-after-tracker-drain", map[string]any{"previous": r.PreviousRangeID, "requested": r.ShardInfo.RangeId, "stack": string(debug.Stack())})
++	err := m.ShardManager.UpdateShard(ctx, r)
++	m.e.record("G-real-range-renewal-return", map[string]any{"previous": r.PreviousRangeID, "new": r.ShardInfo.RangeId, "error": fmt.Sprint(err)})
++	select {
++	case m.e.renewResult <- err:
++	default:
++	}
++	return err
++}
++
++func (e *experiment) allowDelete() { e.deleteOnce.Do(func() { close(e.deleteRelease) }) }
++func (m *observedExecution) CompleteHistoryTask(ctx context.Context, r *persistence.CompleteHistoryTaskRequest) error {
++	select {
++	case <-m.e.deleteRelease:
++		return m.ExecutionManager.CompleteHistoryTask(ctx, r)
++	case <-ctx.Done():
++		return ctx.Err()
++	}
++}
++func (m *observedExecution) RangeCompleteHistoryTasks(ctx context.Context, r *persistence.RangeCompleteHistoryTasksRequest) error {
++	select {
++	case <-m.e.deleteRelease:
++		return m.ExecutionManager.RangeCompleteHistoryTasks(ctx, r)
++	case <-ctx.Done():
++		return ctx.Err()
++	}
++}
++
++func (e *experiment) releaseOld() {
++	e.gateOnce.Do(func() { e.released.Store(true); close(e.gate) })
++}
++// Abandoned delegates must not log through testing.T after the test has returned.
++func (e *experiment) retainDelegateResources() {
++	e.recordMu.Lock()
++	defer e.recordMu.Unlock()
++	e.preserveResources = true
++}
++
++// A true result means no delegate was started or done was received.
++func (e *experiment) cleanupDelegate() bool {
++	e.releaseOld()
++	if !e.started.Load() {
++		return true
++	}
++	if e.arm=="negative" && !e.launched.Load() { e.delegateCancel(); e.launchOnce.Do(func(){close(e.launch)}) }
++	timer := time.NewTimer(10 * time.Second)
++	defer timer.Stop()
++	select {
++	case <-e.done:
++	case <-timer.C:
++		e.delegateCancel()
++		timer.Reset(5 * time.Second)
++		select {
++		case <-e.done:
++		case <-timer.C:
++			e.retainDelegateResources()
++			e.t.Error("INCONCLUSIVE: delegate did not terminate after bounded cancellation; resources retained until process exit")
++			return false
++		}
++	}
++	e.delegateCancel()
++	if e.tx != nil && !e.tx.closed.Load() {
++		e.retainDelegateResources()
++		e.t.Error("INCONCLUSIVE: transaction closure not confirmed before cluster teardown")
++	}
++	e.record("cleanup-joined", map[string]any{"delegate_done": true, "cancel_called": true, "error": fmt.Sprint(e.delegateErr)})
++	return true
++}
++
++type connectionAudit struct {
++ mu sync.Mutex
++ e *experiment
++ connections []driver.Conn
++ ids map[string]bool
++ prefix string
++ active bool
++}
++
++var hookRegistry = struct {
++ sync.Mutex
++ once sync.Once
++ entries map[string]*connectionAudit
++}{entries:make(map[string]*connectionAudit)}
++
++func newConnectionAudit(e *experiment,dbName string) *connectionAudit {
++ a:=&connectionAudit{e:e,ids:map[string]bool{},prefix:"file:"+dbName+"?",active:true}
++ hookRegistry.once.Do(func(){
++  modernc.RegisterConnectionHook(func(c modernc.ExecQuerierContext,dsn string) error {
++   hookRegistry.Lock()
++   var selected *connectionAudit
++   for prefix,v:=range hookRegistry.entries { if strings.HasPrefix(dsn,prefix) { selected=v;break } }
++   hookRegistry.Unlock()
++   if selected==nil { return nil }
++   return selected.observe(c,dsn)
++  })
++ })
++ hookRegistry.Lock();hookRegistry.entries[a.prefix]=a;hookRegistry.Unlock()
++ e.record("connection-hook-registered",map[string]any{"prefix":a.prefix,"global_dispatcher":"once per process; no testing.T capture","removable_registration":true})
++ return a
++}
++
++func (a *connectionAudit) observe(c modernc.ExecQuerierContext,dsn string) error {
++ a.mu.Lock();defer a.mu.Unlock()
++ if !a.active { return nil }
++ conn,ok:=c.(driver.Conn);if !ok {return fmt.Errorf("driver connection cannot be owned at cleanup")}
++ id:=fmt.Sprintf("%T:%p",c,c)
++ ctx,cancel:=context.WithTimeout(context.Background(),5*time.Second);defer cancel()
++ values:=map[string]any{}
++ for _,q:=range []string{"PRAGMA journal_mode","PRAGMA read_uncommitted","PRAGMA database_list"} {
++  rows,err:=c.QueryContext(ctx,q,nil);if err!=nil{return err}
++  v:=make([]driver.Value,len(rows.Columns()));err=rows.Next(v);closeErr:=rows.Close()
++  if err!=nil{return err};if closeErr!=nil{return closeErr};values[q]=v
++ }
++ if fmt.Sprint(values["PRAGMA journal_mode"])!="[wal]" || fmt.Sprint(values["PRAGMA read_uncommitted"])!="[0]" || !strings.Contains(dsn,"cache=private") {return fmt.Errorf("unexpected SQLite configuration: %v %s",values,dsn)}
++ a.connections=append(a.connections,conn);a.ids[id]=true
++ a.e.record("real-driver-connection",map[string]any{"connection":id,"dsn":dsn,"pragma":values})
++ return nil
++}
++
++// The pinned pool retains idle connections; unregister and close only after delegate and service teardown.
++func (a *connectionAudit) close() {
++ hookRegistry.Lock();delete(hookRegistry.entries,a.prefix);left:=len(hookRegistry.entries);hookRegistry.Unlock()
++ a.mu.Lock();defer a.mu.Unlock()
++ a.active=false
++ if a.e.preserveResources {
++  a.e.t.Logf("INCONCLUSIVE: connection hook unregistered; %d physical connections retained until process exit; registry entries=%d",len(a.connections),left)
++  return
++ }
++ for _,c:=range a.connections {
++  err:=c.Close()
++  a.e.record("physical-driver-close",map[string]any{"connection":fmt.Sprintf("%T:%p",c,c),"error":fmt.Sprint(err)})
++  if err!=nil {a.e.t.Errorf("INCONCLUSIVE: driver connection close: %v",err)}
++ }
++ a.e.record("connection-hook-unregistered",map[string]any{"remaining_registry_entries":left,"callback_no_longer_retains_test":true})
++ a.connections=nil
++}
+--- /dev/null
++++ b/tests/ccpo_c5b2/ownership_test.go
+@@ -0,0 +1,243 @@
++package ccpo_c5b2_test
++
++import (
++	"crypto/sha256"
++	"encoding/hex"
++	"encoding/json"
++	"fmt"
++	"reflect"
++	"slices"
++	"time"
++
++	commonpb "go.temporal.io/api/common/v1"
++	"go.temporal.io/server/common/persistence"
++	"go.temporal.io/server/service/history/tasks"
++	"google.golang.org/protobuf/proto"
++)
++
++func cloneProto[T proto.Message](p T) T {
++	if reflect.ValueOf(p).IsNil() {
++		var zero T
++		return zero
++	}
++	return proto.Clone(p).(T)
++}
++
++func cloneBlobs[K comparable](m map[K]*commonpb.DataBlob) map[K]*commonpb.DataBlob {
++	if m == nil {
++		return nil
++	}
++	r := make(map[K]*commonpb.DataBlob, len(m))
++	for k, v := range m {
++		r[k] = cloneProto(v)
++	}
++	return r
++}
++
++func cloneSet[K comparable](m map[K]struct{}) map[K]struct{} {
++	if m == nil {
++		return nil
++	}
++	r := make(map[K]struct{}, len(m))
++	for k := range m {
++		r[k] = struct{}{}
++	}
++	return r
++}
++
++// The manager can roll back protobuf fields after returning, so the delegate owns every mutable leaf.
++func cloneRequest(r *persistence.InternalUpdateWorkflowExecutionRequest) (*persistence.InternalUpdateWorkflowExecutionRequest, error) {
++	if r.NewWorkflowSnapshot != nil || len(r.NewWorkflowNewEvents) != 0 {
++		return nil, fmt.Errorf("unsupported new-workflow ownership")
++	}
++	m := &r.UpdateWorkflowMutation
++	n := persistence.InternalWorkflowMutation{
++		NamespaceID: m.NamespaceID, WorkflowID: m.WorkflowID, RunID: m.RunID,
++		ExecutionInfo: cloneProto(m.ExecutionInfo), ExecutionInfoBlob: cloneProto(m.ExecutionInfoBlob),
++		ExecutionState: cloneProto(m.ExecutionState), ExecutionStateBlob: cloneProto(m.ExecutionStateBlob),
++		NextEventID: m.NextEventID, StartVersion: m.StartVersion, LastWriteVersion: m.LastWriteVersion, DBRecordVersion: m.DBRecordVersion,
++		UpsertActivityInfos: cloneBlobs(m.UpsertActivityInfos), DeleteActivityInfos: cloneSet(m.DeleteActivityInfos),
++		UpsertTimerInfos: cloneBlobs(m.UpsertTimerInfos), DeleteTimerInfos: cloneSet(m.DeleteTimerInfos),
++		UpsertChildExecutionInfos: cloneBlobs(m.UpsertChildExecutionInfos), DeleteChildExecutionInfos: cloneSet(m.DeleteChildExecutionInfos),
++		UpsertRequestCancelInfos: cloneBlobs(m.UpsertRequestCancelInfos), DeleteRequestCancelInfos: cloneSet(m.DeleteRequestCancelInfos),
++		UpsertSignalInfos: cloneBlobs(m.UpsertSignalInfos), DeleteSignalInfos: cloneSet(m.DeleteSignalInfos),
++		DeleteChasmNodes: cloneSet(m.DeleteChasmNodes), UpsertSignalRequestedIDs: cloneSet(m.UpsertSignalRequestedIDs),
++		DeleteSignalRequestedIDs: cloneSet(m.DeleteSignalRequestedIDs), NewBufferedEvents: cloneProto(m.NewBufferedEvents),
++		ClearBufferedEvents: m.ClearBufferedEvents, Condition: m.Condition, Checksum: cloneProto(m.Checksum),
++	}
++	if m.UpsertChasmNodes != nil {
++		n.UpsertChasmNodes = make(map[string]persistence.InternalChasmNode, len(m.UpsertChasmNodes))
++		for k, v := range m.UpsertChasmNodes {
++			n.UpsertChasmNodes[k] = persistence.InternalChasmNode{Metadata: cloneProto(v.Metadata), Data: cloneProto(v.Data), CassandraBlob: cloneProto(v.CassandraBlob)}
++		}
++	}
++	if m.Tasks != nil {
++		n.Tasks = make(map[tasks.Category][]persistence.InternalHistoryTask, len(m.Tasks))
++		for k, v := range m.Tasks {
++			if v == nil {
++				n.Tasks[k] = nil
++				continue
++			}
++			a := make([]persistence.InternalHistoryTask, len(v))
++			for i, task := range v {
++				a[i] = persistence.InternalHistoryTask{Key: task.Key, Blob: cloneProto(task.Blob)}
++			}
++			n.Tasks[k] = a
++		}
++	}
++	var events []*persistence.InternalAppendHistoryNodesRequest
++	if r.UpdateWorkflowNewEvents != nil {
++		events = make([]*persistence.InternalAppendHistoryNodesRequest, len(r.UpdateWorkflowNewEvents))
++	}
++	for i, v := range r.UpdateWorkflowNewEvents {
++		if v == nil || v.IsNewBranch {
++			return nil, fmt.Errorf("expected existing-branch history append")
++		}
++		events[i] = &persistence.InternalAppendHistoryNodesRequest{
++			BranchToken: slices.Clone(v.BranchToken), IsNewBranch: v.IsNewBranch, Info: v.Info,
++			BranchInfo: cloneProto(v.BranchInfo), TreeInfo: cloneProto(v.TreeInfo), ShardID: v.ShardID,
++			Node: persistence.InternalHistoryNode{NodeID: v.Node.NodeID, TransactionID: v.Node.TransactionID, PrevTransactionID: v.Node.PrevTransactionID, Events: cloneProto(v.Node.Events)},
++		}
++	}
++	var newEvents []*persistence.InternalAppendHistoryNodesRequest
++	if r.NewWorkflowNewEvents != nil {
++		newEvents = make([]*persistence.InternalAppendHistoryNodesRequest, 0)
++	}
++	return &persistence.InternalUpdateWorkflowExecutionRequest{
++		ShardID: r.ShardID, RangeID: r.RangeID, Mode: r.Mode, ArchetypeID: r.ArchetypeID,
++		UpdateWorkflowMutation: n, UpdateWorkflowNewEvents: events, NewWorkflowSnapshot: nil, NewWorkflowNewEvents: newEvents,
++	}, nil
++}
++
++// Include serialized blobs omitted by the request's JSON tags; protobuf caches are not semantic content.
++func normalized(v reflect.Value) any {
++	if !v.IsValid() {
++		return nil
++	}
++	if v.CanInterface() {
++		if p, ok := v.Interface().(proto.Message); ok {
++			if v.IsNil() {
++				return nil
++			}
++			b, err := proto.MarshalOptions{Deterministic: true}.Marshal(p)
++			if err != nil {
++				panic(err)
++			}
++			return hex.EncodeToString(b)
++		}
++		if t, ok := v.Interface().(time.Time); ok {
++			return t.UTC().Format(time.RFC3339Nano)
++		}
++	}
++	switch v.Kind() {
++	case reflect.Pointer, reflect.Interface:
++		if v.IsNil() {
++			return nil
++		}
++		return normalized(v.Elem())
++	case reflect.Struct:
++		r := map[string]any{}
++		for i := range v.NumField() {
++			if v.Type().Field(i).IsExported() {
++				r[v.Type().Field(i).Name] = normalized(v.Field(i))
++			}
++		}
++		return r
++	case reflect.Map:
++		if v.IsNil() {
++			return nil
++		}
++		r := map[string]any{}
++		iter := v.MapRange()
++		for iter.Next() {
++			r[fmt.Sprintf("%#v", iter.Key().Interface())] = normalized(iter.Value())
++		}
++		return r
++	case reflect.Slice, reflect.Array:
++		if v.Kind() == reflect.Slice && v.IsNil() {
++			return nil
++		}
++		r := make([]any, v.Len())
++		for i := range v.Len() {
++			r[i] = normalized(v.Index(i))
++		}
++		return r
++	default:
++		return v.Interface()
++	}
++}
++
++func requestDigest(r *persistence.InternalUpdateWorkflowExecutionRequest) (string, error) {
++	b, err := json.Marshal(normalized(reflect.ValueOf(r)))
++	if err != nil {
++		return "", err
++	}
++	return fmt.Sprintf("%x", sha256.Sum256(b)), nil
++}
++
++func normalizedValue(r *persistence.InternalUpdateWorkflowExecutionRequest) any {
++	return normalized(reflect.ValueOf(r))
++}
++
++func mutableAddresses(v reflect.Value, out map[string]bool) {
++	if !v.IsValid() || v.Type() == reflect.TypeFor[time.Time]() {
++		return
++	}
++	switch v.Kind() {
++	case reflect.Interface:
++		if !v.IsNil() {
++			mutableAddresses(v.Elem(), out)
++		}
++	case reflect.Pointer:
++		if !v.IsNil() {
++			out[fmt.Sprintf("pointer:%s:%x", v.Type(), v.Pointer())] = true
++			mutableAddresses(v.Elem(), out)
++		}
++	case reflect.Slice:
++		if v.Len() > 0 {
++			out[fmt.Sprintf("slice:%s:%x", v.Type(), v.Pointer())] = true
++		}
++		for i := range v.Len() {
++			mutableAddresses(v.Index(i), out)
++		}
++	case reflect.Map:
++		if v.IsNil() {
++			return
++		}
++		out[fmt.Sprintf("map:%s:%p", v.Type(), v.UnsafePointer())] = true
++		iter := v.MapRange()
++		for iter.Next() {
++			mutableAddresses(iter.Value(), out)
++		}
++	case reflect.Struct:
++		for i := range v.NumField() {
++			f := v.Type().Field(i)
++			if f.IsExported() || f.Name == "unknownFields" {
++				mutableAddresses(v.Field(i), out)
++			}
++		}
++	}
++}
++
++func verifyOwnership(a, b *persistence.InternalUpdateWorkflowExecutionRequest) (map[string]any, error) {
++	aHash, err := requestDigest(a)
++	if err != nil {
++		return nil, err
++	}
++	bHash, err := requestDigest(b)
++	if err != nil {
++		return nil, err
++	}
++	if aHash != bHash {
++		return nil, fmt.Errorf("clone content differs: %s vs %s", aHash, bHash)
++	}
++	aa, bb := map[string]bool{}, map[string]bool{}
++	mutableAddresses(reflect.ValueOf(a), aa)
++	mutableAddresses(reflect.ValueOf(b), bb)
++	for addr := range aa {
++		if bb[addr] {
++			return nil, fmt.Errorf("mutable alias: %s", addr)
++		}
++	}
++	return map[string]any{"source_digest": aHash, "clone_digest": bHash, "source_mutable_objects": len(aa), "clone_mutable_objects": len(bb), "shared_mutable_objects": 0}, nil
++}

@@ -1,0 +1,262 @@
+[
+  {
+    "original_relative_path": "run-01/protobuf/request.pb",
+    "sha256": "fbe956c6a5d7658f0891fa82a160998fb32ee1bd982dc6a21b24d0b88e0e60dd",
+    "bytes": 272,
+    "protobuf_type": "temporal.api.workflowservice.v1.RespondWorkflowTaskCompletedRequest",
+    "binary_published": false,
+    "prior_policy": "EXCLUDE_RAW_BINARY",
+    "public_semantic_projection": "events.public.json",
+    "public_event_sequences": [
+      6
+    ],
+    "projection_limit": "Recorded runtime JSON/SQL observation, not a decode or re-encoding of this binary. Shard/describe metadata projection includes only observed RangeID/MS contract fields; activity-token binary has no complete decoded public equivalent."
+  },
+  {
+    "original_relative_path": "run-01/protobuf/task-token.pb",
+    "sha256": "b76e5de2aa0deba42670a5f40e7de25fb2ed533f3636dfb0b369a501377d380c",
+    "bytes": 125,
+    "protobuf_type": "temporal.server.api.token.v1.Task",
+    "binary_published": false,
+    "prior_policy": "EXCLUDE_RAW_BINARY",
+    "public_semantic_projection": "events.public.json",
+    "public_event_sequences": [
+      6
+    ],
+    "projection_limit": "Recorded runtime JSON/SQL observation, not a decode or re-encoding of this binary. Shard/describe metadata projection includes only observed RangeID/MS contract fields; activity-token binary has no complete decoded public equivalent."
+  },
+  {
+    "original_relative_path": "run-01/protobuf/initial-mutable-state.pb",
+    "sha256": "9189578f6e772d80301ed3015282471c2b379134dfba6f388f9b15ed70fca1ce",
+    "bytes": 726,
+    "protobuf_type": "temporal.server.api.persistence.v1.WorkflowMutableState",
+    "binary_published": false,
+    "prior_policy": "EXCLUDE_RAW_BINARY",
+    "public_semantic_projection": "events.public.json",
+    "public_event_sequences": [
+      19
+    ],
+    "projection_limit": "Recorded runtime JSON/SQL observation, not a decode or re-encoding of this binary. Shard/describe metadata projection includes only observed RangeID/MS contract fields; activity-token binary has no complete decoded public equivalent."
+  },
+  {
+    "original_relative_path": "run-01/protobuf/initial-history.pb",
+    "sha256": "6cdcaf95f37d2ebbdb899bbbc2a3ac8c706fb3578d653c6220a81e1d1a60793a",
+    "bytes": 329,
+    "protobuf_type": "temporal.api.history.v1.History",
+    "binary_published": false,
+    "prior_policy": "HOLD_BINARY_REVIEW",
+    "public_semantic_projection": "events.public.json",
+    "public_event_sequences": [
+      19
+    ],
+    "projection_limit": "Recorded runtime JSON/SQL observation, not a decode or re-encoding of this binary. Shard/describe metadata projection includes only observed RangeID/MS contract fields; activity-token binary has no complete decoded public equivalent."
+  },
+  {
+    "original_relative_path": "run-01/protobuf/initial-shard.pb",
+    "sha256": "9649d664aef7888357cda738c3e4a22e410eae71c205da623a88dd729aa1f932",
+    "bytes": 75,
+    "protobuf_type": "temporal.server.api.persistence.v1.ShardInfo",
+    "binary_published": false,
+    "prior_policy": "EXCLUDE_RAW_BINARY",
+    "public_semantic_projection": "events.public.json",
+    "public_event_sequences": [
+      19
+    ],
+    "projection_limit": "Recorded runtime JSON/SQL observation, not a decode or re-encoding of this binary. Shard/describe metadata projection includes only observed RangeID/MS contract fields; activity-token binary has no complete decoded public equivalent."
+  },
+  {
+    "original_relative_path": "run-01/protobuf/guarded-describe.pb",
+    "sha256": "ecc7daee90321392a34d06c39bbfd81a4dd8f0eaf92b4fa773d349f24cd2e615",
+    "bytes": 394,
+    "protobuf_type": "temporal.api.workflowservice.v1.DescribeWorkflowExecutionResponse",
+    "binary_published": false,
+    "prior_policy": "EXCLUDE_RAW_BINARY",
+    "public_semantic_projection": "events.public.json",
+    "public_event_sequences": [
+      31
+    ],
+    "projection_limit": "Recorded runtime JSON/SQL observation, not a decode or re-encoding of this binary. Shard/describe metadata projection includes only observed RangeID/MS contract fields; activity-token binary has no complete decoded public equivalent."
+  },
+  {
+    "original_relative_path": "run-01/protobuf/negative-before-old-launch-mutable-state.pb",
+    "sha256": "9189578f6e772d80301ed3015282471c2b379134dfba6f388f9b15ed70fca1ce",
+    "bytes": 726,
+    "protobuf_type": "temporal.server.api.persistence.v1.WorkflowMutableState",
+    "binary_published": false,
+    "prior_policy": "EXCLUDE_RAW_BINARY",
+    "public_semantic_projection": "events.public.json",
+    "public_event_sequences": [
+      43
+    ],
+    "projection_limit": "Recorded runtime JSON/SQL observation, not a decode or re-encoding of this binary. Shard/describe metadata projection includes only observed RangeID/MS contract fields; activity-token binary has no complete decoded public equivalent."
+  },
+  {
+    "original_relative_path": "run-01/protobuf/negative-before-old-launch-history.pb",
+    "sha256": "6cdcaf95f37d2ebbdb899bbbc2a3ac8c706fb3578d653c6220a81e1d1a60793a",
+    "bytes": 329,
+    "protobuf_type": "temporal.api.history.v1.History",
+    "binary_published": false,
+    "prior_policy": "HOLD_BINARY_REVIEW",
+    "public_semantic_projection": "events.public.json",
+    "public_event_sequences": [
+      43
+    ],
+    "projection_limit": "Recorded runtime JSON/SQL observation, not a decode or re-encoding of this binary. Shard/describe metadata projection includes only observed RangeID/MS contract fields; activity-token binary has no complete decoded public equivalent."
+  },
+  {
+    "original_relative_path": "run-01/protobuf/negative-before-old-launch-shard.pb",
+    "sha256": "d36a4b96277e75f481cd55a2b3d484b52d571b7312b91239e00a92c906409c86",
+    "bytes": 75,
+    "protobuf_type": "temporal.server.api.persistence.v1.ShardInfo",
+    "binary_published": false,
+    "prior_policy": "EXCLUDE_RAW_BINARY",
+    "public_semantic_projection": "events.public.json",
+    "public_event_sequences": [
+      43
+    ],
+    "projection_limit": "Recorded runtime JSON/SQL observation, not a decode or re-encoding of this binary. Shard/describe metadata projection includes only observed RangeID/MS contract fields; activity-token binary has no complete decoded public equivalent."
+  },
+  {
+    "original_relative_path": "run-01/protobuf/negative-after-stale-attempt-mutable-state.pb",
+    "sha256": "9189578f6e772d80301ed3015282471c2b379134dfba6f388f9b15ed70fca1ce",
+    "bytes": 726,
+    "protobuf_type": "temporal.server.api.persistence.v1.WorkflowMutableState",
+    "binary_published": false,
+    "prior_policy": "EXCLUDE_RAW_BINARY",
+    "public_semantic_projection": "events.public.json",
+    "public_event_sequences": [
+      62
+    ],
+    "projection_limit": "Recorded runtime JSON/SQL observation, not a decode or re-encoding of this binary. Shard/describe metadata projection includes only observed RangeID/MS contract fields; activity-token binary has no complete decoded public equivalent."
+  },
+  {
+    "original_relative_path": "run-01/protobuf/negative-after-stale-attempt-history.pb",
+    "sha256": "6cdcaf95f37d2ebbdb899bbbc2a3ac8c706fb3578d653c6220a81e1d1a60793a",
+    "bytes": 329,
+    "protobuf_type": "temporal.api.history.v1.History",
+    "binary_published": false,
+    "prior_policy": "HOLD_BINARY_REVIEW",
+    "public_semantic_projection": "events.public.json",
+    "public_event_sequences": [
+      62
+    ],
+    "projection_limit": "Recorded runtime JSON/SQL observation, not a decode or re-encoding of this binary. Shard/describe metadata projection includes only observed RangeID/MS contract fields; activity-token binary has no complete decoded public equivalent."
+  },
+  {
+    "original_relative_path": "run-01/protobuf/negative-after-stale-attempt-shard.pb",
+    "sha256": "d36a4b96277e75f481cd55a2b3d484b52d571b7312b91239e00a92c906409c86",
+    "bytes": 75,
+    "protobuf_type": "temporal.server.api.persistence.v1.ShardInfo",
+    "binary_published": false,
+    "prior_policy": "EXCLUDE_RAW_BINARY",
+    "public_semantic_projection": "events.public.json",
+    "public_event_sequences": [
+      62
+    ],
+    "projection_limit": "Recorded runtime JSON/SQL observation, not a decode or re-encoding of this binary. Shard/describe metadata projection includes only observed RangeID/MS contract fields; activity-token binary has no complete decoded public equivalent."
+  },
+  {
+    "original_relative_path": "run-01/protobuf/negative-after-legitimate-retry-mutable-state.pb",
+    "sha256": "1df49c263da0a96fb45ed19238c2f2664d0246e77238bc61c1ec20e3b891485d",
+    "bytes": 966,
+    "protobuf_type": "temporal.server.api.persistence.v1.WorkflowMutableState",
+    "binary_published": false,
+    "prior_policy": "EXCLUDE_RAW_BINARY",
+    "public_semantic_projection": "events.public.json",
+    "public_event_sequences": [
+      77
+    ],
+    "projection_limit": "Recorded runtime JSON/SQL observation, not a decode or re-encoding of this binary. Shard/describe metadata projection includes only observed RangeID/MS contract fields; activity-token binary has no complete decoded public equivalent."
+  },
+  {
+    "original_relative_path": "run-01/protobuf/negative-after-legitimate-retry-history.pb",
+    "sha256": "003eb023de6be730f50fbc1cf0b62224b7dc11d2542acd6c734d84b7cf8cfb77",
+    "bytes": 534,
+    "protobuf_type": "temporal.api.history.v1.History",
+    "binary_published": false,
+    "prior_policy": "HOLD_BINARY_REVIEW",
+    "public_semantic_projection": "events.public.json",
+    "public_event_sequences": [
+      77
+    ],
+    "projection_limit": "Recorded runtime JSON/SQL observation, not a decode or re-encoding of this binary. Shard/describe metadata projection includes only observed RangeID/MS contract fields; activity-token binary has no complete decoded public equivalent."
+  },
+  {
+    "original_relative_path": "run-01/protobuf/negative-after-legitimate-retry-shard.pb",
+    "sha256": "d36a4b96277e75f481cd55a2b3d484b52d571b7312b91239e00a92c906409c86",
+    "bytes": 75,
+    "protobuf_type": "temporal.server.api.persistence.v1.ShardInfo",
+    "binary_published": false,
+    "prior_policy": "EXCLUDE_RAW_BINARY",
+    "public_semantic_projection": "events.public.json",
+    "public_event_sequences": [
+      77
+    ],
+    "projection_limit": "Recorded runtime JSON/SQL observation, not a decode or re-encoding of this binary. Shard/describe metadata projection includes only observed RangeID/MS contract fields; activity-token binary has no complete decoded public equivalent."
+  },
+  {
+    "original_relative_path": "run-01/protobuf/activity-poll.pb",
+    "sha256": "6bc7d38b87f9cefd0ddee64c6f6726a24b9c828acb2ab4372f204b26f41c0ff1",
+    "bytes": 397,
+    "protobuf_type": "temporal.api.workflowservice.v1.PollActivityTaskQueueResponse",
+    "binary_published": false,
+    "prior_policy": "EXCLUDE_RAW_BINARY",
+    "public_semantic_projection": "events.public.json",
+    "public_event_sequences": [
+      79
+    ],
+    "projection_limit": "Recorded runtime JSON/SQL observation, not a decode or re-encoding of this binary. Shard/describe metadata projection includes only observed RangeID/MS contract fields; activity-token binary has no complete decoded public equivalent."
+  },
+  {
+    "original_relative_path": "run-01/protobuf/activity-token.pb",
+    "sha256": "45d6cb81d4fb9b96fb620fdede0867d922cfb38f56db91a624b4c90dd515754e",
+    "bytes": 143,
+    "protobuf_type": "temporal.server.api.token.v1.Task",
+    "binary_published": false,
+    "prior_policy": "EXCLUDE_RAW_BINARY",
+    "public_semantic_projection": "events.public.json",
+    "public_event_sequences": [
+      79
+    ],
+    "projection_limit": "Recorded runtime JSON/SQL observation, not a decode or re-encoding of this binary. Shard/describe metadata projection includes only observed RangeID/MS contract fields; activity-token binary has no complete decoded public equivalent."
+  },
+  {
+    "original_relative_path": "run-01/protobuf/after-Activity-poll-mutable-state.pb",
+    "sha256": "86b69727c1a0a42baa8a687ea522498d3b37fd342ef117b854e6a013f14b3fa6",
+    "bytes": 1065,
+    "protobuf_type": "temporal.server.api.persistence.v1.WorkflowMutableState",
+    "binary_published": false,
+    "prior_policy": "EXCLUDE_RAW_BINARY",
+    "public_semantic_projection": "events.public.json",
+    "public_event_sequences": [
+      95
+    ],
+    "projection_limit": "Recorded runtime JSON/SQL observation, not a decode or re-encoding of this binary. Shard/describe metadata projection includes only observed RangeID/MS contract fields; activity-token binary has no complete decoded public equivalent."
+  },
+  {
+    "original_relative_path": "run-01/protobuf/after-Activity-poll-history.pb",
+    "sha256": "003eb023de6be730f50fbc1cf0b62224b7dc11d2542acd6c734d84b7cf8cfb77",
+    "bytes": 534,
+    "protobuf_type": "temporal.api.history.v1.History",
+    "binary_published": false,
+    "prior_policy": "HOLD_BINARY_REVIEW",
+    "public_semantic_projection": "events.public.json",
+    "public_event_sequences": [
+      95
+    ],
+    "projection_limit": "Recorded runtime JSON/SQL observation, not a decode or re-encoding of this binary. Shard/describe metadata projection includes only observed RangeID/MS contract fields; activity-token binary has no complete decoded public equivalent."
+  },
+  {
+    "original_relative_path": "run-01/protobuf/after-Activity-poll-shard.pb",
+    "sha256": "d36a4b96277e75f481cd55a2b3d484b52d571b7312b91239e00a92c906409c86",
+    "bytes": 75,
+    "protobuf_type": "temporal.server.api.persistence.v1.ShardInfo",
+    "binary_published": false,
+    "prior_policy": "EXCLUDE_RAW_BINARY",
+    "public_semantic_projection": "events.public.json",
+    "public_event_sequences": [
+      95
+    ],
+    "projection_limit": "Recorded runtime JSON/SQL observation, not a decode or re-encoding of this binary. Shard/describe metadata projection includes only observed RangeID/MS contract fields; activity-token binary has no complete decoded public equivalent."
+  }
+]
