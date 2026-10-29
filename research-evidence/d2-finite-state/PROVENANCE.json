@@ -1,0 +1,60 @@
+{
+  "candidate_parent": "c86de99134b3a1d4144e089d6c1bba35e29debcc",
+  "candidate_branch": "research/ccpo-egts-d2-finite-state",
+  "intended_repository": "hikaru-212/temporalio-sdk-rust",
+  "source_ids": {
+    "D2_ORIGINAL_EVIDENCE": {
+      "original_manifest_sha256": "734ec9e5bee6e929637ea455848e981d1f080cd9a3005a02c5f743991ff7f8da",
+      "manifest_entries_verified": 37,
+      "original_file_count_including_manifest": 38
+    },
+    "D1_ORIGINAL_REPORT": {
+      "sha256": "f425383ff2a5e832378c3a78b1172a049e3fa34951e3fe125c2779cfde89eac4",
+      "scope": "Full original retained privately; exact sections 7 and 9 excerpted",
+      "excerpt_sections": [
+        {
+          "section": 7,
+          "first_line": 157,
+          "last_line": 192,
+          "extracted_bytes_sha256": "91e14537acac9b37ad22a7f569576a69b66721b239e97f95d48847ea0ab03a79"
+        },
+        {
+          "section": 9,
+          "first_line": 201,
+          "last_line": 208,
+          "extracted_bytes_sha256": "9194a9618701964f248b49fda4330d42cb598ada4f730d61b8352e3cb49e0fce"
+        }
+      ]
+    }
+  },
+  "reference_versions": {
+    "Temporal_Server": "0d5e3848bed625907987f73d5eaae8dc77bc6590",
+    "C5B_checkpoint": "c86de99134b3a1d4144e089d6c1bba35e29debcc"
+  },
+  "historic_run": {
+    "python": "3.12.3",
+    "invocations": 1,
+    "configurations": 3,
+    "contract_ablations": 2,
+    "exit_code": 0,
+    "source_sha256": {
+      "explore.py": "918348c37d8a465fd0fa2f3aec1192d8e96111452f6a67bdae432bfe80d7372f",
+      "model.py": "4a3d4a39ba571013e2fb1c2a838e75e75d3477d861baa3276b1d28361b74a417",
+      "properties.py": "c31efbc29caff7da8ad86a141926a62eb35f3eee9d1d573ac7fb7dfbdd24cdac"
+    }
+  },
+  "public_preparation": {
+    "model_modified": false,
+    "model_rerun": false,
+    "Temporal_tests_or_compilations": 0,
+    "method": "Hash verification, saved JSON/trace consistency, AST dependency analysis, explicit publication allowlist, text/privacy review",
+    "runtime_revalidation_of_public_copy": false
+  },
+  "historic_audit_summary": {
+    "strict_audit_exit_code": 1,
+    "cause": "Added tool-internal capture reference; no research-ref mutation",
+    "followup_audit_exit_code": 0,
+    "all_git_refs_identical": false,
+    "private_identifiers_and_git_fingerprints_excluded": true
+  }
+}

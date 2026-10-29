@@ -1,0 +1,578 @@
+{
+  "original_files": [
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "AUDIT-NOTES.zh-TW.md",
+      "original_sha256": "06815471771d53861073baae476ef42bf220fbf001516f6af129c777a24e0d3e",
+      "original_bytes": 1877,
+      "decision": "exclude-original",
+      "public_files": [],
+      "exclusion_reason": "Host-bound provenance, local inventory, internal Git/audit metadata, or host-bound audit tooling; retained unchanged privately. The historical failure/qualified follow-up is summarized in PUBLICATION-NOTES.zh-TW.md."
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "COUNTEREXAMPLES.zh-TW.md",
+      "original_sha256": "e3f1eddcf399844b74a90ff581ea0cf649a8099ef5cea4102de5a0953dfeb285",
+      "original_bytes": 2690,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "COUNTEREXAMPLES.zh-TW.md",
+          "sha256": "e3f1eddcf399844b74a90ff581ea0cf649a8099ef5cea4102de5a0953dfeb285",
+          "bytes": 2690,
+          "transformation": "exact-copy",
+          "description": "Reviewed UTF-8 artifact; original bytes retained."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "INPUT-PROVENANCE.json",
+      "original_sha256": "f9734ed419175c3603dedbc301eb24670a37f27b5dcd68eef8ed012f0781803b",
+      "original_bytes": 202734,
+      "decision": "exclude-original",
+      "public_files": [],
+      "exclusion_reason": "Host-bound provenance, local inventory, internal Git/audit metadata, or host-bound audit tooling; retained unchanged privately. The historical failure/qualified follow-up is summarized in PUBLICATION-NOTES.zh-TW.md."
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "INVENTORY.json",
+      "original_sha256": "59dead9d5c32b965d3919037487bb5fd85edc425adda65bc5365c74aaf76182b",
+      "original_bytes": 6137,
+      "decision": "exclude-original",
+      "public_files": [],
+      "exclusion_reason": "Host-bound provenance, local inventory, internal Git/audit metadata, or host-bound audit tooling; retained unchanged privately. The historical failure/qualified follow-up is summarized in PUBLICATION-NOTES.zh-TW.md."
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "LIMITATIONS.zh-TW.md",
+      "original_sha256": "8bd25887546a284e011b207ed5286f638a6f06466d66f9e5d6615662846c39a4",
+      "original_bytes": 3184,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "LIMITATIONS.zh-TW.md",
+          "sha256": "8bd25887546a284e011b207ed5286f638a6f06466d66f9e5d6615662846c39a4",
+          "bytes": 3184,
+          "transformation": "exact-copy",
+          "description": "Reviewed UTF-8 artifact; original bytes retained."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "MODEL.zh-TW.md",
+      "original_sha256": "25c3af803265da1a151a36f38119abf1356ce5f45d0b262c6df215e7515a8702",
+      "original_bytes": 9246,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "MODEL.zh-TW.md",
+          "sha256": "25c3af803265da1a151a36f38119abf1356ce5f45d0b262c6df215e7515a8702",
+          "bytes": 9246,
+          "transformation": "exact-copy",
+          "description": "Reviewed UTF-8 artifact; original bytes retained."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "PRE-RUN-SHA256SUMS",
+      "original_sha256": "83d648f17c83c154f844d480252146f189538cc0195ea52c8673016baa8a9d01",
+      "original_bytes": 509,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "provenance/original-PRE-RUN-SHA256SUMS",
+          "sha256": "83d648f17c83c154f844d480252146f189538cc0195ea52c8673016baa8a9d01",
+          "bytes": 509,
+          "transformation": "exact-copy",
+          "description": "Historical pre-run hash catalog; not the public manifest."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "PREREGISTRATION.json",
+      "original_sha256": "1cabd6212739a2ace765a5a3bef33fa3836209bfd003c07e97dfcd07044f9504",
+      "original_bytes": 2199,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "PREREGISTRATION.public.json",
+          "sha256": "b92fa58c3932e9af9bff0b71f89070cd7d1b4a98d618c73184e2575b66788bf6",
+          "bytes": 2140,
+          "transformation": "path-redaction",
+          "description": "Replace only the original D1 absolute source path by D1_ORIGINAL_REPORT; all other bytes unchanged."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "README.zh-TW.md",
+      "original_sha256": "744bd6c7672ae0f6c40a69bfd7432b8a453f803bca1eb2df3e73909dac6f9bab",
+      "original_bytes": 3117,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "README.zh-TW.md",
+          "sha256": "137bfb967b6552ee6840a513547dd954fc3d4f9ac4c2af22a07d5fb4943d20bd",
+          "bytes": 3818,
+          "transformation": "public-rewrite",
+          "description": "Portable instructions and public verifier replace host-dependent audit instructions; no research result changes."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "REPORT.zh-TW.md",
+      "original_sha256": "5750a3e14fa829702c80fc4b013c6ca7b6966c7ad66a188a469df699ae2a8dc2",
+      "original_bytes": 20268,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "REPORT.zh-TW.md",
+          "sha256": "14a2f35700ff9a386826e5b47fc2abdae609eb41706d908324356e6e3022e40a",
+          "bytes": 20084,
+          "transformation": "public-metadata-projection",
+          "description": "Add public-copy notice; replace local path/device metadata and links; replace private audit paragraph by scoped public summary; mathematical content/results unchanged."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "SHA256SUMS",
+      "original_sha256": "734ec9e5bee6e929637ea455848e981d1f080cd9a3005a02c5f743991ff7f8da",
+      "original_bytes": 3455,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "provenance/original-SHA256SUMS",
+          "sha256": "734ec9e5bee6e929637ea455848e981d1f080cd9a3005a02c5f743991ff7f8da",
+          "bytes": 3455,
+          "transformation": "exact-copy",
+          "description": "Historical hash catalog only; no private file content."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "audit-02-invocation.json",
+      "original_sha256": "dec964a852488c1a1fc3503e7c9da6b0624b8f773742eab5a34b88a55576c244",
+      "original_bytes": 328,
+      "decision": "exclude-original",
+      "public_files": [],
+      "exclusion_reason": "Host-bound provenance, local inventory, internal Git/audit metadata, or host-bound audit tooling; retained unchanged privately. The historical failure/qualified follow-up is summarized in PUBLICATION-NOTES.zh-TW.md."
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "audit-02.json",
+      "original_sha256": "dd96185c95371ff7ded34301c865939f147a8f8900827e9c20bcbfd97ecddcaf",
+      "original_bytes": 2236,
+      "decision": "exclude-original",
+      "public_files": [],
+      "exclusion_reason": "Host-bound provenance, local inventory, internal Git/audit metadata, or host-bound audit tooling; retained unchanged privately. The historical failure/qualified follow-up is summarized in PUBLICATION-NOTES.zh-TW.md."
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "audit-02.stderr.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "decision": "exclude-original",
+      "public_files": [],
+      "exclusion_reason": "Host-bound provenance, local inventory, internal Git/audit metadata, or host-bound audit tooling; retained unchanged privately. The historical failure/qualified follow-up is summarized in PUBLICATION-NOTES.zh-TW.md."
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "audit-invocation.json",
+      "original_sha256": "ae7ce586b01908990aacda303e5021843455f955e591c4ac5c527738c483de79",
+      "original_bytes": 282,
+      "decision": "exclude-original",
+      "public_files": [],
+      "exclusion_reason": "Host-bound provenance, local inventory, internal Git/audit metadata, or host-bound audit tooling; retained unchanged privately. The historical failure/qualified follow-up is summarized in PUBLICATION-NOTES.zh-TW.md."
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "audit-saved.json",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "decision": "exclude-original",
+      "public_files": [],
+      "exclusion_reason": "Host-bound provenance, local inventory, internal Git/audit metadata, or host-bound audit tooling; retained unchanged privately. The historical failure/qualified follow-up is summarized in PUBLICATION-NOTES.zh-TW.md."
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "audit-saved.stderr.log",
+      "original_sha256": "717635024c39a55faec9a8287519ed08a88782aedad58b0564ab5217299b9f31",
+      "original_bytes": 386,
+      "decision": "exclude-original",
+      "public_files": [],
+      "exclusion_reason": "Host-bound provenance, local inventory, internal Git/audit metadata, or host-bound audit tooling; retained unchanged privately. The historical failure/qualified follow-up is summarized in PUBLICATION-NOTES.zh-TW.md."
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "run-01/exit.json",
+      "original_sha256": "322c78816e371c73536694238a699ad6f9e5a8fd423bd279ac9e01a5720c6c69",
+      "original_bytes": 134,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "run-01/exit.json",
+          "sha256": "322c78816e371c73536694238a699ad6f9e5a8fd423bd279ac9e01a5720c6c69",
+          "bytes": 134,
+          "transformation": "exact-copy",
+          "description": "Reviewed UTF-8 artifact; original bytes retained."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "run-01/invocation.json",
+      "original_sha256": "259c05290ba08245aab10b1ac0eab8e7c8639b38e3aec192872a9b492568a960",
+      "original_bytes": 758,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "run-01/invocation.public.json",
+          "sha256": "b60fcd3e14fa1fbe0c80562b4429e3c19ea3cea3b54fa0011865eaa376ec8667",
+          "bytes": 1049,
+          "transformation": "path-normalization-with-disclosure",
+          "description": "Normalize evidence-root paths in argv/cwd; retain timestamps, source/preregistration hashes and timeout; append publication disclosure."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "run-01/results/A_no_commit_claim/counterexample-P2a.json",
+      "original_sha256": "051b04a94aa80f59a13c97c7a3a3ad4bb066401edaa20910b23eafd2622c13ce",
+      "original_bytes": 18718,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "run-01/results/A_no_commit_claim/counterexample-P2a.json",
+          "sha256": "051b04a94aa80f59a13c97c7a3a3ad4bb066401edaa20910b23eafd2622c13ce",
+          "bytes": 18718,
+          "transformation": "exact-copy",
+          "description": "Reviewed UTF-8 artifact; original bytes retained."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "run-01/results/A_no_commit_claim/result.json",
+      "original_sha256": "b0dbec491ec59d0d0cecdd5a09159a155584be0d2a8982cdf85399e2c62ab9e7",
+      "original_bytes": 2082,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "run-01/results/A_no_commit_claim/result.json",
+          "sha256": "b0dbec491ec59d0d0cecdd5a09159a155584be0d2a8982cdf85399e2c62ab9e7",
+          "bytes": 2082,
+          "transformation": "exact-copy",
+          "description": "Reviewed UTF-8 artifact; original bytes retained."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "run-01/results/B_no_epoch_conflict/counterexample-P2b.json",
+      "original_sha256": "c9e6cda65492b0e0a23fb44ae4a32e0aa61abf9ebf65754fa8a74195778f59b8",
+      "original_bytes": 15947,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "run-01/results/B_no_epoch_conflict/counterexample-P2b.json",
+          "sha256": "c9e6cda65492b0e0a23fb44ae4a32e0aa61abf9ebf65754fa8a74195778f59b8",
+          "bytes": 15947,
+          "transformation": "exact-copy",
+          "description": "Reviewed UTF-8 artifact; original bytes retained."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "run-01/results/B_no_epoch_conflict/result.json",
+      "original_sha256": "99e0a6783885bea2afb1867b52febab17444b746ddb70388528fabd20ab5c2e7",
+      "original_bytes": 1982,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "run-01/results/B_no_epoch_conflict/result.json",
+          "sha256": "99e0a6783885bea2afb1867b52febab17444b746ddb70388528fabd20ab5c2e7",
+          "bytes": 1982,
+          "transformation": "exact-copy",
+          "description": "Reviewed UTF-8 artifact; original bytes retained."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "run-01/results/baseline/result.json",
+      "original_sha256": "83f729ffb1412ce9d6b8e925e567a53e998ec05419cfebbcb78611fdc35e024d",
+      "original_bytes": 2603,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "run-01/results/baseline/result.json",
+          "sha256": "83f729ffb1412ce9d6b8e925e567a53e998ec05419cfebbcb78611fdc35e024d",
+          "bytes": 2603,
+          "transformation": "exact-copy",
+          "description": "Reviewed UTF-8 artifact; original bytes retained."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "run-01/results/baseline/witness-AckLostRetry.json",
+      "original_sha256": "1f63f3fbd27586cc50fbdd41d184b39be55444349030965e38466fc3dbffbcef",
+      "original_bytes": 21942,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "run-01/results/baseline/witness-AckLostRetry.json",
+          "sha256": "1f63f3fbd27586cc50fbdd41d184b39be55444349030965e38466fc3dbffbcef",
+          "bytes": 21942,
+          "transformation": "exact-copy",
+          "description": "Reviewed UTF-8 artifact; original bytes retained."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "run-01/results/baseline/witness-Main.json",
+      "original_sha256": "1621f7b38cbe73e66f7d671621bfdcf9bfba780f7e7cab09182f6a0e5ac84727",
+      "original_bytes": 32155,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "run-01/results/baseline/witness-Main.json",
+          "sha256": "1621f7b38cbe73e66f7d671621bfdcf9bfba780f7e7cab09182f6a0e5ac84727",
+          "bytes": 32155,
+          "transformation": "exact-copy",
+          "description": "Reviewed UTF-8 artifact; original bytes retained."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "run-01/results/baseline/witness-Negative.json",
+      "original_sha256": "199dd22f79ec9ad5ed34673b78677be70f408d84e649adf38c28c67553ea35dc",
+      "original_bytes": 30911,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "run-01/results/baseline/witness-Negative.json",
+          "sha256": "199dd22f79ec9ad5ed34673b78677be70f408d84e649adf38c28c67553ea35dc",
+          "bytes": 30911,
+          "transformation": "exact-copy",
+          "description": "Reviewed UTF-8 artifact; original bytes retained."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "run-01/results/baseline/witness-Positive.json",
+      "original_sha256": "477c34e2cb62be6b26d1ae541ca17953368fecf973988d3de10d3b0b7c3ddee2",
+      "original_bytes": 24407,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "run-01/results/baseline/witness-Positive.json",
+          "sha256": "477c34e2cb62be6b26d1ae541ca17953368fecf973988d3de10d3b0b7c3ddee2",
+          "bytes": 24407,
+          "transformation": "exact-copy",
+          "description": "Reviewed UTF-8 artifact; original bytes retained."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "run-01/results/configurations.json",
+      "original_sha256": "c6106f89ce9f097331e6c082201d71c5decff1ec199108cddf938e8509af738a",
+      "original_bytes": 247,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "run-01/results/configurations.json",
+          "sha256": "c6106f89ce9f097331e6c082201d71c5decff1ec199108cddf938e8509af738a",
+          "bytes": 247,
+          "transformation": "exact-copy",
+          "description": "Reviewed UTF-8 artifact; original bytes retained."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "run-01/results/source-hashes.json",
+      "original_sha256": "aaaadd4ac3d06c1b72a31cd470a66a9c160292f9899e63ced341ae1d772afe40",
+      "original_bytes": 256,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "run-01/results/source-hashes.json",
+          "sha256": "aaaadd4ac3d06c1b72a31cd470a66a9c160292f9899e63ced341ae1d772afe40",
+          "bytes": 256,
+          "transformation": "exact-copy",
+          "description": "Reviewed UTF-8 artifact; original bytes retained."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "run-01/results/summary.json",
+      "original_sha256": "a61affc2e283843075d86efd1e760ad57d131082ec5cc0eb128d38c472b38fe8",
+      "original_bytes": 7199,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "run-01/results/summary.json",
+          "sha256": "a61affc2e283843075d86efd1e760ad57d131082ec5cc0eb128d38c472b38fe8",
+          "bytes": 7199,
+          "transformation": "exact-copy",
+          "description": "Reviewed UTF-8 artifact; original bytes retained."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "run-01/stderr.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "run-01/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "transformation": "exact-copy",
+          "description": "Reviewed UTF-8 artifact; original bytes retained."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "run-01/stdout.log",
+      "original_sha256": "d2dba1dd3758a82804eb9ef1fedddf759b4b7caaa2da00f2ef3911ddb7e0e771",
+      "original_bytes": 6768,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "run-01/stdout.log",
+          "sha256": "d2dba1dd3758a82804eb9ef1fedddf759b4b7caaa2da00f2ef3911ddb7e0e771",
+          "bytes": 6768,
+          "transformation": "exact-copy",
+          "description": "Reviewed UTF-8 artifact; original bytes retained."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "source/explore.py",
+      "original_sha256": "918348c37d8a465fd0fa2f3aec1192d8e96111452f6a67bdae432bfe80d7372f",
+      "original_bytes": 9717,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "source/explore.py",
+          "sha256": "918348c37d8a465fd0fa2f3aec1192d8e96111452f6a67bdae432bfe80d7372f",
+          "bytes": 9717,
+          "transformation": "exact-copy",
+          "description": "Reviewed UTF-8 artifact; original bytes retained."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "source/model.py",
+      "original_sha256": "4a3d4a39ba571013e2fb1c2a838e75e75d3477d861baa3276b1d28361b74a417",
+      "original_bytes": 8241,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "source/model.py",
+          "sha256": "4a3d4a39ba571013e2fb1c2a838e75e75d3477d861baa3276b1d28361b74a417",
+          "bytes": 8241,
+          "transformation": "exact-copy",
+          "description": "Reviewed UTF-8 artifact; original bytes retained."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "source/properties.py",
+      "original_sha256": "c31efbc29caff7da8ad86a141926a62eb35f3eee9d1d573ac7fb7dfbdd24cdac",
+      "original_bytes": 2393,
+      "decision": "include",
+      "public_files": [
+        {
+          "path": "source/properties.py",
+          "sha256": "c31efbc29caff7da8ad86a141926a62eb35f3eee9d1d573ac7fb7dfbdd24cdac",
+          "bytes": 2393,
+          "transformation": "exact-copy",
+          "description": "Reviewed UTF-8 artifact; original bytes retained."
+        }
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "tools/audit_saved.py",
+      "original_sha256": "424f8df64e90d716337d28038d869f9e652a34fda7397e9c07a1c3fc72cdf2a6",
+      "original_bytes": 5230,
+      "decision": "exclude-original",
+      "public_files": [],
+      "exclusion_reason": "Host-bound provenance, local inventory, internal Git/audit metadata, or host-bound audit tooling; retained unchanged privately. The historical failure/qualified follow-up is summarized in PUBLICATION-NOTES.zh-TW.md."
+    },
+    {
+      "source_id": "D2_ORIGINAL_EVIDENCE",
+      "original_path": "tools/audit_saved_v2.py",
+      "original_sha256": "9ed9eb209147806999cc5a0b57395499cade5999f2754a67e4c3038bf1eb1b8c",
+      "original_bytes": 6273,
+      "decision": "exclude-original",
+      "public_files": [],
+      "exclusion_reason": "Host-bound provenance, local inventory, internal Git/audit metadata, or host-bound audit tooling; retained unchanged privately. The historical failure/qualified follow-up is summarized in PUBLICATION-NOTES.zh-TW.md."
+    }
+  ],
+  "generated_documents": [
+    "README.zh-TW.md",
+    "PUBLICATION-NOTES.zh-TW.md",
+    "PROVENANCE.json",
+    "PUBLICATION-ALLOWLIST.json",
+    "SHA256SUMS",
+    "tools/verify_public.py"
+  ],
+  "derived_external_document": {
+    "source_id": "D1_ORIGINAL_REPORT",
+    "original_sha256": "f425383ff2a5e832378c3a78b1172a049e3fa34951e3fe125c2779cfde89eac4",
+    "public_path": "provenance/D1-P2-D2-excerpt.zh-TW.md",
+    "public_sha256": "3e6fff807b0367a1ea82a2c7127ad64644c7f39df2753e240479a90abf7d2597",
+    "transformation": "Exact original sections 7 and 9 plus an explicit scope/provenance header; not the full D1 report."
+  },
+  "no_original_artifact_was_modified": true
+}

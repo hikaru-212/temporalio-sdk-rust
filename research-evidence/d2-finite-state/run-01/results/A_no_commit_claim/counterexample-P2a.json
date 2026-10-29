@@ -1,0 +1,742 @@
+{
+  "mode": "A_no_commit_claim",
+  "property": "P2a",
+  "shortest_unit_transition_length": 12,
+  "BFS_complete": true,
+  "path": [
+    {
+      "action": null,
+      "state": {
+        "K": "fixed-normal-WFT",
+        "payload": "fixed-ScheduleActivityTask",
+        "epoch": 1,
+        "authority": "active",
+        "pending_K": true,
+        "revision": 3,
+        "physical_appends": [],
+        "effective_batches": [],
+        "durable_tasks": [],
+        "certificate": null,
+        "attempts": [
+          {
+            "id": 0,
+            "stage": "unused",
+            "request_epoch": 0,
+            "request_revision": 0,
+            "snapshot_epoch": 0,
+            "snapshot_revision": 0,
+            "snapshot_pending": false,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          },
+          {
+            "id": 1,
+            "stage": "unused",
+            "request_epoch": 0,
+            "request_revision": 0,
+            "snapshot_epoch": 0,
+            "snapshot_revision": 0,
+            "snapshot_pending": false,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          }
+        ]
+      },
+      "monitor": {
+        "acceptances": [],
+        "post_certificate_old_commits": []
+      },
+      "P2a": true,
+      "P2b": true
+    },
+    {
+      "action": {
+        "kind": "Submit",
+        "attempt": 0,
+        "detail": "first"
+      },
+      "state": {
+        "K": "fixed-normal-WFT",
+        "payload": "fixed-ScheduleActivityTask",
+        "epoch": 1,
+        "authority": "active",
+        "pending_K": true,
+        "revision": 3,
+        "physical_appends": [],
+        "effective_batches": [],
+        "durable_tasks": [],
+        "certificate": null,
+        "attempts": [
+          {
+            "id": 0,
+            "stage": "submitted",
+            "request_epoch": 1,
+            "request_revision": 3,
+            "snapshot_epoch": 0,
+            "snapshot_revision": 0,
+            "snapshot_pending": false,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          },
+          {
+            "id": 1,
+            "stage": "unused",
+            "request_epoch": 0,
+            "request_revision": 0,
+            "snapshot_epoch": 0,
+            "snapshot_revision": 0,
+            "snapshot_pending": false,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          }
+        ]
+      },
+      "monitor": {
+        "acceptances": [],
+        "post_certificate_old_commits": []
+      },
+      "P2a": true,
+      "P2b": true
+    },
+    {
+      "action": {
+        "kind": "AppendPhysical",
+        "attempt": 0,
+        "detail": ""
+      },
+      "state": {
+        "K": "fixed-normal-WFT",
+        "payload": "fixed-ScheduleActivityTask",
+        "epoch": 1,
+        "authority": "active",
+        "pending_K": true,
+        "revision": 3,
+        "physical_appends": [
+          0
+        ],
+        "effective_batches": [],
+        "durable_tasks": [],
+        "certificate": null,
+        "attempts": [
+          {
+            "id": 0,
+            "stage": "appended",
+            "request_epoch": 1,
+            "request_revision": 3,
+            "snapshot_epoch": 0,
+            "snapshot_revision": 0,
+            "snapshot_pending": false,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          },
+          {
+            "id": 1,
+            "stage": "unused",
+            "request_epoch": 0,
+            "request_revision": 0,
+            "snapshot_epoch": 0,
+            "snapshot_revision": 0,
+            "snapshot_pending": false,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          }
+        ]
+      },
+      "monitor": {
+        "acceptances": [],
+        "post_certificate_old_commits": []
+      },
+      "P2a": true,
+      "P2b": true
+    },
+    {
+      "action": {
+        "kind": "Begin",
+        "attempt": 0,
+        "detail": ""
+      },
+      "state": {
+        "K": "fixed-normal-WFT",
+        "payload": "fixed-ScheduleActivityTask",
+        "epoch": 1,
+        "authority": "active",
+        "pending_K": true,
+        "revision": 3,
+        "physical_appends": [
+          0
+        ],
+        "effective_batches": [],
+        "durable_tasks": [],
+        "certificate": null,
+        "attempts": [
+          {
+            "id": 0,
+            "stage": "begun",
+            "request_epoch": 1,
+            "request_revision": 3,
+            "snapshot_epoch": 0,
+            "snapshot_revision": 0,
+            "snapshot_pending": false,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          },
+          {
+            "id": 1,
+            "stage": "unused",
+            "request_epoch": 0,
+            "request_revision": 0,
+            "snapshot_epoch": 0,
+            "snapshot_revision": 0,
+            "snapshot_pending": false,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          }
+        ]
+      },
+      "monitor": {
+        "acceptances": [],
+        "post_certificate_old_commits": []
+      },
+      "P2a": true,
+      "P2b": true
+    },
+    {
+      "action": {
+        "kind": "ReadSnapshot",
+        "attempt": 0,
+        "detail": "validated"
+      },
+      "state": {
+        "K": "fixed-normal-WFT",
+        "payload": "fixed-ScheduleActivityTask",
+        "epoch": 1,
+        "authority": "active",
+        "pending_K": true,
+        "revision": 3,
+        "physical_appends": [
+          0
+        ],
+        "effective_batches": [],
+        "durable_tasks": [],
+        "certificate": null,
+        "attempts": [
+          {
+            "id": 0,
+            "stage": "read",
+            "request_epoch": 1,
+            "request_revision": 3,
+            "snapshot_epoch": 1,
+            "snapshot_revision": 3,
+            "snapshot_pending": true,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          },
+          {
+            "id": 1,
+            "stage": "unused",
+            "request_epoch": 0,
+            "request_revision": 0,
+            "snapshot_epoch": 0,
+            "snapshot_revision": 0,
+            "snapshot_pending": false,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          }
+        ]
+      },
+      "monitor": {
+        "acceptances": [],
+        "post_certificate_old_commits": []
+      },
+      "P2a": true,
+      "P2b": true
+    },
+    {
+      "action": {
+        "kind": "TryMutation",
+        "attempt": 0,
+        "detail": "private_write_set"
+      },
+      "state": {
+        "K": "fixed-normal-WFT",
+        "payload": "fixed-ScheduleActivityTask",
+        "epoch": 1,
+        "authority": "active",
+        "pending_K": true,
+        "revision": 3,
+        "physical_appends": [
+          0
+        ],
+        "effective_batches": [],
+        "durable_tasks": [],
+        "certificate": null,
+        "attempts": [
+          {
+            "id": 0,
+            "stage": "mutated",
+            "request_epoch": 1,
+            "request_revision": 3,
+            "snapshot_epoch": 1,
+            "snapshot_revision": 3,
+            "snapshot_pending": true,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          },
+          {
+            "id": 1,
+            "stage": "unused",
+            "request_epoch": 0,
+            "request_revision": 0,
+            "snapshot_epoch": 0,
+            "snapshot_revision": 0,
+            "snapshot_pending": false,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          }
+        ]
+      },
+      "monitor": {
+        "acceptances": [],
+        "post_certificate_old_commits": []
+      },
+      "P2a": true,
+      "P2b": true
+    },
+    {
+      "action": {
+        "kind": "Submit",
+        "attempt": 1,
+        "detail": "concurrent"
+      },
+      "state": {
+        "K": "fixed-normal-WFT",
+        "payload": "fixed-ScheduleActivityTask",
+        "epoch": 1,
+        "authority": "active",
+        "pending_K": true,
+        "revision": 3,
+        "physical_appends": [
+          0
+        ],
+        "effective_batches": [],
+        "durable_tasks": [],
+        "certificate": null,
+        "attempts": [
+          {
+            "id": 0,
+            "stage": "mutated",
+            "request_epoch": 1,
+            "request_revision": 3,
+            "snapshot_epoch": 1,
+            "snapshot_revision": 3,
+            "snapshot_pending": true,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          },
+          {
+            "id": 1,
+            "stage": "submitted",
+            "request_epoch": 1,
+            "request_revision": 3,
+            "snapshot_epoch": 0,
+            "snapshot_revision": 0,
+            "snapshot_pending": false,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          }
+        ]
+      },
+      "monitor": {
+        "acceptances": [],
+        "post_certificate_old_commits": []
+      },
+      "P2a": true,
+      "P2b": true
+    },
+    {
+      "action": {
+        "kind": "AppendPhysical",
+        "attempt": 1,
+        "detail": ""
+      },
+      "state": {
+        "K": "fixed-normal-WFT",
+        "payload": "fixed-ScheduleActivityTask",
+        "epoch": 1,
+        "authority": "active",
+        "pending_K": true,
+        "revision": 3,
+        "physical_appends": [
+          0,
+          1
+        ],
+        "effective_batches": [],
+        "durable_tasks": [],
+        "certificate": null,
+        "attempts": [
+          {
+            "id": 0,
+            "stage": "mutated",
+            "request_epoch": 1,
+            "request_revision": 3,
+            "snapshot_epoch": 1,
+            "snapshot_revision": 3,
+            "snapshot_pending": true,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          },
+          {
+            "id": 1,
+            "stage": "appended",
+            "request_epoch": 1,
+            "request_revision": 3,
+            "snapshot_epoch": 0,
+            "snapshot_revision": 0,
+            "snapshot_pending": false,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          }
+        ]
+      },
+      "monitor": {
+        "acceptances": [],
+        "post_certificate_old_commits": []
+      },
+      "P2a": true,
+      "P2b": true
+    },
+    {
+      "action": {
+        "kind": "Begin",
+        "attempt": 1,
+        "detail": ""
+      },
+      "state": {
+        "K": "fixed-normal-WFT",
+        "payload": "fixed-ScheduleActivityTask",
+        "epoch": 1,
+        "authority": "active",
+        "pending_K": true,
+        "revision": 3,
+        "physical_appends": [
+          0,
+          1
+        ],
+        "effective_batches": [],
+        "durable_tasks": [],
+        "certificate": null,
+        "attempts": [
+          {
+            "id": 0,
+            "stage": "mutated",
+            "request_epoch": 1,
+            "request_revision": 3,
+            "snapshot_epoch": 1,
+            "snapshot_revision": 3,
+            "snapshot_pending": true,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          },
+          {
+            "id": 1,
+            "stage": "begun",
+            "request_epoch": 1,
+            "request_revision": 3,
+            "snapshot_epoch": 0,
+            "snapshot_revision": 0,
+            "snapshot_pending": false,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          }
+        ]
+      },
+      "monitor": {
+        "acceptances": [],
+        "post_certificate_old_commits": []
+      },
+      "P2a": true,
+      "P2b": true
+    },
+    {
+      "action": {
+        "kind": "ReadSnapshot",
+        "attempt": 1,
+        "detail": "validated"
+      },
+      "state": {
+        "K": "fixed-normal-WFT",
+        "payload": "fixed-ScheduleActivityTask",
+        "epoch": 1,
+        "authority": "active",
+        "pending_K": true,
+        "revision": 3,
+        "physical_appends": [
+          0,
+          1
+        ],
+        "effective_batches": [],
+        "durable_tasks": [],
+        "certificate": null,
+        "attempts": [
+          {
+            "id": 0,
+            "stage": "mutated",
+            "request_epoch": 1,
+            "request_revision": 3,
+            "snapshot_epoch": 1,
+            "snapshot_revision": 3,
+            "snapshot_pending": true,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          },
+          {
+            "id": 1,
+            "stage": "read",
+            "request_epoch": 1,
+            "request_revision": 3,
+            "snapshot_epoch": 1,
+            "snapshot_revision": 3,
+            "snapshot_pending": true,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          }
+        ]
+      },
+      "monitor": {
+        "acceptances": [],
+        "post_certificate_old_commits": []
+      },
+      "P2a": true,
+      "P2b": true
+    },
+    {
+      "action": {
+        "kind": "Commit",
+        "attempt": 0,
+        "detail": ""
+      },
+      "state": {
+        "K": "fixed-normal-WFT",
+        "payload": "fixed-ScheduleActivityTask",
+        "epoch": 1,
+        "authority": "active",
+        "pending_K": false,
+        "revision": 4,
+        "physical_appends": [
+          0,
+          1
+        ],
+        "effective_batches": [
+          0
+        ],
+        "durable_tasks": [
+          0
+        ],
+        "certificate": null,
+        "attempts": [
+          {
+            "id": 0,
+            "stage": "committed",
+            "request_epoch": 1,
+            "request_revision": 3,
+            "snapshot_epoch": 1,
+            "snapshot_revision": 3,
+            "snapshot_pending": true,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          },
+          {
+            "id": 1,
+            "stage": "read",
+            "request_epoch": 1,
+            "request_revision": 3,
+            "snapshot_epoch": 1,
+            "snapshot_revision": 3,
+            "snapshot_pending": true,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          }
+        ]
+      },
+      "monitor": {
+        "acceptances": [
+          0
+        ],
+        "post_certificate_old_commits": []
+      },
+      "P2a": true,
+      "P2b": true
+    },
+    {
+      "action": {
+        "kind": "TryMutation",
+        "attempt": 1,
+        "detail": "private_write_set"
+      },
+      "state": {
+        "K": "fixed-normal-WFT",
+        "payload": "fixed-ScheduleActivityTask",
+        "epoch": 1,
+        "authority": "active",
+        "pending_K": false,
+        "revision": 4,
+        "physical_appends": [
+          0,
+          1
+        ],
+        "effective_batches": [
+          0
+        ],
+        "durable_tasks": [
+          0
+        ],
+        "certificate": null,
+        "attempts": [
+          {
+            "id": 0,
+            "stage": "committed",
+            "request_epoch": 1,
+            "request_revision": 3,
+            "snapshot_epoch": 1,
+            "snapshot_revision": 3,
+            "snapshot_pending": true,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          },
+          {
+            "id": 1,
+            "stage": "mutated",
+            "request_epoch": 1,
+            "request_revision": 3,
+            "snapshot_epoch": 1,
+            "snapshot_revision": 3,
+            "snapshot_pending": true,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          }
+        ]
+      },
+      "monitor": {
+        "acceptances": [
+          0
+        ],
+        "post_certificate_old_commits": []
+      },
+      "P2a": true,
+      "P2b": true
+    },
+    {
+      "action": {
+        "kind": "Commit",
+        "attempt": 1,
+        "detail": ""
+      },
+      "state": {
+        "K": "fixed-normal-WFT",
+        "payload": "fixed-ScheduleActivityTask",
+        "epoch": 1,
+        "authority": "active",
+        "pending_K": false,
+        "revision": 5,
+        "physical_appends": [
+          0,
+          1
+        ],
+        "effective_batches": [
+          0,
+          1
+        ],
+        "durable_tasks": [
+          0,
+          1
+        ],
+        "certificate": null,
+        "attempts": [
+          {
+            "id": 0,
+            "stage": "committed",
+            "request_epoch": 1,
+            "request_revision": 3,
+            "snapshot_epoch": 1,
+            "snapshot_revision": 3,
+            "snapshot_pending": true,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          },
+          {
+            "id": 1,
+            "stage": "committed",
+            "request_epoch": 1,
+            "request_revision": 3,
+            "snapshot_epoch": 1,
+            "snapshot_revision": 3,
+            "snapshot_pending": true,
+            "error": "",
+            "manager_result": "waiting",
+            "caller_observation": "waiting",
+            "ack": "none"
+          }
+        ]
+      },
+      "monitor": {
+        "acceptances": [
+          0,
+          1
+        ],
+        "post_certificate_old_commits": []
+      },
+      "P2a": false,
+      "P2b": true
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "mode": "baseline",
+  "contracts": {
+    "atomic_claim": true,
+    "epoch_conflict": true
+  },
+  "exhaustive": true,
+  "search": "unweighted BFS; no depth/state cap, no symmetry or partial-order reduction",
+  "visited_states_including_monitors": 23385,
+  "directed_transition_edges": 89646,
+  "max_shortest_depth": 26,
+  "max_frontier": 2618,
+  "max_acceptance_count": 1,
+  "max_revision": 4,
+  "property_holds": {
+    "P2a": true,
+    "P2b": true
+  },
+  "violating_states": {},
+  "shortest_counterexample_steps": {},
+  "nonvacuity": {
+    "retry_after_unknown_edges": 122,
+    "certified_states": 8991,
+    "certificate_pending_states": 5611,
+    "committed_caller_unknown_states": 5945,
+    "old_transaction_open_after_certificate_states": 948,
+    "legal_new_epoch_commits_after_certificate_edges": 255,
+    "certificate_consumed_states": 3380,
+    "terminal_states": 339
+  },
+  "action_edge_counts": {
+    "Abort:claim_conflict_at_commit": 480,
+    "Abort:claim_mismatch_at_read": 480,
+    "Abort:epoch_conflict_at_commit": 1341,
+    "Abort:epoch_conflict_at_mutation": 1341,
+    "Abort:range_mismatch_at_read": 1431,
+    "Acquire:": 4671,
+    "AppendPhysical:": 2337,
+    "Begin:": 2337,
+    "CertifyFresh:": 7401,
+    "Commit:": 696,
+    "CommitRejected:claim_conflict_at_commit": 300,
+    "CommitRejected:epoch_conflict_at_commit": 1341,
+    "DeliverAck:failure": 3582,
+    "DeliverAck:success": 2378,
+    "LoseAck:": 5960,
+    "ManagerResult:failure": 3582,
+    "ManagerResult:success": 2378,
+    "ManagerUnknown:": 16932,
+    "ObserveTimeout:": 17506,
+    "ReadSnapshot:claim_mismatch_at_read": 300,
+    "ReadSnapshot:range_mismatch_at_read": 1341,
+    "ReadSnapshot:validated": 696,
+    "RenewBegin:": 1161,
+    "RenewCommit:": 1161,
+    "SendAck:failure": 3582,
+    "SendAck:success": 2378,
+    "Submit:concurrent": 79,
+    "Submit:duplicate_after_reply": 12,
+    "Submit:first": 3,
+    "Submit:retry_after_unknown": 122,
+    "TryMutation:epoch_conflict_at_mutation": 1341,
+    "TryMutation:private_write_set": 996
+  },
+  "witness_embeddings": {
+    "Main": {
+      "steps": 20,
+      "final_revision": 4,
+      "effective_batches": [
+        1
+      ]
+    },
+    "Positive": {
+      "steps": 15,
+      "final_revision": 4,
+      "effective_batches": [
+        0
+      ]
+    },
+    "Negative": {
+      "steps": 19,
+      "final_revision": 4,
+      "effective_batches": [
+        1
+      ]
+    },
+    "AckLostRetry": {
+      "steps": 14,
+      "final_revision": 4,
+      "effective_batches": [
+        0
+      ]
+    }
+  },
+  "wall_seconds": 0.43845,
+  "Temporal_experiments_executed": 0
+}

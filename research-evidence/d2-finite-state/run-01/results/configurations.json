@@ -1,0 +1,14 @@
+{
+  "baseline": {
+    "atomic_claim": true,
+    "epoch_conflict": true
+  },
+  "A_no_commit_claim": {
+    "atomic_claim": false,
+    "epoch_conflict": true
+  },
+  "B_no_epoch_conflict": {
+    "atomic_claim": true,
+    "epoch_conflict": false
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "mode": "B_no_epoch_conflict",
+  "contracts": {
+    "atomic_claim": true,
+    "epoch_conflict": false
+  },
+  "exhaustive": true,
+  "search": "unweighted BFS; no depth/state cap, no symmetry or partial-order reduction",
+  "visited_states_including_monitors": 17371,
+  "directed_transition_edges": 64974,
+  "max_shortest_depth": 25,
+  "max_frontier": 1876,
+  "max_acceptance_count": 1,
+  "max_revision": 4,
+  "property_holds": {
+    "P2a": true,
+    "P2b": false
+  },
+  "violating_states": {
+    "P2b": 1590
+  },
+  "shortest_counterexample_steps": {
+    "P2b": 10
+  },
+  "nonvacuity": {
+    "retry_after_unknown_edges": 99,
+    "certified_states": 7923,
+    "certificate_pending_states": 4523,
+    "committed_caller_unknown_states": 6565,
+    "old_transaction_open_after_certificate_states": 756,
+    "legal_new_epoch_commits_after_certificate_edges": 177,
+    "certificate_consumed_states": 3400,
+    "terminal_states": 327
+  },
+  "action_edge_counts": {
+    "Abort:claim_conflict_at_commit": 720,
+    "Abort:claim_mismatch_at_read": 570,
+    "Abort:range_mismatch_at_read": 1263,
+    "Acquire:": 2253,
+    "AppendPhysical:": 1863,
+    "Begin:": 1863,
+    "CertifyFresh:": 4873,
+    "Commit:": 1143,
+    "CommitRejected:claim_conflict_at_commit": 720,
+    "DeliverAck:failure": 1922,
+    "DeliverAck:success": 2626,
+    "LoseAck:": 4548,
+    "ManagerResult:failure": 1922,
+    "ManagerResult:success": 2626,
+    "ManagerUnknown:": 12240,
+    "ObserveTimeout:": 13052,
+    "ReadSnapshot:claim_mismatch_at_read": 390,
+    "ReadSnapshot:range_mismatch_at_read": 933,
+    "ReadSnapshot:validated": 540,
+    "RenewBegin:": 1161,
+    "RenewCommit:": 1161,
+    "SendAck:failure": 1922,
+    "SendAck:success": 2626,
+    "Submit:concurrent": 63,
+    "Submit:duplicate_after_reply": 9,
+    "Submit:first": 3,
+    "Submit:retry_after_unknown": 99,
+    "TryMutation:private_write_set": 1863
+  },
+  "witness_embeddings": {},
+  "wall_seconds": 0.321025,
+  "Temporal_experiments_executed": 0
+}

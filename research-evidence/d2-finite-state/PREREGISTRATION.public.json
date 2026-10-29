@@ -1,0 +1,26 @@
+{
+  "phase": "D-2",
+  "registered_before_execution": true,
+  "source_report": "D1_ORIGINAL_REPORT",
+  "source_report_sha256": "f425383ff2a5e832378c3a78b1172a049e3fa34951e3fe125c2779cfde89eac4",
+  "configurations": [
+    {"name": "baseline", "atomic_claim": true, "epoch_conflict": true, "predicted_P2a": true, "predicted_P2b": true},
+    {"name": "A_no_commit_claim", "atomic_claim": false, "epoch_conflict": true, "predicted_P2a": false, "predicted_P2b": true},
+    {"name": "B_no_epoch_conflict", "atomic_claim": true, "epoch_conflict": false, "predicted_P2a": true, "predicted_P2b": false}
+  ],
+  "predicted_mechanisms": {
+    "A": "Two attempts read pending K at revision3 before either commit; both can install their batches after commit-time claim validation is disabled.",
+    "B": "An attempt reads epoch1 and pending K; renewal2 and a fresh revision3 certificate precede its old-epoch effective commit when epoch conflict protection is disabled."
+  },
+  "independence": "Each ablation changes exactly one Contracts boolean; initial snapshot checks and every other transition remain unchanged.",
+  "falsification": [
+    "A baseline counterexample disproves the specified model implication, subject to explorer audit.",
+    "No A counterexample would require examining retained guards rather than weakening another contract.",
+    "No B counterexample would require examining retained guards rather than weakening another contract.",
+    "Any structural assertion or execution failure is INCONCLUSIVE, not a product defect."
+  ],
+  "search": "Unweighted BFS through queue exhaustion for exactly three configurations; shortest traces measured in model transitions; no depth/state pruning.",
+  "nonvacuity": ["A reaches acceptance count2", "B reaches an old-epoch effective commit after certificate", "baseline represents open old transactions after certificate", "baseline represents lost acknowledgement and retry"],
+  "evidence_mapping": ["Main", "Positive", "Negative"],
+  "limits": "Bounded abstract model, not new Temporal or database execution; no backend-general fencing theorem, liveness theorem or external-effect claim."
+}
