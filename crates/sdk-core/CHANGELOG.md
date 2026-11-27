@@ -36,6 +36,15 @@ relevant information.
 
 ## Unreleased
 
+### Changed
+* A legacy query (a query task sent while no workflow task is pending) is now answered at the last
+  completed workflow task the server names in `previous_started_event_id`. Events after that
+  task's own completion and command events, such as a signal that arrived after the query was
+  dispatched, are left to the next workflow task, so query handlers no longer observe them and
+  Core no longer evicts the run after such a query. When matching that task's recorded commands
+  requires applying an event that runs workflow code, Core still evicts and rebuilds the run before
+  the next workflow task.
+
 ### Fixed
 * Replayed Local Activity timeouts now report an Activity failure with the timeout as its cause,
   matching live execution.

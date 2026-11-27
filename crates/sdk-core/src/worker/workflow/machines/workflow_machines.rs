@@ -130,6 +130,9 @@ pub(crate) struct WorkflowMachines {
     /// already in history, but no workflow task records the activation boundary at which workflow
     /// code reacts to it, so replay cannot reconstruct that boundary.
     legacy_query_applied_new_events: bool,
+    /// Set once this legacy query's preparation has applied the completion and command events of
+    /// the newest completed workflow task, so they are matched only once.
+    legacy_query_validated_advertised_task: bool,
     /// Rejection-only tasks can be discarded, so they must not release LAs waiting on replay.
     update_only_task: bool,
     /// Workflow identifier
@@ -314,6 +317,7 @@ impl WorkflowMachines {
             replaying,
             preparing_legacy_query: false,
             legacy_query_applied_new_events: false,
+            legacy_query_validated_advertised_task: false,
             update_only_task: false,
             metrics: basics.metrics,
             // In an ideal world one could say ..Default::default() here and it'd still work.
@@ -371,6 +375,7 @@ impl WorkflowMachines {
         self.protocol_msgs = protocol_messages;
         self.preparing_legacy_query = preparing_legacy_query;
         self.legacy_query_applied_new_events = false;
+        self.legacy_query_validated_advertised_task = false;
         self.update_only_task = false;
         self.new_history_from_server(update)?;
         Ok(())
@@ -519,6 +524,42 @@ impl WorkflowMachines {
 
     pub(crate) fn legacy_query_applied_new_events(&self) -> bool {
         self.legacy_query_applied_new_events
+    }
+
+    /// A legacy query must not let workflow code react to anything no completed workflow task has
+    /// processed. The query task names the newest completed task by its started event, so once
+    /// that task's sequence is applied (its marker lookahead has already read the events after
+    /// it), only that task's own completion and command events are applied further, and the next
+    /// workflow task delivers the remaining events again. A sequence that runs past that started
+    /// event, such as one whose task failed, is applied as before, leaving the conservative
+    /// eviction to protect the next workflow task.
+    fn legacy_query_reached_advertised_task(&self) -> bool {
+        // Only a query delivered on its own task, which never carries a started event, is bounded.
+        if self.last_history_from_server.wft_started_id != 0 {
+            return false;
+        }
+        let advertised = self.last_history_from_server.previous_wft_started_id;
+        if advertised <= 0 {
+            return false;
+        }
+        let next = self
+            .last_history_from_server
+            .peek_next_wft_sequence(self.current_started_event_id);
+        let Some(first_unapplied) = next.iter().find(|e| e.event_id > self.last_processed_event)
+        else {
+            return false;
+        };
+        if first_unapplied.event_id > advertised {
+            return true;
+        }
+        if next.last().is_some_and(|e| e.event_id > advertised) {
+            debug!(
+                advertised,
+                "Legacy query history sequence runs past the advertised completed task; \
+                 applying it unbounded"
+            );
+        }
+        false
     }
 
     pub(crate) fn history_size_bytes(&self) -> u64 {
@@ -746,8 +787,22 @@ impl WorkflowMachines {
             return Ok(0);
         }
 
+        // The newest completed task's completion and command events follow its started event, in
+        // the same sequence as the inputs no task has processed yet. They are applied once, up to
+        // the task's last command event, so the commands lang produced while replaying the task are
+        // matched against what history recorded. The rest goes back into the update.
+        let mut validating_advertised_task = false;
+        if self.preparing_legacy_query && self.legacy_query_reached_advertised_task() {
+            if self.legacy_query_validated_advertised_task {
+                self.replaying = true;
+                return Ok(0);
+            }
+            self.legacy_query_validated_advertised_task = true;
+            validating_advertised_task = true;
+        }
+
         let last_handled_wft_started_id = self.current_started_event_id;
-        let (events, has_final_event) = match self
+        let (mut events, has_final_event) = match self
             .last_history_from_server
             .take_next_wft_sequence(last_handled_wft_started_id)
         {
@@ -764,6 +819,18 @@ impl WorkflowMachines {
                 ));
             }
         };
+        if validating_advertised_task {
+            let next_started = events
+                .iter()
+                .position(|e| e.event_type() == EventType::WorkflowTaskStarted)
+                .unwrap_or(events.len());
+            let end = events[..next_started]
+                .iter()
+                .rposition(|e| e.is_command_event())
+                .map_or(0, |ix| ix + 1);
+            let rest = events.split_off(end);
+            self.last_history_from_server.put_back(rest);
+        }
         let num_events_to_process = events.len();
         if num_events_to_process > 0 {
             self.local_activity_data.wft_applied();
@@ -857,7 +924,11 @@ impl WorkflowMachines {
             // event, because that will typically show up as the first event in an incremental
             // history, and we want to ignore it and its associated commands since we "produced"
             // them.
-            let is_new_event = has_final_event
+            //
+            // The validation prefix of a legacy query is cut from a sequence that may not be the
+            // last one in history, yet its non-command events are input the newest completed task
+            // never saw.
+            let is_new_event = (has_final_event || validating_advertised_task)
                 && eid > self.last_history_from_server.previous_wft_started_id
                 && event.event_type() != EventType::WorkflowTaskCompleted
                 && !event.is_command_event();
@@ -930,6 +1001,12 @@ impl WorkflowMachines {
                 do_handle_event = true;
             }
             self.last_processed_event = eid;
+        }
+
+        if validating_advertised_task {
+            // The lookahead and local activity notifications below concern the next workflow
+            // task, which this legacy query must not start.
+            return Ok(num_events_to_process);
         }
 
         // Needed to delay mutation of self until after we've iterated over peeked events.

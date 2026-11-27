@@ -456,6 +456,16 @@ impl HistoryUpdate {
         }
     }
 
+    /// Returns events taken by [Self::take_next_wft_sequence] to the front of the update, so a
+    /// later caller takes them again.
+    pub(crate) fn put_back(&mut self, mut events: Vec<HistoryEvent>) {
+        if events.is_empty() {
+            return;
+        }
+        events.extend(mem::take(&mut self.events));
+        self.events = events.into_iter();
+    }
+
     pub(crate) fn is_real(&self) -> bool {
         self.previous_wft_started_id >= 0
     }
